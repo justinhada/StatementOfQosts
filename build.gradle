@@ -10,15 +10,17 @@ repositories {
 
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation 'io.quarkus:quarkus-hibernate-orm'
-    implementation 'io.quarkus:quarkus-qute'
-    implementation 'io.quarkus:quarkus-jdbc-mariadb'
-    implementation 'io.quarkus:quarkus-resteasy'
-    implementation 'io.quarkus:quarkus-agroal'
-    implementation 'io.quarkus:quarkus-resteasy-qute'
-    implementation 'io.quarkus:quarkus-arc'
-    testImplementation 'io.quarkus:quarkus-junit5'
-    testImplementation 'io.rest-assured:rest-assured'
+    implementation "io.quarkus:quarkus-hibernate-orm",
+            "io.quarkus:quarkus-qute",
+            "io.quarkus:quarkus-jdbc-mariadb",
+            "io.quarkus:quarkus-resteasy",
+            "io.quarkus:quarkus-agroal",
+            "io.quarkus:quarkus-resteasy-qute",
+            "io.quarkus:quarkus-arc",
+            "io.vavr:vavr:$project.vavrVersion"
+
+    testImplementation 'io.quarkus:quarkus-junit5',
+            'io.rest-assured:rest-assured'
 }
 
 group 'de.justinharder'
