@@ -26,7 +26,16 @@ entity Kategorie
     * Name
 }
 
+entity Einnahmequelle
+{
+    * **ID <<PK>>**
+    * Name
+    * Häufigkeit
+    * Betrag
+}
+
 Kosten ||--o{ Kostenpunkt
 Kostenpunkt }o--|| Kategorie
 Kostenpunkt }o--|| Person
+Person ||--o{ Einnahmequelle
 @enduml
