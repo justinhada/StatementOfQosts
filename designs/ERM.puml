@@ -1,0 +1,32 @@
+@startuml
+entity Kostenpunkt
+{
+    * **ID <<PK>>**
+    * Posten
+    * Datum
+    * Betrag
+    * Übernommen von JH/LT
+}
+
+entity Person
+{
+    * **ID <<PK>>**
+    * Name
+}
+
+entity Kosten
+{
+    * **ID <<PK>>**
+    * Name
+}
+
+entity Kategorie
+{
+    * **ID <<PK>>**
+    * Name
+}
+
+Kosten ||--o{ Kostenpunkt
+Kostenpunkt }o--|| Kategorie
+Kostenpunkt }o--|| Person
+@enduml

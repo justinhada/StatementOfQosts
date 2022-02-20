@@ -69,4 +69,8 @@
 * Posten
 * Betrag
 
+## 
 
+## Ideen
+
+Alle anfallenden Kosten einer Kategorie zuordnen.
