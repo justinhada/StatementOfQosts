@@ -1,6 +1,9 @@
 package de.justinharder.soq.domain.model;
 
-import de.justinharder.soq.domain.model.embeddables.ID;
+import de.justinharder.soq.domain.model.attribute.ID;
+import de.justinharder.soq.domain.model.attribute.WertObjekt;
+import de.justinharder.soq.domain.model.meldung.Ebene;
+import de.justinharder.soq.domain.model.meldung.Meldung;
 import io.vavr.control.Validation;
 import lombok.Getter;
 import lombok.NonNull;

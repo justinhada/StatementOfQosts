@@ -1,4 +1,4 @@
-package de.justinharder.soq.domain.model;
+package de.justinharder.soq.domain.model.meldung;
 
 import io.vavr.collection.Seq;
 

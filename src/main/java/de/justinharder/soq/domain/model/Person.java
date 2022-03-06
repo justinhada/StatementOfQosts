@@ -1,9 +1,12 @@
 package de.justinharder.soq.domain.model;
 
+import de.justinharder.soq.domain.model.attribute.Nachname;
+import de.justinharder.soq.domain.model.attribute.Vorname;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
-import lombok.experimental.Accessors;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.io.Serial;
 import java.util.Objects;

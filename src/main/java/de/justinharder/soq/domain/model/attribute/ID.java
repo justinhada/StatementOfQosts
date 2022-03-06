@@ -1,4 +1,4 @@
-package de.justinharder.soq.domain.model.embeddables;
+package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.UuidMapper;
 import lombok.AllArgsConstructor;

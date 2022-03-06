@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.model;
 
-import de.justinharder.soq.domain.model.embeddables.ID;
+import de.justinharder.soq.domain.model.attribute.ID;
 import lombok.*;
 import lombok.experimental.Accessors;
 

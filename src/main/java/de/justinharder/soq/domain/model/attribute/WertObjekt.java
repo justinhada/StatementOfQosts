@@ -1,4 +1,4 @@
-package de.justinharder.soq.domain.model.embeddables;
+package de.justinharder.soq.domain.model.attribute;
 
 import java.io.Serial;
 import java.io.Serializable;
