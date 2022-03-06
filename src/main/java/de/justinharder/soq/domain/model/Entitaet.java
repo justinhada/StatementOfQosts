@@ -32,15 +32,13 @@ public abstract class Entitaet implements Serializable
 		this.id = id;
 	}
 
-	protected static <T> Validation<Meldung, T> validiereAttribut(T attribut, String schluessel, String text)
+	protected static <T extends WertObjekt<?>> Validation<Meldung, T> validiereAttribut(
+		T attribut,
+		String schluessel,
+		String text)
 	{
-		var pruefung = attribut == null;
-		if(attribut instanceof String attributString)
-		{
-			pruefung = attributString.isEmpty();
-		}
-		return pruefung
-			? Validation.invalid(new Meldung(schluessel, "fehler", text))
+		return attribut == null
+			? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))
 			: Validation.valid(attribut);
 	}
 

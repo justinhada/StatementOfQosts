@@ -11,8 +11,7 @@ import java.util.function.Function;
 
 @Entity
 @Getter
-@Setter
-@Accessors(chain = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Person extends Entitaet
 {
@@ -20,19 +19,14 @@ public class Person extends Entitaet
 	private static final long serialVersionUID = -8045099408632256819L;
 
 	@NonNull
-	private String nachname;
+	@Embedded
+	private Nachname nachname;
 
 	@NonNull
-	private String vorname;
+	@Embedded
+	private Vorname vorname;
 
-	private Person(String nachname, String vorname)
-	{
-		super();
-		this.nachname = nachname;
-		this.vorname = vorname;
-	}
-
-	public static Validation<Meldungen, Person> aus(String nachname, String vorname)
+	public static Validation<Meldungen, Person> aus(Nachname nachname, Vorname vorname)
 	{
 		return Validation.combine(
 				validiereAttribut(nachname, "nachname", "Der Nachname darf nicht leer sein!"),

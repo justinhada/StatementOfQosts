@@ -1,7 +1,9 @@
 package de.justinharder.soq.domain.model.embeddables;
 
 import de.justinharder.soq.domain.UuidMapper;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -11,6 +13,7 @@ import java.util.UUID;
 
 @Getter
 @Embeddable
+@AllArgsConstructor
 public class ID extends WertObjekt<UUID>
 {
 	@Serial
@@ -23,11 +26,6 @@ public class ID extends WertObjekt<UUID>
 
 	public ID()
 	{
-		this.wert = UUID.randomUUID();
-	}
-
-	public ID(UUID wert)
-	{
-		this.wert = wert;
+		this(UUID.randomUUID());
 	}
 }
