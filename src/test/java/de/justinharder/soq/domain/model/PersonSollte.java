@@ -70,6 +70,7 @@ class PersonSollte
 			() -> assertThat(sut.getVorname()).isEqualTo("Justin"));
 
 		validierung = Person.aus("Tiemerding", "Laura");
+		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getNachname()).isEqualTo("Tiemerding"),
