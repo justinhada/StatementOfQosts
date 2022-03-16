@@ -1,5 +1,10 @@
 package de.justinharder.soq.domain.model.attribute;
 
+import de.justinharder.soq.domain.model.meldung.Ebene;
+import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
+import io.vavr.control.Validation;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,6 +30,21 @@ public abstract class WertObjekt<T> implements Serializable, Comparable<WertObje
 		}
 		WertObjekt<T> that = (WertObjekt<T>) o;
 		return Objects.equals(getWert(), that.getWert());
+	}
+
+	protected static Validation<Meldung, String> validiereString(String wert, Schluessel schluessel, String text)
+	{
+		return validiere(wert, schluessel, text)
+			.flatMap(string -> string.isBlank()
+				? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))
+				: Validation.valid(string));
+	}
+
+	protected static <U> Validation<Meldung, U> validiere(U wert, Schluessel schluessel, String text)
+	{
+		return wert == null
+			? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))
+			: Validation.valid(wert);
 	}
 
 	@Override

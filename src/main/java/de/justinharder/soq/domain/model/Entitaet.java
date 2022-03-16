@@ -1,12 +1,14 @@
 package de.justinharder.soq.domain.model;
 
 import de.justinharder.soq.domain.model.attribute.ID;
-import de.justinharder.soq.domain.model.attribute.WertObjekt;
 import de.justinharder.soq.domain.model.meldung.Ebene;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
@@ -16,6 +18,7 @@ import java.util.Objects;
 
 @Getter
 @MappedSuperclass
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Entitaet implements Serializable
 {
 	@Serial
@@ -30,15 +33,7 @@ public abstract class Entitaet implements Serializable
 		this.id = new ID();
 	}
 
-	protected Entitaet(@NonNull ID id)
-	{
-		this.id = id;
-	}
-
-	protected static <T extends WertObjekt<?>> Validation<Meldung, T> validiereAttribut(
-		T attribut,
-		String schluessel,
-		String text)
+	protected static <T> Validation<Meldung, T> validiere(T attribut, Schluessel schluessel, String text)
 	{
 		return attribut == null
 			? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))

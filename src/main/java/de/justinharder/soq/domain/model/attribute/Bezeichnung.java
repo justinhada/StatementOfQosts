@@ -13,18 +13,18 @@ import java.io.Serial;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Nachname extends WertObjekt<String>
+public class Bezeichnung extends WertObjekt<String>
 {
 	@Serial
-	private static final long serialVersionUID = -2969529612633353459L;
+	private static final long serialVersionUID = 3864063299218421073L;
 
 	@NonNull
-	@Column(name = "Nachname", nullable = false)
+	@Column(name = "Bezeichnung", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, Nachname> aus(String wert)
+	public static Validation<Meldung, Bezeichnung> aus(String wert)
 	{
-		return validiereString(wert, Schluessel.NACHNAME, "Der Nachname darf nicht leer sein!")
-			.map(Nachname::new);
+		return validiereString(wert, Schluessel.BEZEICHNUNG, "Die Bezeichnung darf nicht leer sein!")
+			.map(Bezeichnung::new);
 	}
 }

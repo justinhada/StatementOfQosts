@@ -1,9 +1,9 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.UuidMapper;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Getter
 @Embeddable
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ID extends WertObjekt<UUID>
 {
 	@Serial

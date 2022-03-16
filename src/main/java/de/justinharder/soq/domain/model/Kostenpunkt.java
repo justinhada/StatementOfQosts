@@ -1,46 +1,56 @@
 package de.justinharder.soq.domain.model;
 
-import de.justinharder.soq.domain.model.attribute.ID;
+import de.justinharder.soq.domain.model.attribute.Betrag;
+import de.justinharder.soq.domain.model.attribute.Datum;
+import de.justinharder.soq.domain.model.attribute.Posten;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
+import io.vavr.control.Validation;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.io.Serial;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
+import java.util.function.Function;
 
 @Entity
 @Getter
-@Setter
 @Accessors(chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Kostenpunkt extends Entitaet
 {
 	@Serial
 	private static final long serialVersionUID = -7695291132147617901L;
 
 	@NonNull
-	private String posten;
+	@Embedded
+	private Posten posten;
 
 	@NonNull
-	private LocalDate datum;
+	@Embedded
+	private Datum datum;
 
 	@NonNull
-	private BigDecimal betrag;
+	@Embedded
+	private Betrag betrag;
 
 	@NonNull
 	@ManyToOne
 	private Person person;
 
-	public Kostenpunkt(ID id, String posten, LocalDate datum, BigDecimal betrag, Person person)
+	public static Validation<Meldungen, Kostenpunkt> aus(Posten posten, Datum datum, Betrag betrag, Person person, String lol)
 	{
-		super(id);
-		this.posten = posten;
-		this.datum = datum;
-		this.betrag = betrag;
-		this.person = person;
+		return Validation.combine(
+				validiere(posten, Schluessel.POSTEN, "Der Posten darf nicht leer sein!"),
+				validiere(datum, Schluessel.DATUM, "Das Datum darf nicht leer sein!"),
+				validiere(betrag, Schluessel.BETRAG, "Der Betrag darf nicht leer sein!"),
+				validiere(person, Schluessel.PERSON, "Der Vorname darf nicht leer sein!"))
+			.ap(Kostenpunkt::new)
+			.bimap(Meldungen::ausSeq, Function.identity());
 	}
 
 	@Override

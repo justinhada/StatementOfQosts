@@ -5,6 +5,7 @@ import de.justinharder.soq.domain.model.attribute.Vorname;
 import de.justinharder.soq.domain.model.meldung.Ebene;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,12 +19,12 @@ class PersonSollte
 {
 	private static final Nachname HARDER = new Nachname("Harder");
 	private static final Nachname TIEMERDING = new Nachname("Tiemerding");
-	private static final Vorname JUSTIN = new Vorname("Justin");
-	private static final Vorname LAURA = new Vorname("Laura");
+	private static final Vorname JUSTIN = Vorname.aus("Justin").get();
+	private static final Vorname LAURA = Vorname.aus("Laura").get();
 	public static final Meldung NACHNAME_MELDUNG =
-		new Meldung("nachname", Ebene.FEHLER, "Der Nachname darf nicht leer sein!");
+		new Meldung(Schluessel.NACHNAME, Ebene.FEHLER, "Der Nachname darf nicht leer sein!");
 	public static final Meldung VORNAME_MELDUNG =
-		new Meldung("vorname", Ebene.FEHLER, "Der Vorname darf nicht leer sein!");
+		new Meldung(Schluessel.VORNAME, Ebene.FEHLER, "Der Vorname darf nicht leer sein!");
 
 	private Person sut;
 
@@ -41,14 +42,12 @@ class PersonSollte
 		validierung = Person.aus(null, JUSTIN);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(
-				new Meldung("nachname", Ebene.FEHLER, "Der Nachname darf nicht leer sein!")));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(NACHNAME_MELDUNG));
 
 		validierung = Person.aus(HARDER, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(
-				new Meldung("vorname", Ebene.FEHLER, "Der Vorname darf nicht leer sein!")));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(VORNAME_MELDUNG));
 	}
 
 	@Test

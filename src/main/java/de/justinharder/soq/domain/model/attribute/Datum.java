@@ -8,23 +8,24 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serial;
+import java.time.LocalDate;
 
 @Getter
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Nachname extends WertObjekt<String>
+public class Datum extends WertObjekt<LocalDate>
 {
 	@Serial
-	private static final long serialVersionUID = -2969529612633353459L;
+	private static final long serialVersionUID = 5066170286071040307L;
 
 	@NonNull
-	@Column(name = "Nachname", nullable = false)
-	private String wert;
+	@Column(name = "Datum", nullable = false)
+	private LocalDate wert;
 
-	public static Validation<Meldung, Nachname> aus(String wert)
+	public static Validation<Meldung, Datum> aus(LocalDate wert)
 	{
-		return validiereString(wert, Schluessel.NACHNAME, "Der Nachname darf nicht leer sein!")
-			.map(Nachname::new);
+		return validiere(wert, Schluessel.DATUM, "Das Datum darf nicht leer sein!")
+			.map(Datum::new);
 	}
 }

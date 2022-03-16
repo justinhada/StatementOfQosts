@@ -3,6 +3,7 @@ package de.justinharder.soq.domain.model;
 import de.justinharder.soq.domain.model.attribute.Nachname;
 import de.justinharder.soq.domain.model.attribute.Vorname;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -32,8 +33,8 @@ public class Person extends Entitaet
 	public static Validation<Meldungen, Person> aus(Nachname nachname, Vorname vorname)
 	{
 		return Validation.combine(
-				validiereAttribut(nachname, "nachname", "Der Nachname darf nicht leer sein!"),
-				validiereAttribut(vorname, "vorname", "Der Vorname darf nicht leer sein!"))
+				validiere(nachname, Schluessel.NACHNAME, "Der Nachname darf nicht leer sein!"),
+				validiere(vorname, Schluessel.VORNAME, "Der Vorname darf nicht leer sein!"))
 			.ap(Person::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
