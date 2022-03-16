@@ -1,8 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
-import de.justinharder.soq.domain.model.meldung.Ebene;
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 
 import java.io.Serial;
@@ -32,18 +30,18 @@ public abstract class WertObjekt<T> implements Serializable, Comparable<WertObje
 		return Objects.equals(getWert(), that.getWert());
 	}
 
-	protected static Validation<Meldung, String> validiereString(String wert, Schluessel schluessel, String text)
+	protected static Validation<Meldung, String> validiereString(String wert, Meldung meldung)
 	{
-		return validiere(wert, schluessel, text)
+		return validiere(wert, meldung)
 			.flatMap(string -> string.isBlank()
-				? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))
+				? Validation.invalid(meldung)
 				: Validation.valid(string));
 	}
 
-	protected static <U> Validation<Meldung, U> validiere(U wert, Schluessel schluessel, String text)
+	protected static <U> Validation<Meldung, U> validiere(U wert, Meldung meldung)
 	{
 		return wert == null
-			? Validation.invalid(new Meldung(schluessel, Ebene.FEHLER, text))
+			? Validation.invalid(meldung)
 			: Validation.valid(wert);
 	}
 

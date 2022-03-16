@@ -1,7 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -24,7 +23,7 @@ public class Vorname extends WertObjekt<String>
 
 	public static Validation<Meldung, Vorname> aus(String wert)
 	{
-		return validiereString(wert, Schluessel.VORNAME, "Der Vorname darf nicht leer sein!")
+		return validiereString(wert, Meldung.VORNAME)
 			.map(Vorname::new);
 	}
 }

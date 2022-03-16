@@ -1,7 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -16,7 +15,7 @@ import java.io.Serial;
 public class Nachname extends WertObjekt<String>
 {
 	@Serial
-	private static final long serialVersionUID = -2969529612633353459L;
+	private static final long serialVersionUID = 2632717840087524114L;
 
 	@NonNull
 	@Column(name = "Nachname", nullable = false)
@@ -24,7 +23,7 @@ public class Nachname extends WertObjekt<String>
 
 	public static Validation<Meldung, Nachname> aus(String wert)
 	{
-		return validiereString(wert, Schluessel.NACHNAME, "Der Nachname darf nicht leer sein!")
+		return validiereString(wert, Meldung.NACHNAME)
 			.map(Nachname::new);
 	}
 }

@@ -1,22 +1,22 @@
 package de.justinharder.soq.domain.model;
 
+import com.google.common.base.MoreObjects;
 import de.justinharder.soq.domain.model.attribute.Nachname;
 import de.justinharder.soq.domain.model.attribute.Vorname;
+import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
-import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import lombok.*;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.io.Serial;
-import java.util.Objects;
 import java.util.function.Function;
 
 @Entity
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Person extends Entitaet
 {
 	@Serial
@@ -33,8 +33,8 @@ public class Person extends Entitaet
 	public static Validation<Meldungen, Person> aus(Nachname nachname, Vorname vorname)
 	{
 		return Validation.combine(
-				validiere(nachname, Schluessel.NACHNAME, "Der Nachname darf nicht leer sein!"),
-				validiere(vorname, Schluessel.VORNAME, "Der Vorname darf nicht leer sein!"))
+				validiere(nachname, Meldung.NACHNAME),
+				validiere(vorname, Meldung.VORNAME))
 			.ap(Person::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
@@ -42,6 +42,9 @@ public class Person extends Entitaet
 	@Override
 	public String toString()
 	{
-		return Objects.toString(this);
+		return MoreObjects.toStringHelper(this)
+			.add("Nachname", nachname)
+			.add("Vorname", vorname)
+			.toString();
 	}
 }

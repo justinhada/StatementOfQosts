@@ -1,8 +1,7 @@
-package de.justinharder.soq.domain.model;
+package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,46 +10,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Person sollte")
-class PersonSollte extends Testdaten
+@DisplayName("Datum sollte")
+class DatumSollte extends Testdaten
 {
-	private Person sut;
+	private Datum sut;
 
-	private Validation<Meldungen, Person> validierung;
+	private Validation<Meldung, Datum> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Person.aus(null, null);
+		validierung = Datum.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME, Meldung.VORNAME));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.DATUM));
 	}
 
 	@Test
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Person.aus(HARDER, JUSTIN);
+		validierung = Datum.aus(D_01012020_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getNachname()).isEqualTo(HARDER),
-			() -> assertThat(sut.getVorname()).isEqualTo(JUSTIN));
+			() -> assertThat(sut.getWert()).isEqualTo(D_01012020_WERT));
 
-		validierung = Person.aus(TIEMERDING, LAURA);
+		validierung = Datum.aus(D_01012021_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getNachname()).isEqualTo(TIEMERDING),
-			() -> assertThat(sut.getVorname()).isEqualTo(LAURA));
+			() -> assertThat(sut.getWert()).isEqualTo(D_01012021_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Person.aus(HARDER, JUSTIN).get()).hasToString("Person{Nachname=Harder, Vorname=Justin}");
+		assertThat(Datum.aus(D_01012020_WERT).get()).hasToString("01.01.2020");
 	}
 }

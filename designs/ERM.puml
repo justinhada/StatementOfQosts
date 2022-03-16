@@ -2,40 +2,45 @@
 entity Kostenpunkt
 {
     * **ID <<PK>>**
-    * Posten
+    * Bezeichnung
     * Datum
     * Betrag
-    * Übernommen von JH/LT
+    * **KostenID <<FK>>**
 }
 
 entity Person
 {
     * **ID <<PK>>**
-    * Name
+    * Nachname
+    * Vorname
+}
+
+entity Login
+{
+    * **ID <<PK>>**
+    * E-Mail-Adresse
+    * Benutzername
+    * Passwort
+    * **PersonID <<FK>>**
 }
 
 entity Kosten
 {
     * **ID <<PK>>**
-    * Name
-}
-
-entity Kategorie
-{
-    * **ID <<PK>>**
-    * Name
+    * Bezeichnung
 }
 
 entity Einnahmequelle
 {
     * **ID <<PK>>**
-    * Name
-    * Häufigkeit
+    * Bezeichnung
+    * Turnus
     * Betrag
+    * **PersonID <<FK>>**
 }
 
 Kosten ||--o{ Kostenpunkt
-Kostenpunkt }o--|| Kategorie
 Kostenpunkt }o--|| Person
 Person ||--o{ Einnahmequelle
+Person ||--|| Login
 @enduml

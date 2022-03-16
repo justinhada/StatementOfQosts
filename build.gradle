@@ -18,7 +18,8 @@ dependencies {
             "io.quarkus:quarkus-resteasy-qute",
             "io.quarkus:quarkus-arc",
             "io.vavr:vavr:$project.vavrVersion",
-            "org.projectlombok:lombok:$project.lombokVersion"
+            "org.projectlombok:lombok:$project.lombokVersion",
+            "com.google.guava:guava:$project.guavaVersion"
 
     testImplementation "io.quarkus:quarkus-junit5",
             "io.rest-assured:rest-assured",

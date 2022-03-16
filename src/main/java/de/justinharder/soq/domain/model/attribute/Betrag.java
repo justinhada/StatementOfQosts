@@ -1,8 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
-import de.justinharder.soq.domain.model.meldung.Ebene;
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -26,9 +24,9 @@ public class Betrag extends WertObjekt<BigDecimal>
 
 	public static Validation<Meldung, Betrag> aus(BigDecimal wert)
 	{
-		return validiere(wert, Schluessel.BETRAG, "Der Betrag darf nicht leer sein!")
-			.flatMap(bigDecimal -> bigDecimal.compareTo(BigDecimal.ZERO) <= 0
-				? Validation.invalid(new Meldung(Schluessel.BETRAG, Ebene.FEHLER, "Der Betrag darf nicht negativ sein!"))
+		return validiere(wert, Meldung.BETRAG_LEER)
+			.flatMap(bigDecimal -> bigDecimal.compareTo(BigDecimal.ZERO) < 0
+				? Validation.invalid(Meldung.BETRAG_NEGATIV)
 				: Validation.valid(new Betrag(bigDecimal)));
 	}
 }

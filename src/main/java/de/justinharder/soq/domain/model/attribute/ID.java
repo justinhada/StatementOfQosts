@@ -1,9 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.UuidMapper;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -13,7 +11,8 @@ import java.util.UUID;
 
 @Getter
 @Embeddable
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ID extends WertObjekt<UUID>
 {
 	@Serial
@@ -24,8 +23,8 @@ public class ID extends WertObjekt<UUID>
 	@Column(name = "ID", columnDefinition = "VARCHAR(36)")
 	private UUID wert;
 
-	public ID()
+	public static ID random()
 	{
-		this(UUID.randomUUID());
+		return new ID(UUID.randomUUID());
 	}
 }

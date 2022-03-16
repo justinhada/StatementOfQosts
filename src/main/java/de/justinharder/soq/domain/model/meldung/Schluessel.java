@@ -5,8 +5,10 @@ public enum Schluessel
 	BETRAG,
 	BEZEICHNUNG,
 	DATUM,
+	KATEGORIE,
 	NACHNAME,
 	PERSON,
 	POSTEN,
+	TURNUS,
 	VORNAME
 }
