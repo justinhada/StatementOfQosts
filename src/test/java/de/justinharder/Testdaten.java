@@ -24,6 +24,15 @@ public class Testdaten
 	protected static final Person JUSTIN_HARDER = Person.aus(HARDER, JUSTIN).get();
 	protected static final Person LAURA_TIEMERDING = Person.aus(TIEMERDING, LAURA).get();
 
+	protected static final Benutzername B_HARDER = Benutzername.aus(HARDER_WERT).get();
+	protected static final Benutzername B_TIEMERDING = Benutzername.aus(TIEMERDING_WERT).get();
+
+	protected static final String E_JUSTIN_WERT = "justinharder@t-online.de";
+	protected static final EmailAdresse E_JUSTIN = EmailAdresse.aus(E_JUSTIN_WERT).get();
+
+	protected static final String E_LAURA_WERT = "laura.tiemerding@icloud.com";
+	protected static final EmailAdresse E_LAURA = EmailAdresse.aus(E_LAURA_WERT).get();
+
 	protected static final String EDEKA_WERT = "Edeka";
 	protected static final Bezeichnung EDEKA = Bezeichnung.aus(EDEKA_WERT).get();
 
@@ -59,4 +68,6 @@ public class Testdaten
 
 	protected static final Kostenpunkt K_1 = Kostenpunkt.aus(EDEKA, D_01012020, B_1, JUSTIN_HARDER).get();
 	protected static final Kostenpunkt K_2 = Kostenpunkt.aus(LIDL, D_01012021, B_10, LAURA_TIEMERDING).get();
+
+	protected static final Salt SALT = Salt.random();
 }

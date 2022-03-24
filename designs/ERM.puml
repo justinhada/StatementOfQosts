@@ -20,6 +20,7 @@ entity Login
     * **ID <<PK>>**
     * E-Mail-Adresse
     * Benutzername
+    * Salt
     * Passwort
     * **PersonID <<FK>>**
 }
