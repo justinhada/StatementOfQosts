@@ -70,4 +70,7 @@ public class Testdaten
 	protected static final Kostenpunkt K_2 = Kostenpunkt.aus(LIDL, D_01012021, B_10, LAURA_TIEMERDING).get();
 
 	protected static final Salt SALT = Salt.random();
+
+	protected static final Passwort P_JUSTIN = Passwort.aus(SALT, "Justinharder#98").get();
+	protected static final Passwort P_LAURA = Passwort.aus(SALT, "Justinharder#98").get();
 }
