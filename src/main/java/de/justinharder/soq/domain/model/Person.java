@@ -10,11 +10,13 @@ import lombok.*;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serial;
 import java.util.function.Function;
 
 @Entity
 @Getter
+@Table(name = "Person")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Person extends Entitaet

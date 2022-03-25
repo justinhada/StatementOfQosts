@@ -10,15 +10,14 @@ import io.vavr.control.Validation;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serial;
 import java.util.function.Function;
 
 @Entity
 @Getter
 @Accessors(chain = true)
+@Table(name = "Kostenpunkt")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Kostenpunkt extends Entitaet
@@ -39,7 +38,8 @@ public class Kostenpunkt extends Entitaet
 	private Betrag betrag;
 
 	@NonNull
-	@ManyToOne
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "PersonID", nullable = false)
 	private Person person;
 
 	public static Validation<Meldungen, Kostenpunkt> aus(Bezeichnung bezeichnung, Datum datum, Betrag betrag, Person person)

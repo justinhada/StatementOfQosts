@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 @Entity
 @Getter
+@Table(name = "Einnahmequelle")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Einnahmequelle extends Entitaet
@@ -27,6 +28,7 @@ public class Einnahmequelle extends Entitaet
 	private Bezeichnung bezeichnung;
 
 	@NonNull
+	@Column(name = "Turnus")
 	@Enumerated(EnumType.STRING)
 	private Turnus turnus;
 
@@ -35,7 +37,8 @@ public class Einnahmequelle extends Entitaet
 	private Betrag betrag;
 
 	@NonNull
-	@ManyToOne
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "PersonID", nullable = false)
 	private Person person;
 
 	public static Validation<Meldungen, Einnahmequelle> aus(

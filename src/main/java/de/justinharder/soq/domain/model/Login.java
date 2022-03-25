@@ -10,14 +10,13 @@ import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serial;
 import java.util.function.Function;
 
 @Entity
 @Getter
+@Table(name = "Login")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Login extends Entitaet
@@ -42,7 +41,8 @@ public class Login extends Entitaet
 	private Passwort passwort;
 
 	@NonNull
-	@OneToOne
+	@OneToOne(optional = false)
+	@JoinColumn(name = "PersonID", nullable = false)
 	private Person person;
 
 	public static Validation<Meldungen, Login> aus(
