@@ -3,7 +3,6 @@ package de.justinharder.soq.domain.model;
 import com.google.common.base.MoreObjects;
 import de.justinharder.soq.domain.model.attribute.Nachname;
 import de.justinharder.soq.domain.model.attribute.Vorname;
-import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
@@ -32,11 +31,9 @@ public class Person extends Entitaet
 	@Embedded
 	private Vorname vorname;
 
-	public static Validation<Meldungen, Person> aus(Nachname nachname, Vorname vorname)
+	public static Validation<Meldungen, Person> aus(String nachname, String vorname)
 	{
-		return Validation.combine(
-				validiere(nachname, Meldung.NACHNAME),
-				validiere(vorname, Meldung.VORNAME))
+		return Validation.combine(Nachname.aus(nachname), Vorname.aus(vorname))
 			.ap(Person::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}

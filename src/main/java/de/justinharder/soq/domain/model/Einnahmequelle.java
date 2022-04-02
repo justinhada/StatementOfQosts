@@ -51,7 +51,7 @@ public class Einnahmequelle extends Entitaet
 				validiere(bezeichnung, Meldung.BEZEICHNUNG),
 				validiere(turnus, Meldung.TURNUS),
 				validiere(betrag, Meldung.BETRAG_LEER),
-				validiere(person, Meldung.PERSON))
+				validiere(person, Meldung.PERSON_LEER))
 			.ap(Einnahmequelle::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}

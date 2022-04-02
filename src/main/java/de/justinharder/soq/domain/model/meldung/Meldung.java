@@ -2,10 +2,15 @@ package de.justinharder.soq.domain.model.meldung;
 
 public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 {
-	public static final Meldung BENUTZERNAME = new Meldung(
+	public static final Meldung BENUTZERNAME_LEER = new Meldung(
 		Schluessel.BENUTZERNAME,
 		Ebene.FEHLER,
 		"Der Benutzername darf nicht leer sein!");
+
+	public static final Meldung BENUTZERNAME_VERGEBEN = new Meldung(
+		Schluessel.BENUTZERNAME,
+		Ebene.FEHLER,
+		"Der Benutzername ist bereits vergeben!");
 
 	public static final Meldung BETRAG_LEER = new Meldung(
 		Schluessel.BETRAG,
@@ -52,7 +57,17 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Das Passwort darf nicht leer sein!");
 
-	public static final Meldung PERSON = new Meldung(
+	public static final Meldung PASSWORT_UNGLEICH = new Meldung(
+		Schluessel.PASSWORT,
+		Ebene.FEHLER,
+		"Die Passwörter sind nicht identisch!");
+
+	public static final Meldung PERSON_ERSTELLT = new Meldung(
+		Schluessel.PERSON,
+		Ebene.ERFOLG,
+		"Die Person wurde erfolgreich erstellt!");
+
+	public static final Meldung PERSON_LEER = new Meldung(
 		Schluessel.PERSON,
 		Ebene.FEHLER,
 		"Die Person darf nicht leer sein!");

@@ -24,22 +24,22 @@ class BenutzernameSollte extends Testdaten
 		validierung = Benutzername.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus("");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus(" ");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus("             ");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 	}
 
 	@Test

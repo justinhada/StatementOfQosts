@@ -48,7 +48,7 @@ public class Kostenpunkt extends Entitaet
 				validiere(bezeichnung, Meldung.BEZEICHNUNG),
 				validiere(datum, Meldung.DATUM),
 				validiere(betrag, Meldung.BETRAG_LEER),
-				validiere(person, Meldung.PERSON))
+				validiere(person, Meldung.PERSON_LEER))
 			.ap(Kostenpunkt::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}

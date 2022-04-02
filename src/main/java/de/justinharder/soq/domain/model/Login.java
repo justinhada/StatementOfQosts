@@ -54,10 +54,10 @@ public class Login extends Entitaet
 	{
 		return Validation.combine(
 				validiere(emailAdresse, Meldung.E_MAIL_ADRESSE_LEER),
-				validiere(benutzername, Meldung.BENUTZERNAME),
+				validiere(benutzername, Meldung.BENUTZERNAME_LEER),
 				validiere(salt, Meldung.SALT),
 				validiere(passwort, Meldung.PASSWORT_LEER),
-				validiere(person, Meldung.PERSON))
+				validiere(person, Meldung.PERSON_LEER))
 			.ap(Login::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}

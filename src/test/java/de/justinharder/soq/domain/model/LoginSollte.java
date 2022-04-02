@@ -26,7 +26,7 @@ class LoginSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER,
-				Meldung.BENUTZERNAME, Meldung.SALT, Meldung.PASSWORT_LEER, Meldung.PERSON));
+				Meldung.BENUTZERNAME_LEER, Meldung.SALT, Meldung.PASSWORT_LEER, Meldung.PERSON_LEER));
 	}
 
 	@Test

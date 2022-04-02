@@ -26,7 +26,7 @@ class EinnahmequelleSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG, Meldung.TURNUS,
-				Meldung.BETRAG_LEER, Meldung.PERSON));
+				Meldung.BETRAG_LEER, Meldung.PERSON_LEER));
 	}
 
 	@Test
