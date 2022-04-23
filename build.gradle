@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     implementation enforcedPlatform("$project.quarkusPlatformGroupId:$project.quarkusPlatformArtifactId:$project.quarkusPlatformVersion")
+
     implementation "io.quarkus:quarkus-hibernate-orm",
             "io.quarkus:quarkus-qute",
             "io.quarkus:quarkus-jdbc-mariadb",
@@ -17,13 +18,17 @@ dependencies {
             "io.quarkus:quarkus-agroal",
             "io.quarkus:quarkus-resteasy-qute",
             "io.quarkus:quarkus-arc",
+            "io.quarkus:quarkus-test-common",
+            "io.quarkus:quarkus-security-jpa",
+            "io.quarkus:quarkus-hibernate-validator:$project.hibernateVersion",
             "io.vavr:vavr:$project.vavrVersion",
             "org.projectlombok:lombok:$project.lombokVersion",
             "com.google.guava:guava:$project.guavaVersion"
 
     testImplementation "io.quarkus:quarkus-junit5",
             "io.rest-assured:rest-assured",
-            "org.assertj:assertj-core:$project.assertjVersion"
+            "org.assertj:assertj-core:$project.assertjVersion",
+            "org.mockito:mockito-core:$project.mockitoVersion"
 
     annotationProcessor "org.projectlombok:lombok:$project.lombokVersion"
 }

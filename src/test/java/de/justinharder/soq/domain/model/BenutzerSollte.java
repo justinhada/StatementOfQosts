@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Person sollte")
-class PersonSollte extends Testdaten
+class BenutzerSollte extends Testdaten
 {
-	private Person sut;
+	private Benutzer sut;
 
-	private Validation<Meldungen, Person> validierung;
+	private Validation<Meldungen, Benutzer> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Person.aus(null, null);
+		validierung = Benutzer.aus(null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME, Meldung.VORNAME));
@@ -32,14 +32,14 @@ class PersonSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Person.aus(HARDER, JUSTIN);
+		validierung = Benutzer.aus(HARDER_WERT, JUSTIN_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getNachname()).isEqualTo(HARDER),
 			() -> assertThat(sut.getVorname()).isEqualTo(JUSTIN));
 
-		validierung = Person.aus(TIEMERDING, LAURA);
+		validierung = Benutzer.aus(TIEMERDING_WERT, LAURA_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -51,6 +51,8 @@ class PersonSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Person.aus(HARDER, JUSTIN).get()).hasToString("Person{Nachname=Harder, Vorname=Justin}");
+		validierung = Benutzer.aus(HARDER_WERT, JUSTIN_WERT);
+		sut = validierung.get();
+		assertThat(sut).hasToString("Benutzer{ID=" + sut.getId() + ", Nachname=Harder, Vorname=Justin}");
 	}
 }

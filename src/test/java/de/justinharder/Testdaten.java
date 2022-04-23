@@ -1,7 +1,8 @@
 package de.justinharder;
 
+import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.Kostenpunkt;
-import de.justinharder.soq.domain.model.Person;
+import de.justinharder.soq.domain.model.Login;
 import de.justinharder.soq.domain.model.attribute.*;
 
 import java.math.BigDecimal;
@@ -21,17 +22,17 @@ public class Testdaten
 	protected static final String LAURA_WERT = "Laura";
 	protected static final Vorname LAURA = Vorname.aus(LAURA_WERT).get();
 
-	protected static final Person JUSTIN_HARDER = Person.aus(HARDER, JUSTIN).get();
-	protected static final Person LAURA_TIEMERDING = Person.aus(TIEMERDING, LAURA).get();
+	protected static final Benutzer JUSTIN_HARDER = Benutzer.aus(HARDER_WERT, JUSTIN_WERT).get();
+	protected static final Benutzer LAURA_TIEMERDING = Benutzer.aus(TIEMERDING_WERT, LAURA_WERT).get();
 
 	protected static final Benutzername B_HARDER = Benutzername.aus(HARDER_WERT).get();
 	protected static final Benutzername B_TIEMERDING = Benutzername.aus(TIEMERDING_WERT).get();
 
 	protected static final String E_JUSTIN_WERT = "justinharder@t-online.de";
-	protected static final EmailAdresse E_JUSTIN = EmailAdresse.aus(E_JUSTIN_WERT).get();
+	protected static final EMailAdresse E_JUSTIN = EMailAdresse.aus(E_JUSTIN_WERT).get();
 
 	protected static final String E_LAURA_WERT = "laura.tiemerding@icloud.com";
-	protected static final EmailAdresse E_LAURA = EmailAdresse.aus(E_LAURA_WERT).get();
+	protected static final EMailAdresse E_LAURA = EMailAdresse.aus(E_LAURA_WERT).get();
 
 	protected static final String EDEKA_WERT = "Edeka";
 	protected static final Bezeichnung EDEKA = Bezeichnung.aus(EDEKA_WERT).get();
@@ -71,6 +72,11 @@ public class Testdaten
 
 	protected static final Salt SALT = Salt.random();
 
-	protected static final Passwort P_JUSTIN = Passwort.aus(SALT, "Justinharder#98").get();
-	protected static final Passwort P_LAURA = Passwort.aus(SALT, "Justinharder#98").get();
+	protected static final String P_JUSTIN_WERT = "JustinHarder#98";
+	protected static final String P_LAURA_WERT = "LauraTiemerding#98";
+
+	protected static final Passwort P_JUSTIN = Passwort.aus(SALT, P_JUSTIN_WERT).get();
+	protected static final Passwort P_LAURA = Passwort.aus(SALT, P_LAURA_WERT).get();
+
+	protected static final Login LOGIN = Login.aus(E_JUSTIN, B_HARDER, SALT, P_JUSTIN, JUSTIN_HARDER).get();
 }

@@ -26,7 +26,7 @@ class LoginSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER,
-				Meldung.BENUTZERNAME_LEER, Meldung.SALT, Meldung.PASSWORT_LEER, Meldung.PERSON_LEER));
+				Meldung.BENUTZERNAME_LEER, Meldung.SALT, Meldung.PASSWORT_LEER, Meldung.BENUTZER_LEER));
 	}
 
 	@Test
@@ -41,7 +41,7 @@ class LoginSollte extends Testdaten
 			() -> assertThat(sut.getBenutzername()).isEqualTo(B_HARDER),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
 			() -> assertThat(sut.getPasswort()).isEqualTo(P_JUSTIN),
-			() -> assertThat(sut.getPerson()).isEqualTo(JUSTIN_HARDER));
+			() -> assertThat(sut.getBenutzer()).isEqualTo(JUSTIN_HARDER));
 
 		validierung = Login.aus(E_LAURA, B_TIEMERDING, SALT, P_LAURA, LAURA_TIEMERDING);
 		sut = validierung.get();
@@ -51,7 +51,7 @@ class LoginSollte extends Testdaten
 			() -> assertThat(sut.getBenutzername()).isEqualTo(B_TIEMERDING),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
 			() -> assertThat(sut.getPasswort()).isEqualTo(P_LAURA),
-			() -> assertThat(sut.getPerson()).isEqualTo(LAURA_TIEMERDING));
+			() -> assertThat(sut.getBenutzer()).isEqualTo(LAURA_TIEMERDING));
 	}
 
 	@Test

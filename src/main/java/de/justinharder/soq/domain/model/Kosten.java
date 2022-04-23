@@ -45,6 +45,7 @@ public class Kosten extends Entitaet
 	public String toString()
 	{
 		return MoreObjects.toStringHelper(this)
+			.add("ID", id)
 			.add("Bezeichnung", bezeichnung)
 			.add("Kostenpunkte", kostenpunkte)
 			.toString();

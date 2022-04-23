@@ -2,6 +2,21 @@ package de.justinharder.soq.domain.model.meldung;
 
 public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 {
+	public static final Meldung BENUTZER_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Benutzer wurde erfolgreich erstellt!");
+
+	public static final Meldung BENUTZER_LEER = new Meldung(
+		Schluessel.BENUTZER,
+		Ebene.FEHLER,
+		"Der Benutzer darf nicht leer sein!");
+
+	public static final Meldung BENUTZERNAME_EXISTIERT_NICHT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Der Benutzername existiert nicht!");
+
 	public static final Meldung BENUTZERNAME_LEER = new Meldung(
 		Schluessel.BENUTZERNAME,
 		Ebene.FEHLER,
@@ -47,6 +62,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Nachname darf nicht leer sein!");
 
+	public static final Meldung PASSWORT_FALSCH = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Der Benutzername oder das Passwort ist falsch!");
+
 	public static final Meldung PASSWORT_HASH = new Meldung(
 		Schluessel.PASSWORT,
 		Ebene.FEHLER,
@@ -57,20 +77,10 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Das Passwort darf nicht leer sein!");
 
-	public static final Meldung PASSWORT_UNGLEICH = new Meldung(
+	public static final Meldung PASSWORT_UNGUELTIG = new Meldung(
 		Schluessel.PASSWORT,
 		Ebene.FEHLER,
-		"Die Passwörter sind nicht identisch!");
-
-	public static final Meldung PERSON_ERSTELLT = new Meldung(
-		Schluessel.PERSON,
-		Ebene.ERFOLG,
-		"Die Person wurde erfolgreich erstellt!");
-
-	public static final Meldung PERSON_LEER = new Meldung(
-		Schluessel.PERSON,
-		Ebene.FEHLER,
-		"Die Person darf nicht leer sein!");
+		"Das Passwort ist ungültig!");
 
 	public static final Meldung SALT = new Meldung(
 		Schluessel.SALT,
@@ -86,4 +96,9 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.VORNAME,
 		Ebene.FEHLER,
 		"Der Vorname darf nicht leer sein!");
+
+	public static final Meldung LOGIN_ERFOLGREICH = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Login war erfolgreich!");
 }

@@ -51,9 +51,14 @@ class KostenSollte extends Testdaten
 		sut = Kosten.aus(NUR_ESSEN).get();
 		sut.fuegeKostenpunktHinzu(K_1);
 		sut.fuegeKostenpunktHinzu(K_2);
-
 		assertThat(sut).hasToString(
-			"Kosten{Bezeichnung=Variable Kosten (nur Essen), Kostenpunkte=[Kostenpunkt{Bezeichnung=Edeka, Datum=01.01.2020, Betrag=1, Person=Person{Nachname=Harder, Vorname=Justin}}, Kostenpunkt{Bezeichnung=Lidl, Datum=01.01.2021, Betrag=10, Person=Person{Nachname=Tiemerding, Vorname=Laura}}]}");
+			"Kosten{ID=" + sut.getId() + ", Bezeichnung=Variable Kosten (nur Essen), Kostenpunkte=[Kostenpunkt{ID=" + sut.getKostenpunkte()
+				.get(0)
+				.getId() + ", Bezeichnung=Edeka, Datum=01.01.2020, Betrag=1, Benutzer=Benutzer{ID=" + sut.getKostenpunkte()
+				.get(0).getBenutzer().getId() + ", Nachname=Harder, Vorname=Justin}}, Kostenpunkt{ID=" +
+				sut.getKostenpunkte().get(1)
+					.getId() + ", Bezeichnung=Lidl, Datum=01.01.2021, Betrag=10, Benutzer=Benutzer{ID=" + sut.getKostenpunkte()
+				.get(1).getBenutzer().getId() + ", Nachname=Tiemerding, Vorname=Laura}}]}");
 	}
 
 	@Test
@@ -63,7 +68,6 @@ class KostenSollte extends Testdaten
 		sut = Kosten.aus(NUR_ESSEN).get();
 		sut.fuegeKostenpunktHinzu(K_1);
 		sut.fuegeKostenpunktHinzu(K_2);
-
 		assertThat(sut.getKostenpunkte()).containsExactlyInAnyOrder(K_1, K_2);
 	}
 }

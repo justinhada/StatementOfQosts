@@ -15,10 +15,10 @@ import java.util.function.Function;
 
 @Entity
 @Getter
-@Table(name = "Person")
+@Table(name = "Benutzer")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Person extends Entitaet
+public class Benutzer extends Entitaet
 {
 	@Serial
 	private static final long serialVersionUID = -8045099408632256819L;
@@ -31,10 +31,10 @@ public class Person extends Entitaet
 	@Embedded
 	private Vorname vorname;
 
-	public static Validation<Meldungen, Person> aus(String nachname, String vorname)
+	public static Validation<Meldungen, Benutzer> aus(String nachname, String vorname)
 	{
 		return Validation.combine(Nachname.aus(nachname), Vorname.aus(vorname))
-			.ap(Person::new)
+			.ap(Benutzer::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
 
@@ -42,6 +42,7 @@ public class Person extends Entitaet
 	public String toString()
 	{
 		return MoreObjects.toStringHelper(this)
+			.add("ID", id)
 			.add("Nachname", nachname)
 			.add("Vorname", vorname)
 			.toString();

@@ -24,7 +24,7 @@ public abstract class Entitaet implements Serializable
 
 	@NonNull
 	@EmbeddedId
-	private final ID id;
+	protected final ID id;
 
 	protected Entitaet()
 	{

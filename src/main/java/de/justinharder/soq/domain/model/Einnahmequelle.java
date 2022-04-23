@@ -38,20 +38,20 @@ public class Einnahmequelle extends Entitaet
 
 	@NonNull
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "PersonID", nullable = false)
-	private Person person;
+	@JoinColumn(name = "BenutzerID", nullable = false)
+	private Benutzer benutzer;
 
 	public static Validation<Meldungen, Einnahmequelle> aus(
 		Bezeichnung bezeichnung,
 		Turnus turnus,
 		Betrag betrag,
-		Person person)
+		Benutzer benutzer)
 	{
 		return Validation.combine(
 				validiere(bezeichnung, Meldung.BEZEICHNUNG),
 				validiere(turnus, Meldung.TURNUS),
 				validiere(betrag, Meldung.BETRAG_LEER),
-				validiere(person, Meldung.PERSON_LEER))
+				validiere(benutzer, Meldung.BENUTZER_LEER))
 			.ap(Einnahmequelle::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
@@ -60,10 +60,11 @@ public class Einnahmequelle extends Entitaet
 	public String toString()
 	{
 		return MoreObjects.toStringHelper(this)
+			.add("ID", id)
 			.add("Bezeichnung", bezeichnung)
 			.add("Turnus", turnus)
 			.add("Betrag", betrag)
-			.add("Person", person)
+			.add("Benutzer", benutzer)
 			.toString();
 	}
 }

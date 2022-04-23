@@ -41,6 +41,46 @@ class PasswortSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_LEER));
+
+		validierung = Passwort.aus(SALT, "JustinHarder");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "JustinHarder#");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "JustinHarder98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "justinharder#98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "JUSTINHARDER#98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "#98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
+
+		validierung = Passwort.aus(SALT, "Justin#98");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_UNGUELTIG));
 	}
 
 	@Test
@@ -48,8 +88,8 @@ class PasswortSollte extends Testdaten
 	void test02()
 	{
 		validierung = Passwort.aus(SALT, "JustinHarder#98");
-		var andereValidierung = Passwort.aus(Salt.random(), "LauraTiemerding#01");
 		sut = validierung.get();
+		var andereValidierung = Passwort.aus(Salt.random(), "LauraTiemerding#01");
 		var anderesPasswort = andereValidierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),

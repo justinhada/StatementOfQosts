@@ -8,7 +8,7 @@ entity Kostenpunkt
     * **KostenID <<FK>>**
 }
 
-entity Person
+entity Benutzer
 {
     * **ID <<PK>>**
     * Nachname
@@ -41,7 +41,7 @@ entity Einnahmequelle
 }
 
 Kosten ||--o{ Kostenpunkt
-Kostenpunkt }o--|| Person
-Person ||--o{ Einnahmequelle
-Person ||--|| Login
+Kostenpunkt }o--|| Benutzer
+Benutzer ||--o{ Einnahmequelle
+Benutzer ||--|| Login
 @enduml

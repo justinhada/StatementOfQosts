@@ -10,43 +10,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("E-Mail-Adresse sollte")
-class EmailAdresseSollte extends Testdaten
+@DisplayName("EMailAdresse sollte")
+class EMailAdresseSollte extends Testdaten
 {
-	private EmailAdresse sut;
+	private EMailAdresse sut;
 
-	private Validation<Meldung, EmailAdresse> validierung;
+	private Validation<Meldung, EMailAdresse> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = EmailAdresse.aus(null);
+		validierung = EMailAdresse.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EmailAdresse.aus("");
+		validierung = EMailAdresse.aus("");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EmailAdresse.aus(" ");
+		validierung = EMailAdresse.aus(" ");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EmailAdresse.aus("             ");
+		validierung = EMailAdresse.aus("             ");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EmailAdresse.aus("harder");
+		validierung = EMailAdresse.aus("harder");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
 
-		validierung = EmailAdresse.aus("harder.de");
+		validierung = EMailAdresse.aus("harder.de");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
@@ -56,13 +56,13 @@ class EmailAdresseSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = EmailAdresse.aus(E_JUSTIN_WERT);
+		validierung = EMailAdresse.aus(E_JUSTIN_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getWert()).isEqualTo(E_JUSTIN_WERT));
 
-		validierung = EmailAdresse.aus(E_LAURA_WERT);
+		validierung = EMailAdresse.aus(E_LAURA_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -73,6 +73,6 @@ class EmailAdresseSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(EmailAdresse.aus(E_JUSTIN_WERT).get()).hasToString(E_JUSTIN_WERT);
+		assertThat(EMailAdresse.aus(E_JUSTIN_WERT).get()).hasToString(E_JUSTIN_WERT);
 	}
 }

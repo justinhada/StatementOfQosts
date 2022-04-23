@@ -1,19 +1,15 @@
 package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.RegistrierungService;
-import de.justinharder.soq.domain.services.dto.NeuePerson;
+import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
-@RequestScoped
 @Path("/registrierung")
 public class RegistrierungRessource
 {
@@ -24,29 +20,32 @@ public class RegistrierungRessource
 	private final Template registrierung;
 
 	@NonNull
-	private NeuePerson neuePerson;
+	private NeuerBenutzer neuerBenutzer;
 
 	@Inject
 	public RegistrierungRessource(
 		@NonNull RegistrierungService registrierungService,
 		@NonNull Template registrierung,
-		@NonNull NeuePerson neuePerson)
+		@NonNull NeuerBenutzer neuerBenutzer)
 	{
 		this.registrierungService = registrierungService;
 		this.registrierung = registrierung;
-		this.neuePerson = neuePerson;
+		this.neuerBenutzer = neuerBenutzer;
 	}
 
 	@GET
+	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeRegistrierungFormular()
 	{
-		return registrierung.data("neuePerson", neuePerson);
+		return registrierung.data("neuerBenutzer", neuerBenutzer);
 	}
 
 	@POST
-	public TemplateInstance erstelleBenutzer(@BeanParam NeuePerson neuePerson)
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public TemplateInstance erstelleBenutzer(@BeanParam NeuerBenutzer neuerBenutzer)
 	{
-		this.neuePerson = registrierungService.registriere(neuePerson);
+		this.neuerBenutzer = registrierungService.registriere(neuerBenutzer);
 		return zeigeRegistrierungFormular();
 	}
 }

@@ -1,103 +1,85 @@
 package de.justinharder.soq.domain.services;
 
+import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.Login;
-import de.justinharder.soq.domain.model.Person;
 import de.justinharder.soq.domain.model.attribute.Benutzername;
-import de.justinharder.soq.domain.model.attribute.EmailAdresse;
+import de.justinharder.soq.domain.model.attribute.EMailAdresse;
 import de.justinharder.soq.domain.model.attribute.Passwort;
 import de.justinharder.soq.domain.model.attribute.Salt;
 import de.justinharder.soq.domain.model.meldung.Meldung;
-import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.repository.BenutzerRepository;
 import de.justinharder.soq.domain.repository.LoginRepository;
-import de.justinharder.soq.domain.repository.PersonRepository;
-import de.justinharder.soq.domain.services.dto.NeuePerson;
-import io.vavr.control.Validation;
+import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 @Dependent
 public class RegistrierungService
 {
 	@NonNull
-	private final PersonRepository personRepository;
+	private final BenutzerRepository benutzerRepository;
 
 	@NonNull
 	private final LoginRepository loginRepository;
 
 	@Inject
-	public RegistrierungService(@NonNull PersonRepository personRepository, @NonNull LoginRepository loginRepository)
+	public RegistrierungService(
+		@NonNull BenutzerRepository benutzerRepository,
+		@NonNull LoginRepository loginRepository)
 	{
-		this.personRepository = personRepository;
+		this.benutzerRepository = benutzerRepository;
 		this.loginRepository = loginRepository;
 	}
 
-	public NeuePerson registriere(@NonNull NeuePerson neuePerson)
+	@Transactional
+	public NeuerBenutzer registriere(@NonNull NeuerBenutzer neuerBenutzer)
 	{
-		Salt salt = Salt.random();
-		Validation<Meldungen, Passwort> passwort = Passwort.aus(salt, neuePerson.getPasswort());
-		Validation<Meldungen, Passwort> passwortWiederholen = Passwort.aus(salt, neuePerson.getPasswortWiederholen());
-
+		var salt = Salt.random();
+		var passwort = Passwort.aus(salt, neuerBenutzer.getPasswort());
 		if (passwort.isInvalid())
 		{
-			neuePerson.fuegeMeldungenHinzu(passwort.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(passwort.getError());
 		}
 
-		if (passwortWiederholen.isInvalid())
+		var benutzer = Benutzer.aus(neuerBenutzer.getNachname(), neuerBenutzer.getVorname());
+		if (benutzer.isInvalid())
 		{
-			neuePerson.fuegeMeldungenHinzu(passwortWiederholen.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(benutzer.getError());
 		}
 
-		Validation<Meldungen, Person> person = Person.aus(neuePerson.getNachname(), neuePerson.getVorname());
-
-		if (person.isInvalid())
-		{
-			neuePerson.fuegeMeldungenHinzu(person.getError());
-		}
-
-		var emailAdresse = EmailAdresse.aus(neuePerson.getEmailadresse());
-
+		var emailAdresse = EMailAdresse.aus(neuerBenutzer.getEmailadresse());
 		if (emailAdresse.isInvalid())
 		{
-			neuePerson.fuegeMeldungHinzu(emailAdresse.getError());
+			neuerBenutzer.fuegeMeldungHinzu(emailAdresse.getError());
 		}
 
-		var benutzername = Benutzername.aus(neuePerson.getBenutzername());
-
+		var benutzername = Benutzername.aus(neuerBenutzer.getBenutzername());
 		if (benutzername.isInvalid())
 		{
-			neuePerson.fuegeMeldungHinzu(benutzername.getError());
+			neuerBenutzer.fuegeMeldungHinzu(benutzername.getError());
 		}
 
-		if (neuePerson.hatMeldungen())
+		if (neuerBenutzer.hatMeldungen())
 		{
-			return neuePerson;
-		}
-
-		Passwort validesPasswort = passwort.get();
-		Passwort validesPasswortWiederholen = passwortWiederholen.get();
-
-		if (validesPasswort.equals(validesPasswortWiederholen))
-		{
-			neuePerson.fuegeMeldungHinzu(Meldung.PASSWORT_UNGLEICH);
+			return neuerBenutzer;
 		}
 
 		if (loginRepository.finde(benutzername.get()).isDefined())
 		{
-			return neuePerson.fuegeMeldungHinzu(Meldung.BENUTZERNAME_VERGEBEN);
+			return neuerBenutzer.fuegeMeldungHinzu(Meldung.BENUTZERNAME_VERGEBEN);
 		}
 
-		var login = Login.aus(emailAdresse.get(), benutzername.get(), salt, validesPasswort, person.get());
-
+		var login = Login.aus(emailAdresse.get(), benutzername.get(), salt, passwort.get(), benutzer.get());
 		if (login.isInvalid())
 		{
-			return neuePerson.fuegeMeldungenHinzu(login.getError());
+			return neuerBenutzer.fuegeMeldungenHinzu(login.getError());
 		}
 
-		personRepository.speichere(person.get());
+		benutzerRepository.speichere(benutzer.get());
 		loginRepository.speichere(login.get());
-
-		return new NeuePerson().fuegeMeldungHinzu(Meldung.PERSON_ERSTELLT);
+		return new NeuerBenutzer().fuegeMeldungHinzu(Meldung.BENUTZER_ERSTELLT);
 	}
 }

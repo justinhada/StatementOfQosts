@@ -39,16 +39,16 @@ public class Kostenpunkt extends Entitaet
 
 	@NonNull
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "PersonID", nullable = false)
-	private Person person;
+	@JoinColumn(name = "BenutzerID", nullable = false)
+	private Benutzer benutzer;
 
-	public static Validation<Meldungen, Kostenpunkt> aus(Bezeichnung bezeichnung, Datum datum, Betrag betrag, Person person)
+	public static Validation<Meldungen, Kostenpunkt> aus(Bezeichnung bezeichnung, Datum datum, Betrag betrag, Benutzer benutzer)
 	{
 		return Validation.combine(
 				validiere(bezeichnung, Meldung.BEZEICHNUNG),
 				validiere(datum, Meldung.DATUM),
 				validiere(betrag, Meldung.BETRAG_LEER),
-				validiere(person, Meldung.PERSON_LEER))
+				validiere(benutzer, Meldung.BENUTZER_LEER))
 			.ap(Kostenpunkt::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
@@ -57,10 +57,11 @@ public class Kostenpunkt extends Entitaet
 	public String toString()
 	{
 		return MoreObjects.toStringHelper(this)
+			.add("ID", id)
 			.add("Bezeichnung", bezeichnung)
 			.add("Datum", datum)
 			.add("Betrag", betrag)
-			.add("Person", person)
+			.add("Benutzer", benutzer)
 			.toString();
 	}
 }

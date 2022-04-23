@@ -4,6 +4,7 @@ import de.justinharder.soq.domain.model.Login;
 import de.justinharder.soq.domain.model.attribute.Benutzername;
 import de.justinharder.soq.domain.repository.LoginRepository;
 import io.vavr.control.Option;
+import io.vavr.control.Try;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;

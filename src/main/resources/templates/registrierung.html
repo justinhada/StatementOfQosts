@@ -89,6 +89,14 @@
 
         <form method="post"
               action="/registrierung">
+            {#if neuerBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
+                <ul class="list-unstyled alert {#if neuerBenutzer.istErfolgreich()}alert-success{/if}">
+                {#for meldung in neuerBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
+                    <li>{meldung.text}</li>
+                {/for}
+                </ul>
+            {/if}
+
             <div class="row">
                 <div class="col">
                     <label for="emailadresse"
@@ -99,15 +107,14 @@
                     <input id="emailadresse"
                            name="emailadresse"
                            type="text"
-                           class="form-control"
+                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:E_MAIL_ADRESSE)}is-invalid{/if}"
                            placeholder="maxmustermann@mail.de"
-                           aria-label="emailadresse">
-                        {neuePerson.emailadresse}
-                    </input>
+                           aria-label="emailadresse"
+                           value="{neuerBenutzer.emailadresse}" />
 
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:E_MAIL_ADRESSE)}
-                            <li class="invalid-feedback">{meldung.text}</li>
+                    <ul class="list-unstyled invalid-feedback">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:E_MAIL_ADRESSE)}
+                            <li>{meldung.text}</li>
                         {/for}
                     </ul>
                 </div>
@@ -127,17 +134,16 @@
                         <input id="benutzername"
                                name="benutzername"
                                type="text"
-                               class="form-control"
+                               class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:BENUTZERNAME)}is-invalid{/if}"
                                placeholder="MaxMustermann"
                                aria-label="Benutzername"
-                               aria-describedby="benutzernameAddon">
-                            {neuePerson.benutzername}
-                        </input>
+                               aria-describedby="benutzernameAddon"
+                               value="{neuerBenutzer.benutzername}" />
                     </div>
 
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:BENUTZERNAME)}
-                            <li class="invalid-feedback">{meldung.text}</li>
+                    <ul class="list-unstyled invalid-feedback">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:BENUTZERNAME)}
+                            <li>{meldung.text}</li>
                         {/for}
                     </ul>
                 </div>
@@ -153,15 +159,14 @@
                     <input id="nachname"
                            name="nachname"
                            type="text"
-                           class="form-control"
+                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:NACHNAME)}is-invalid{/if}"
                            placeholder="Mustermann"
-                           aria-label="nachname">
-                        {neuePerson.nachname}
-                    </input>
+                           aria-label="nachname"
+                           value="{neuerBenutzer.nachname}" />
 
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:NACHNAME)}
-                            <li class="invalid-feedback">{meldung.text}</li>
+                    <ul class="list-unstyled invalid-feedback">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:NACHNAME)}
+                            <li>{meldung.text}</li>
                         {/for}
                     </ul>
                 </div>
@@ -175,15 +180,14 @@
                     <input id="vorname"
                            name="vorname"
                            type="text"
-                           class="form-control"
+                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:VORNAME)}is-invalid{/if}"
                            placeholder="Max"
-                           aria-label="vorname">
-                        {neuePerson.vorname}
-                    </input>
+                           aria-label="vorname"
+                           value="{neuerBenutzer.vorname}">
 
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:VORNAME)}
-                            <li class="invalid-feedback">{meldung.text}</li>
+                    <ul class="list-unstyled invalid-feedback">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:VORNAME)}
+                            <li>{meldung.text}</li>
                         {/for}
                     </ul>
                 </div>
@@ -199,35 +203,13 @@
                     <input id="passwort"
                            name="passwort"
                            type="password"
-                           class="form-control"
-                           aria-label="passwort">
-                        {neuePerson.passwort}
-                    </input>
+                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:PASSWORT)}is-invalid{/if}"
+                           aria-label="passwort"
+                           value="{neuerBenutzer.passwort}">
 
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:PASSWORT)}
-                            <li class="invalid-feedback">{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
-
-                <div class="col">
-                    <label for="passwortWiederholen"
-                           class="form-label mt-2 fw-bold">
-                        Passwort (wiederholen)
-                    </label>
-
-                    <input id="passwortWiederholen"
-                           name="passwortWiederholen"
-                           type="password"
-                           class="form-control"
-                           aria-label="passwortWiederholen">
-                        {neuePerson.passwortWiederholen}
-                    </input>
-
-                    <ul class="list-unstyled">
-                        {#for meldung in neuePerson.getMeldungen(Schluessel:PASSWORT)}
-                            <li class="invalid-feedback">{meldung.text}</li>
+                    <ul class="list-unstyled invalid-feedback">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:PASSWORT)}
+                            <li>{meldung.text}</li>
                         {/for}
                     </ul>
                 </div>

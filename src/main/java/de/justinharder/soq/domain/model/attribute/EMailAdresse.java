@@ -12,20 +12,20 @@ import java.io.Serial;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class EmailAdresse extends WertObjekt<String>
+public class EMailAdresse extends WertObjekt<String>
 {
 	@Serial
 	private static final long serialVersionUID = 8834883601481281835L;
 
 	@NonNull
-	@Column(name = "E-Mail-Adresse", nullable = false)
+	@Column(name = "EMailAdresse", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, EmailAdresse> aus(String wert)
+	public static Validation<Meldung, EMailAdresse> aus(String wert)
 	{
 		return validiereString(wert, Meldung.E_MAIL_ADRESSE_LEER)
 			.flatMap(string -> !string.contains("@")
 				? Validation.invalid(Meldung.E_MAIL_ADRESSE_UNGUELTIG)
-				: Validation.valid(new EmailAdresse(string)));
+				: Validation.valid(new EMailAdresse(string)));
 	}
 }

@@ -26,7 +26,7 @@ class EinnahmequelleSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG, Meldung.TURNUS,
-				Meldung.BETRAG_LEER, Meldung.PERSON_LEER));
+				Meldung.BETRAG_LEER, Meldung.BENUTZER_LEER));
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class EinnahmequelleSollte extends Testdaten
 			() -> assertThat(sut.getBezeichnung()).isEqualTo(GEHALT),
 			() -> assertThat(sut.getTurnus()).isEqualTo(MONATLICH),
 			() -> assertThat(sut.getBetrag()).isEqualTo(B_1),
-			() -> assertThat(sut.getPerson()).isEqualTo(JUSTIN_HARDER));
+			() -> assertThat(sut.getBenutzer()).isEqualTo(JUSTIN_HARDER));
 
 		validierung = Einnahmequelle.aus(WEIHNACHTSGELD, JAEHRLICH, B_10, LAURA_TIEMERDING);
 		sut = validierung.get();
@@ -49,15 +49,18 @@ class EinnahmequelleSollte extends Testdaten
 			() -> assertThat(sut.getBezeichnung()).isEqualTo(WEIHNACHTSGELD),
 			() -> assertThat(sut.getTurnus()).isEqualTo(JAEHRLICH),
 			() -> assertThat(sut.getBetrag()).isEqualTo(B_10),
-			() -> assertThat(sut.getPerson()).isEqualTo(LAURA_TIEMERDING));
+			() -> assertThat(sut.getBenutzer()).isEqualTo(LAURA_TIEMERDING));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Einnahmequelle.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER).get()).hasToString(
-			"Einnahmequelle{Bezeichnung=Gehalt, Turnus=MONATLICH, Betrag=1, Person=Person{Nachname=Harder, Vorname=Justin}}");
+		validierung = Einnahmequelle.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER);
+		sut = validierung.get();
+		assertThat(sut).hasToString(
+			"Einnahmequelle{ID=" + sut.getId() + ", Bezeichnung=Gehalt, Turnus=MONATLICH, Betrag=1, Benutzer=Benutzer{ID=" + sut.getBenutzer()
+				.getId() + ", Nachname=Harder, Vorname=Justin}}");
 	}
 
 }

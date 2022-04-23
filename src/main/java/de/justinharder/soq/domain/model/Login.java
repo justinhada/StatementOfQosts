@@ -2,7 +2,7 @@ package de.justinharder.soq.domain.model;
 
 import com.google.common.base.MoreObjects;
 import de.justinharder.soq.domain.model.attribute.Benutzername;
-import de.justinharder.soq.domain.model.attribute.EmailAdresse;
+import de.justinharder.soq.domain.model.attribute.EMailAdresse;
 import de.justinharder.soq.domain.model.attribute.Passwort;
 import de.justinharder.soq.domain.model.attribute.Salt;
 import de.justinharder.soq.domain.model.meldung.Meldung;
@@ -26,7 +26,7 @@ public class Login extends Entitaet
 
 	@NonNull
 	@Embedded
-	private EmailAdresse emailAdresse;
+	private EMailAdresse emailAdresse;
 
 	@NonNull
 	@Embedded
@@ -42,22 +42,22 @@ public class Login extends Entitaet
 
 	@NonNull
 	@OneToOne(optional = false)
-	@JoinColumn(name = "PersonID", nullable = false)
-	private Person person;
+	@JoinColumn(name = "BenutzerID", nullable = false)
+	private Benutzer benutzer;
 
 	public static Validation<Meldungen, Login> aus(
-		EmailAdresse emailAdresse,
+		EMailAdresse emailAdresse,
 		Benutzername benutzername,
 		Salt salt,
 		Passwort passwort,
-		Person person)
+		Benutzer benutzer)
 	{
 		return Validation.combine(
 				validiere(emailAdresse, Meldung.E_MAIL_ADRESSE_LEER),
 				validiere(benutzername, Meldung.BENUTZERNAME_LEER),
 				validiere(salt, Meldung.SALT),
 				validiere(passwort, Meldung.PASSWORT_LEER),
-				validiere(person, Meldung.PERSON_LEER))
+				validiere(benutzer, Meldung.BENUTZER_LEER))
 			.ap(Login::new)
 			.bimap(Meldungen::ausSeq, Function.identity());
 	}
@@ -66,11 +66,12 @@ public class Login extends Entitaet
 	public String toString()
 	{
 		return MoreObjects.toStringHelper(this)
+			.add("ID", id)
 			.add("E-Mail-Adresse", emailAdresse)
 			.add("Benutzername", benutzername)
 			.add("Salt", salt)
 			.add("Passwort", passwort)
-			.add("Person", person)
+			.add("Benutzer", benutzer)
 			.toString();
 	}
 }

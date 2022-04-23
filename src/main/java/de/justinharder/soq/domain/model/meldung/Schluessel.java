@@ -5,6 +5,7 @@ import io.quarkus.qute.TemplateEnum;
 @TemplateEnum
 public enum Schluessel
 {
+	ALLGEMEIN,
 	BENUTZERNAME,
 	BETRAG,
 	BEZEICHNUNG,
@@ -13,7 +14,7 @@ public enum Schluessel
 	KATEGORIE,
 	NACHNAME,
 	PASSWORT,
-	PERSON,
+	BENUTZER,
 	POSTEN,
 	SALT,
 	TURNUS,
