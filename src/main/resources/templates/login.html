@@ -105,40 +105,19 @@
 
 <section>
     <div class="container mt-5">
-        <h1 class="fw-bold">Benutzer erstellen</h1>
+        <h1 class="fw-bold">Login</h1>
 
         <form method="post"
-              action="/registrierung">
-            {#if neuerBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
-                <ul class="list-unstyled alert {#if neuerBenutzer.istErfolgreich()}alert-success{/if}">
-                {#for meldung in neuerBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
+              action="/login">
+            {#if angemeldeterBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
+                <ul class="list-unstyled alert {#if angemeldeterBenutzer.istErfolgreich()}alert-success{#else}alert-danger{/if}">
+                {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
                     <li>{meldung.text}</li>
                 {/for}
                 </ul>
             {/if}
 
             <div class="row">
-                <div class="col">
-                    <label for="emailadresse"
-                           class="form-label mt-2 fw-bold">
-                        E-Mail-Adresse
-                    </label>
-
-                    <input id="emailadresse"
-                           name="emailadresse"
-                           type="text"
-                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:E_MAIL_ADRESSE)}is-invalid{/if}"
-                           placeholder="maxmustermann@mail.de"
-                           aria-label="emailadresse"
-                           value="{neuerBenutzer.emailadresse}" />
-
-                    <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:E_MAIL_ADRESSE)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
-
                 <div class="col">
                     <label for="benutzername"
                            class="form-label mt-2 fw-bold">
@@ -154,59 +133,15 @@
                         <input id="benutzername"
                                name="benutzername"
                                type="text"
-                               class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:BENUTZERNAME)}is-invalid{/if}"
+                               class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:BENUTZERNAME)}is-invalid{/if}"
                                placeholder="MaxMustermann"
                                aria-label="Benutzername"
                                aria-describedby="benutzernameAddon"
-                               value="{neuerBenutzer.benutzername}" />
+                               value="{angemeldeterBenutzer.benutzername}" />
                     </div>
 
                     <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:BENUTZERNAME)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <label for="nachname"
-                           class="form-label mt-2 fw-bold">
-                        Nachname
-                    </label>
-
-                    <input id="nachname"
-                           name="nachname"
-                           type="text"
-                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:NACHNAME)}is-invalid{/if}"
-                           placeholder="Mustermann"
-                           aria-label="nachname"
-                           value="{neuerBenutzer.nachname}" />
-
-                    <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:NACHNAME)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
-
-                <div class="col">
-                    <label for="vorname"
-                           class="form-label mt-2 fw-bold">
-                        Vorname
-                    </label>
-
-                    <input id="vorname"
-                           name="vorname"
-                           type="text"
-                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:VORNAME)}is-invalid{/if}"
-                           placeholder="Max"
-                           aria-label="vorname"
-                           value="{neuerBenutzer.vorname}">
-
-                    <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:VORNAME)}
+                        {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:BENUTZERNAME)}
                             <li>{meldung.text}</li>
                         {/for}
                     </ul>
@@ -223,12 +158,12 @@
                     <input id="passwort"
                            name="passwort"
                            type="password"
-                           class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:PASSWORT)}is-invalid{/if}"
+                           class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:PASSWORT)}is-invalid{/if}"
                            aria-label="passwort"
-                           value="{neuerBenutzer.passwort}">
+                           value="{angemeldeterBenutzer.passwort}">
 
                     <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:PASSWORT)}
+                        {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:PASSWORT)}
                             <li>{meldung.text}</li>
                         {/for}
                     </ul>
@@ -239,7 +174,7 @@
                 <div class="col">
                     <button type="submit"
                             class="btn btn-primary mt-3 fw-bold">
-                        Registrieren
+                        Login
                     </button>
                 </div>
             </div>
