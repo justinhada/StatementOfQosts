@@ -37,7 +37,7 @@ class LoginSollte extends Testdaten
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getEmailAdresse()).isEqualTo(E_JUSTIN),
+			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_JUSTIN),
 			() -> assertThat(sut.getBenutzername()).isEqualTo(B_HARDER),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
 			() -> assertThat(sut.getPasswort()).isEqualTo(P_JUSTIN),
@@ -47,7 +47,7 @@ class LoginSollte extends Testdaten
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getEmailAdresse()).isEqualTo(E_LAURA),
+			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_LAURA),
 			() -> assertThat(sut.getBenutzername()).isEqualTo(B_TIEMERDING),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
 			() -> assertThat(sut.getPasswort()).isEqualTo(P_LAURA),

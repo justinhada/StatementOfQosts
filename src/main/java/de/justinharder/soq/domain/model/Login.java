@@ -26,7 +26,7 @@ public class Login extends Entitaet
 
 	@NonNull
 	@Embedded
-	private EMailAdresse emailAdresse;
+	private EMailAdresse eMailAdresse;
 
 	@NonNull
 	@Embedded
@@ -46,14 +46,14 @@ public class Login extends Entitaet
 	private Benutzer benutzer;
 
 	public static Validation<Meldungen, Login> aus(
-		EMailAdresse emailAdresse,
+		EMailAdresse eMailAdresse,
 		Benutzername benutzername,
 		Salt salt,
 		Passwort passwort,
 		Benutzer benutzer)
 	{
 		return Validation.combine(
-				validiere(emailAdresse, Meldung.E_MAIL_ADRESSE_LEER),
+				validiere(eMailAdresse, Meldung.E_MAIL_ADRESSE_LEER),
 				validiere(benutzername, Meldung.BENUTZERNAME_LEER),
 				validiere(salt, Meldung.SALT),
 				validiere(passwort, Meldung.PASSWORT_LEER),
@@ -67,7 +67,7 @@ public class Login extends Entitaet
 	{
 		return MoreObjects.toStringHelper(this)
 			.add("ID", id)
-			.add("E-Mail-Adresse", emailAdresse)
+			.add("E-Mail-Adresse", eMailAdresse)
 			.add("Benutzername", benutzername)
 			.add("Salt", salt)
 			.add("Passwort", passwort)
