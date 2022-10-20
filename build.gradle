@@ -82,4 +82,4 @@ compileTestJava {
 }
 
 group 'de.justinharder.soq'
-version '1.0.0'
+version '1.0.1'
