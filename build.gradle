@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'io.quarkus'
     id 'jacoco'
-    id "org.sonarqube" version '3.2.0'
+    id "org.sonarqube" version '3.3'
 }
 
 repositories {
@@ -27,16 +27,11 @@ dependencies {
             "org.projectlombok:lombok:$project.lombokVersion",
             "com.google.guava:guava:$project.guavaVersion"
 
-    testImplementation "io.quarkus:quarkus-junit5",
-            "io.rest-assured:rest-assured",
-            "org.assertj:assertj-core:$project.assertjVersion",
-            "org.mockito:mockito-core:$project.mockitoVersion"
-
     annotationProcessor "org.projectlombok:lombok:$project.lombokVersion"
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.8"
     reportsDir = file("${buildDir}/jacoco")
 }
 
