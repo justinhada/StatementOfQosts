@@ -10,6 +10,12 @@ repositories {
     mavenLocal()
 }
 
+[
+        "tests"
+].each {
+    apply from: "gradle/${it}.gradle"
+}
+
 dependencies {
     implementation enforcedPlatform("$project.quarkusPlatformGroupId:$project.quarkusPlatformArtifactId:$project.quarkusPlatformVersion")
 
