@@ -40,9 +40,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Copy JacocoAgent
-        run: ./gradlew kopiereJacocoAgent
-
       - name: Create JaCoCo-IntegrationTest Folder
         run: mkdir -p build/jacocoit
 
