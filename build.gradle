@@ -60,7 +60,7 @@ task mergeJacocoReports(type: JacocoReport) {
 sonarqube {
     properties {
         property "sonar.projectKey", "justinhada_StatementOfQosts"
-        property "sonar.organization", "statementofqosts"
+        property "sonar.organization", "justinhada"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.login", System.getenv("SONAR_TOKEN")
         property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/jacoco/merge.xml"
