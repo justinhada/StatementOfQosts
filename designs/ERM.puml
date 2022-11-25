@@ -22,7 +22,7 @@ entity Login
     * Benutzername
     * Salt
     * Passwort
-    * **PersonID <<FK>>**
+    * **BenutzerID <<FK>>**
 }
 
 entity Kosten
@@ -37,7 +37,7 @@ entity Einnahmequelle
     * Bezeichnung
     * Turnus
     * Betrag
-    * **PersonID <<FK>>**
+    * **BenutzerID <<FK>>**
 }
 
 Kosten ||--o{ Kostenpunkt
