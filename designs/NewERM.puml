@@ -1,0 +1,57 @@
+@startuml
+entity Benutzer
+{
+    * **ID <<PK>>**
+    * Nachname
+    * Vorname
+}
+
+entity Login
+{
+    * **ID <<PK>>**
+    * E-Mail-Adresse
+    * Benutzername
+    * Salt
+    * Passwort
+    * **BenutzerID <<FK>>**
+}
+
+entity Bank
+{
+    * **ID <<PK>>**
+    * Bezeichnung
+    * BIC
+}
+
+entity Bankverbindung
+{
+    * **ID <<PK>>**
+    * IBAN
+    * **BenutzerID <<FK>>**
+    * **BankID <<FK>>**
+}
+
+entity Umsatz
+{
+    * **ID <<PK>>**
+    * Betrag
+    * Datum
+    * Verwendungszweck
+    * **BankverbindungSenderID <<FK>>**
+    * **BankverbindungEmpfaengerID <<FK>>**
+    * **TranksaktionID <<FK>>**
+}
+
+entity Transaktion
+{
+    * **ID <<PK>>**
+    * Bezeichnung
+    * Code
+}
+
+Benutzer ||--|| Login
+Benutzer ||--o{ Bankverbindung
+Bank ||--o{ Bankverbindung
+Bankverbindung }o--o{ Umsatz
+Transaktion ||--o{ Umsatz
+@enduml
