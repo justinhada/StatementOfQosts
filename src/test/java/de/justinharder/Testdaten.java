@@ -84,4 +84,8 @@ public class Testdaten
 		Login.aus(E_MAIL_ADRESSE_2, BENUTZERNAME_2, SALT, PASSWORT_2, BENUTZER_2).get();
 	protected static final Transaktion TRANSAKTION_1 = Transaktion.aus(BEZEICHNUNG_3, CODE_1).get();
 	protected static final Transaktion TRANSAKTION_2 = Transaktion.aus(BEZEICHNUNG_4, CODE_2).get();
+	protected static final Umsatz UMSATZ_1 =
+		Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2, TRANSAKTION_1).get();
+	protected static final Umsatz UMSATZ_2 =
+		Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1, TRANSAKTION_2).get();
 }
