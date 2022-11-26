@@ -1,6 +1,7 @@
 package de.justinharder;
 
 import de.justinharder.soq.domain.model.Benutzer;
+import de.justinharder.soq.domain.model.Kategorie;
 import de.justinharder.soq.domain.model.Login;
 import de.justinharder.soq.domain.model.Transaktion;
 import de.justinharder.soq.domain.model.attribute.*;
@@ -30,6 +31,10 @@ public class Testdaten
 	protected static final Bezeichnung BEZEICHNUNG_3 = Bezeichnung.aus(BEZEICHNUNG_3_WERT).get();
 	protected static final String BEZEICHNUNG_4_WERT = "Überweisung";
 	protected static final Bezeichnung BEZEICHNUNG_4 = Bezeichnung.aus(BEZEICHNUNG_4_WERT).get();
+	protected static final String BEZEICHNUNG_5_WERT = "Lebensmittel";
+	protected static final Bezeichnung BEZEICHNUNG_5 = Bezeichnung.aus(BEZEICHNUNG_5_WERT).get();
+	protected static final String BEZEICHNUNG_6_WERT = "Supplements";
+	protected static final Bezeichnung BEZEICHNUNG_6 = Bezeichnung.aus(BEZEICHNUNG_6_WERT).get();
 	protected static final String BIC_1_WERT = "GENODEF1DIK";
 	protected static final BIC BIC_1 = BIC.aus(BIC_1_WERT).get();
 	protected static final String BIC_2_WERT = "OLBODEH2XXX";
@@ -70,8 +75,12 @@ public class Testdaten
 	// -- Entitaeten ---------------------------------------------------------------------------------------------------
 	protected static final Benutzer BENUTZER_1 = Benutzer.aus(NACHNAME_1, VORNAME_1).get();
 	protected static final Benutzer BENUTZER_2 = Benutzer.aus(NACHNAME_2, VORNAME_2).get();
-	protected static final Login LOGIN_1 = Login.aus(E_MAIL_ADRESSE_1, BENUTZERNAME_1, SALT, PASSWORT_1, BENUTZER_1).get();
-	protected static final Login LOGIN_2 = Login.aus(E_MAIL_ADRESSE_2, BENUTZERNAME_2, SALT, PASSWORT_2, BENUTZER_2).get();
+	protected static final Kategorie KATEGORIE_1 = Kategorie.aus(BEZEICHNUNG_5).get();
+	protected static final Kategorie KATEGORIE_2 = Kategorie.aus(BEZEICHNUNG_6).get();
+	protected static final Login LOGIN_1 =
+		Login.aus(E_MAIL_ADRESSE_1, BENUTZERNAME_1, SALT, PASSWORT_1, BENUTZER_1).get();
+	protected static final Login LOGIN_2 =
+		Login.aus(E_MAIL_ADRESSE_2, BENUTZERNAME_2, SALT, PASSWORT_2, BENUTZER_2).get();
 	protected static final Transaktion TRANSAKTION_1 = Transaktion.aus(BEZEICHNUNG_3, CODE_1).get();
 	protected static final Transaktion TRANSAKTION_2 = Transaktion.aus(BEZEICHNUNG_4, CODE_2).get();
 }
