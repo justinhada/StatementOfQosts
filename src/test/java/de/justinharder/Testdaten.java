@@ -1,9 +1,6 @@
 package de.justinharder;
 
-import de.justinharder.soq.domain.model.Benutzer;
-import de.justinharder.soq.domain.model.Kategorie;
-import de.justinharder.soq.domain.model.Login;
-import de.justinharder.soq.domain.model.Transaktion;
+import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
 
 import java.math.BigDecimal;
@@ -35,9 +32,9 @@ public class Testdaten
 	protected static final Bezeichnung BEZEICHNUNG_5 = Bezeichnung.aus(BEZEICHNUNG_5_WERT).get();
 	protected static final String BEZEICHNUNG_6_WERT = "Supplements";
 	protected static final Bezeichnung BEZEICHNUNG_6 = Bezeichnung.aus(BEZEICHNUNG_6_WERT).get();
-	protected static final String BIC_1_WERT = "GENODEF1DIK";
+	protected static final String BIC_1_WERT = "OLBODEH2XXX";
 	protected static final BIC BIC_1 = BIC.aus(BIC_1_WERT).get();
-	protected static final String BIC_2_WERT = "OLBODEH2XXX";
+	protected static final String BIC_2_WERT = "GENODEF1DIK";
 	protected static final BIC BIC_2 = BIC.aus(BIC_2_WERT).get();
 	protected static final String CODE_1_WERT = "152";
 	protected static final Code CODE_1 = Code.aus(CODE_1_WERT).get();
@@ -73,6 +70,8 @@ public class Testdaten
 	protected static final String VORNAME_2_WERT = "Laura";
 	protected static final Vorname VORNAME_2 = Vorname.aus(VORNAME_2_WERT).get();
 	// -- Entitaeten ---------------------------------------------------------------------------------------------------
+	protected static final Bank BANK_1 = Bank.aus(BEZEICHNUNG_1, BIC_1).get();
+	protected static final Bank BANK_2 = Bank.aus(BEZEICHNUNG_1, BIC_1).get();
 	protected static final Benutzer BENUTZER_1 = Benutzer.aus(NACHNAME_1, VORNAME_1).get();
 	protected static final Benutzer BENUTZER_2 = Benutzer.aus(NACHNAME_2, VORNAME_2).get();
 	protected static final Kategorie KATEGORIE_1 = Kategorie.aus(BEZEICHNUNG_5).get();
