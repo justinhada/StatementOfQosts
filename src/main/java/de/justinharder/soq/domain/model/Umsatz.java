@@ -59,7 +59,7 @@ public class Umsatz extends Entitaet
 	{
 		return Validation.combine(
 				validiere(datum, Meldung.DATUM),
-				validiere(betrag, Meldung.BETRAG_LEER),
+				validiere(betrag, Meldung.BETRAG),
 				validiere(verwendungszweck, Meldung.VERWENDUNGSZWECK),
 				validiere(bankverbindungSender, Meldung.BANKVERBINDUNG),
 				validiere(bankverbindungEmpfaenger, Meldung.BANKVERBINDUNG),

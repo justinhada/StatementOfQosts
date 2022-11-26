@@ -7,5 +7,10 @@ import lombok.RequiredArgsConstructor;
 public enum Art
 {
 	AUSGABE,
-	EINNAHME
+	EINNAHME;
+
+	public static Art aus(Betrag betrag)
+	{
+		return betrag.istNegativ() ? AUSGABE : EINNAHME;
+	}
 }

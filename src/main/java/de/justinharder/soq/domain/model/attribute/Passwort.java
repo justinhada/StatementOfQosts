@@ -12,7 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.util.Base64;
-import java.util.function.Function;
 import java.util.function.IntPredicate;
 
 @Getter
@@ -34,7 +33,7 @@ public class Passwort extends WertObjekt<String>
 				validierePasswort(wert),
 				validiere(salt, Meldung.SALT))
 			.ap(Passwort::hash)
-			.bimap(Meldungen::ausSeq, Function.identity())
+			.mapError(Meldungen::ausSeq)
 			.flatMap(passwortTry -> passwortTry.toValidation(() -> Meldungen.aus(Meldung.PASSWORT_HASH)));
 	}
 

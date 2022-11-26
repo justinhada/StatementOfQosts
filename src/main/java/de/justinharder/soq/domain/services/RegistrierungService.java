@@ -2,10 +2,7 @@ package de.justinharder.soq.domain.services;
 
 import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.Login;
-import de.justinharder.soq.domain.model.attribute.Benutzername;
-import de.justinharder.soq.domain.model.attribute.EMailAdresse;
-import de.justinharder.soq.domain.model.attribute.Passwort;
-import de.justinharder.soq.domain.model.attribute.Salt;
+import de.justinharder.soq.domain.model.attribute.*;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.repository.BenutzerRepository;
 import de.justinharder.soq.domain.repository.LoginRepository;
@@ -44,10 +41,16 @@ public class RegistrierungService
 			neuerBenutzer.fuegeMeldungenHinzu(passwort.getError());
 		}
 
-		var benutzer = Benutzer.aus(neuerBenutzer.getNachname(), neuerBenutzer.getVorname());
-		if (benutzer.isInvalid())
+		var nachname = Nachname.aus(neuerBenutzer.getNachname());
+		if(nachname.isInvalid())
 		{
-			neuerBenutzer.fuegeMeldungenHinzu(benutzer.getError());
+			neuerBenutzer.fuegeMeldungHinzu(nachname.getError());
+		}
+
+		var vorname = Vorname.aus(neuerBenutzer.getVorname());
+		if(vorname.isInvalid())
+		{
+			neuerBenutzer.fuegeMeldungHinzu(vorname.getError());
 		}
 
 		var emailAdresse = EMailAdresse.aus(neuerBenutzer.getEmailadresse());
@@ -65,6 +68,12 @@ public class RegistrierungService
 		if (neuerBenutzer.hatMeldungen())
 		{
 			return neuerBenutzer;
+		}
+
+		var benutzer = Benutzer.aus(nachname.get(), vorname.get());
+		if (benutzer.isInvalid())
+		{
+			neuerBenutzer.fuegeMeldungenHinzu(benutzer.getError());
 		}
 
 		if (loginRepository.finde(benutzername.get()).isDefined())

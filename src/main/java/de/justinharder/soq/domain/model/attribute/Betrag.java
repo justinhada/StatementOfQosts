@@ -24,9 +24,12 @@ public class Betrag extends WertObjekt<BigDecimal>
 
 	public static Validation<Meldung, Betrag> aus(BigDecimal wert)
 	{
-		return validiere(wert, Meldung.BETRAG_LEER)
-			.flatMap(bigDecimal -> bigDecimal.compareTo(BigDecimal.ZERO) < 0
-				? Validation.invalid(Meldung.BETRAG_NEGATIV)
-				: Validation.valid(new Betrag(bigDecimal)));
+		return validiere(wert, Meldung.BETRAG)
+			.map(Betrag::new);
+	}
+
+	public boolean istNegativ()
+	{
+		return wert.compareTo(BigDecimal.ZERO) < 0;
 	}
 }

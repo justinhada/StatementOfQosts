@@ -26,12 +26,7 @@ class BetragSollte extends Testdaten
 		validierung = Betrag.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BETRAG_LEER));
-
-		validierung = Betrag.aus(new BigDecimal("-1"));
-		assertAll(
-			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BETRAG_NEGATIV));
+			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BETRAG));
 	}
 
 	@Test

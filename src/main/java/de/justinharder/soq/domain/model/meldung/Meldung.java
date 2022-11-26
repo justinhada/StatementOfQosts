@@ -42,15 +42,10 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Benutzername ist bereits vergeben!");
 
-	public static final Meldung BETRAG_LEER = new Meldung(
+	public static final Meldung BETRAG = new Meldung(
 		Schluessel.BETRAG,
 		Ebene.FEHLER,
 		"Der Betrag darf nicht leer sein!");
-
-	public static final Meldung BETRAG_NEGATIV = new Meldung(
-		Schluessel.BETRAG,
-		Ebene.FEHLER,
-		"Der Betrag darf nicht negativ sein!");
 
 	public static final Meldung BEZEICHNUNG = new Meldung(
 		Schluessel.BEZEICHNUNG,

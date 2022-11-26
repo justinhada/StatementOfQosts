@@ -32,14 +32,14 @@ class BenutzerSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Benutzer.aus(HARDER_WERT, JUSTIN_WERT);
+		validierung = Benutzer.aus(HARDER, JUSTIN);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getNachname()).isEqualTo(HARDER),
 			() -> assertThat(sut.getVorname()).isEqualTo(JUSTIN));
 
-		validierung = Benutzer.aus(TIEMERDING_WERT, LAURA_WERT);
+		validierung = Benutzer.aus(TIEMERDING, LAURA);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -51,7 +51,7 @@ class BenutzerSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		validierung = Benutzer.aus(HARDER_WERT, JUSTIN_WERT);
+		validierung = Benutzer.aus(HARDER, JUSTIN);
 		sut = validierung.get();
 		assertThat(sut).hasToString("Benutzer{ID=" + sut.getId() + ", Nachname=Harder, Vorname=Justin}");
 	}
