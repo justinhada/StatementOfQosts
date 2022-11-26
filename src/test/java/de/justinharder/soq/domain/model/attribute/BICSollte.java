@@ -26,17 +26,17 @@ class BICSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
 
-		validierung = BIC.aus("");
+		validierung = BIC.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
 
-		validierung = BIC.aus(" ");
+		validierung = BIC.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
 
-		validierung = BIC.aus("             ");
+		validierung = BIC.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
@@ -46,23 +46,23 @@ class BICSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = BIC.aus("GENODEF1DIK");
+		validierung = BIC.aus(BIC_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("GENODEF1DIK"));
+			() -> assertThat(sut.getWert()).isEqualTo(BIC_1_WERT));
 
-		validierung = BIC.aus("OLBODEH2XXX");
+		validierung = BIC.aus(BIC_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("OLBODEH2XXX"));
+			() -> assertThat(sut.getWert()).isEqualTo(BIC_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(BIC.aus("GENODEF1DIK").get()).hasToString("GENODEF1DIK");
+		assertThat(BIC_1).hasToString(BIC_1_WERT);
 	}
 }

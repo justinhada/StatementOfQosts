@@ -1,5 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
+import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("IBAN sollte")
-class IBANSollte
+class IBANSollte extends Testdaten
 {
 	private IBAN sut;
 
@@ -25,17 +26,17 @@ class IBANSollte
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
 
-		validierung = IBAN.aus("");
+		validierung = IBAN.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
 
-		validierung = IBAN.aus(" ");
+		validierung = IBAN.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
 
-		validierung = IBAN.aus("             ");
+		validierung = IBAN.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
@@ -45,23 +46,23 @@ class IBANSollte
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = IBAN.aus("DE87280200504008357800");
+		validierung = IBAN.aus(IBAN_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("DE87280200504008357800"));
+			() -> assertThat(sut.getWert()).isEqualTo(IBAN_1_WERT));
 
-		validierung = IBAN.aus("DE28280651080012888000");
+		validierung = IBAN.aus(IBAN_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("DE28280651080012888000"));
+			() -> assertThat(sut.getWert()).isEqualTo(IBAN_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(IBAN.aus("DE87280200504008357800").get()).hasToString("DE87280200504008357800");
+		assertThat(IBAN_1).hasToString(IBAN_1_WERT);
 	}
 }

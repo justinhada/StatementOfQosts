@@ -26,17 +26,17 @@ class BezeichnungSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BEZEICHNUNG));
 
-		validierung = Bezeichnung.aus("");
+		validierung = Bezeichnung.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BEZEICHNUNG));
 
-		validierung = Bezeichnung.aus(" ");
+		validierung = Bezeichnung.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BEZEICHNUNG));
 
-		validierung = Bezeichnung.aus("             ");
+		validierung = Bezeichnung.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BEZEICHNUNG));
@@ -46,23 +46,23 @@ class BezeichnungSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Bezeichnung.aus(OHNE_ESSEN_WERT);
+		validierung = Bezeichnung.aus(BEZEICHNUNG_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(OHNE_ESSEN_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(BEZEICHNUNG_1_WERT));
 
-		validierung = Bezeichnung.aus(NUR_ESSEN_WERT);
+		validierung = Bezeichnung.aus(BEZEICHNUNG_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(NUR_ESSEN_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(BEZEICHNUNG_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Bezeichnung.aus(OHNE_ESSEN_WERT).get()).hasToString(OHNE_ESSEN_WERT);
+		assertThat(BEZEICHNUNG_1).hasToString(BEZEICHNUNG_1_WERT);
 	}
 }

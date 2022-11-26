@@ -33,32 +33,32 @@ class LoginSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Login.aus(E_JUSTIN, B_HARDER, SALT, P_JUSTIN, JUSTIN_HARDER);
+		validierung = Login.aus(E_MAIL_ADRESSE_1, BENUTZERNAME_1, SALT, PASSWORT_1, BENUTZER_1);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_JUSTIN),
-			() -> assertThat(sut.getBenutzername()).isEqualTo(B_HARDER),
+			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_MAIL_ADRESSE_1),
+			() -> assertThat(sut.getBenutzername()).isEqualTo(BENUTZERNAME_1),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
-			() -> assertThat(sut.getPasswort()).isEqualTo(P_JUSTIN),
-			() -> assertThat(sut.getBenutzer()).isEqualTo(JUSTIN_HARDER));
+			() -> assertThat(sut.getPasswort()).isEqualTo(PASSWORT_1),
+			() -> assertThat(sut.getBenutzer()).isEqualTo(BENUTZER_1));
 
-		validierung = Login.aus(E_LAURA, B_TIEMERDING, SALT, P_LAURA, LAURA_TIEMERDING);
+		validierung = Login.aus(E_MAIL_ADRESSE_2, BENUTZERNAME_2, SALT, PASSWORT_2, BENUTZER_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_LAURA),
-			() -> assertThat(sut.getBenutzername()).isEqualTo(B_TIEMERDING),
+			() -> assertThat(sut.getEMailAdresse()).isEqualTo(E_MAIL_ADRESSE_2),
+			() -> assertThat(sut.getBenutzername()).isEqualTo(BENUTZERNAME_2),
 			() -> assertThat(sut.getSalt()).isEqualTo(SALT),
-			() -> assertThat(sut.getPasswort()).isEqualTo(P_LAURA),
-			() -> assertThat(sut.getBenutzer()).isEqualTo(LAURA_TIEMERDING));
+			() -> assertThat(sut.getPasswort()).isEqualTo(PASSWORT_2),
+			() -> assertThat(sut.getBenutzer()).isEqualTo(BENUTZER_2));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Login.aus(E_JUSTIN, B_HARDER, SALT, P_JUSTIN, JUSTIN_HARDER).get().toString()).isNotEqualTo(
-			Login.aus(E_LAURA, B_TIEMERDING, SALT, P_LAURA, LAURA_TIEMERDING).get().toString());
+		assertThat(LOGIN_1).hasToString(
+			"Login{ID=" + LOGIN_1.getId() + ", E-Mail-Adresse=justinharder@t-online.de, Benutzername=hard3r, Salt=" + SALT + ", Passwort=" + PASSWORT_1 + ", Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}}");
 	}
 }

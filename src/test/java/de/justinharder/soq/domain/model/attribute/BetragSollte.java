@@ -39,23 +39,23 @@ class BetragSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getWert()).isEqualTo(BigDecimal.ZERO));
 
-		validierung = Betrag.aus(B_1_WERT);
+		validierung = Betrag.aus(BETRAG_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(B_1_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(BETRAG_1_WERT));
 
-		validierung = Betrag.aus(B_10_WERT);
+		validierung = Betrag.aus(BETRAG_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(B_10_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(BETRAG_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Betrag.aus(B_1_WERT).get()).hasToString("1");
+		assertThat(BETRAG_1).hasToString(BETRAG_1_WERT.toString());
 	}
 }

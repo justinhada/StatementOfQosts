@@ -26,17 +26,17 @@ class VerwendungszweckSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
 
-		validierung = Verwendungszweck.aus("");
+		validierung = Verwendungszweck.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
 
-		validierung = Verwendungszweck.aus(" ");
+		validierung = Verwendungszweck.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
 
-		validierung = Verwendungszweck.aus("             ");
+		validierung = Verwendungszweck.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
@@ -46,23 +46,23 @@ class VerwendungszweckSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Verwendungszweck.aus("Wohnungsmiete");
+		validierung = Verwendungszweck.aus(VERWENDUNGSZWECK_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("Wohnungsmiete"));
+			() -> assertThat(sut.getWert()).isEqualTo(VERWENDUNGSZWECK_1_WERT));
 
-		validierung = Verwendungszweck.aus("Lohn/Gehalt");
+		validierung = Verwendungszweck.aus(VERWENDUNGSZWECK_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo("Lohn/Gehalt"));
+			() -> assertThat(sut.getWert()).isEqualTo(VERWENDUNGSZWECK_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Verwendungszweck.aus("Wohnungsmiete").get()).hasToString("Wohnungsmiete");
+		assertThat(VERWENDUNGSZWECK_1).hasToString(VERWENDUNGSZWECK_1_WERT);
 	}
 }

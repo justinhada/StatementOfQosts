@@ -32,12 +32,12 @@ class PasswortSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_LEER));
 
-		validierung = Passwort.aus(SALT, " ");
+		validierung = Passwort.aus(SALT, LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_LEER));
 
-		validierung = Passwort.aus(SALT, "             ");
+		validierung = Passwort.aus(SALT, LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.PASSWORT_LEER));
@@ -101,7 +101,6 @@ class PasswortSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Passwort.aus(SALT, "JustinHarder#98").get().toString()).isNotEqualTo(
-			Passwort.aus(Salt.random(), "LauraTiemerding#01").get().toString());
+		assertThat(PASSWORT_1.toString()).isNotEqualTo(PASSWORT_2.toString());
 	}
 }

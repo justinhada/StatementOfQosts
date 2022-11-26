@@ -32,27 +32,25 @@ class BenutzerSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Benutzer.aus(HARDER, JUSTIN);
+		validierung = Benutzer.aus(NACHNAME_1, VORNAME_1);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getNachname()).isEqualTo(HARDER),
-			() -> assertThat(sut.getVorname()).isEqualTo(JUSTIN));
+			() -> assertThat(sut.getNachname()).isEqualTo(NACHNAME_1),
+			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_1));
 
-		validierung = Benutzer.aus(TIEMERDING, LAURA);
+		validierung = Benutzer.aus(NACHNAME_2, VORNAME_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getNachname()).isEqualTo(TIEMERDING),
-			() -> assertThat(sut.getVorname()).isEqualTo(LAURA));
+			() -> assertThat(sut.getNachname()).isEqualTo(NACHNAME_2),
+			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_2));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		validierung = Benutzer.aus(HARDER, JUSTIN);
-		sut = validierung.get();
-		assertThat(sut).hasToString("Benutzer{ID=" + sut.getId() + ", Nachname=Harder, Vorname=Justin}");
+		assertThat(BENUTZER_1).hasToString("Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}");
 	}
 }

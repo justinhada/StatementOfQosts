@@ -49,7 +49,7 @@ class RegistrierungServiceSollte extends Testdaten
 	@DisplayName("invaliden Benutzer und Login nicht registrieren")
 	void test02()
 	{
-		var neuerBenutzer = new NeuerBenutzer("", "", "", "", "");
+		var neuerBenutzer = new NeuerBenutzer(LEER, LEER, LEER, LEER, LEER);
 
 		var ergebnis = sut.registriere(neuerBenutzer);
 
@@ -69,7 +69,7 @@ class RegistrierungServiceSollte extends Testdaten
 	@DisplayName("invaliden Benutzer und Login nicht registrieren")
 	void test03()
 	{
-		var neuerBenutzer = new NeuerBenutzer("invalideEMailAdresse", "", "", "", "");
+		var neuerBenutzer = new NeuerBenutzer("invalideEMailAdresse", LEER, LEER, LEER, LEER);
 
 		var ergebnis = sut.registriere(neuerBenutzer);
 
@@ -89,8 +89,9 @@ class RegistrierungServiceSollte extends Testdaten
 	@DisplayName("Benutzer und Login mit vergebenem Benutzernamen nicht registrieren")
 	void test04()
 	{
-		var neuerBenutzer = new NeuerBenutzer(E_JUSTIN_WERT, HARDER_WERT, HARDER_WERT, JUSTIN_WERT, P_JUSTIN_WERT);
-		when(loginRepository.finde(B_HARDER)).thenReturn(Option.of(LOGIN));
+		var neuerBenutzer = new NeuerBenutzer(E_MAIL_ADRESSE_1_WERT, BENUTZERNAME_1_WERT, NACHNAME_1_WERT,
+			VORNAME_1_WERT, PASSWORT_1_WERT);
+		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.of(LOGIN_1));
 
 		var ergebnis = sut.registriere(neuerBenutzer);
 
@@ -102,15 +103,16 @@ class RegistrierungServiceSollte extends Testdaten
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.VORNAME)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
-		verify(loginRepository).finde(B_HARDER);
+		verify(loginRepository).finde(BENUTZERNAME_1);
 	}
 
 	@Test
 	@DisplayName("Benutzer und Login registrieren")
 	void test05()
 	{
-		var neuerBenutzer = new NeuerBenutzer(E_JUSTIN_WERT, HARDER_WERT, HARDER_WERT, JUSTIN_WERT, P_JUSTIN_WERT);
-		when(loginRepository.finde(B_HARDER)).thenReturn(Option.none());
+		var neuerBenutzer = new NeuerBenutzer(E_MAIL_ADRESSE_1_WERT, BENUTZERNAME_1_WERT, NACHNAME_1_WERT,
+			VORNAME_1_WERT, PASSWORT_1_WERT);
+		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.none());
 
 		var ergebnis = sut.registriere(neuerBenutzer);
 
@@ -122,7 +124,7 @@ class RegistrierungServiceSollte extends Testdaten
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
 				Meldung.BENUTZER_ERSTELLT));
-		verify(loginRepository).finde(B_HARDER);
+		verify(loginRepository).finde(BENUTZERNAME_1);
 		verify(benutzerRepository).speichere(any(Benutzer.class));
 		verify(loginRepository).speichere(any(Login.class));
 	}

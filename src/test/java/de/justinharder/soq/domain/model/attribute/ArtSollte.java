@@ -4,8 +4,6 @@ import de.justinharder.Testdaten;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -17,7 +15,7 @@ class ArtSollte extends Testdaten
 	void test01()
 	{
 		assertAll(
-			() -> assertThat(Art.aus(Betrag.aus(new BigDecimal(-1)).get())).isEqualTo(Art.AUSGABE),
-			() -> assertThat(Art.aus(B_1)).isEqualTo(Art.EINNAHME));
+			() -> assertThat(Art.aus(BETRAG_2)).isEqualTo(Art.AUSGABE),
+			() -> assertThat(Art.aus(BETRAG_1)).isEqualTo(Art.EINNAHME));
 	}
 }

@@ -26,17 +26,17 @@ class EMailAdresseSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EMailAdresse.aus("");
+		validierung = EMailAdresse.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EMailAdresse.aus(" ");
+		validierung = EMailAdresse.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
 
-		validierung = EMailAdresse.aus("             ");
+		validierung = EMailAdresse.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
@@ -56,23 +56,23 @@ class EMailAdresseSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = EMailAdresse.aus(E_JUSTIN_WERT);
+		validierung = EMailAdresse.aus(E_MAIL_ADRESSE_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(E_JUSTIN_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(E_MAIL_ADRESSE_1_WERT));
 
-		validierung = EMailAdresse.aus(E_LAURA_WERT);
+		validierung = EMailAdresse.aus(E_MAIL_ADRESSE_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(E_LAURA_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(E_MAIL_ADRESSE_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(EMailAdresse.aus(E_JUSTIN_WERT).get()).hasToString(E_JUSTIN_WERT);
+		assertThat(E_MAIL_ADRESSE_1).hasToString(E_MAIL_ADRESSE_1_WERT);
 	}
 }

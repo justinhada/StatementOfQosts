@@ -26,17 +26,17 @@ class BenutzernameSollte extends Testdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
-		validierung = Benutzername.aus("");
+		validierung = Benutzername.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
-		validierung = Benutzername.aus(" ");
+		validierung = Benutzername.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
 
-		validierung = Benutzername.aus("             ");
+		validierung = Benutzername.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
@@ -46,23 +46,23 @@ class BenutzernameSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Benutzername.aus(HARDER_WERT);
+		validierung = Benutzername.aus(NACHNAME_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(HARDER_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(NACHNAME_1_WERT));
 
-		validierung = Benutzername.aus(TIEMERDING_WERT);
+		validierung = Benutzername.aus(NACHNAME_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(TIEMERDING_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(NACHNAME_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Benutzername.aus(HARDER_WERT).get()).hasToString(HARDER_WERT);
+		assertThat(BENUTZERNAME_1).hasToString(BENUTZERNAME_1_WERT);
 	}
 }

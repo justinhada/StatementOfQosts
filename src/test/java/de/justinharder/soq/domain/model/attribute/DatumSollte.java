@@ -31,23 +31,23 @@ class DatumSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Datum.aus(D_01012020_WERT);
+		validierung = Datum.aus(DATUM_1_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(D_01012020_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(DATUM_1_WERT));
 
-		validierung = Datum.aus(D_01012021_WERT);
+		validierung = Datum.aus(DATUM_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(D_01012021_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(DATUM_2_WERT));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(Datum.aus(D_01012020_WERT).get()).hasToString("01.01.2020");
+		assertThat(DATUM_1).hasToString("01.01.2020");
 	}
 }
