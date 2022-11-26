@@ -14,6 +14,21 @@ public abstract class WertObjekt<T> implements Serializable, Comparable<WertObje
 
 	public abstract T getWert();
 
+	protected static <U> Validation<Meldung, U> validiere(U wert, Meldung meldung)
+	{
+		return wert == null
+			? Validation.invalid(meldung)
+			: Validation.valid(wert);
+	}
+
+	protected static Validation<Meldung, String> validiereString(String wert, Meldung meldung)
+	{
+		return validiere(wert, meldung)
+			.flatMap(string -> string.isBlank()
+				? Validation.invalid(meldung)
+				: Validation.valid(string));
+	}
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean equals(Object o)
@@ -28,21 +43,6 @@ public abstract class WertObjekt<T> implements Serializable, Comparable<WertObje
 		}
 		WertObjekt<T> that = (WertObjekt<T>) o;
 		return Objects.equals(getWert(), that.getWert());
-	}
-
-	protected static Validation<Meldung, String> validiereString(String wert, Meldung meldung)
-	{
-		return validiere(wert, meldung)
-			.flatMap(string -> string.isBlank()
-				? Validation.invalid(meldung)
-				: Validation.valid(string));
-	}
-
-	protected static <U> Validation<Meldung, U> validiere(U wert, Meldung meldung)
-	{
-		return wert == null
-			? Validation.invalid(meldung)
-			: Validation.valid(wert);
 	}
 
 	@Override

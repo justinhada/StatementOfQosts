@@ -57,7 +57,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der BIC (Bank Identifier Code) darf nicht leer sein!");
 
-	public static final Meldung Code = new Meldung(
+	public static final Meldung CODE = new Meldung(
 		Schluessel.CODE,
 		Ebene.FEHLER,
 		"Der Code darf nicht leer sein!"

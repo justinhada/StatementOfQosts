@@ -35,7 +35,7 @@ public class Transaktion extends Entitaet
 	{
 		return Validation.combine(
 				validiere(bezeichnung, Meldung.BEZEICHNUNG),
-				validiere(code, Meldung.Code))
+				validiere(code, Meldung.CODE))
 			.ap(Transaktion::new)
 			.mapError(Meldungen::ausSeq);
 	}

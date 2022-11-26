@@ -24,7 +24,7 @@ public class Code extends WertObjekt<String>
 	public static Validation<Meldung, Code> aus(String wert)
 	{
 		// TODO: Code richtig validieren! z. B. nur 3-stellig
-		return validiereString(wert, Meldung.Code)
+		return validiereString(wert, Meldung.CODE)
 			.map(Code::new);
 	}
 }

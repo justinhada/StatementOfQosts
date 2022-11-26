@@ -52,7 +52,7 @@ public class LoginRessource
 		{
 			return login.data("angemeldeterBenutzer", angemeldeterBenutzer);
 		}
-		System.out.println(userPrincipal.getName());
+
 		return start.instance();
 	}
 

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("IBAN sollte")
-public class IBANSollte
+class IBANSollte
 {
 	private IBAN sut;
 
