@@ -1,9 +1,8 @@
 package de.justinharder.soq.domain.model;
 
 import com.google.common.base.MoreObjects;
-import de.justinharder.soq.domain.model.attribute.Nachname;
-import de.justinharder.soq.domain.model.attribute.Vorname;
-import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.attribute.BIC;
+import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
@@ -15,28 +14,26 @@ import java.io.Serial;
 
 @Entity
 @Getter
-@Table(name = "Benutzer")
+@Table(name = "Bank")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Benutzer extends Entitaet
+public class Bank extends Entitaet
 {
 	@Serial
-	private static final long serialVersionUID = -8045099408632256819L;
+	private static final long serialVersionUID = -7862317599521419955L;
 
 	@NonNull
 	@Embedded
-	private Nachname nachname;
+	private Bezeichnung bezeichnung;
 
 	@NonNull
 	@Embedded
-	private Vorname vorname;
+	private BIC bic;
 
-	public static Validation<Meldungen, Benutzer> aus(Nachname nachname, Vorname vorname)
+	public static Validation<Meldungen, Bank> aus(String bezeichnung, String bic)
 	{
-		return Validation.combine(
-				validiere(nachname, Meldung.NACHNAME),
-				validiere(vorname, Meldung.VORNAME))
-			.ap(Benutzer::new)
+		return Validation.combine(Bezeichnung.aus(bezeichnung), BIC.aus(bic))
+			.ap(Bank::new)
 			.mapError(Meldungen::ausSeq);
 	}
 
@@ -45,8 +42,8 @@ public class Benutzer extends Entitaet
 	{
 		return MoreObjects.toStringHelper(this)
 			.add("ID", id)
-			.add("Nachname", nachname)
-			.add("Vorname", vorname)
+			.add("Bezeichnung", bezeichnung)
+			.add("BIC", bic)
 			.toString();
 	}
 }

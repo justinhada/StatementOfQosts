@@ -34,8 +34,8 @@ entity Bankverbindung
 entity Umsatz
 {
     * **ID <<PK>>**
-    * Betrag
     * Datum
+    * Betrag
     * Verwendungszweck
     * **BankverbindungSenderID <<FK>>**
     * **BankverbindungEmpfaengerID <<FK>>**
@@ -49,9 +49,25 @@ entity Transaktion
     * Code
 }
 
+entity EinnahmeAusgabe
+{
+    * **ID <<PK>>**
+    * Art
+    * **UmsatzID <<FK>>**
+    * **KategorieID <<FK>>**
+}
+
+entity Kategorie
+{
+    * **ID <<PK>>**
+    * Bezeichnung
+}
+
 Benutzer ||--|| Login
 Benutzer ||--o{ Bankverbindung
 Bank ||--o{ Bankverbindung
 Bankverbindung }o--o{ Umsatz
 Transaktion ||--o{ Umsatz
+Kategorie ||--o{ EinnahmeAusgabe
+Umsatz ||--|| EinnahmeAusgabe
 @enduml

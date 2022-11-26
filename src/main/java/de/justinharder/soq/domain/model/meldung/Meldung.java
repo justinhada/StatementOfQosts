@@ -2,6 +2,21 @@ package de.justinharder.soq.domain.model.meldung;
 
 public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 {
+	public static final Meldung ART = new Meldung(
+		Schluessel.ART,
+		Ebene.FEHLER,
+		"Die Art darf nicht leer sein!");
+
+	public static final Meldung BANK_LEER = new Meldung(
+		Schluessel.BANK,
+		Ebene.FEHLER,
+		"Die Bank darf nicht leer sein!");
+
+	public static final Meldung BANKVERBINDUNG = new Meldung(
+		Schluessel.BANKVERBINDUNG,
+		Ebene.FEHLER,
+		"Die Bankverbindung darf nicht leer sein!");
+
 	public static final Meldung BENUTZER_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
@@ -42,6 +57,17 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Bezeichnung darf nicht leer sein!");
 
+	public static final Meldung BIC = new Meldung(
+		Schluessel.BIC,
+		Ebene.FEHLER,
+		"Der BIC (Bank Identifier Code) darf nicht leer sein!");
+
+	public static final Meldung Code = new Meldung(
+		Schluessel.CODE,
+		Ebene.FEHLER,
+		"Der Code darf nicht leer sein!"
+	);
+
 	public static final Meldung DATUM = new Meldung(
 		Schluessel.DATUM,
 		Ebene.FEHLER,
@@ -56,6 +82,21 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.E_MAIL_ADRESSE,
 		Ebene.FEHLER,
 		"Die E-Mail-Adresse ist ungültig!");
+
+	public static final Meldung IBAN = new Meldung(
+		Schluessel.IBAN,
+		Ebene.FEHLER,
+		"Die IBAN (Internationale Bankkontonummer) darf nicht leer sein!");
+
+	public static final Meldung KATEGORIE_LEER = new Meldung(
+		Schluessel.KATEGORIE,
+		Ebene.FEHLER,
+		"Die Kategorie darf nicht leer sein!");
+
+	public static final Meldung LOGIN_ERFOLGREICH = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Login war erfolgreich!");
 
 	public static final Meldung NACHNAME = new Meldung(
 		Schluessel.NACHNAME,
@@ -87,18 +128,23 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Salt darf nicht leer sein!");
 
-	public static final Meldung TURNUS = new Meldung(
-		Schluessel.TURNUS,
+	public static final Meldung TRANSAKTION = new Meldung(
+		Schluessel.TRANSAKTION,
 		Ebene.FEHLER,
-		"Der Turnus darf nicht leer sein!");
+		"Die Transaktion darf nicht leer sein!");
+
+	public static final Meldung UMSATZ_LEER = new Meldung(
+		Schluessel.UMSATZ,
+		Ebene.FEHLER,
+		"Der Umsatz darf nicht leer sein!");
+
+	public static final Meldung VERWENDUNGSZWECK = new Meldung(
+		Schluessel.VERWENDUNGSZWECK,
+		Ebene.FEHLER,
+		"Der Verwendungszweck darf nicht leer sein!");
 
 	public static final Meldung VORNAME = new Meldung(
 		Schluessel.VORNAME,
 		Ebene.FEHLER,
 		"Der Vorname darf nicht leer sein!");
-
-	public static final Meldung LOGIN_ERFOLGREICH = new Meldung(
-		Schluessel.ALLGEMEIN,
-		Ebene.ERFOLG,
-		"Der Login war erfolgreich!");
 }

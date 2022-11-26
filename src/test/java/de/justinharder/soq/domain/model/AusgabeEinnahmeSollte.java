@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Einnahmequelle sollte")
-class EinnahmequelleSollte extends Testdaten
+class EinnahmeAusgabeSollte extends Testdaten
 {
-	private Einnahmequelle sut;
+	private EinnahmeAusgabe sut;
 
-	private Validation<Meldungen, Einnahmequelle> validierung;
+	private Validation<Meldungen, EinnahmeAusgabe> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Einnahmequelle.aus(null, null, null, null);
+		validierung = EinnahmeAusgabe.aus(null, null, null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG, Meldung.TURNUS,
@@ -33,7 +33,7 @@ class EinnahmequelleSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Einnahmequelle.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER);
+		validierung = EinnahmeAusgabe.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -42,7 +42,7 @@ class EinnahmequelleSollte extends Testdaten
 			() -> assertThat(sut.getBetrag()).isEqualTo(B_1),
 			() -> assertThat(sut.getBenutzer()).isEqualTo(JUSTIN_HARDER));
 
-		validierung = Einnahmequelle.aus(WEIHNACHTSGELD, JAEHRLICH, B_10, LAURA_TIEMERDING);
+		validierung = EinnahmeAusgabe.aus(WEIHNACHTSGELD, JAEHRLICH, B_10, LAURA_TIEMERDING);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -56,7 +56,7 @@ class EinnahmequelleSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		validierung = Einnahmequelle.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER);
+		validierung = EinnahmeAusgabe.aus(GEHALT, MONATLICH, B_1, JUSTIN_HARDER);
 		sut = validierung.get();
 		assertThat(sut).hasToString(
 			"Einnahmequelle{ID=" + sut.getId() + ", Bezeichnung=Gehalt, Turnus=MONATLICH, Betrag=1, Benutzer=Benutzer{ID=" + sut.getBenutzer()

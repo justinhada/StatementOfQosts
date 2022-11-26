@@ -6,17 +6,17 @@ import de.justinharder.soq.domain.model.meldung.Meldung;
 import io.vavr.control.Validation;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "Kosten")
+@Table(name = "Kategorie")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Kosten extends Entitaet
+public class Kategorie extends Entitaet
 {
 	@Serial
 	private static final long serialVersionUID = -944011812988956775L;
@@ -25,20 +25,10 @@ public class Kosten extends Entitaet
 	@Embedded
 	private Bezeichnung bezeichnung;
 
-	@NonNull
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "KostenID")
-	private final List<Kostenpunkt> kostenpunkte = new ArrayList<>();
-
-	public static Validation<Meldung, Kosten> aus(Bezeichnung bezeichnung)
+	public static Validation<Meldung, Kategorie> aus(Bezeichnung bezeichnung)
 	{
 		return validiere(bezeichnung, Meldung.BEZEICHNUNG)
-			.map(Kosten::new);
-	}
-
-	public void fuegeKostenpunktHinzu(@NonNull Kostenpunkt kostenpunkt)
-	{
-		kostenpunkte.add(kostenpunkt);
+			.map(Kategorie::new);
 	}
 
 	@Override
@@ -47,7 +37,6 @@ public class Kosten extends Entitaet
 		return MoreObjects.toStringHelper(this)
 			.add("ID", id)
 			.add("Bezeichnung", bezeichnung)
-			.add("Kostenpunkte", kostenpunkte)
 			.toString();
 	}
 }
