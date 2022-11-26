@@ -2,6 +2,7 @@ package de.justinharder;
 
 import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.Login;
+import de.justinharder.soq.domain.model.Transaktion;
 import de.justinharder.soq.domain.model.attribute.*;
 
 import java.math.BigDecimal;
@@ -25,10 +26,18 @@ public class Testdaten
 	protected static final Bezeichnung BEZEICHNUNG_1 = Bezeichnung.aus(BEZEICHNUNG_1_WERT).get();
 	protected static final String BEZEICHNUNG_2_WERT = "Volksbank Vechta eG";
 	protected static final Bezeichnung BEZEICHNUNG_2 = Bezeichnung.aus(BEZEICHNUNG_2_WERT).get();
+	protected static final String BEZEICHNUNG_3_WERT = "Gutschrift";
+	protected static final Bezeichnung BEZEICHNUNG_3 = Bezeichnung.aus(BEZEICHNUNG_3_WERT).get();
+	protected static final String BEZEICHNUNG_4_WERT = "Überweisung";
+	protected static final Bezeichnung BEZEICHNUNG_4 = Bezeichnung.aus(BEZEICHNUNG_4_WERT).get();
 	protected static final String BIC_1_WERT = "GENODEF1DIK";
 	protected static final BIC BIC_1 = BIC.aus(BIC_1_WERT).get();
 	protected static final String BIC_2_WERT = "OLBODEH2XXX";
 	protected static final BIC BIC_2 = BIC.aus(BIC_2_WERT).get();
+	protected static final String CODE_1_WERT = "152";
+	protected static final Code CODE_1 = Code.aus(CODE_1_WERT).get();
+	protected static final String CODE_2_WERT = "116";
+	protected static final Code CODE_2 = Code.aus(CODE_2_WERT).get();
 	protected static final LocalDate DATUM_1_WERT = LocalDate.of(2020, 1, 1);
 	protected static final Datum DATUM_1 = Datum.aus(DATUM_1_WERT).get();
 	protected static final LocalDate DATUM_2_WERT = LocalDate.of(2021, 1, 1);
@@ -63,4 +72,6 @@ public class Testdaten
 	protected static final Benutzer BENUTZER_2 = Benutzer.aus(NACHNAME_2, VORNAME_2).get();
 	protected static final Login LOGIN_1 = Login.aus(E_MAIL_ADRESSE_1, BENUTZERNAME_1, SALT, PASSWORT_1, BENUTZER_1).get();
 	protected static final Login LOGIN_2 = Login.aus(E_MAIL_ADRESSE_2, BENUTZERNAME_2, SALT, PASSWORT_2, BENUTZER_2).get();
+	protected static final Transaktion TRANSAKTION_1 = Transaktion.aus(BEZEICHNUNG_3, CODE_1).get();
+	protected static final Transaktion TRANSAKTION_2 = Transaktion.aus(BEZEICHNUNG_4, CODE_2).get();
 }
