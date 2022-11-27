@@ -88,4 +88,8 @@ public class Testdaten
 		Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2, TRANSAKTION_1).get();
 	protected static final Umsatz UMSATZ_2 =
 		Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1, TRANSAKTION_2).get();
+	protected static final AusgabeEinnahme AUSGABE_EINNAHME_1 =
+		AusgabeEinnahme.aus(Art.AUSGABE, UMSATZ_1, KATEGORIE_1).get();
+	protected static final AusgabeEinnahme AUSGABE_EINNAHME_2 =
+		AusgabeEinnahme.aus(Art.EINNAHME, UMSATZ_2, KATEGORIE_2).get();
 }
