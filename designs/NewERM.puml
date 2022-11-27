@@ -39,14 +39,6 @@ entity Umsatz
     * Verwendungszweck
     * **BankverbindungSenderID <<FK>>**
     * **BankverbindungEmpfaengerID <<FK>>**
-    * **TranksaktionID <<FK>>**
-}
-
-entity Transaktion
-{
-    * **ID <<PK>>**
-    * Bezeichnung
-    * Code
 }
 
 entity EinnahmeAusgabe
@@ -67,7 +59,6 @@ Benutzer ||--|| Login
 Benutzer ||--o{ Bankverbindung
 Bank ||--o{ Bankverbindung
 Bankverbindung }o--o{ Umsatz
-Transaktion ||--o{ Umsatz
 Kategorie ||--o{ EinnahmeAusgabe
 Umsatz ||--|| EinnahmeAusgabe
 @enduml

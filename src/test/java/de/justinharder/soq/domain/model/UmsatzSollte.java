@@ -22,19 +22,18 @@ class UmsatzSollte extends Testdaten
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Umsatz.aus(null, null, null, null, null, null);
+		validierung = Umsatz.aus(null, null, null, null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.DATUM, Meldung.BETRAG,
-				Meldung.VERWENDUNGSZWECK, Meldung.BANKVERBINDUNG, Meldung.BANKVERBINDUNG, Meldung.TRANSAKTION));
+				Meldung.VERWENDUNGSZWECK, Meldung.BANKVERBINDUNG, Meldung.BANKVERBINDUNG));
 	}
 
 	@Test
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung =
-			Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2, TRANSAKTION_1);
+		validierung = Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -42,11 +41,9 @@ class UmsatzSollte extends Testdaten
 			() -> assertThat(sut.getBetrag()).isEqualTo(BETRAG_1),
 			() -> assertThat(sut.getVerwendungszweck()).isEqualTo(VERWENDUNGSZWECK_1),
 			() -> assertThat(sut.getBankverbindungSender()).isEqualTo(BANKVERBINDUNG_1),
-			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_2),
-			() -> assertThat(sut.getTransaktion()).isEqualTo(TRANSAKTION_1));
+			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_2));
 
-		validierung =
-			Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1, TRANSAKTION_2);
+		validierung = Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -54,8 +51,7 @@ class UmsatzSollte extends Testdaten
 			() -> assertThat(sut.getBetrag()).isEqualTo(BETRAG_2),
 			() -> assertThat(sut.getVerwendungszweck()).isEqualTo(VERWENDUNGSZWECK_2),
 			() -> assertThat(sut.getBankverbindungSender()).isEqualTo(BANKVERBINDUNG_2),
-			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_1),
-			() -> assertThat(sut.getTransaktion()).isEqualTo(TRANSAKTION_2));
+			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_1));
 	}
 
 	@Test
@@ -63,6 +59,6 @@ class UmsatzSollte extends Testdaten
 	void test03()
 	{
 		assertThat(UMSATZ_1).hasToString(
-			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungSender=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungEmpfaenger=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Benutzer=Benutzer{ID=" + BENUTZER_2.getId() + ", Nachname=Tiemerding, Vorname=Laura}, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, Transaktion=Transaktion{ID=" + TRANSAKTION_1.getId() + ", Bezeichnung=Gutschrift, Code=152}}");
+			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungSender=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungEmpfaenger=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Benutzer=Benutzer{ID=" + BENUTZER_2.getId() + ", Nachname=Tiemerding, Vorname=Laura}, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}");
 	}
 }

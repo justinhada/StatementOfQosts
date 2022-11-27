@@ -31,17 +31,17 @@ class KategorieSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Kategorie.aus(BEZEICHNUNG_5);
+		validierung = Kategorie.aus(BEZEICHNUNG_3);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getBezeichnung()).isEqualTo(BEZEICHNUNG_5));
+			() -> assertThat(sut.getBezeichnung()).isEqualTo(BEZEICHNUNG_3));
 
-		validierung = Kategorie.aus(BEZEICHNUNG_6);
+		validierung = Kategorie.aus(BEZEICHNUNG_4);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getBezeichnung()).isEqualTo(BEZEICHNUNG_6));
+			() -> assertThat(sut.getBezeichnung()).isEqualTo(BEZEICHNUNG_4));
 	}
 
 	@Test

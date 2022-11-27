@@ -14,7 +14,6 @@ public enum Schluessel
 	BETRAG,
 	BEZEICHNUNG,
 	BIC,
-	CODE,
 	DATUM,
 	E_MAIL_ADRESSE,
 	IBAN,

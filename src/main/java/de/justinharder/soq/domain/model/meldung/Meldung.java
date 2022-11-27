@@ -57,12 +57,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der BIC (Bank Identifier Code) darf nicht leer sein!");
 
-	public static final Meldung CODE = new Meldung(
-		Schluessel.CODE,
-		Ebene.FEHLER,
-		"Der Code darf nicht leer sein!"
-	);
-
 	public static final Meldung DATUM = new Meldung(
 		Schluessel.DATUM,
 		Ebene.FEHLER,
@@ -122,11 +116,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.SALT,
 		Ebene.FEHLER,
 		"Der Salt darf nicht leer sein!");
-
-	public static final Meldung TRANSAKTION = new Meldung(
-		Schluessel.TRANSAKTION,
-		Ebene.FEHLER,
-		"Die Transaktion darf nicht leer sein!");
 
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,
