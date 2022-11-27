@@ -12,7 +12,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
-import java.util.function.Function;
 
 @Entity
 @Getter
@@ -59,7 +58,7 @@ public class Login extends Entitaet
 				validiere(passwort, Meldung.PASSWORT_LEER),
 				validiere(benutzer, Meldung.BENUTZER_LEER))
 			.ap(Login::new)
-			.bimap(Meldungen::ausSeq, Function.identity());
+			.mapError(Meldungen::ausSeq);
 	}
 
 	@Override

@@ -9,7 +9,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
-import java.util.function.Function;
 
 @Entity
 @Getter
@@ -43,7 +42,7 @@ public class AusgabeEinnahme extends Entitaet
 				validiere(umsatz, Meldung.UMSATZ_LEER),
 				validiere(kategorie, Meldung.KATEGORIE_LEER))
 			.ap(AusgabeEinnahme::new)
-			.bimap(Meldungen::ausSeq, Function.identity());
+			.mapError(Meldungen::ausSeq);
 	}
 
 	@Override
