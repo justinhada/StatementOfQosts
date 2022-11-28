@@ -23,4 +23,12 @@ class UmsatzDatenSollte extends Testdaten
 	{
 		assertThat(Import.aus(VRB_UMSATZ_DATEN)).isEqualTo(UMSATZ_DATEN_AUS_VRB);
 	}
+
+	@Test
+	@DisplayName("sich drucken")
+	void test03()
+	{
+		assertThat(UMSATZ_DATEN_AUS_OLB).hasToString(
+			"UmsatzDaten{AuftraggeberIBAN=DE87280200504008357800, Datum=31.10.2022, ZahlungsbeteiligterName=Laura Tiemerding, ZahlungsbeteiligterIBAN=DE28280651080012888000, ZahlungsbeteiligterBIC=GENODEF1DIK, Verwendungszweck=Wohnungsmiete, Betrag=447,48}");
+	}
 }
