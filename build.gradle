@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation enforcedPlatform("$project.quarkusPlatformGroupId:$project.quarkusPlatformArtifactId:$project.quarkusPlatformVersion")
+    implementation enforcedPlatform("io.quarkus:quarkus-bom:$project.quarkusVersion")
 
     implementation "io.quarkus:quarkus-hibernate-orm",
             "io.quarkus:quarkus-qute",
