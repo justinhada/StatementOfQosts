@@ -2,6 +2,9 @@ package de.justinharder;
 
 import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
+import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDaten;
+import de.justinharder.soq.domain.services.imports.model.UmsatzDaten;
+import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDaten;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -82,4 +85,57 @@ public class Testdaten
 		AusgabeEinnahme.aus(Art.AUSGABE, UMSATZ_1, KATEGORIE_1).get();
 	protected static final AusgabeEinnahme AUSGABE_EINNAHME_2 =
 		AusgabeEinnahme.aus(Art.EINNAHME, UMSATZ_2, KATEGORIE_2).get();
+	// -- Weiteres -----------------------------------------------------------------------------------------------------
+	protected static final OLBUmsatzDaten OLB_UMSATZ_DATEN = new OLBUmsatzDaten(
+		"DE87280200504008357800",
+		"31.10.2022",
+		"31.10.2022",
+		"Laura Tiemerding",
+		"DE28280651080012888000",
+		"GENODEF1DIK",
+		"Wohnungsmiete",
+		"447,48",
+		"EUR",
+		"NONREF",
+		"",
+		"0004770",
+		"152",
+		"DA-GUTSCHR");
+	protected static final UmsatzDaten UMSATZ_DATEN_AUS_OLB = new UmsatzDaten(
+		"DE87280200504008357800",
+		"31.10.2022",
+		"Laura Tiemerding",
+		"DE28280651080012888000",
+		"GENODEF1DIK",
+		"Wohnungsmiete",
+		"447,48");
+	protected static final VRBUmsatzDaten VRB_UMSATZ_DATEN = new VRBUmsatzDaten(
+		"VR Start",
+		"DE28280651080012888000",
+		"GENODEF1DIK",
+		"VR BANK Dinklage-Steinfeld eG",
+		"31.10.2022",
+		"31.10.2022",
+		"Justin Harder",
+		"DE87280200504008357800",
+		"OLBODEH2XXX",
+		"Dauerauftragsbelast",
+		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
+		"-447,48",
+		"EUR",
+		"10.000,00",
+		"",
+		"Sonstiges",
+		"",
+		"",
+		"");
+	protected static final UmsatzDaten UMSATZ_DATEN_AUS_VRB = new UmsatzDaten(
+		"DE28280651080012888000",
+		"31.10.2022",
+		"Justin Harder",
+		"DE87280200504008357800",
+		"OLBODEH2XXX",
+		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
+		"-447,48");
+	// -----------------------------------------------------------------------------------------------------------------
 }

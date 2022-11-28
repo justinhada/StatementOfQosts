@@ -1,28 +1,27 @@
 package de.justinharder.soq.domain.services.imports.model;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import com.google.common.base.MoreObjects;
 
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class UmsatzDaten
+public record UmsatzDaten(
+	String auftraggeberIBAN,
+	String datum,
+	String zahlungsbeteiligterName,
+	String zahlungsbeteiligterIBAN,
+	String zahlungsbeteiligterBIC,
+	String verwendungszweck,
+	String betrag)
 {
-	private final String ibanAuftraggeber;
-	private final String datum;
-	private final String nameZahlungsbeteiligter;
-	private final String ibanZahlungsbeteiligter;
-	private final String bicZahlungsbeteiligter;
-	private final String verwendungszweck;
-	private final String betrag;
-
-	protected static UmsatzDaten aus(
-		String ibanAuftraggeber,
-		String datum,
-		String nameZahlungsbeteiligter,
-		String ibanZahlungsbeteiligter,
-		String bicZahlungsbeteiligter,
-		String verwendungszweck,
-		String betrag)
+	@Override
+	public String toString()
 	{
-		return null;
+		return MoreObjects.toStringHelper(this)
+			.add("AuftraggeberIBAN", auftraggeberIBAN)
+			.add("Datum", datum)
+			.add("ZahlungsbeteiligterName", zahlungsbeteiligterName)
+			.add("ZahlungsbeteiligterIBAN", zahlungsbeteiligterIBAN)
+			.add("ZahlungsbeteiligterBIC", zahlungsbeteiligterBIC)
+			.add("Verwendungszweck", verwendungszweck)
+			.add("Betrag", betrag)
+			.toString();
 	}
 }
