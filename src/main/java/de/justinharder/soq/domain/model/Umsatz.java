@@ -36,27 +36,27 @@ public class Umsatz extends Entitaet
 
 	@NonNull
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "BankverbindungSenderID", nullable = false)
-	private Bankverbindung bankverbindungSender;
+	@JoinColumn(name = "BankverbindungAuftraggeberID", nullable = false)
+	private Bankverbindung bankverbindungAuftraggeber;
 
 	@NonNull
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "BankverbindungEmpfaengerID", nullable = false)
-	private Bankverbindung bankverbindungEmpfaenger;
+	@JoinColumn(name = "BankverbindungZahlungsbeteiligterID", nullable = false)
+	private Bankverbindung bankverbindungZahlungsbeteiligter;
 
 	public static Validation<Meldungen, Umsatz> aus(
 		Datum datum,
 		Betrag betrag,
 		Verwendungszweck verwendungszweck,
-		Bankverbindung bankverbindungSender,
-		Bankverbindung bankverbindungEmpfaenger)
+		Bankverbindung bankverbindungAuftraggeber,
+		Bankverbindung bankverbindungZahlungsbeteiligter)
 	{
 		return Validation.combine(
 				validiere(datum, Meldung.DATUM),
 				validiere(betrag, Meldung.BETRAG),
 				validiere(verwendungszweck, Meldung.VERWENDUNGSZWECK),
-				validiere(bankverbindungSender, Meldung.BANKVERBINDUNG),
-				validiere(bankverbindungEmpfaenger, Meldung.BANKVERBINDUNG))
+				validiere(bankverbindungAuftraggeber, Meldung.BANKVERBINDUNG),
+				validiere(bankverbindungZahlungsbeteiligter, Meldung.BANKVERBINDUNG))
 			.ap(Umsatz::new)
 			.mapError(Meldungen::ausSeq);
 	}
@@ -69,8 +69,8 @@ public class Umsatz extends Entitaet
 			.add("Datum", datum)
 			.add("Betrag", betrag)
 			.add("Verwendungszweck", verwendungszweck)
-			.add("BankverbindungSender", bankverbindungSender)
-			.add("BankverbindungEmpfaenger", bankverbindungEmpfaenger)
+			.add("BankverbindungAuftraggeber", bankverbindungAuftraggeber)
+			.add("BankverbindungZahlungsbeteiligter", bankverbindungZahlungsbeteiligter)
 			.toString();
 	}
 }

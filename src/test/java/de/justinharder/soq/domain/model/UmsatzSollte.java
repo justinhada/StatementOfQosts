@@ -40,8 +40,8 @@ class UmsatzSollte extends Testdaten
 			() -> assertThat(sut.getDatum()).isEqualTo(DATUM_1),
 			() -> assertThat(sut.getBetrag()).isEqualTo(BETRAG_1),
 			() -> assertThat(sut.getVerwendungszweck()).isEqualTo(VERWENDUNGSZWECK_1),
-			() -> assertThat(sut.getBankverbindungSender()).isEqualTo(BANKVERBINDUNG_1),
-			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_2));
+			() -> assertThat(sut.getBankverbindungAuftraggeber()).isEqualTo(BANKVERBINDUNG_1),
+			() -> assertThat(sut.getBankverbindungZahlungsbeteiligter()).isEqualTo(BANKVERBINDUNG_2));
 
 		validierung = Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1);
 		sut = validierung.get();
@@ -50,8 +50,8 @@ class UmsatzSollte extends Testdaten
 			() -> assertThat(sut.getDatum()).isEqualTo(DATUM_2),
 			() -> assertThat(sut.getBetrag()).isEqualTo(BETRAG_2),
 			() -> assertThat(sut.getVerwendungszweck()).isEqualTo(VERWENDUNGSZWECK_2),
-			() -> assertThat(sut.getBankverbindungSender()).isEqualTo(BANKVERBINDUNG_2),
-			() -> assertThat(sut.getBankverbindungEmpfaenger()).isEqualTo(BANKVERBINDUNG_1));
+			() -> assertThat(sut.getBankverbindungAuftraggeber()).isEqualTo(BANKVERBINDUNG_2),
+			() -> assertThat(sut.getBankverbindungZahlungsbeteiligter()).isEqualTo(BANKVERBINDUNG_1));
 	}
 
 	@Test
@@ -59,6 +59,6 @@ class UmsatzSollte extends Testdaten
 	void test03()
 	{
 		assertThat(UMSATZ_1).hasToString(
-			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungSender=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungEmpfaenger=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Benutzer=Benutzer{ID=" + BENUTZER_2.getId() + ", Nachname=Tiemerding, Vorname=Laura}, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}");
+			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Benutzer=Benutzer{ID=" + BENUTZER_2.getId() + ", Nachname=Tiemerding, Vorname=Laura}, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}");
 	}
 }
