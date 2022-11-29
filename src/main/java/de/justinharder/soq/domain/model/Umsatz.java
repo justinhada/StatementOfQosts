@@ -58,7 +58,7 @@ public class Umsatz extends Entitaet
 				validiere(bankverbindungAuftraggeber, Meldung.BANKVERBINDUNG),
 				validiere(bankverbindungZahlungsbeteiligter, Meldung.BANKVERBINDUNG))
 			.ap(Umsatz::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

@@ -17,10 +17,10 @@ public class Meldungen extends ArrayList<Meldung>
 		return meldungen;
 	}
 
-	public static Meldungen ausSeq(Seq<Meldung> meldungenSeq)
+	public static Meldungen aus(Seq<Meldungen> meldungenSeq)
 	{
 		var meldungen = new Meldungen();
-		meldungenSeq.forEach(meldungen::add);
+		meldungenSeq.forEach(meldungen::addAll);
 		return meldungen;
 	}
 }

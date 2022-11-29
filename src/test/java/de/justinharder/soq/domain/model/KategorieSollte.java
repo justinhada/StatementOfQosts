@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class KategorieSollte extends Testdaten
 {
 	private Kategorie sut;
 
-	private Validation<Meldung, Kategorie> validierung;
+	private Validation<Meldungen, Kategorie> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,7 +25,7 @@ class KategorieSollte extends Testdaten
 		validierung = Kategorie.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BEZEICHNUNG));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG));
 	}
 
 	@Test

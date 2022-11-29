@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -21,7 +22,7 @@ public class Nachname extends WertObjekt<String>
 	@Column(name = "Nachname", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, Nachname> aus(String wert)
+	public static Validation<Meldungen, Nachname> aus(String wert)
 	{
 		return validiereString(wert, Meldung.NACHNAME)
 			.map(Nachname::new);

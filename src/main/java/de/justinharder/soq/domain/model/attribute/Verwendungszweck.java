@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -21,7 +22,7 @@ public class Verwendungszweck extends WertObjekt<String>
 	@Column(name = "Verwendungszweck", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, Verwendungszweck> aus(String wert)
+	public static Validation<Meldungen, Verwendungszweck> aus(String wert)
 	{
 		return validiereString(wert, Meldung.VERWENDUNGSZWECK)
 			.map(Verwendungszweck::new);

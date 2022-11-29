@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class VerwendungszweckSollte extends Testdaten
 {
 	private Verwendungszweck sut;
 
-	private Validation<Meldung, Verwendungszweck> validierung;
+	private Validation<Meldungen, Verwendungszweck> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,22 +25,22 @@ class VerwendungszweckSollte extends Testdaten
 		validierung = Verwendungszweck.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.VERWENDUNGSZWECK));
 
 		validierung = Verwendungszweck.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.VERWENDUNGSZWECK));
 
 		validierung = Verwendungszweck.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.VERWENDUNGSZWECK));
 
 		validierung = Verwendungszweck.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.VERWENDUNGSZWECK));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.VERWENDUNGSZWECK));
 	}
 
 	@Test

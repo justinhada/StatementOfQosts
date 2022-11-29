@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -22,7 +23,7 @@ public class Betrag extends WertObjekt<BigDecimal>
 	@Column(name = "Betrag", nullable = false)
 	private BigDecimal wert;
 
-	public static Validation<Meldung, Betrag> aus(BigDecimal wert)
+	public static Validation<Meldungen, Betrag> aus(BigDecimal wert)
 	{
 		return validiere(wert, Meldung.BETRAG)
 			.map(Betrag::new);

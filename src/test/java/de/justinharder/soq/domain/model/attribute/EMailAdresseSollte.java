@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class EMailAdresseSollte extends Testdaten
 {
 	private EMailAdresse sut;
 
-	private Validation<Meldung, EMailAdresse> validierung;
+	private Validation<Meldungen, EMailAdresse> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,32 +25,32 @@ class EMailAdresseSollte extends Testdaten
 		validierung = EMailAdresse.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER));
 
 		validierung = EMailAdresse.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER));
 
 		validierung = EMailAdresse.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER));
 
 		validierung = EMailAdresse.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_LEER));
 
 		validierung = EMailAdresse.aus("harder");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
 
 		validierung = EMailAdresse.aus("harder.de");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.E_MAIL_ADRESSE_UNGUELTIG));
 	}
 
 	@Test

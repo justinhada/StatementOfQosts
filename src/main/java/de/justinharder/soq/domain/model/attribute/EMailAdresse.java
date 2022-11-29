@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -21,11 +22,11 @@ public class EMailAdresse extends WertObjekt<String>
 	@Column(name = "EMailAdresse", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, EMailAdresse> aus(String wert)
+	public static Validation<Meldungen, EMailAdresse> aus(String wert)
 	{
 		return validiereString(wert, Meldung.E_MAIL_ADRESSE_LEER)
 			.flatMap(string -> !string.contains("@")
-				? Validation.invalid(Meldung.E_MAIL_ADRESSE_UNGUELTIG)
+				? Validation.invalid(Meldungen.aus(Meldung.E_MAIL_ADRESSE_UNGUELTIG))
 				: Validation.valid(new EMailAdresse(string)));
 	}
 }

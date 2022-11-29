@@ -42,27 +42,27 @@ public class RegistrierungService
 		}
 
 		var nachname = Nachname.aus(neuerBenutzer.getNachname());
-		if(nachname.isInvalid())
+		if (nachname.isInvalid())
 		{
-			neuerBenutzer.fuegeMeldungHinzu(nachname.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(nachname.getError());
 		}
 
 		var vorname = Vorname.aus(neuerBenutzer.getVorname());
-		if(vorname.isInvalid())
+		if (vorname.isInvalid())
 		{
-			neuerBenutzer.fuegeMeldungHinzu(vorname.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(vorname.getError());
 		}
 
 		var emailAdresse = EMailAdresse.aus(neuerBenutzer.getEmailadresse());
 		if (emailAdresse.isInvalid())
 		{
-			neuerBenutzer.fuegeMeldungHinzu(emailAdresse.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(emailAdresse.getError());
 		}
 
 		var benutzername = Benutzername.aus(neuerBenutzer.getBenutzername());
 		if (benutzername.isInvalid())
 		{
-			neuerBenutzer.fuegeMeldungHinzu(benutzername.getError());
+			neuerBenutzer.fuegeMeldungenHinzu(benutzername.getError());
 		}
 
 		if (neuerBenutzer.hatMeldungen())

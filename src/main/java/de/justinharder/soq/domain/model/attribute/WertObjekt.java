@@ -1,11 +1,15 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
+import io.vavr.control.Option;
 import io.vavr.control.Validation;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
+
+import static java.util.function.Predicate.not;
 
 public abstract class WertObjekt<T> implements Serializable, Comparable<WertObjekt<T>>
 {
@@ -14,19 +18,17 @@ public abstract class WertObjekt<T> implements Serializable, Comparable<WertObje
 
 	public abstract T getWert();
 
-	protected static <U> Validation<Meldung, U> validiere(U wert, Meldung meldung)
+	protected static <U> Validation<Meldungen, U> validiere(U wert, Meldung meldung)
 	{
-		return wert == null
-			? Validation.invalid(meldung)
-			: Validation.valid(wert);
+		return Option.of(wert)
+			.toValidation(Meldungen.aus(meldung));
 	}
 
-	protected static Validation<Meldung, String> validiereString(String wert, Meldung meldung)
+	protected static Validation<Meldungen, String> validiereString(String wert, Meldung meldung)
 	{
-		return validiere(wert, meldung)
-			.flatMap(string -> string.isBlank()
-				? Validation.invalid(meldung)
-				: Validation.valid(string));
+		return Option.of(wert)
+			.filter(not(String::isBlank))
+			.toValidation(Meldungen.aus(meldung));
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class BICSollte extends Testdaten
 {
 	private BIC sut;
 
-	private Validation<Meldung, BIC> validierung;
+	private Validation<Meldungen, BIC> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,22 +25,22 @@ class BICSollte extends Testdaten
 		validierung = BIC.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
 
 		validierung = BIC.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
 
 		validierung = BIC.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
 
 		validierung = BIC.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
 	}
 
 	@Test

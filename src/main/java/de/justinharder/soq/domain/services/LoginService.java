@@ -27,13 +27,13 @@ public class LoginService
 		var benutzername = Benutzername.aus(angemeldeterBenutzer.getBenutzername());
 		if (benutzername.isInvalid())
 		{
-			angemeldeterBenutzer.fuegeMeldungHinzu(benutzername.getError());
+			angemeldeterBenutzer.fuegeMeldungenHinzu(benutzername.getError());
 		}
 
 		var passwort = Passwort.validierePasswort(angemeldeterBenutzer.getPasswort());
 		if (passwort.isInvalid())
 		{
-			angemeldeterBenutzer.fuegeMeldungHinzu(passwort.getError());
+			angemeldeterBenutzer.fuegeMeldungenHinzu(passwort.getError());
 		}
 
 		if (angemeldeterBenutzer.hatMeldungen())

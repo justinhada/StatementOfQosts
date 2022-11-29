@@ -33,11 +33,11 @@ public class Passwort extends WertObjekt<String>
 				validierePasswort(wert),
 				validiere(salt, Meldung.SALT))
 			.ap(Passwort::hash)
-			.mapError(Meldungen::ausSeq)
+			.mapError(Meldungen::aus)
 			.flatMap(passwortTry -> passwortTry.toValidation(() -> Meldungen.aus(Meldung.PASSWORT_HASH)));
 	}
 
-	public static Validation<Meldung, String> validierePasswort(String passwort)
+	public static Validation<Meldungen, String> validierePasswort(String passwort)
 	{
 		return validiereString(passwort, Meldung.PASSWORT_LEER)
 			.flatMap(Passwort::pruefeGrossbuchstabe)
@@ -47,36 +47,38 @@ public class Passwort extends WertObjekt<String>
 			.flatMap(Passwort::pruefeLaenge);
 	}
 
-	private static Validation<Meldung, String> pruefeGrossbuchstabe(String passwort)
+	private static Validation<Meldungen, String> pruefeGrossbuchstabe(String passwort)
 	{
 		return pruefeAuf(passwort, Character::isUpperCase);
 	}
 
-	private static Validation<Meldung, String> pruefeKleinbuchstabe(String passwort)
+	private static Validation<Meldungen, String> pruefeKleinbuchstabe(String passwort)
 	{
 		return pruefeAuf(passwort, Character::isLowerCase);
 	}
 
-	private static Validation<Meldung, String> pruefeZahl(String passwort)
+	private static Validation<Meldungen, String> pruefeZahl(String passwort)
 	{
 		return pruefeAuf(passwort, Character::isDigit);
 	}
 
-	private static Validation<Meldung, String> pruefeSonderzeichen(String passwort)
+	private static Validation<Meldungen, String> pruefeSonderzeichen(String passwort)
 	{
 		return pruefeAuf(passwort, character -> !Character.isLetterOrDigit(character));
 	}
 
-	private static Validation<Meldung, String> pruefeAuf(String passwort, IntPredicate pruefung)
+	private static Validation<Meldungen, String> pruefeAuf(String passwort, IntPredicate pruefung)
 	{
 		return passwort.chars().anyMatch(pruefung)
 			? Validation.valid(passwort)
-			: Validation.invalid(Meldung.PASSWORT_UNGUELTIG);
+			: Validation.invalid(Meldungen.aus(Meldung.PASSWORT_UNGUELTIG));
 	}
 
-	private static Validation<Meldung, String> pruefeLaenge(String passwort)
+	private static Validation<Meldungen, String> pruefeLaenge(String passwort)
 	{
-		return passwort.length() < 12 ? Validation.invalid(Meldung.PASSWORT_UNGUELTIG) : Validation.valid(passwort);
+		return passwort.length() < 12
+			? Validation.invalid(Meldungen.aus(Meldung.PASSWORT_UNGUELTIG))
+			: Validation.valid(passwort);
 	}
 
 	private static Try<Passwort> hash(String passwort, Salt salt)

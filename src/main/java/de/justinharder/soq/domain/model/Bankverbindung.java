@@ -41,7 +41,7 @@ public class Bankverbindung extends Entitaet
 				validiere(benutzer, Meldung.BENUTZER_LEER),
 				validiere(bank, Meldung.BANK_LEER))
 			.ap(Bankverbindung::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

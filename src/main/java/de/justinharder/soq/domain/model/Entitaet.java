@@ -2,6 +2,8 @@ package de.justinharder.soq.domain.model;
 
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
+import io.vavr.control.Option;
 import io.vavr.control.Validation;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -31,11 +33,10 @@ public abstract class Entitaet implements Serializable
 		this.id = ID.random();
 	}
 
-	protected static <T> Validation<Meldung, T> validiere(T attribut, Meldung meldung)
+	protected static <T> Validation<Meldungen, T> validiere(T attribut, Meldung meldung)
 	{
-		return attribut == null
-			? Validation.invalid(meldung)
-			: Validation.valid(attribut);
+		return Option.of(attribut)
+			.toValidation(Meldungen.aus(meldung));
 	}
 
 	@Override

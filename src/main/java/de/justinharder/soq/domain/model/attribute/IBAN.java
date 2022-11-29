@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -21,7 +22,7 @@ public class IBAN extends WertObjekt<String>
 	@Column(name = "IBAN", nullable = false)
 	private String wert;
 
-	public static Validation<Meldung, IBAN> aus(String wert)
+	public static Validation<Meldungen, IBAN> aus(String wert)
 	{
 		// TODO: IBAN richtig validieren!
 		return validiereString(wert, Meldung.IBAN)

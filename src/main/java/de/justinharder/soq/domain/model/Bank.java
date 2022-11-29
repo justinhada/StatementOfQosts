@@ -35,7 +35,7 @@ public class Bank extends Entitaet
 	{
 		return Validation.combine(validiere(bezeichnung, Meldung.BEZEICHNUNG), validiere(bic, Meldung.BIC))
 			.ap(Bank::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

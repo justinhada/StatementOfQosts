@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class BenutzernameSollte extends Testdaten
 {
 	private Benutzername sut;
 
-	private Validation<Meldung, Benutzername> validierung;
+	private Validation<Meldungen, Benutzername> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,22 +25,22 @@ class BenutzernameSollte extends Testdaten
 		validierung = Benutzername.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BENUTZERNAME_LEER));
 
 		validierung = Benutzername.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.BENUTZERNAME_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BENUTZERNAME_LEER));
 	}
 
 	@Test

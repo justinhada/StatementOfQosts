@@ -58,7 +58,7 @@ public class Login extends Entitaet
 				validiere(passwort, Meldung.PASSWORT_LEER),
 				validiere(benutzer, Meldung.BENUTZER_LEER))
 			.ap(Login::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

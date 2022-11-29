@@ -37,7 +37,7 @@ public class Benutzer extends Entitaet
 				validiere(nachname, Meldung.NACHNAME),
 				validiere(vorname, Meldung.VORNAME))
 			.ap(Benutzer::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

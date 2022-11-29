@@ -42,7 +42,7 @@ public class AusgabeEinnahme extends Entitaet
 				validiere(umsatz, Meldung.UMSATZ_LEER),
 				validiere(kategorie, Meldung.KATEGORIE_LEER))
 			.ap(AusgabeEinnahme::new)
-			.mapError(Meldungen::ausSeq);
+			.mapError(Meldungen::aus);
 	}
 
 	@Override

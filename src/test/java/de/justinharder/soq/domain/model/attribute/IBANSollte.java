@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.Testdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class IBANSollte extends Testdaten
 {
 	private IBAN sut;
 
-	private Validation<Meldung, IBAN> validierung;
+	private Validation<Meldungen, IBAN> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
@@ -24,22 +25,22 @@ class IBANSollte extends Testdaten
 		validierung = IBAN.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
 
 		validierung = IBAN.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
 
 		validierung = IBAN.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
 
 		validierung = IBAN.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).isEqualTo(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
 	}
 
 	@Test

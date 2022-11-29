@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -23,7 +24,7 @@ public class Datum extends WertObjekt<LocalDate>
 	@Column(name = "Datum", nullable = false)
 	private LocalDate wert;
 
-	public static Validation<Meldung, Datum> aus(LocalDate wert)
+	public static Validation<Meldungen, Datum> aus(LocalDate wert)
 	{
 		return validiere(wert, Meldung.DATUM)
 			.map(Datum::new);

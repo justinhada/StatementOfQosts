@@ -3,6 +3,7 @@ package de.justinharder.soq.domain.model;
 import com.google.common.base.MoreObjects;
 import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
 
@@ -25,7 +26,7 @@ public class Kategorie extends Entitaet
 	@Embedded
 	private Bezeichnung bezeichnung;
 
-	public static Validation<Meldung, Kategorie> aus(Bezeichnung bezeichnung)
+	public static Validation<Meldungen, Kategorie> aus(Bezeichnung bezeichnung)
 	{
 		return validiere(bezeichnung, Meldung.BEZEICHNUNG)
 			.map(Kategorie::new);
