@@ -1,189 +1,89 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
+    {#include head /}
 
-    <title>Statement of Qosts</title>
+    <body>
+        {#include header /}
 
-    <link rel="stylesheet"
-          href="/css/main.css" />
+        <section>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Login</h1>
 
-    <link rel="stylesheet"
-          href="/css/bootstrap.css" />
+                <form method="post"
+                      action="/login">
+                    {#if angemeldeterBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if angemeldeterBenutzer.istErfolgreich()}alert-success{#else}alert-danger{/if}">
+                        {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
 
-    <link rel="stylesheet"
-          href="/css/bootstrap-grid.css" />
+                    <div class="row">
+                        <div class="col">
+                            <label for="benutzername"
+                                   class="form-label mt-2 fw-bold">
+                                Benutzername
+                            </label>
 
-    <link rel="stylesheet"
-          href="/css/bootstrap-icons.css" />
-
-    <link rel="stylesheet"
-          href="/css/bootstrap-reboot.css" />
-
-    <link rel="stylesheet"
-          href="/css/bootstrap-utilities.css" />
-
-    <link rel="script"
-          href="/js/bootstrap.js" />
-
-    <link rel="script"
-          href="/js/bootstrap.esm.js" />
-
-    <link rel="script"
-          href="/js/bootstrap.bundle.js" />
-</head>
-<body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-color text-white">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white fw-bolder"
-               href="/start">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="32"
-                     height="32"
-                     fill="currentColor"
-                     class="bi bi-bank"
-                     viewBox="0 0 16 16">
-                    <path d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.379l.5 2A.5.5 0 0 1 15.5 17H.5a.5.5 0 0 1-.485-.621l.5-2A.5.5 0 0 1 1 14V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.776 4h8.447L8 2.05 3.776 4zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z" />
-                </svg>
-                Statement of Qosts
-            </a>
-
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="navbarNavAltMarkup"
-                 class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold"
-                           title="Kosten"
-                           href="/kosten">
-                            Kosten
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold"
-                           title="Einnahmen"
-                           href="/einnahmen">
-                            Einnahmen
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="d-flex">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold"
-                           title="Login"
-                           href="/login">
-                            Login
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold"
-                           title="Registrierung"
-                           href="/registrierung">
-                            Registrierung
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<section>
-    <div class="container mt-5">
-        <h1 class="fw-bold">Login</h1>
-
-        <form method="post"
-              action="/login">
-            {#if angemeldeterBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
-                <ul class="list-unstyled alert {#if angemeldeterBenutzer.istErfolgreich()}alert-success{#else}alert-danger{/if}">
-                {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
-                    <li>{meldung.text}</li>
-                {/for}
-                </ul>
-            {/if}
-
-            <div class="row">
-                <div class="col">
-                    <label for="benutzername"
-                           class="form-label mt-2 fw-bold">
-                        Benutzername
-                    </label>
-
-                    <div class="input-group">
+                            <div class="input-group">
                         <span id="benutzernameAddon"
                               class="input-group-text">
                             @
                         </span>
 
-                        <input id="benutzername"
-                               name="benutzername"
-                               type="text"
-                               class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:BENUTZERNAME)}is-invalid{/if}"
-                               placeholder="MaxMustermann"
-                               aria-label="Benutzername"
-                               aria-describedby="benutzernameAddon"
-                               value="{angemeldeterBenutzer.benutzername}" />
+                                <input id="benutzername"
+                                       name="benutzername"
+                                       type="text"
+                                       class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:BENUTZERNAME)}is-invalid{/if}"
+                                       placeholder="MaxMustermann"
+                                       aria-label="Benutzername"
+                                       aria-describedby="benutzernameAddon"
+                                       value="{angemeldeterBenutzer.benutzername}" />
+                            </div>
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:BENUTZERNAME)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
                     </div>
 
-                    <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:BENUTZERNAME)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="passwort"
+                                   class="form-label mt-2 fw-bold">
+                                Passwort
+                            </label>
+
+                            <input id="passwort"
+                                   name="passwort"
+                                   type="password"
+                                   class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:PASSWORT)}is-invalid{/if}"
+                                   aria-label="passwort"
+                                   value="{angemeldeterBenutzer.passwort}">
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:PASSWORT)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </section>
 
-            <div class="row">
-                <div class="col">
-                    <label for="passwort"
-                           class="form-label mt-2 fw-bold">
-                        Passwort
-                    </label>
-
-                    <input id="passwort"
-                           name="passwort"
-                           type="password"
-                           class="form-control {#if angemeldeterBenutzer.hatMeldungen(Schluessel:PASSWORT)}is-invalid{/if}"
-                           aria-label="passwort"
-                           value="{angemeldeterBenutzer.passwort}">
-
-                    <ul class="list-unstyled invalid-feedback">
-                        {#for meldung in angemeldeterBenutzer.getMeldungen(Schluessel:PASSWORT)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <button type="submit"
-                            class="btn btn-primary mt-3 fw-bold">
-                        Login
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
-
-<footer>
-
-</footer>
-</body>
+        {#include footer /}
+    </body>
 </html>
