@@ -35,7 +35,7 @@ public class RegistrierungRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeRegistrierungFormular()
+	public TemplateInstance zeigeFormular()
 	{
 		return registrierung.data("neuerBenutzer", neuerBenutzer);
 	}
@@ -46,6 +46,6 @@ public class RegistrierungRessource
 	public TemplateInstance erstelleBenutzer(@BeanParam NeuerBenutzer neuerBenutzer)
 	{
 		this.neuerBenutzer = registrierungService.registriere(neuerBenutzer);
-		return zeigeRegistrierungFormular();
+		return zeigeFormular();
 	}
 }

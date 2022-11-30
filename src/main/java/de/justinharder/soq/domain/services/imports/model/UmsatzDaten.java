@@ -11,6 +11,30 @@ public record UmsatzDaten(
 	String verwendungszweck,
 	String betrag)
 {
+	public static UmsatzDaten aus(OLBUmsatzDaten olbUmsatzDaten)
+	{
+		return new UmsatzDaten(
+			olbUmsatzDaten.inhaberkonto(),
+			olbUmsatzDaten.buchungsdatum(),
+			olbUmsatzDaten.auftraggeber(),
+			olbUmsatzDaten.iban(),
+			olbUmsatzDaten.bic(),
+			olbUmsatzDaten.verwendungszweck(),
+			olbUmsatzDaten.betrag());
+	}
+
+	public static UmsatzDaten aus(VRBUmsatzDaten vrbUmsatzDaten)
+	{
+		return new UmsatzDaten(
+			vrbUmsatzDaten.ibanAuftragskonto(),
+			vrbUmsatzDaten.buchungstag(),
+			vrbUmsatzDaten.nameZahlungsbeteiligter(),
+			vrbUmsatzDaten.ibanZahlungsbeteiligter(),
+			vrbUmsatzDaten.bicZahlungsbeteiligter(),
+			vrbUmsatzDaten.verwendungszweck(),
+			vrbUmsatzDaten.betrag());
+	}
+
 	@Override
 	public String toString()
 	{

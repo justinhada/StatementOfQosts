@@ -45,7 +45,7 @@ public class LoginRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeLoginFormular()
+	public TemplateInstance zeigeFormular()
 	{
 		var userPrincipal = securityContext.getUserPrincipal();
 		if (userPrincipal == null)
@@ -66,6 +66,6 @@ public class LoginRessource
 		{
 			return start.instance();
 		}
-		return zeigeLoginFormular();
+		return zeigeFormular();
 	}
 }
