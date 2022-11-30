@@ -1,6 +1,5 @@
 dependencies {
     testImplementation "io.quarkus:quarkus-junit5",
-            "io.rest-assured:rest-assured",
             "org.assertj:assertj-core:$project.assertjVersion",
             "org.mockito:mockito-core:$project.mockitoVersion"
 }

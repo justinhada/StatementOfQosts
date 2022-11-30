@@ -11,7 +11,8 @@ repositories {
 }
 
 [
-        "tests"
+        "tests",
+        "integrationstests"
 ].each {
     apply from: "gradle/${it}.gradle"
 }
@@ -46,7 +47,8 @@ task mergeJacocoReports(type: JacocoReport) {
     sourceDirectories.setFrom files(sourceSets.main.allSource.srcDirs)
     classDirectories.setFrom files(sourceSets.main.output)
     executionData(
-            file("${buildDir}/jacoco/test.exec")
+            file("${buildDir}/jacoco/test.exec"),
+            file("${project.buildDir}/jacoco-quarkus.exec")
     )
     reports {
         xml.enabled true
@@ -81,5 +83,13 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
+compileIntegrationTestJava {
+    options.encoding = 'UTF-8'
+}
+
 group 'de.justinharder.soq'
 version '1.0.1'
+
+project.tasks['sonarqube'].dependsOn jacocoTestReport
+project.tasks['integrationTest'].dependsOn quarkusBuild
+project.tasks['check'].dependsOn integrationTest
