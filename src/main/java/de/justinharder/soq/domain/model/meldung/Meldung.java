@@ -7,6 +7,16 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Art darf nicht leer sein!");
 
+	public static final Meldung BANK_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Bank wurde erfolgreich erstellt!");
+
+	public static final Meldung BANK_EXISTIERT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Die Bank existiert bereits!");
+
 	public static final Meldung BANK_LEER = new Meldung(
 		Schluessel.BANK,
 		Ebene.FEHLER,
