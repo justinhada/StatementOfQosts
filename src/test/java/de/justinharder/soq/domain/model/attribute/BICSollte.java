@@ -25,22 +25,32 @@ class BICSollte extends Testdaten
 		validierung = BIC.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_LEER));
 
 		validierung = BIC.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_LEER));
 
 		validierung = BIC.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_LEER));
 
 		validierung = BIC.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_LEER));
+
+		validierung = BIC.aus("OLBODEH2X");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_UNGUELTIG));
+
+		validierung = BIC.aus("OLBODEH2XXXX");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BIC_UNGUELTIG));
 	}
 
 	@Test
@@ -58,6 +68,12 @@ class BICSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getWert()).isEqualTo(BIC_2_WERT));
+
+		validierung = BIC.aus(BIC_3_WERT);
+		sut = validierung.get();
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::getError),
+			() -> assertThat(sut.getWert()).isEqualTo(BIC_3_WERT));
 	}
 
 	@Test

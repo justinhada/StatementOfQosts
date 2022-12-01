@@ -62,10 +62,15 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Bezeichnung darf nicht leer sein!");
 
-	public static final Meldung BIC = new Meldung(
+	public static final Meldung BIC_LEER = new Meldung(
 		Schluessel.BIC,
 		Ebene.FEHLER,
 		"Der BIC (Bank Identifier Code) darf nicht leer sein!");
+
+	public static final Meldung BIC_UNGUELTIG = new Meldung(
+		Schluessel.BIC,
+		Ebene.FEHLER,
+		"Der BIC (Bank Identifier Code) ist ungültig!");
 
 	public static final Meldung DATUM = new Meldung(
 		Schluessel.DATUM,
@@ -82,10 +87,15 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die E-Mail-Adresse ist ungültig!");
 
-	public static final Meldung IBAN = new Meldung(
+	public static final Meldung IBAN_LEER = new Meldung(
 		Schluessel.IBAN,
 		Ebene.FEHLER,
 		"Die IBAN (Internationale Bankkontonummer) darf nicht leer sein!");
+
+	public static final Meldung IBAN_UNGUELTIG = new Meldung(
+		Schluessel.IBAN,
+		Ebene.FEHLER,
+		"Die IBAN (Internationale Bankkontonummer) ist ungültig!");
 
 	public static final Meldung KATEGORIE_LEER = new Meldung(
 		Schluessel.KATEGORIE,

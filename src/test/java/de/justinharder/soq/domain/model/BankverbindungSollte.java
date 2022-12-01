@@ -25,7 +25,7 @@ class BankverbindungSollte extends Testdaten
 		validierung = Bankverbindung.aus(null, null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN, Meldung.BENUTZER_LEER,
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER, Meldung.BENUTZER_LEER,
 				Meldung.BANK_LEER));
 	}
 

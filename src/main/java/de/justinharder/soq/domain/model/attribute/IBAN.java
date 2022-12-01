@@ -4,6 +4,7 @@ import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
 import lombok.*;
+import org.apache.commons.validator.routines.IBANValidator;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -24,8 +25,9 @@ public class IBAN extends WertObjekt<String>
 
 	public static Validation<Meldungen, IBAN> aus(String wert)
 	{
-		// TODO: IBAN richtig validieren!
-		return validiereString(wert, Meldung.IBAN)
+		return validiereString(wert, Meldung.IBAN_LEER)
+			.filter(IBANValidator.DEFAULT_IBAN_VALIDATOR::isValid)
+			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.IBAN_UNGUELTIG)))
 			.map(IBAN::new);
 	}
 }

@@ -35,6 +35,8 @@ public class Testdaten
 	protected static final BIC BIC_1 = BIC.aus(BIC_1_WERT).get();
 	protected static final String BIC_2_WERT = "GENODEF1DIK";
 	protected static final BIC BIC_2 = BIC.aus(BIC_2_WERT).get();
+	protected static final String BIC_3_WERT = "OLBODEH2";
+	protected static final BIC BIC_3 = BIC.aus(BIC_3_WERT).get();
 	protected static final LocalDate DATUM_1_WERT = LocalDate.of(2020, 1, 1);
 	protected static final Datum DATUM_1 = Datum.aus(DATUM_1_WERT).get();
 	protected static final LocalDate DATUM_2_WERT = LocalDate.of(2021, 1, 1);

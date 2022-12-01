@@ -24,8 +24,15 @@ public class BIC extends WertObjekt<String>
 
 	public static Validation<Meldungen, BIC> aus(String wert)
 	{
-		// TODO: BIC richtig validieren!
-		return validiereString(wert, Meldung.BIC)
+		return validiereString(wert, Meldung.BIC_LEER)
+			.map(String::strip)
+			.filter(BIC::pruefeLaenge)
+			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BIC_UNGUELTIG)))
 			.map(BIC::new);
+	}
+
+	private static boolean pruefeLaenge(String wert)
+	{
+		return wert.length() == 8 || wert.length() == 11;
 	}
 }

@@ -1,11 +1,12 @@
 package de.justinharder.soq.domain.services.imports;
 
+import de.justinharder.Testdaten;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ImportService sollte")
-class ImportServiceSollte
+class ImportServiceSollte extends Testdaten
 {
 	private ImportService sut;
 

@@ -32,7 +32,8 @@ dependencies {
             "io.quarkus:quarkus-hibernate-validator:$project.hibernateVersion",
             "io.vavr:vavr:$project.vavrVersion",
             "org.projectlombok:lombok:$project.lombokVersion",
-            "com.google.guava:guava:$project.guavaVersion"
+            "com.google.guava:guava:$project.guavaVersion",
+            "commons-validator:commons-validator:$project.apacheVersion"
 
     annotationProcessor "org.projectlombok:lombok:$project.lombokVersion"
 }

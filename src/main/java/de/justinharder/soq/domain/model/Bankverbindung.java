@@ -37,7 +37,7 @@ public class Bankverbindung extends Entitaet
 	public static Validation<Meldungen, Bankverbindung> aus(IBAN iban, Benutzer benutzer, Bank bank)
 	{
 		return Validation.combine(
-				validiere(iban, Meldung.IBAN),
+				validiere(iban, Meldung.IBAN_LEER),
 				validiere(benutzer, Meldung.BENUTZER_LEER),
 				validiere(bank, Meldung.BANK_LEER))
 			.ap(Bankverbindung::new)

@@ -25,22 +25,27 @@ class IBANSollte extends Testdaten
 		validierung = IBAN.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER));
 
 		validierung = IBAN.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER));
 
 		validierung = IBAN.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER));
 
 		validierung = IBAN.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER));
+
+		validierung = IBAN.aus("DE87280200504008357801");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_UNGUELTIG));
 	}
 
 	@Test
