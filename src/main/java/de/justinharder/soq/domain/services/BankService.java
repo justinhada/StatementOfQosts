@@ -50,12 +50,10 @@ public class BankService
 			.flatMap(Function.identity())
 			.filter(not(bank -> bankRepository.finde(bank.getBezeichnung()).isDefined()))
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BANK_EXISTIERT)))
-			.fold(neueBank::fuegeMeldungenHinzu, this::erstelle);
+			.fold(neueBank::fuegeMeldungenHinzu, bank -> {
+				bankRepository.speichere(bank);
+				return new NeueBank().fuegeMeldungHinzu(Meldung.BANK_ERSTELLT);
+			});
 	}
 
-	private NeueBank erstelle(Bank bank)
-	{
-		bankRepository.speichere(bank);
-		return new NeueBank().fuegeMeldungHinzu(Meldung.BANK_ERSTELLT);
-	}
 }
