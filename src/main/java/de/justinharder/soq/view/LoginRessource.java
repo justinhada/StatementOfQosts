@@ -6,12 +6,14 @@ import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
+@RequestScoped
 @Path("/login")
 public class LoginRessource
 {

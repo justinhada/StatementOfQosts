@@ -6,10 +6,12 @@ import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+@RequestScoped
 @Path("/registrierung")
 public class RegistrierungRessource
 {

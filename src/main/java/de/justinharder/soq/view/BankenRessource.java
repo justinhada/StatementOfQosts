@@ -6,9 +6,11 @@ import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+@RequestScoped
 @Path("/banken")
 public class BankenRessource
 {
