@@ -4,6 +4,8 @@ dependencies {
 
 configurations {
     integrationTestAnnotationProcessor.extendsFrom annotationProcessor
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 task integrationTest(type: Test) {
