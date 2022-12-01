@@ -9,25 +9,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
-@DisplayName("BankRessource sollte")
-class BankenViewSollte extends ViewSollte
+@DisplayName("StartRessource sollte")
+class StartViewSollte extends ViewSollte
 {
 	@Test
-	@DisplayName("Formular aufrufen")
+	@DisplayName("Seite aufrufen")
 	void test01()
 	{
 		given()
 			.when()
-			.get("/banken")
+			.get("/start")
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
-			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
-			.body(
-				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
-				containsString("Oldenburgische Landesbank AG"),
-				containsString("OLBODEH2XXX"));
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
 	}
 }

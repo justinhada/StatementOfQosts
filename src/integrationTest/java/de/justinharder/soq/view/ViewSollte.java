@@ -5,7 +5,7 @@ import io.restassured.config.DecoderConfig;
 import io.restassured.config.RestAssuredConfig;
 import org.junit.jupiter.api.BeforeAll;
 
-public class RessourceSollte
+public class ViewSollte
 {
 	@BeforeAll
 	static void konfiguriere()
