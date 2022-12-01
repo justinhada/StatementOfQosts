@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 @DisplayName("BankRessource sollte")
-class BankenRessourceSollte
+class BankenRessourceSollte extends RessourceSollte
 {
 	@Test
 	@DisplayName("Formular erfassen")
