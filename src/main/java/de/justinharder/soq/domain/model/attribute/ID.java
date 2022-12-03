@@ -1,6 +1,11 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import de.justinharder.soq.domain.UuidMapper;
+import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
+import io.vavr.control.Try;
+import io.vavr.control.Validation;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -26,5 +31,18 @@ public class ID extends WertObjekt<UUID>
 	public static ID random()
 	{
 		return new ID(UUID.randomUUID());
+	}
+
+	public static Validation<Meldungen, ID> aus(String wert, Schluessel schluessel)
+	{
+		return validiereString(wert, Meldung.ID_LEER(schluessel))
+			.map(ID::aus)
+			.flatMap(uuid -> uuid.toValidation(Meldungen.aus(Meldung.ID_UNGUELTIG(schluessel))))
+			.map(ID::new);
+	}
+
+	private static Try<UUID> aus(String wert)
+	{
+		return Try.of(() -> UUID.fromString(wert));
 	}
 }
