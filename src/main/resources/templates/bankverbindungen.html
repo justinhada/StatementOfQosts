@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Bankverbindungen - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+        {#include header /}
+
+        <section>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Bankverbindung erstellen</h1>
+
+                <form method="post"
+                      action="/bankverbindungen">
+                    {#if neueBankverbindung.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neueBankverbindung.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neueBankverbindung.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="iban"
+                                   class="form-label mt-2 fw-bold">
+                                IBAN
+                            </label>
+
+                            <input id="iban"
+                                   name="iban"
+                                   type="text"
+                                   class="form-control {#if neueBankverbindung.hatMeldungen(Schluessel:BEZEICHNUNG)}is-invalid{/if}"
+                                   placeholder="Musterbank AG"
+                                   aria-label="iban"
+                                   value="{neueBankverbindung.iban}" />
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neueBankverbindung.getMeldungen(Schluessel:BEZEICHNUNG)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="benutzerId"
+                                   class="form-label mt-2 fw-bold">
+                                Benutzer
+                            </label>
+
+                            <select id="benutzerId"
+                                    name="benutzerId"
+                                    class="form-select {#if ! neueBankverbindung.getMeldungen(Schluessel:BENUTZER).isEmpty()}is-invalid{/if}">
+                                {#for benutzer in alleBenutzer}
+                                    <option value="{benutzer.id}">{benutzer.vorname} {benutzer.nachname}</option>
+                                {/for}
+                            </select>
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neueBankverbindung.getMeldungen(Schluessel:BENUTZER)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <label for="bankId"
+                                   class="form-label mt-2 fw-bold">
+                                Bank
+                            </label>
+
+                            <select id="bankId"
+                                    name="bankId"
+                                    class="form-select {#if ! neueBankverbindung.getMeldungen(Schluessel:BANK).isEmpty()}is-invalid{/if}">
+                                {#for bank in banken}
+                                    <option value="{bank.id}">{bank.bezeichnung}</option>
+                                {/for}
+                            </select>
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neueBankverbindung.getMeldungen(Schluessel:BANK)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Bank erstellen
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped table-hover mt-5">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>IBAN</th>
+                            <th>Benutzer</th>
+                            <th>Bank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#for bankverbindung in bankverbindungen}
+                            <tr>
+                            <td>{bankverbindung.id}</td>
+                            <td>{bankverbindung.iban}</td>
+                            <td>{bankverbindung.vorname} {bankverbindung.nachname}</td>
+                            <td>{bankverbindung.bank}</td>
+                            </tr>
+                        {/for}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+            
+        {#include footer /}
+    </body>
+</html>
