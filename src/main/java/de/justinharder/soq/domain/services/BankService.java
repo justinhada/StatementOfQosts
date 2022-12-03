@@ -13,6 +13,7 @@ import io.vavr.control.Validation;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Function;
@@ -28,6 +29,7 @@ public class BankService
 	@NonNull
 	private final BankMapping bankMapping;
 
+	@Inject
 	public BankService(@NonNull BankRepository bankRepository, @NonNull BankMapping bankMapping)
 	{
 		this.bankRepository = bankRepository;

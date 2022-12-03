@@ -7,6 +7,7 @@ import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -23,6 +24,7 @@ public class BankenRessource
 	@NonNull
 	private NeueBank neueBank;
 
+	@Inject
 	public BankenRessource(@NonNull BankService bankService, @NonNull Template banken, @NonNull NeueBank neueBank)
 	{
 		this.bankService = bankService;
