@@ -41,14 +41,6 @@ public class RegistrierungService
 			neuerBenutzer.fuegeMeldungenHinzu(passwort.getError());
 		}
 
-		//		Validation.combine(
-		//				Nachname.aus(neuerBenutzer.getNachname()),
-		//				Vorname.aus(neuerBenutzer.getVorname()))
-		//			.ap(Benutzer::aus)
-		//			.mapError(Meldungen::aus)
-		//			.flatMap(Function.identity())
-		//			.fold(neuerBenutzer::fuegeMeldungenHinzu, benutzerRepository::speichere);
-
 		var nachname = Nachname.aus(neuerBenutzer.getNachname());
 		if (nachname.isInvalid())
 		{
