@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
-@DisplayName("StartRessource sollte")
+@DisplayName("StartView sollte")
 class StartViewSollte extends ViewSollte
 {
 	@Test

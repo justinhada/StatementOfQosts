@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
-@DisplayName("BankRessource sollte")
+@DisplayName("BankenView sollte")
 class BankenViewSollte extends ViewSollte
 {
 	@Test

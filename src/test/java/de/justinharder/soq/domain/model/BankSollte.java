@@ -25,7 +25,8 @@ class BankSollte extends Testdaten
 		validierung = Bank.aus(null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG, Meldung.BIC_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG_LEER,
+				Meldung.BIC_LEER));
 	}
 
 	@Test

@@ -12,17 +12,22 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Die Bank wurde erfolgreich erstellt!");
 
-	public static final Meldung BANK_EXISTIERT = new Meldung(
-		Schluessel.ALLGEMEIN,
+	public static final Meldung BANK_EXISTIERT_NICHT = new Meldung(
+		Schluessel.BANK,
 		Ebene.FEHLER,
-		"Die Bank existiert bereits!");
+		"Die Bank existiert nicht!");
 
 	public static final Meldung BANK_LEER = new Meldung(
 		Schluessel.BANK,
 		Ebene.FEHLER,
 		"Die Bank darf nicht leer sein!");
 
-	public static final Meldung BANKVERBINDUNG = new Meldung(
+	public static final Meldung BANKVERBINDUNG_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Bankverbindung wurde erfolgreich erstellt!");
+
+	public static final Meldung BANKVERBINDUNG_LEER = new Meldung(
 		Schluessel.BANKVERBINDUNG,
 		Ebene.FEHLER,
 		"Die Bankverbindung darf nicht leer sein!");
@@ -31,6 +36,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
 		"Der Benutzer wurde erfolgreich erstellt!");
+
+	public static final Meldung BENUTZER_EXISTIERT_NICHT = new Meldung(
+		Schluessel.BENUTZER,
+		Ebene.FEHLER,
+		"Der Benutzer existiert nicht!");
 
 	public static final Meldung BENUTZER_LEER = new Meldung(
 		Schluessel.BENUTZER,
@@ -57,10 +67,20 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Betrag darf nicht leer sein!");
 
-	public static final Meldung BEZEICHNUNG = new Meldung(
+	public static final Meldung BEZEICHNUNG_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.BEZEICHNUNG,
+		Ebene.FEHLER,
+		"Die Bezeichnung existiert bereits!");
+
+	public static final Meldung BEZEICHNUNG_LEER = new Meldung(
 		Schluessel.BEZEICHNUNG,
 		Ebene.FEHLER,
 		"Die Bezeichnung darf nicht leer sein!");
+
+	public static final Meldung BIC_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.BIC,
+		Ebene.FEHLER,
+		"Der BIC (Bank Identifier Code) existiert bereits!");
 
 	public static final Meldung BIC_LEER = new Meldung(
 		Schluessel.BIC,
@@ -86,6 +106,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.E_MAIL_ADRESSE,
 		Ebene.FEHLER,
 		"Die E-Mail-Adresse ist ungültig!");
+
+	public static final Meldung IBAN_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.IBAN,
+		Ebene.FEHLER,
+		"Die IBAN (Internationale Bankkontonummer) existiert bereits!");
 
 	public static final Meldung IBAN_LEER = new Meldung(
 		Schluessel.IBAN,

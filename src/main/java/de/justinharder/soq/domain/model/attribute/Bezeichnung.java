@@ -24,7 +24,7 @@ public class Bezeichnung extends WertObjekt<String>
 
 	public static Validation<Meldungen, Bezeichnung> aus(String wert)
 	{
-		return validiereString(wert, Meldung.BEZEICHNUNG)
+		return validiereString(wert, Meldung.BEZEICHNUNG_LEER)
 			.map(Bezeichnung::new);
 	}
 }

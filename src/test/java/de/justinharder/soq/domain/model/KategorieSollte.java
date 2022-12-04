@@ -25,7 +25,7 @@ class KategorieSollte extends Testdaten
 		validierung = Kategorie.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BEZEICHNUNG_LEER));
 	}
 
 	@Test

@@ -33,7 +33,7 @@ public class Bank extends Entitaet
 
 	public static Validation<Meldungen, Bank> aus(Bezeichnung bezeichnung, BIC bic)
 	{
-		return Validation.combine(validiere(bezeichnung, Meldung.BEZEICHNUNG), validiere(bic, Meldung.BIC_LEER))
+		return Validation.combine(validiere(bezeichnung, Meldung.BEZEICHNUNG_LEER), validiere(bic, Meldung.BIC_LEER))
 			.ap(Bank::new)
 			.mapError(Meldungen::aus);
 	}

@@ -28,7 +28,7 @@ public class Kategorie extends Entitaet
 
 	public static Validation<Meldungen, Kategorie> aus(Bezeichnung bezeichnung)
 	{
-		return validiere(bezeichnung, Meldung.BEZEICHNUNG)
+		return validiere(bezeichnung, Meldung.BEZEICHNUNG_LEER)
 			.map(Kategorie::new);
 	}
 
