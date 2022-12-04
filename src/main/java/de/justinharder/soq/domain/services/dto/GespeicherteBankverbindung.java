@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherteBankverbindung extends Dto<GespeicherteBankverbindung>
+public class GespeicherteBankverbindung
 {
 	@NonNull
 	private final String id;
@@ -24,10 +24,4 @@ public class GespeicherteBankverbindung extends Dto<GespeicherteBankverbindung>
 
 	@NonNull
 	private final String bank;
-
-	@Override
-	protected GespeicherteBankverbindung myself()
-	{
-		return this;
-	}
 }

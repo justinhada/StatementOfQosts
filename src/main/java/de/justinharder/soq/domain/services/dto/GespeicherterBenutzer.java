@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherterBenutzer extends Dto<GespeicherterBenutzer>
+public class GespeicherterBenutzer
 {
 	@NonNull
 	private final String id;
@@ -18,10 +18,4 @@ public class GespeicherterBenutzer extends Dto<GespeicherterBenutzer>
 
 	@NonNull
 	private final String vorname;
-
-	@Override
-	protected GespeicherterBenutzer myself()
-	{
-		return this;
-	}
 }
