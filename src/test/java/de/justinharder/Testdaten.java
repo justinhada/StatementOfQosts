@@ -2,6 +2,7 @@ package de.justinharder;
 
 import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDaten;
 import de.justinharder.soq.domain.services.imports.model.UmsatzDaten;
 import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDaten;
@@ -49,6 +50,8 @@ public class Testdaten
 	protected static final IBAN IBAN_1 = IBAN.aus(IBAN_1_WERT).get();
 	protected static final String IBAN_2_WERT = "DE28280651080012888000";
 	protected static final IBAN IBAN_2 = IBAN.aus(IBAN_2_WERT).get();
+	protected static final String ID_1_WERT = "46c317ae-25dd-4805-98ca-273e45d32815";
+	protected static final ID ID_1 = ID.aus(ID_1_WERT, Schluessel.BENUTZER).get();
 	protected static final String NACHNAME_1_WERT = "Harder";
 	protected static final Nachname NACHNAME_1 = Nachname.aus(NACHNAME_1_WERT).get();
 	protected static final String NACHNAME_2_WERT = "Tiemerding";

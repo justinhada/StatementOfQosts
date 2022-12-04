@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.model.attribute;
 
-import de.justinharder.soq.domain.UuidMapper;
+import de.justinharder.soq.domain.UUIDMapping;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
@@ -24,7 +24,7 @@ public class ID extends WertObjekt<UUID>
 	private static final long serialVersionUID = -2765501812381917984L;
 
 	@NonNull
-	@Convert(converter = UuidMapper.class)
+	@Convert(converter = UUIDMapping.class)
 	@Column(name = "ID", columnDefinition = "VARCHAR(36)")
 	private UUID wert;
 
