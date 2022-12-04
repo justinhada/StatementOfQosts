@@ -26,6 +26,7 @@ public class IBAN extends WertObjekt<String>
 	public static Validation<Meldungen, IBAN> aus(String wert)
 	{
 		return validiereString(wert, Meldung.IBAN_LEER)
+			.map(String::trim)
 			.filter(IBANValidator.DEFAULT_IBAN_VALIDATOR::isValid)
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.IBAN_UNGUELTIG)))
 			.map(IBAN::new);

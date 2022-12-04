@@ -46,12 +46,16 @@ public class BankService
 	@Transactional
 	public NeueBank erstelle(NeueBank neueBank)
 	{
-		return Validation.combine(Bezeichnung.aus(neueBank.getBezeichnung()), BIC.aus(neueBank.getBic()))
+		return Validation.combine(
+				Bezeichnung.aus(neueBank.getBezeichnung())
+					.filter(not(bankRepository::istVorhanden))
+					.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BEZEICHNUNG_EXISTIERT_BEREITS))),
+				BIC.aus(neueBank.getBic())
+					.filter(not(bankRepository::istVorhanden))
+					.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BIC_EXISTIERT_BEREITS))))
 			.ap(Bank::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.filter(not(bank -> bankRepository.finde(bank.getBezeichnung()).isDefined()))
-			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BANK_EXISTIERT)))
 			.fold(neueBank::fuegeMeldungenHinzu, bank -> {
 				bankRepository.speichere(bank);
 				return new NeueBank().fuegeMeldungHinzu(Meldung.BANK_ERSTELLT);
