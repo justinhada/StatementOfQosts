@@ -1,11 +1,9 @@
 package de.justinharder.soq.domain.services.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Getter
+@ToString
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class GespeicherterBenutzer

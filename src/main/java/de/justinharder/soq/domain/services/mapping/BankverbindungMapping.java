@@ -12,12 +12,11 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 	@Override
 	public GespeicherteBankverbindung mappe(@NonNull Bankverbindung bankverbindung)
 	{
-		// TODO: Benutzer und Bank müssen mitgegeben werden.
 		return new GespeicherteBankverbindung(
 			bankverbindung.getId().getWert().toString(),
 			bankverbindung.getIban().getWert(),
-			"",
-			"",
-			"");
+			bankverbindung.getBenutzer().getNachname().getWert(),
+			bankverbindung.getBenutzer().getVorname().getWert(),
+			bankverbindung.getBank().getBezeichnung().getWert());
 	}
 }
