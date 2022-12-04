@@ -26,6 +26,7 @@ class NeuerBenutzerSollte extends DtoTestdaten
 			() -> assertThat(sut.getBenutzername()).isEqualTo(BENUTZERNAME_1_WERT),
 			() -> assertThat(sut.getNachname()).isEqualTo(NACHNAME_1_WERT),
 			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_1_WERT),
-			() -> assertThat(sut.getPasswort()).isEqualTo(PASSWORT_1_WERT));
+			() -> assertThat(sut.getPasswort()).isEqualTo(PASSWORT_1_WERT),
+			() -> assertThat(sut.myself()).isEqualTo(sut));
 	}
 }

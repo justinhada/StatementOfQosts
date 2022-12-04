@@ -27,6 +27,7 @@ class NeueBankverbindungSollte extends DtoTestdaten
 		assertAll(
 			() -> assertThat(sut.getIban()).isEqualTo(IBAN_1_WERT),
 			() -> assertThat(sut.getBenutzerId()).isEqualTo(BENUTZER_ID),
-			() -> assertThat(sut.getBankId()).isEqualTo(BANK_ID));
+			() -> assertThat(sut.getBankId()).isEqualTo(BANK_ID),
+			() -> assertThat(sut.myself()).isEqualTo(sut));
 	}
 }

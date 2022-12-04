@@ -20,6 +20,7 @@ class NeueBankSollte extends DtoTestdaten
 
 		assertAll(
 			() -> assertThat(sut.getBezeichnung()).isEqualTo(BEZEICHNUNG_1_WERT),
-			() -> assertThat(sut.getBic()).isEqualTo(BIC_1_WERT));
+			() -> assertThat(sut.getBic()).isEqualTo(BIC_1_WERT),
+			() -> assertThat(sut.myself()).isEqualTo(sut));
 	}
 }
