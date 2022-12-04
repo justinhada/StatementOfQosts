@@ -21,10 +21,16 @@ public class LoginJpaRepository extends JpaRepository<Login> implements LoginRep
 	public Option<Login> finde(@NonNull Benutzername benutzername)
 	{
 		return Try.of(() -> entityManager.createQuery(
-				"SELECT login FROM Login login WHERE login.benutzername = :benutzername",
-				Login.class)
-			.setParameter("benutzername", benutzername)
-			.getSingleResult())
+					"SELECT login FROM Login login WHERE login.benutzername = :benutzername",
+					Login.class)
+				.setParameter("benutzername", benutzername)
+				.getSingleResult())
 			.toOption();
+	}
+
+	@Override
+	public boolean istVorhanden(@NonNull Benutzername benutzername)
+	{
+		return finde(benutzername).isDefined();
 	}
 }

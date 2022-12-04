@@ -3,12 +3,16 @@ package de.justinharder.soq.domain.services;
 import de.justinharder.soq.domain.model.attribute.Benutzername;
 import de.justinharder.soq.domain.model.attribute.Passwort;
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.repository.LoginRepository;
 import de.justinharder.soq.domain.services.dto.AngemeldeterBenutzer;
+import io.vavr.control.Validation;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+
+import static java.util.function.Predicate.not;
 
 @Dependent
 public class LoginService
@@ -24,34 +28,18 @@ public class LoginService
 
 	public AngemeldeterBenutzer login(@NonNull AngemeldeterBenutzer angemeldeterBenutzer)
 	{
-		var benutzername = Benutzername.aus(angemeldeterBenutzer.getBenutzername());
-		if (benutzername.isInvalid())
-		{
-			angemeldeterBenutzer.fuegeMeldungenHinzu(benutzername.getError());
-		}
-
-		var passwort = Passwort.validierePasswort(angemeldeterBenutzer.getPasswort());
-		if (passwort.isInvalid())
-		{
-			angemeldeterBenutzer.fuegeMeldungenHinzu(passwort.getError());
-		}
-
-		if (angemeldeterBenutzer.hatMeldungen())
-		{
-			return angemeldeterBenutzer;
-		}
-
-		var login = loginRepository.finde(benutzername.get());
-		if (login.isEmpty())
-		{
-			return angemeldeterBenutzer.fuegeMeldungHinzu(Meldung.BENUTZERNAME_EXISTIERT_NICHT);
-		}
-
-		if (!Passwort.aus(login.get().getSalt(), passwort.get()).get().equals(login.get().getPasswort()))
-		{
-			return angemeldeterBenutzer.fuegeMeldungHinzu(Meldung.PASSWORT_FALSCH);
-		}
-
-		return angemeldeterBenutzer.fuegeMeldungHinzu(Meldung.LOGIN_ERFOLGREICH);
+		return Validation.combine(
+				Benutzername.aus(angemeldeterBenutzer.getBenutzername()),
+				Passwort.validierePasswort(angemeldeterBenutzer.getPasswort()))
+			.ap((benutzername, passwort) -> loginRepository.finde(benutzername))
+			.mapError(Meldungen::aus)
+			.flatMap(login -> login.toValidation(Meldungen.aus(Meldung.BENUTZERNAME_EXISTIERT_NICHT)))
+			.filter(not(login -> Passwort.aus(
+					login.getSalt(),
+					Passwort.validierePasswort(angemeldeterBenutzer.getPasswort()).get()).get()
+				.equals(login.getPasswort())))
+			.getOrElse(() -> Validation.invalid(Meldungen.aus(Meldung.PASSWORT_FALSCH)))
+			.fold(angemeldeterBenutzer::fuegeMeldungenHinzu,
+				login -> angemeldeterBenutzer.fuegeMeldungHinzu(Meldung.LOGIN_ERFOLGREICH));
 	}
 }

@@ -48,7 +48,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		"Der Benutzer darf nicht leer sein!");
 
 	public static final Meldung BENUTZERNAME_EXISTIERT_NICHT = new Meldung(
-		Schluessel.ALLGEMEIN,
+		Schluessel.BENUTZERNAME,
 		Ebene.FEHLER,
 		"Der Benutzername existiert nicht!");
 
@@ -148,7 +148,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		"Der Nachname darf nicht leer sein!");
 
 	public static final Meldung PASSWORT_FALSCH = new Meldung(
-		Schluessel.ALLGEMEIN,
+		Schluessel.PASSWORT,
 		Ebene.FEHLER,
 		"Der Benutzername oder das Passwort ist falsch!");
 
