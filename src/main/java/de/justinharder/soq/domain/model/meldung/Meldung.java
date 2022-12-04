@@ -57,10 +57,10 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Benutzername darf nicht leer sein!");
 
-	public static final Meldung BENUTZERNAME_VERGEBEN = new Meldung(
+	public static final Meldung BENUTZERNAME_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.BENUTZERNAME,
 		Ebene.FEHLER,
-		"Der Benutzername ist bereits vergeben!");
+		"Der Benutzername existiert bereits!");
 
 	public static final Meldung BETRAG = new Meldung(
 		Schluessel.BETRAG,

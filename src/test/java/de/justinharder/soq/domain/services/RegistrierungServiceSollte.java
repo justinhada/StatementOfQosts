@@ -98,7 +98,7 @@ class RegistrierungServiceSollte extends Testdaten
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.E_MAIL_ADRESSE)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).containsExactlyInAnyOrder(
-				Meldung.BENUTZERNAME_VERGEBEN),
+				Meldung.BENUTZERNAME_EXISTIERT_BEREITS),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.NACHNAME)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.VORNAME)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
