@@ -12,8 +12,6 @@ import lombok.NonNull;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
-import static java.util.function.Predicate.not;
-
 @Dependent
 public class LoginService
 {
@@ -34,10 +32,9 @@ public class LoginService
 			.ap((benutzername, passwort) -> loginRepository.finde(benutzername))
 			.mapError(Meldungen::aus)
 			.flatMap(login -> login.toValidation(Meldungen.aus(Meldung.BENUTZERNAME_EXISTIERT_NICHT)))
-			.filter(not(login -> Passwort.aus(
-					login.getSalt(),
-					Passwort.validierePasswort(angemeldeterBenutzer.getPasswort()).get()).get()
-				.equals(login.getPasswort())))
+			.filter(login -> Passwort.aus(login.getSalt(), angemeldeterBenutzer.getPasswort())
+				.filter(passwort -> login.getPasswort().equals(passwort))
+				.isDefined())
 			.getOrElse(() -> Validation.invalid(Meldungen.aus(Meldung.PASSWORT_FALSCH)))
 			.fold(angemeldeterBenutzer::fuegeMeldungenHinzu,
 				login -> angemeldeterBenutzer.fuegeMeldungHinzu(Meldung.LOGIN_ERFOLGREICH));
