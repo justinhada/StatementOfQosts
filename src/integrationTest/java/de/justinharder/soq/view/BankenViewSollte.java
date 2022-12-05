@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.model.meldung.Meldung;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +16,17 @@ import static org.hamcrest.CoreMatchers.containsString;
 @DisplayName("BankenView sollte")
 class BankenViewSollte extends ViewSollte
 {
+	private static final String PFAD = "/banken";
+	private static final String BEZEICHNUNG = "bezeichnung";
+	private static final String BIC = "bic";
+
 	@Test
 	@DisplayName("Formular aufrufen")
 	void test01()
 	{
 		given()
 			.when()
-			.get("/banken")
+			.get(PFAD)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -29,5 +34,61 @@ class BankenViewSollte extends ViewSollte
 				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
 				containsString("Oldenburgische Landesbank AG"),
 				containsString("OLBODEH2XXX"));
+	}
+
+	@Test
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten leer sind")
+	void test02()
+	{
+		given()
+			.formParam(BEZEICHNUNG, "")
+			.formParam(BIC, "")
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(PFAD)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(containsString(Meldung.BEZEICHNUNG_LEER.text()), containsString(Meldung.BIC_LEER.text()));
+	}
+
+	@Test
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten bereits existieren")
+	void test03()
+	{
+		given()
+			.formParam(BEZEICHNUNG, "Oldenburgische Landesbank AG")
+			.formParam(BIC, "OLBODEH2XXX")
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(PFAD)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString(Meldung.BEZEICHNUNG_EXISTIERT_BEREITS.text()),
+				containsString(Meldung.BIC_EXISTIERT_BEREITS.text()));
+	}
+
+	@Test
+	@DisplayName("Meldung anzeigen, wenn Bank erstellt wurde")
+	void test04()
+	{
+		var bezeichnung = "Volksbank Vechta";
+		var bic = "GENODEF1VEC";
+
+		given()
+			.formParam(BEZEICHNUNG, bezeichnung)
+			.formParam(BIC, bic)
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(PFAD)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString(Meldung.BANK_ERSTELLT.text()),
+				containsString(bezeichnung),
+				containsString(bic));
 	}
 }
