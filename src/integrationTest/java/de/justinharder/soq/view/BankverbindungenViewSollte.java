@@ -1,5 +1,7 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,12 +23,77 @@ class BankverbindungenViewSollte extends ViewSollte
 	{
 		given()
 			.when()
-			.get("/bankverbindungen")
+			.get(BANKVERBINDUNGEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
 			.body(
 				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
 				containsString("Oldenburgische Landesbank AG"));
+	}
+
+	@Test
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten leer sind")
+	void test02()
+	{
+		given()
+			.formParam(IBAN, LEER)
+			.formParam(BENUTZER_ID, LEER)
+			.formParam(BANK_ID, LEER)
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(BANKVERBINDUNGEN)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString(Meldung.IBAN_LEER.text()),
+				containsString(Meldung.ID_LEER(Schluessel.BENUTZER).text()),
+				containsString(Meldung.ID_LEER(Schluessel.BANK).text()));
+	}
+
+	@Test
+	@DisplayName("Meldungen anzeigen, wenn IBAN bereits existiert und IDs nicht existieren")
+	void test03()
+	{
+		given()
+			.formParam(IBAN, "DE87280200504008357800")
+			.formParam(BENUTZER_ID, "2fc25135-e71e-4a7a-857d-80db289baba2")
+			.formParam(BANK_ID, "e8b9020a-8c41-4d6c-9afb-f3dd70953d70")
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(BANKVERBINDUNGEN)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString(Meldung.IBAN_EXISTIERT_BEREITS.text()),
+				containsString(Meldung.BENUTZER_EXISTIERT_NICHT.text()),
+				containsString(Meldung.BANK_EXISTIERT_NICHT.text()));
+	}
+
+	@Test
+	@DisplayName("Meldung anzeigen, wenn Bankverbindung erstellt wurde")
+	void test04()
+	{
+		var iban = "DE02120300000000202051";
+		var benutzerId = "1eaa1624-69f3-4634-a96f-a3a9fd9c7bb4";
+		var bankId = "46c317ae-25dd-4805-98ca-273e45d32815";
+
+		given()
+			.formParam(IBAN, iban)
+			.formParam(BENUTZER_ID, benutzerId)
+			.formParam(BANK_ID, bankId)
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+			.when()
+			.post(BANKVERBINDUNGEN)
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString(Meldung.BANKVERBINDUNG_ERSTELLT.text()),
+				containsString(iban),
+				containsString(benutzerId),
+				containsString(bankId));
 	}
 }
