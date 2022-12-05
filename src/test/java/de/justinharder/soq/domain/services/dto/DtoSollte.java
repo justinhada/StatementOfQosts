@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Dto sollte")
 abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
@@ -25,8 +26,19 @@ abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
 	}
 
 	@Test
-	@DisplayName("erfolgreich sein")
+	@DisplayName("null validieren")
 	void test001()
+	{
+		assertAll(
+			() -> assertThrows(NullPointerException.class, () -> sut.fuegeMeldungHinzu(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.fuegeMeldungenHinzu(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.getMeldungen(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.hatMeldungen(null)));
+	}
+
+	@Test
+	@DisplayName("erfolgreich sein")
+	void test002()
 	{
 		sut.fuegeMeldungHinzu(erfolgMeldung);
 		assertThat(sut.istErfolgreich()).isTrue();
@@ -34,7 +46,7 @@ abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
 
 	@Test
 	@DisplayName("nicht erfolgreich sein")
-	void test002()
+	void test003()
 	{
 		sut.fuegeMeldungHinzu(fehlerMeldung1);
 		assertThat(sut.istErfolgreich()).isFalse();
@@ -42,7 +54,7 @@ abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
 
 	@Test
 	@DisplayName("Meldung hinzufuegen")
-	void test003()
+	void test004()
 	{
 		sut.fuegeMeldungHinzu(erfolgMeldung);
 		assertAll(
@@ -56,7 +68,7 @@ abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
 
 	@Test
 	@DisplayName("Meldungen hinzufuegen")
-	void test004()
+	void test005()
 	{
 		sut.fuegeMeldungHinzu(fehlerMeldung1).fuegeMeldungHinzu(fehlerMeldung2);
 		assertAll(
