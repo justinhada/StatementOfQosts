@@ -7,6 +7,15 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class ViewSollte
 {
+	protected static final String LEER = "";
+	protected static final String BANKEN = "/banken";
+	protected static final String BANKVERBINDUNGEN = "/bankverbindungen";
+	protected static final String BEZEICHNUNG = "bezeichnung";
+	protected static final String BANK_ID = "bankId";
+	protected static final String BENUTZER_ID = "benutzerId";
+	protected static final String BIC = "bic";
+	protected static final String IBAN = "iban";
+
 	@BeforeAll
 	static void konfiguriere()
 	{

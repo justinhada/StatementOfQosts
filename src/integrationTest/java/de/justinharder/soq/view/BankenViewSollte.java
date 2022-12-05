@@ -16,17 +16,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 @DisplayName("BankenView sollte")
 class BankenViewSollte extends ViewSollte
 {
-	private static final String PFAD = "/banken";
-	private static final String BEZEICHNUNG = "bezeichnung";
-	private static final String BIC = "bic";
-
 	@Test
 	@DisplayName("Formular aufrufen")
 	void test01()
 	{
 		given()
 			.when()
-			.get(PFAD)
+			.get(BANKEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -41,11 +37,11 @@ class BankenViewSollte extends ViewSollte
 	void test02()
 	{
 		given()
-			.formParam(BEZEICHNUNG, "")
-			.formParam(BIC, "")
+			.formParam(BEZEICHNUNG, LEER)
+			.formParam(BIC, LEER)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(PFAD)
+			.post(BANKEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -61,7 +57,7 @@ class BankenViewSollte extends ViewSollte
 			.formParam(BIC, "OLBODEH2XXX")
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(PFAD)
+			.post(BANKEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -82,7 +78,7 @@ class BankenViewSollte extends ViewSollte
 			.formParam(BIC, bic)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(PFAD)
+			.post(BANKEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
