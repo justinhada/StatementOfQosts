@@ -64,10 +64,10 @@ public class LoginRessource
 	public TemplateInstance login(@BeanParam AngemeldeterBenutzer angemeldeterBenutzer)
 	{
 		this.angemeldeterBenutzer = loginService.login(angemeldeterBenutzer);
-		if (angemeldeterBenutzer.istErfolgreich())
-		{
-			return start.instance();
-		}
+		// if (angemeldeterBenutzer.istErfolgreich())
+		// {
+		// 	return start.instance();
+		// }
 		return zeigeFormular();
 	}
 }
