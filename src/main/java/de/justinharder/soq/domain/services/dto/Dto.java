@@ -31,19 +31,14 @@ public abstract class Dto<T extends Dto<T>>
 		return myself();
 	}
 
-	public boolean hatMeldungen()
-	{
-		return !meldungen.isEmpty();
-	}
-
-	public List<Meldung> getMeldungen(Schluessel schluessel)
+	public List<Meldung> getMeldungen(@NonNull Schluessel schluessel)
 	{
 		return meldungen.stream()
 			.filter(meldung -> meldung.schluessel().equals(schluessel))
 			.toList();
 	}
 
-	public boolean hatMeldungen(Schluessel schluessel)
+	public boolean hatMeldungen(@NonNull Schluessel schluessel)
 	{
 		return !getMeldungen(schluessel).isEmpty();
 	}
