@@ -34,7 +34,9 @@ class LoginServiceSollte extends DtoTestdaten
 	@DisplayName("null validieren")
 	void test01()
 	{
-		assertThrows(NullPointerException.class, () -> new LoginService(null));
+		assertAll(
+			() -> assertThrows(NullPointerException.class, () -> new LoginService(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.login(null)));
 	}
 
 	@Test
@@ -55,8 +57,25 @@ class LoginServiceSollte extends DtoTestdaten
 	}
 
 	@Test
-	@DisplayName("Benutzer anmelden")
+	@DisplayName("falsches Passwort melden")
 	void test03()
+	{
+		var angemeldeterBenutzer = new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_2_WERT);
+		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.of(LOGIN_1));
+
+		var ergebnis = sut.login(angemeldeterBenutzer);
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).containsExactlyInAnyOrder(
+				Meldung.PASSWORT_FALSCH),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
+		verify(loginRepository).finde(BENUTZERNAME_1);
+	}
+
+	@Test
+	@DisplayName("Benutzer anmelden")
+	void test04()
 	{
 		var angemeldeterBenutzer = new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_1_WERT);
 		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.of(LOGIN_1));
