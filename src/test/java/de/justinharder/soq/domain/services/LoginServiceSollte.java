@@ -40,30 +40,26 @@ class LoginServiceSollte extends DtoTestdaten
 	}
 
 	@Test
-	@DisplayName("nicht existierenden Benutzernamen melden")
+	@DisplayName("leere Eingabedaten melden")
 	void test02()
 	{
-		var angemeldeterBenutzer = new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_1_WERT);
-		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.none());
-
-		var ergebnis = sut.login(angemeldeterBenutzer);
+		var ergebnis = sut.login(new AngemeldeterBenutzer(LEER, LEER));
 
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).containsExactlyInAnyOrder(
-				Meldung.BENUTZERNAME_EXISTIERT_NICHT),
-			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
+				Meldung.BENUTZERNAME_LEER),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).containsExactlyInAnyOrder(
+				Meldung.PASSWORT_LEER),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
-		verify(loginRepository).finde(BENUTZERNAME_1);
 	}
 
 	@Test
 	@DisplayName("falsches Passwort melden")
 	void test03()
 	{
-		var angemeldeterBenutzer = new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_2_WERT);
 		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.of(LOGIN_1));
 
-		var ergebnis = sut.login(angemeldeterBenutzer);
+		var ergebnis = sut.login(new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_2_WERT));
 
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).isEmpty(),
@@ -77,16 +73,31 @@ class LoginServiceSollte extends DtoTestdaten
 	@DisplayName("Benutzer anmelden")
 	void test04()
 	{
-		var angemeldeterBenutzer = new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_1_WERT);
 		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.of(LOGIN_1));
 
-		var ergebnis = sut.login(angemeldeterBenutzer);
+		var ergebnis = sut.login(new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_1_WERT));
 
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
 				Meldung.LOGIN_ERFOLGREICH));
+		verify(loginRepository).finde(BENUTZERNAME_1);
+	}
+
+	@Test
+	@DisplayName("nicht existierenden Benutzernamen melden")
+	void test05()
+	{
+		when(loginRepository.finde(BENUTZERNAME_1)).thenReturn(Option.none());
+
+		var ergebnis = sut.login(new AngemeldeterBenutzer(BENUTZERNAME_1_WERT, PASSWORT_1_WERT));
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZERNAME)).containsExactlyInAnyOrder(
+				Meldung.BENUTZERNAME_EXISTIERT_NICHT),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.PASSWORT)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
 		verify(loginRepository).finde(BENUTZERNAME_1);
 	}
 }
