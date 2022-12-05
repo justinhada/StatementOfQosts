@@ -39,6 +39,7 @@ public class RegistrierungService
 	@Transactional
 	public NeuerBenutzer registriere(@NonNull NeuerBenutzer neuerBenutzer)
 	{
+		// TODO: Prüfen, ob E-Mail-Adresse schon vergeben ist!
 		var salt = Salt.random();
 		return Validation.combine(
 				EMailAdresse.aus(neuerBenutzer.getEmailadresse()),
