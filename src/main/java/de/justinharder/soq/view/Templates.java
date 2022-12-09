@@ -36,4 +36,8 @@ public class Templates
 		NeuerBenutzer neuerBenutzer);
 
 	public static native TemplateInstance start();
+
+	public static native TemplateInstance kontoinhaber(
+		NeuerKontoinhaber neuerKontoinhaber,
+		List<GespeicherterKontoinhaber> alleKontoinhaber);
 }

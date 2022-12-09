@@ -66,7 +66,11 @@ public class KontoinhaberRessource
 	public TemplateInstance erstelleKontoinhaber(@BeanParam NeuerKontoinhaber neuerKontoinhaber)
 	{
 		this.neuerKontoinhaber = kontoinhaberService.erstelle(neuerKontoinhaber);
-		return Templates.kontoinhaber(
+		if (this.neuerKontoinhaber.istErfolgreich())
+		{
+			return zeigeListe();
+		}
+		return Templates.kontoinhaberWeiterleitung(
 			neuerKontoinhaber,
 			benutzerService.findeAlle(),
 			bankverbindungService.finde(neuerKontoinhaber.getBankverbindungId()));
