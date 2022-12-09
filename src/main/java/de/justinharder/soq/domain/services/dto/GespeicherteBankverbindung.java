@@ -4,22 +4,20 @@ import lombok.*;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherteBankverbindung
+public class GespeicherteBankverbindung extends Dto<GespeicherteBankverbindung>
 {
-	@NonNull
-	private final String id;
+	private String id;
 
-	@NonNull
-	private final String iban;
+	private String iban;
 
-	@NonNull
-	private final String nachname;
+	private String bank;
 
-	@NonNull
-	private final String vorname;
-
-	@NonNull
-	private final String bank;
+	@Override
+	protected GespeicherteBankverbindung myself()
+	{
+		return this;
+	}
 }

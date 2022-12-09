@@ -8,7 +8,6 @@ import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
-import de.justinharder.soq.domain.repository.BenutzerRepository;
 import de.justinharder.soq.domain.services.dto.GespeicherteBankverbindung;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import de.justinharder.soq.domain.services.mapping.BankverbindungMapping;
@@ -30,9 +29,6 @@ public class BankverbindungService
 	private final BankverbindungRepository bankverbindungRepository;
 
 	@NonNull
-	private final BenutzerRepository benutzerRepository;
-
-	@NonNull
 	private final BankRepository bankRepository;
 
 	@NonNull
@@ -41,12 +37,10 @@ public class BankverbindungService
 	@Inject
 	public BankverbindungService(
 		@NonNull BankverbindungRepository bankverbindungRepository,
-		@NonNull BenutzerRepository benutzerRepository,
 		@NonNull BankRepository bankRepository,
 		@NonNull BankverbindungMapping bankverbindungMapping)
 	{
 		this.bankverbindungRepository = bankverbindungRepository;
-		this.benutzerRepository = benutzerRepository;
 		this.bankRepository = bankRepository;
 		this.bankverbindungMapping = bankverbindungMapping;
 	}
@@ -65,12 +59,9 @@ public class BankverbindungService
 				IBAN.aus(neueBankverbindung.getIban())
 					.filter(not(bankverbindungRepository::istVorhanden))
 					.getOrElse(Validation.invalid(Meldungen.aus(Meldung.IBAN_EXISTIERT_BEREITS))),
-				ID.aus(neueBankverbindung.getBenutzerId(), Schluessel.BENUTZER)
-					.map(benutzerRepository::finde)
-					.flatMap(b -> b.toValidation(Meldungen.aus(Meldung.BENUTZER_EXISTIERT_NICHT))),
 				ID.aus(neueBankverbindung.getBankId(), Schluessel.BANK)
 					.map(bankRepository::finde)
-					.flatMap(ba -> ba.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT))))
+					.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT))))
 			.ap(Bankverbindung::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())

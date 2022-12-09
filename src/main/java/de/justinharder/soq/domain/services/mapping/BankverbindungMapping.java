@@ -15,8 +15,6 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 		return new GespeicherteBankverbindung(
 			bankverbindung.getId().getWert().toString(),
 			bankverbindung.getIban().getWert(),
-			bankverbindung.getBenutzer().getNachname().getWert(),
-			bankverbindung.getBenutzer().getVorname().getWert(),
 			bankverbindung.getBank().getBezeichnung().getWert());
 	}
 }

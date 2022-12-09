@@ -25,13 +25,9 @@ public class DtoTestdaten extends Testdaten
 	protected static final GespeicherteBankverbindung GESPEICHERTE_BANKVERBINDUNG_1 = new GespeicherteBankverbindung(
 		BANKVERBINDUNG_1.getId().getWert().toString(),
 		BANKVERBINDUNG_1.getIban().getWert(),
-		BANKVERBINDUNG_1.getBenutzer().getNachname().getWert(),
-		BANKVERBINDUNG_1.getBenutzer().getVorname().getWert(),
 		BANKVERBINDUNG_1.getBank().getBezeichnung().getWert());
 	protected static final GespeicherteBankverbindung GESPEICHERTE_BANKVERBINDUNG_2 = new GespeicherteBankverbindung(
 		BANKVERBINDUNG_2.getId().getWert().toString(),
 		BANKVERBINDUNG_2.getIban().getWert(),
-		BANKVERBINDUNG_2.getBenutzer().getNachname().getWert(),
-		BANKVERBINDUNG_2.getBenutzer().getVorname().getWert(),
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert());
 }

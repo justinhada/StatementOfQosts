@@ -15,10 +15,7 @@ class NeueBankverbindungSollte extends DtoSollte<NeueBankverbindung>
 	void setup()
 	{
 		super.setup(
-			new NeueBankverbindung(
-				IBAN_1_WERT,
-				BENUTZER_1.getId().getWert().toString(),
-				BANK_1.getId().getWert().toString()),
+			new NeueBankverbindung(IBAN_1_WERT, BANK_1.getId().getWert().toString()),
 			Meldung.BANKVERBINDUNG_ERSTELLT,
 			Meldung.IBAN_EXISTIERT_BEREITS,
 			Meldung.BENUTZER_EXISTIERT_NICHT);
@@ -30,12 +27,10 @@ class NeueBankverbindungSollte extends DtoSollte<NeueBankverbindung>
 	{
 		var sut = new NeueBankverbindung();
 		sut.setIban(IBAN_1_WERT);
-		sut.setBenutzerId(BENUTZER_1.getId().getWert().toString());
 		sut.setBankId(BANK_1.getId().getWert().toString());
 
 		assertAll(
 			() -> assertThat(sut.getIban()).isEqualTo(IBAN_1_WERT),
-			() -> assertThat(sut.getBenutzerId()).isEqualTo(BENUTZER_1.getId().getWert().toString()),
 			() -> assertThat(sut.getBankId()).isEqualTo(BANK_1.getId().getWert().toString()),
 			() -> assertThat(sut.myself()).isEqualTo(sut));
 	}
