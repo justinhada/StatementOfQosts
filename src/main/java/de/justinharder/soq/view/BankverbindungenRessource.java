@@ -4,7 +4,7 @@ import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.BenutzerService;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
-import io.quarkus.qute.Template;
+import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
@@ -59,6 +59,13 @@ public class BankverbindungenRessource
 	public TemplateInstance erstelleBankverbindung(@BeanParam NeueBankverbindung neueBankverbindung)
 	{
 		this.neueBankverbindung = bankverbindungService.erstelle(neueBankverbindung);
+		if (this.neueBankverbindung.istErfolgreich())
+		{
+			return Templates.kontoinhaber(
+				new NeuerKontoinhaber(),
+				benutzerService.findeAlle(),
+				bankverbindungService.finde(this.neueBankverbindung.getId()));
+		}
 		return zeigeFormular();
 	}
 }

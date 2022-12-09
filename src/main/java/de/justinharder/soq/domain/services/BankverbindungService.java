@@ -76,7 +76,8 @@ public class BankverbindungService
 			.flatMap(Function.identity())
 			.fold(neueBankverbindung::fuegeMeldungenHinzu, bankverbindung -> {
 				bankverbindungRepository.speichere(bankverbindung);
-				return new NeueBankverbindung().fuegeMeldungHinzu(Meldung.BANKVERBINDUNG_ERSTELLT);
+				return new NeueBankverbindung(bankverbindung.getId().getWert().toString()).fuegeMeldungHinzu(
+					Meldung.BANKVERBINDUNG_ERSTELLT);
 			});
 	}
 }

@@ -11,14 +11,26 @@ import javax.ws.rs.FormParam;
 @Setter
 @Dependent
 @NoArgsConstructor
-@AllArgsConstructor
 public class NeueBankverbindung extends Dto<NeueBankverbindung>
 {
+	private String id;
+
 	@FormParam("iban")
 	private String iban;
 
 	@FormParam("bankId")
 	private String bankId;
+
+	public NeueBankverbindung(String id)
+	{
+		this.id = id;
+	}
+
+	public NeueBankverbindung(String iban, String bankId)
+	{
+		this.iban = iban;
+		this.bankId = bankId;
+	}
 
 	@Override
 	protected NeueBankverbindung myself()

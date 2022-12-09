@@ -85,9 +85,9 @@ class BankverbindungenViewSollte extends ViewSollte
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
 			.body(
-				containsString(Meldung.BANKVERBINDUNG_ERSTELLT.text()),
 				containsString(iban),
-				containsString(benutzerId),
-				containsString(bankId));
+				containsString("Oldenburgische Landesbank AG"),
+				containsString("Justin Harder"),
+				containsString("Laura Tiemerding"));
 	}
 }

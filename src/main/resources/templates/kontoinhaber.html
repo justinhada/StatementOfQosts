@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Bankverbindungen - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+            {#include header /}
+
+        <section>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Kontoinhaber erstellen</h1>
+
+                <form method="post"
+                      action="/kontoinhaber">
+                    {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+
+                    <div class="row">
+                        <h3 class="col fw-bold text-center">Bankverbindung</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col fw-bold text-end">ID</div>
+
+                        <div class="col font-monospace">{bankverbindung.id}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col fw-bold text-end">IBAN</div>
+
+                        <div class="col font-monospace">{bankverbindung.iban}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col fw-bold text-end">Bank</div>
+
+                        <div class="col font-monospace">{bankverbindung.bank}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="benutzerIds"
+                                   class="form-label mt-2 fw-bold">
+                                Benutzer
+                            </label>
+
+                            <select id="benutzerIds"
+                                    name="benutzerIds"
+                                    multiple="multiple"
+                                    class="form-select {#if ! neuerKontoinhaber.getMeldungen(Schluessel:BENUTZER).isEmpty()}is-invalid{/if}">
+                                {#for benutzer in alleBenutzer}
+                                    <option value="{benutzer.id}">{benutzer.vorname} {benutzer.nachname}</option>
+                                {/for}
+                            </select>
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BENUTZER)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Kontoinhaber erstellen
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+            {#include footer /}
+    </body>
+</html>
