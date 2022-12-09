@@ -51,7 +51,7 @@
 
                             <select id="bankId"
                                     name="bankId"
-                                    class="form-select {#if ! neueBankverbindung.getMeldungen(Schluessel:BANK).isEmpty()}is-invalid{/if}">
+                                    class="form-select {#if neueBankverbindung.hatMeldungen(Schluessel:BANK)}is-invalid{/if}">
                                 {#for bank in banken}
                                     <option value="{bank.id}">{bank.bezeichnung}</option>
                                 {/for}

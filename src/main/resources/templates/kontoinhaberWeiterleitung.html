@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
     {#include head}
-        {#title}Bankverbindungen - Statement of Qosts{/title}
+        {#title}Kontoinhaber - Statement of Qosts{/title}
     {/include}
 
     <body>
@@ -71,7 +71,7 @@
                             <select id="benutzerIds"
                                     name="benutzerIds"
                                     multiple="multiple"
-                                    class="form-select {#if ! neuerKontoinhaber.getMeldungen(Schluessel:BENUTZER).isEmpty()}is-invalid{/if}">
+                                    class="form-select {#if neuerKontoinhaber.hatMeldungen(Schluessel:BENUTZER)}is-invalid{/if}">
                                 {#for benutzer in alleBenutzer}
                                     <option value="{benutzer.id}">{benutzer.vorname} {benutzer.nachname}</option>
                                 {/for}

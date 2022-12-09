@@ -52,6 +52,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Benutzer darf nicht leer sein!");
 
+	public static final Meldung BENUTZER_MINDESTENSAUSWAHL = new Meldung(
+		Schluessel.BENUTZER,
+		Ebene.FEHLER,
+		"Es muss mindestens ein Benutzer ausgewählt werden!");
+
 	public static final Meldung BENUTZERNAME_EXISTIERT_NICHT = new Meldung(
 		Schluessel.BENUTZERNAME,
 		Ebene.FEHLER,
