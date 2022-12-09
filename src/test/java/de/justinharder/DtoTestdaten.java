@@ -3,6 +3,7 @@ package de.justinharder;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.GespeicherteBankverbindung;
 import de.justinharder.soq.domain.services.dto.GespeicherterBenutzer;
+import de.justinharder.soq.domain.services.dto.GespeicherterKontoinhaber;
 
 public class DtoTestdaten extends Testdaten
 {
@@ -30,4 +31,16 @@ public class DtoTestdaten extends Testdaten
 		BANKVERBINDUNG_2.getId().getWert().toString(),
 		BANKVERBINDUNG_2.getIban().getWert(),
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert());
+	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_1 = new GespeicherterKontoinhaber(
+		KONTOINHABER_1.getId().getWert().toString(),
+		KONTOINHABER_1.getBenutzer().getNachname().getWert(),
+		KONTOINHABER_1.getBenutzer().getVorname().getWert(),
+		KONTOINHABER_1.getBankverbindung().getIban().getWert(),
+		KONTOINHABER_1.getBankverbindung().getBank().getBezeichnung().getWert());
+	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_2 = new GespeicherterKontoinhaber(
+		KONTOINHABER_2.getId().getWert().toString(),
+		KONTOINHABER_2.getBenutzer().getNachname().getWert(),
+		KONTOINHABER_2.getBenutzer().getVorname().getWert(),
+		KONTOINHABER_2.getBankverbindung().getIban().getWert(),
+		KONTOINHABER_2.getBankverbindung().getBank().getBezeichnung().getWert());
 }
