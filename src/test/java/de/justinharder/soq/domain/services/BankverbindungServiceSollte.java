@@ -73,7 +73,7 @@ class BankverbindungServiceSollte extends DtoTestdaten
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.IBAN)).containsExactlyInAnyOrder(Meldung.IBAN_LEER),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANK)).containsExactlyInAnyOrder(
-				Meldung.ID_LEER(Schluessel.BANK)),
+				Meldung.idLeer(Schluessel.BANK)),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
 	}
 
@@ -88,7 +88,7 @@ class BankverbindungServiceSollte extends DtoTestdaten
 		assertAll(
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.IBAN)).containsExactlyInAnyOrder(Meldung.IBAN_UNGUELTIG),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANK)).containsExactlyInAnyOrder(
-				Meldung.ID_UNGUELTIG(Schluessel.BANK)),
+				Meldung.idUngueltig(Schluessel.BANK)),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
 	}
 

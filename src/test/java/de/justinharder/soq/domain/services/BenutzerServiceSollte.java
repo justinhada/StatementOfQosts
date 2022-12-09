@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @DisplayName("BenutzerService sollte")
-public class BenutzerServiceSollte extends DtoTestdaten
+class BenutzerServiceSollte extends DtoTestdaten
 {
 	private BenutzerService sut;
 

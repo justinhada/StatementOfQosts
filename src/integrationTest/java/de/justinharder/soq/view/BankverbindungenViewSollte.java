@@ -47,7 +47,7 @@ class BankverbindungenViewSollte extends ViewSollte
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
 			.body(
 				containsString(Meldung.IBAN_LEER.text()),
-				containsString(Meldung.ID_LEER(Schluessel.BANK).text()));
+				containsString(Meldung.idLeer(Schluessel.BANK).text()));
 	}
 
 	@Test

@@ -35,9 +35,9 @@ public class ID extends WertObjekt<UUID>
 
 	public static Validation<Meldungen, ID> aus(String wert, Schluessel schluessel)
 	{
-		return validiereString(wert, Meldung.ID_LEER(schluessel))
+		return validiereString(wert, Meldung.idLeer(schluessel))
 			.map(ID::aus)
-			.flatMap(uuid -> uuid.toValidation(Meldungen.aus(Meldung.ID_UNGUELTIG(schluessel))))
+			.flatMap(uuid -> uuid.toValidation(Meldungen.aus(Meldung.idUngueltig(schluessel))))
 			.map(ID::new);
 	}
 

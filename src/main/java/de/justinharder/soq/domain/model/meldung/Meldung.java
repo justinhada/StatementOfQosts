@@ -132,12 +132,12 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die IBAN (Internationale Bankkontonummer) ist ungültig!");
 
-	public static Meldung ID_LEER(Schluessel schluessel)
+	public static Meldung idLeer(Schluessel schluessel)
 	{
 		return new Meldung(schluessel, Ebene.FEHLER, "Die ID darf nicht leer sein!");
 	}
 
-	public static Meldung ID_UNGUELTIG(Schluessel schluessel)
+	public static Meldung idUngueltig(Schluessel schluessel)
 	{
 		return new Meldung(schluessel, Ebene.FEHLER, "Die ID ist ungültig!");
 	}

@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class IDSollte extends Testdaten
 {
 	private static final Schluessel SCHLUESSEL = Schluessel.BENUTZER;
-	private static final Meldung MELDUNG_ID_LEER = Meldung.ID_LEER(SCHLUESSEL);
-	private static final Meldung MELDUNG_ID_UNGUELTIG = Meldung.ID_UNGUELTIG(SCHLUESSEL);
+	private static final Meldung MELDUNG_ID_LEER = Meldung.idLeer(SCHLUESSEL);
+	private static final Meldung MELDUNG_ID_UNGUELTIG = Meldung.idUngueltig(SCHLUESSEL);
 	private ID sut;
 
 	private Validation<Meldungen, ID> validierung;
