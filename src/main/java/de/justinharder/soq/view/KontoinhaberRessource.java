@@ -25,6 +25,7 @@ public class KontoinhaberRessource
 	@NonNull
 	private final BankverbindungService bankverbindungService;
 
+	@NonNull
 	private NeuerKontoinhaber neuerKontoinhaber;
 
 	@Inject
@@ -32,7 +33,7 @@ public class KontoinhaberRessource
 		@NonNull KontoinhaberService kontoinhaberService,
 		@NonNull BenutzerService benutzerService,
 		@NonNull BankverbindungService bankverbindungService,
-		NeuerKontoinhaber neuerKontoinhaber)
+		@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
 		this.kontoinhaberService = kontoinhaberService;
 		this.benutzerService = benutzerService;

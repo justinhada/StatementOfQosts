@@ -11,6 +11,7 @@ public class ViewSollte
 	// -- PFADE --------------------------------------------------------------------------------------------------------
 	protected static final String BANKEN = "/banken";
 	protected static final String BANKVERBINDUNGEN = "/bankverbindungen";
+	protected static final String KONTOINHABER = "/kontoinhaber";
 	protected static final String LOGIN = "/login";
 	protected static final String REGISTRIERUNG = "/registrierung";
 	// -- EINGABEDATEN -------------------------------------------------------------------------------------------------

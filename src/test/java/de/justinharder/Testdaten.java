@@ -46,6 +46,10 @@ public class Testdaten
 	protected static final EMailAdresse E_MAIL_ADRESSE_1 = EMailAdresse.aus(E_MAIL_ADRESSE_1_WERT).get();
 	protected static final String E_MAIL_ADRESSE_2_WERT = "laura.tiemerding@icloud.com";
 	protected static final EMailAdresse E_MAIL_ADRESSE_2 = EMailAdresse.aus(E_MAIL_ADRESSE_2_WERT).get();
+	protected static final String FIRMA_1_WERT = "Rewe-Markt GmbH";
+	protected static final Firma FIRMA_1 = Firma.aus(FIRMA_1_WERT).get();
+	protected static final String FIRMA_2_WERT = "ALTE OLDENBURGER Krankenversicherung AG";
+	protected static final Firma FIRMA_2 = Firma.aus(FIRMA_2_WERT).get();
 	protected static final String IBAN_1_WERT = "DE87280200504008357800";
 	protected static final IBAN IBAN_1 = IBAN.aus(IBAN_1_WERT).get();
 	protected static final String IBAN_2_WERT = "DE28280651080012888000";
@@ -78,6 +82,8 @@ public class Testdaten
 	protected static final Bankverbindung BANKVERBINDUNG_2 = Bankverbindung.aus(IBAN_2, BANK_2).get();
 	protected static final Kategorie KATEGORIE_1 = Kategorie.aus(BEZEICHNUNG_3).get();
 	protected static final Kategorie KATEGORIE_2 = Kategorie.aus(BEZEICHNUNG_4).get();
+	protected static final Kontoinhaber KONTOINHABER_1 = Kontoinhaber.aus(BENUTZER_1, BANKVERBINDUNG_1).get();
+	protected static final Kontoinhaber KONTOINHABER_2 = Kontoinhaber.aus(BENUTZER_2, BANKVERBINDUNG_2).get();
 	protected static final Login LOGIN_1 =
 		Login.aus(E_MAIL_ADRESSE_1, BENUTZERNAME_1, SALT, PASSWORT_1, BENUTZER_1).get();
 	protected static final Login LOGIN_2 =
