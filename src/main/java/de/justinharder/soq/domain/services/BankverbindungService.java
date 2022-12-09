@@ -52,6 +52,15 @@ public class BankverbindungService
 			.toList();
 	}
 
+	public GespeicherteBankverbindung finde(@NonNull String id)
+	{
+		return ID.aus(id, Schluessel.ALLGEMEIN)
+			.map(bankverbindungRepository::finde)
+			.flatMap(bankverbindung -> bankverbindung
+				.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)))
+			.fold(new GespeicherteBankverbindung()::fuegeMeldungenHinzu, bankverbindungMapping::mappe);
+	}
+
 	@Transactional
 	public NeueBankverbindung erstelle(NeueBankverbindung neueBankverbindung)
 	{

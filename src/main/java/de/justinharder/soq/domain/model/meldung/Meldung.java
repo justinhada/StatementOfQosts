@@ -27,6 +27,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Die Bankverbindung wurde erfolgreich erstellt!");
 
+	public static final Meldung BANKVERBINDUNG_EXISTIERT_NICHT = new Meldung(
+		Schluessel.BANKVERBINDUNG,
+		Ebene.ERFOLG,
+		"Die Bankverbindung existiert nicht!");
+
 	public static final Meldung BANKVERBINDUNG_LEER = new Meldung(
 		Schluessel.BANKVERBINDUNG,
 		Ebene.FEHLER,
