@@ -147,6 +147,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Kategorie darf nicht leer sein!");
 
+	public static final Meldung KONTOINHABER_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Kontoinhaber wurde erfolgreich erstellt!");
+
 	public static final Meldung LOGIN_ERFOLGREICH = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,

@@ -19,6 +19,7 @@ public enum Schluessel
 	FIRMA,
 	IBAN,
 	KATEGORIE,
+	KONTOINHABER,
 	NACHNAME,
 	PASSWORT,
 	SALT,

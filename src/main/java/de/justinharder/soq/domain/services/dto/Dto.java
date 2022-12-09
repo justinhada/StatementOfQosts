@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class Dto<T extends Dto<T>>
 {
-	private final Meldungen meldungen = new Meldungen();
+	protected final Meldungen meldungen = new Meldungen();
 
 	protected abstract T myself();
 
@@ -41,5 +41,10 @@ public abstract class Dto<T extends Dto<T>>
 	public boolean hatMeldungen(@NonNull Schluessel schluessel)
 	{
 		return !getMeldungen(schluessel).isEmpty();
+	}
+
+	public T fasseZusammen(T t)
+	{
+		return this.fuegeMeldungenHinzu(t.meldungen);
 	}
 }

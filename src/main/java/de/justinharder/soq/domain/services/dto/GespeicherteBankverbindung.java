@@ -2,8 +2,11 @@ package de.justinharder.soq.domain.services.dto;
 
 import lombok.*;
 
+import javax.enterprise.context.Dependent;
+
 @Getter
 @ToString
+@Dependent
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)

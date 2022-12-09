@@ -32,7 +32,7 @@ public class Kontoinhaber extends Entitaet
 	@JoinColumn(name = "BankverbindungID", nullable = false)
 	private Bankverbindung bankverbindung;
 
-	public Validation<Meldungen, Kontoinhaber> aus(Benutzer benutzer, Bankverbindung bankverbindung)
+	public static Validation<Meldungen, Kontoinhaber> aus(Benutzer benutzer, Bankverbindung bankverbindung)
 	{
 		return Validation.combine(
 				validiere(benutzer, Meldung.BENUTZER_LEER),

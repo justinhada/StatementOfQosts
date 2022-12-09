@@ -13,7 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @RequestScoped
-@Path("/bankverbindungen")
+@Path("/kontoinhaber")
 public class KontoinhaberRessource
 {
 	@NonNull
