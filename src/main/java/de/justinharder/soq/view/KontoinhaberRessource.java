@@ -41,11 +41,20 @@ public class KontoinhaberRessource
 	}
 
 	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public TemplateInstance zeigeListe()
+	{
+		return Templates.kontoinhaber(
+			neuerKontoinhaber,
+			kontoinhaberService.findeAlle());
+	}
+
+	@GET
 	@Path("/{bankverbindungId}")
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular(@PathParam("bankverbindungId") String bankverbindungId)
 	{
-		return Templates.kontoinhaber(
+		return Templates.kontoinhaberWeiterleitung(
 			neuerKontoinhaber,
 			benutzerService.findeAlle(),
 			bankverbindungService.finde(bankverbindungId));

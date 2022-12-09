@@ -61,7 +61,7 @@ public class BankverbindungenRessource
 		this.neueBankverbindung = bankverbindungService.erstelle(neueBankverbindung);
 		if (this.neueBankverbindung.istErfolgreich())
 		{
-			return Templates.kontoinhaber(
+			return Templates.kontoinhaberWeiterleitung(
 				new NeuerKontoinhaber(),
 				benutzerService.findeAlle(),
 				bankverbindungService.finde(this.neueBankverbindung.getId()));

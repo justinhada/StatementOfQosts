@@ -27,7 +27,7 @@ public class Templates
 	public static native TemplateInstance login(
 		AngemeldeterBenutzer angemeldeterBenutzer);
 
-	public static native TemplateInstance kontoinhaber(
+	public static native TemplateInstance kontoinhaberWeiterleitung(
 		NeuerKontoinhaber neuerKontoinhaber,
 		List<GespeicherterBenutzer> alleBenutzer,
 		GespeicherteBankverbindung bankverbindung);
