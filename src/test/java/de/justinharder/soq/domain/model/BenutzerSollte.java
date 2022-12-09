@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Person sollte")
+@DisplayName("Benutzer sollte")
 class BenutzerSollte extends Testdaten
 {
 	private Benutzer sut;
@@ -51,6 +51,7 @@ class BenutzerSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(BENUTZER_1).hasToString("Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}");
+		assertThat(BENUTZER_1).hasToString(
+			"Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}");
 	}
 }

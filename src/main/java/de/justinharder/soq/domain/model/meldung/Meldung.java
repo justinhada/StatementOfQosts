@@ -107,6 +107,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die E-Mail-Adresse ist ungültig!");
 
+	public static final Meldung FIRMA = new Meldung(
+		Schluessel.FIRMA,
+		Ebene.FEHLER,
+		"Die Firma darf nicht leer sein!");
+
 	public static final Meldung IBAN_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.IBAN,
 		Ebene.FEHLER,

@@ -4,6 +4,8 @@ entity Benutzer
     * **ID <<PK>>**
     * Nachname
     * Vorname
+    * Firma
+    * Art
 }
 
 entity Login
@@ -23,11 +25,17 @@ entity Bank
     * BIC
 }
 
+entity Kontoinhaber
+{
+    * **ID <<PK>>**
+    * **BenutzerID <<FK>>**
+    * **BankverbindungID <<FK>>**
+}
+
 entity Bankverbindung
 {
     * **ID <<PK>>**
     * IBAN
-    * **BenutzerID <<FK>>**
     * **BankID <<FK>>**
 }
 
@@ -37,14 +45,14 @@ entity Umsatz
     * Datum
     * Betrag
     * Verwendungszweck
-    * **BankverbindungSenderID <<FK>>**
-    * **BankverbindungEmpfaengerID <<FK>>**
+    * **BankverbindungAuftraggeberID <<FK>>**
+    * **BankverbindungZahlungsbeteiligterID <<FK>>**
 }
 
 entity EinnahmeAusgabe
 {
     * **ID <<PK>>**
-    * Art
+    * Typ
     * **UmsatzID <<FK>>**
     * **KategorieID <<FK>>**
 }
@@ -56,7 +64,8 @@ entity Kategorie
 }
 
 Benutzer ||--|| Login
-Benutzer ||--o{ Bankverbindung
+Benutzer ||--o{ Kontoinhaber
+Bankverbindung ||--o{ Kontoinhaber
 Bank ||--o{ Bankverbindung
 Bankverbindung }o--o{ Umsatz
 Kategorie ||--o{ EinnahmeAusgabe

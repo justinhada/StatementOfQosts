@@ -22,31 +22,28 @@ class BankverbindungSollte extends Testdaten
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Bankverbindung.aus(null, null, null);
+		validierung = Bankverbindung.aus(null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER, Meldung.BENUTZER_LEER,
-				Meldung.BANK_LEER));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IBAN_LEER, Meldung.BANK_LEER));
 	}
 
 	@Test
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Bankverbindung.aus(IBAN_1, BENUTZER_1, BANK_1);
+		validierung = Bankverbindung.aus(IBAN_1, BANK_1);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getIban()).isEqualTo(IBAN_1),
-			() -> assertThat(sut.getBenutzer()).isEqualTo(BENUTZER_1),
 			() -> assertThat(sut.getBank()).isEqualTo(BANK_1));
 
-		validierung = Bankverbindung.aus(IBAN_2, BENUTZER_2, BANK_2);
+		validierung = Bankverbindung.aus(IBAN_2, BANK_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getIban()).isEqualTo(IBAN_2),
-			() -> assertThat(sut.getBenutzer()).isEqualTo(BENUTZER_2),
 			() -> assertThat(sut.getBank()).isEqualTo(BANK_2));
 	}
 
@@ -55,6 +52,6 @@ class BankverbindungSollte extends Testdaten
 	void test03()
 	{
 		assertThat(BANKVERBINDUNG_1).hasToString(
-			"Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}");
+			"Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}");
 	}
 }

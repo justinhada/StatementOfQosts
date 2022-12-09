@@ -1,16 +1,21 @@
 package de.justinharder.soq.domain.model.attribute;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public enum Art
 {
-	AUSGABE,
-	EINNAHME;
+	PRIVATPERSON("Privatperson"),
+	UNTERNEHMEN("Unternehmen");
 
-	public static Art aus(Betrag betrag)
+	private final String wert;
+
+	@Override
+	public String toString()
 	{
-		return betrag.istNegativ() ? AUSGABE : EINNAHME;
+		return wert;
 	}
 }

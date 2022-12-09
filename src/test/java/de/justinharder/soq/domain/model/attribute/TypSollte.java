@@ -8,14 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("Art sollte")
-class ArtSollte extends Testdaten
+class TypSollte extends Testdaten
 {
 	@Test
 	@DisplayName("sich aus Betrag ermitteln")
 	void test01()
 	{
 		assertAll(
-			() -> assertThat(Art.aus(BETRAG_2)).isEqualTo(Art.AUSGABE),
-			() -> assertThat(Art.aus(BETRAG_1)).isEqualTo(Art.EINNAHME));
+			() -> assertThat(Typ.aus(BETRAG_2)).isEqualTo(Typ.AUSGABE),
+			() -> assertThat(Typ.aus(BETRAG_1)).isEqualTo(Typ.EINNAHME));
 	}
 }

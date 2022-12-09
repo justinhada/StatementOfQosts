@@ -26,19 +26,13 @@ public class Bankverbindung extends Entitaet
 
 	@NonNull
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "BenutzerID", nullable = false)
-	private Benutzer benutzer;
-
-	@NonNull
-	@ManyToOne(optional = false)
 	@JoinColumn(name = "BankID", nullable = false)
 	private Bank bank;
 
-	public static Validation<Meldungen, Bankverbindung> aus(IBAN iban, Benutzer benutzer, Bank bank)
+	public static Validation<Meldungen, Bankverbindung> aus(IBAN iban, Bank bank)
 	{
 		return Validation.combine(
 				validiere(iban, Meldung.IBAN_LEER),
-				validiere(benutzer, Meldung.BENUTZER_LEER),
 				validiere(bank, Meldung.BANK_LEER))
 			.ap(Bankverbindung::new)
 			.mapError(Meldungen::aus);
@@ -50,7 +44,6 @@ public class Bankverbindung extends Entitaet
 		return MoreObjects.toStringHelper(this)
 			.add("ID", id)
 			.add("IBAN", iban)
-			.add("Benutzer", benutzer)
 			.add("Bank", bank)
 			.toString();
 	}

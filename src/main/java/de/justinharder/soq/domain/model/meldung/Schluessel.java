@@ -16,6 +16,7 @@ public enum Schluessel
 	BIC,
 	DATUM,
 	E_MAIL_ADRESSE,
+	FIRMA,
 	IBAN,
 	KATEGORIE,
 	NACHNAME,

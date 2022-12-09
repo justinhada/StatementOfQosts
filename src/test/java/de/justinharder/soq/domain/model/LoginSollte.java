@@ -59,6 +59,6 @@ class LoginSollte extends Testdaten
 	void test03()
 	{
 		assertThat(LOGIN_1).hasToString(
-			"Login{ID=" + LOGIN_1.getId() + ", E-Mail-Adresse=justinharder@t-online.de, Benutzername=hard3r, Salt=" + SALT + ", Passwort=" + PASSWORT_1 + ", Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin}}");
+			"Login{ID=" + LOGIN_1.getId() + ", E-Mail-Adresse=justinharder@t-online.de, Benutzername=hard3r, Salt=" + SALT + ", Passwort=" + PASSWORT_1 + ", Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}}");
 	}
 }
