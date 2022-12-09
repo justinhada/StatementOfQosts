@@ -2,7 +2,6 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.dto.NeueBank;
-import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
@@ -19,16 +18,12 @@ public class BankenRessource
 	private final BankService bankService;
 
 	@NonNull
-	private final Template banken;
-
-	@NonNull
 	private NeueBank neueBank;
 
 	@Inject
-	public BankenRessource(@NonNull BankService bankService, @NonNull Template banken, @NonNull NeueBank neueBank)
+	public BankenRessource(@NonNull BankService bankService, @NonNull NeueBank neueBank)
 	{
 		this.bankService = bankService;
-		this.banken = banken;
 		this.neueBank = neueBank;
 	}
 
@@ -36,9 +31,7 @@ public class BankenRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular()
 	{
-		return banken
-			.data("neueBank", neueBank)
-			.data("banken", bankService.findeAlle());
+		return Templates.banken(neueBank, bankService.findeAlle());
 	}
 
 	@POST

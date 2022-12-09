@@ -2,7 +2,6 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.LoginService;
 import de.justinharder.soq.domain.services.dto.AngemeldeterBenutzer;
-import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
@@ -24,24 +23,12 @@ public class LoginRessource
 	private final LoginService loginService;
 
 	@NonNull
-	private final Template login;
-
-	@NonNull
-	private final Template start;
-
-	@NonNull
 	private AngemeldeterBenutzer angemeldeterBenutzer;
 
 	@Inject
-	public LoginRessource(
-		@NonNull LoginService loginService,
-		@NonNull Template login,
-		@NonNull Template start,
-		@NonNull AngemeldeterBenutzer angemeldeterBenutzer)
+	public LoginRessource(@NonNull LoginService loginService, @NonNull AngemeldeterBenutzer angemeldeterBenutzer)
 	{
 		this.loginService = loginService;
-		this.login = login;
-		this.start = start;
 		this.angemeldeterBenutzer = angemeldeterBenutzer;
 	}
 
@@ -52,10 +39,10 @@ public class LoginRessource
 		var userPrincipal = securityContext.getUserPrincipal();
 		if (userPrincipal == null)
 		{
-			return login.data("angemeldeterBenutzer", angemeldeterBenutzer);
+			return Templates.login(angemeldeterBenutzer);
 		}
 
-		return start.instance();
+		return Templates.start();
 	}
 
 	@POST

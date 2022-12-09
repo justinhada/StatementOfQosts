@@ -2,7 +2,6 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.RegistrierungService;
 import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
-import io.quarkus.qute.Template;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +14,12 @@ import static org.mockito.Mockito.mock;
 class RegistrierungRessourceSollte
 {
 	private RegistrierungService registrierungService;
-	private Template registrierung;
 	private NeuerBenutzer neuerBenutzer;
 
 	@BeforeEach
 	void setup()
 	{
 		registrierungService = mock(RegistrierungService.class);
-		registrierung = mock(Template.class);
 		neuerBenutzer = mock(NeuerBenutzer.class);
 	}
 
@@ -32,10 +29,8 @@ class RegistrierungRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new RegistrierungRessource(null, registrierung, neuerBenutzer)),
+				() -> new RegistrierungRessource(null, neuerBenutzer)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new RegistrierungRessource(registrierungService, null, neuerBenutzer)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new RegistrierungRessource(registrierungService, registrierung, null)));
+				() -> new RegistrierungRessource(registrierungService, null)));
 	}
 }

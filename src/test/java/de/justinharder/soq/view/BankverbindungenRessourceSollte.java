@@ -4,7 +4,6 @@ import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.BenutzerService;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
-import io.quarkus.qute.Template;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ class BankverbindungenRessourceSollte
 	private BankverbindungService bankverbindungService;
 	private BenutzerService benutzerService;
 	private BankService bankService;
-	private Template bankverbindungen;
 	private NeueBankverbindung neueBankverbindung;
 
 	@BeforeEach
@@ -28,7 +26,6 @@ class BankverbindungenRessourceSollte
 		bankverbindungService = mock(BankverbindungService.class);
 		benutzerService = mock(BenutzerService.class);
 		bankService = mock(BankService.class);
-		bankverbindungen = mock(Template.class);
 		neueBankverbindung = mock(NeueBankverbindung.class);
 	}
 
@@ -38,19 +35,12 @@ class BankverbindungenRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(null, benutzerService, bankService, bankverbindungen,
-					neueBankverbindung)),
+				() -> new BankverbindungenRessource(null, benutzerService, bankService, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, null, bankService, bankverbindungen,
-					neueBankverbindung)),
+				() -> new BankverbindungenRessource(bankverbindungService, null, bankService, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, null, bankverbindungen,
-					neueBankverbindung)),
+				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, null, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, bankService, null,
-					neueBankverbindung)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, bankService,
-					bankverbindungen, null)));
+				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, bankService, null)));
 	}
 }

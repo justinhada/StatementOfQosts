@@ -27,9 +27,6 @@ public class BankverbindungenRessource
 	private final BankService bankService;
 
 	@NonNull
-	private final Template bankverbindungen;
-
-	@NonNull
 	private NeueBankverbindung neueBankverbindung;
 
 	@Inject
@@ -37,13 +34,11 @@ public class BankverbindungenRessource
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull BenutzerService benutzerService,
 		@NonNull BankService bankService,
-		@NonNull Template bankverbindungen,
 		@NonNull NeueBankverbindung neueBankverbindung)
 	{
 		this.bankverbindungService = bankverbindungService;
 		this.benutzerService = benutzerService;
 		this.bankService = bankService;
-		this.bankverbindungen = bankverbindungen;
 		this.neueBankverbindung = neueBankverbindung;
 	}
 
@@ -51,12 +46,11 @@ public class BankverbindungenRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular()
 	{
-		return bankverbindungen
-			.data("neueBankverbindung", neueBankverbindung)
-			.data("bankverbindungen", bankverbindungService.findeAlle())
-			.data("banken", bankverbindungService.findeAlle())
-			.data("alleBenutzer", benutzerService.findeAlle())
-			.data("banken", bankService.findeAlle());
+		return Templates.bankverbindungen(
+			neueBankverbindung,
+			bankverbindungService.findeAlle(),
+			benutzerService.findeAlle(),
+			bankService.findeAlle());
 	}
 
 	@POST
