@@ -9,15 +9,18 @@
 
         <section>
             <div class="container mt-5">
-                <h1 class="fw-bold">Alle Kontoinhaber</h1>
+                <h1 class="fw-bold">Kontoinhaber erstellen</h1>
 
-                {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
-                    <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
-                    {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
-                        <li>{meldung.text}</li>
-                    {/for}
-                    </ul>
-                {/if}
+                <form method="post"
+                      action="/banken">
+                    {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+                </form>
 
                 <table class="table table-striped table-hover mt-5">
                     <thead>
@@ -31,13 +34,13 @@
                     </thead>
                     <tbody>
                         {#for kontoinhaber in alleKontoinhaber}
-                            <tr>
+                        <tr>
                             <td>{kontoinhaber.id}</td>
                             <td>{kontoinhaber.nachname}</td>
                             <td>{kontoinhaber.vorname}</td>
                             <td>{kontoinhaber.iban}</td>
                             <td>{kontoinhaber.bank}</td>
-                            </tr>
+                        </tr>
                         {/for}
                     </tbody>
                 </table>
