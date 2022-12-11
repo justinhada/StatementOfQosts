@@ -23,6 +23,7 @@ class GespeicherteBankverbindungSollte extends DtoTestdaten
 		assertAll(
 			() -> assertThat(sut.getId()).isEqualTo(ID),
 			() -> assertThat(sut.getIban()).isEqualTo(IBAN),
-			() -> assertThat(sut.getBank()).isEqualTo(BANK));
+			() -> assertThat(sut.getBank()).isEqualTo(BANK),
+			() -> assertThat(sut.myself()).isEqualTo(sut));
 	}
 }

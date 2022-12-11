@@ -62,7 +62,7 @@ public class BankverbindungService
 	}
 
 	@Transactional
-	public NeueBankverbindung erstelle(NeueBankverbindung neueBankverbindung)
+	public NeueBankverbindung erstelle(@NonNull NeueBankverbindung neueBankverbindung)
 	{
 		return Validation.combine(
 				IBAN.aus(neueBankverbindung.getIban())

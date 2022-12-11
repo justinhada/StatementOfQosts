@@ -37,7 +37,7 @@ public class BankenRessource
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public TemplateInstance erstelleBank(@BeanParam NeueBank neueBank)
+	public TemplateInstance erstelle(@BeanParam NeueBank neueBank)
 	{
 		this.neueBank = bankService.erstelle(neueBank);
 		return zeigeFormular();

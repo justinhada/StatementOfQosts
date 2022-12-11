@@ -56,7 +56,7 @@ public class BankverbindungenRessource
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public TemplateInstance erstelleBankverbindung(@BeanParam NeueBankverbindung neueBankverbindung)
+	public TemplateInstance erstelle(@BeanParam NeueBankverbindung neueBankverbindung)
 	{
 		this.neueBankverbindung = bankverbindungService.erstelle(neueBankverbindung);
 		if (this.neueBankverbindung.istErfolgreich())

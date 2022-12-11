@@ -26,7 +26,7 @@ public class ImportRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeImportFormular()
+	public TemplateInstance zeigeFormular()
 	{
 		return Templates.imports();
 	}

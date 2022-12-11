@@ -49,7 +49,9 @@ class BankverbindungServiceSollte extends DtoTestdaten
 			() -> assertThrows(NullPointerException.class,
 				() -> new BankverbindungService(bankverbindungRepository, null, bankverbindungMapping)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungService(bankverbindungRepository, bankRepository, null)));
+				() -> new BankverbindungService(bankverbindungRepository, bankRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
 	}
 
 	@Test

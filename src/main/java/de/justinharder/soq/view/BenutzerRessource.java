@@ -37,7 +37,7 @@ public class BenutzerRessource
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public TemplateInstance erstelleBenutzer(@BeanParam NeuerBenutzer neuerBenutzer)
+	public TemplateInstance erstelle(@BeanParam NeuerBenutzer neuerBenutzer)
 	{
 		this.neuerBenutzer = benutzerService.erstelle(neuerBenutzer);
 		return zeigeFormular();

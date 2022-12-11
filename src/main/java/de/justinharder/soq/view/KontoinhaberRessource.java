@@ -64,7 +64,7 @@ public class KontoinhaberRessource
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public TemplateInstance erstelleKontoinhaber(@BeanParam NeuerKontoinhaber neuerKontoinhaber)
+	public TemplateInstance erstelle(@BeanParam NeuerKontoinhaber neuerKontoinhaber)
 	{
 		this.neuerKontoinhaber = kontoinhaberService.erstelle(neuerKontoinhaber);
 		if (this.neuerKontoinhaber.istErfolgreich())

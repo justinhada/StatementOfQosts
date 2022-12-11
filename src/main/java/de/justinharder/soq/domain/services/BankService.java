@@ -44,7 +44,7 @@ public class BankService
 	}
 
 	@Transactional
-	public NeueBank erstelle(NeueBank neueBank)
+	public NeueBank erstelle(@NonNull NeueBank neueBank)
 	{
 		return Validation.combine(
 				Bezeichnung.aus(neueBank.getBezeichnung())
