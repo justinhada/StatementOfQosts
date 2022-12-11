@@ -31,7 +31,7 @@ public class BenutzerRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular()
 	{
-		return Templates.benutzer(neuerBenutzer);
+		return Templates.benutzer(neuerBenutzer, benutzerService.findeAlle());
 	}
 
 	@POST

@@ -1,47 +1,62 @@
 @startuml
-entity Kostenpunkt
-{
-    * **ID <<PK>>**
-    * Bezeichnung
-    * Datum
-    * Betrag
-    * **KostenID <<FK>>**
-}
-
 entity Benutzer
 {
     * **ID <<PK>>**
     * Nachname
     * Vorname
+    * Firma
+    * Art
 }
 
-entity Login
+entity Bank
 {
     * **ID <<PK>>**
-    * E-Mail-Adresse
-    * Benutzername
-    * Salt
-    * Passwort
+    * Bezeichnung
+    * BIC
+}
+
+entity Kontoinhaber
+{
+    * **ID <<PK>>**
     * **BenutzerID <<FK>>**
+    * **BankverbindungID <<FK>>**
 }
 
-entity Kosten
+entity Bankverbindung
 {
     * **ID <<PK>>**
-    * Bezeichnung
+    * IBAN
+    * **BankID <<FK>>**
 }
 
-entity Einnahmequelle
+entity Umsatz
 {
     * **ID <<PK>>**
-    * Bezeichnung
-    * Turnus
+    * Datum
     * Betrag
-    * **BenutzerID <<FK>>**
+    * Verwendungszweck
+    * **BankverbindungAuftraggeberID <<FK>>**
+    * **BankverbindungZahlungsbeteiligterID <<FK>>**
 }
 
-Kosten ||--o{ Kostenpunkt
-Kostenpunkt }o--|| Benutzer
-Benutzer ||--o{ Einnahmequelle
-Benutzer ||--|| Login
+entity EinnahmeAusgabe
+{
+    * **ID <<PK>>**
+    * Typ
+    * **UmsatzID <<FK>>**
+    * **KategorieID <<FK>>**
+}
+
+entity Kategorie
+{
+    * **ID <<PK>>**
+    * Bezeichnung
+}
+
+Benutzer ||--o{ Kontoinhaber
+Bankverbindung ||--o{ Kontoinhaber
+Bank ||--o{ Bankverbindung
+Bankverbindung }o--o{ Umsatz
+Kategorie ||--o{ EinnahmeAusgabe
+Umsatz ||--|| EinnahmeAusgabe
 @enduml

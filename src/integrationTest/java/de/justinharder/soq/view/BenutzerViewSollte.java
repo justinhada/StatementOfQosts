@@ -25,7 +25,14 @@ class BenutzerViewSollte extends ViewSollte
 			.get(BENUTZER)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
-			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString("1eaa1624-69f3-4634-a96f-a3a9fd9c7bb4"),
+				containsString("Harder"),
+				containsString("Justin"),
+				containsString("c09e5a5d-96c7-4607-b053-e8091a9481a7"),
+				containsString("Tiemerding"),
+				containsString("Laura"));
 	}
 
 	@Test

@@ -30,7 +30,8 @@ public class Templates
 		GespeicherteBankverbindung bankverbindung);
 
 	public static native TemplateInstance benutzer(
-		NeuerBenutzer neuerBenutzer);
+		NeuerBenutzer neuerBenutzer,
+		List<GespeicherterBenutzer> alleBenutzer);
 
 	public static native TemplateInstance start();
 
