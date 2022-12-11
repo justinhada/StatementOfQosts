@@ -1,7 +1,7 @@
 package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BenutzerService;
-import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
+import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
@@ -11,35 +11,35 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @RequestScoped
-@Path("/benutzer")
-public class BenutzerRessource
+@Path("/privatpersonen")
+public class PrivatpersonenRessource
 {
 	@NonNull
 	private final BenutzerService benutzerService;
 
 	@NonNull
-	private NeuerBenutzer neuerBenutzer;
+	private NeuePrivatperson neuePrivatperson;
 
 	@Inject
-	public BenutzerRessource(@NonNull BenutzerService benutzerService, @NonNull NeuerBenutzer neuerBenutzer)
+	public PrivatpersonenRessource(@NonNull BenutzerService benutzerService, @NonNull NeuePrivatperson neuePrivatperson)
 	{
 		this.benutzerService = benutzerService;
-		this.neuerBenutzer = neuerBenutzer;
+		this.neuePrivatperson = neuePrivatperson;
 	}
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular()
 	{
-		return Templates.benutzer(neuerBenutzer, benutzerService.findeAlle());
+		return Templates.privatpersonen(neuePrivatperson, benutzerService.findeAlle());
 	}
 
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public TemplateInstance erstelle(@BeanParam NeuerBenutzer neuerBenutzer)
+	public TemplateInstance erstelle(@BeanParam NeuePrivatperson neuePrivatperson)
 	{
-		this.neuerBenutzer = benutzerService.erstelle(neuerBenutzer);
+		this.neuePrivatperson = benutzerService.erstelle(neuePrivatperson);
 		return zeigeFormular();
 	}
 }

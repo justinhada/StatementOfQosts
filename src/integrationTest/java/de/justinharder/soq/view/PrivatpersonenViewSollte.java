@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
 @DisplayName("BenutzerView sollte")
-class BenutzerViewSollte extends ViewSollte
+class PrivatpersonenViewSollte extends ViewSollte
 {
 	@Test
 	@DisplayName("Formular aufrufen")
@@ -22,7 +22,7 @@ class BenutzerViewSollte extends ViewSollte
 	{
 		given()
 			.when()
-			.get(BENUTZER)
+			.get(PRIVATPERSONEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -44,7 +44,7 @@ class BenutzerViewSollte extends ViewSollte
 			.formParam(VORNAME, LEER)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(BENUTZER)
+			.post(PRIVATPERSONEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
@@ -63,7 +63,7 @@ class BenutzerViewSollte extends ViewSollte
 			.formParam(VORNAME, vorname)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(BENUTZER)
+			.post(PRIVATPERSONEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)

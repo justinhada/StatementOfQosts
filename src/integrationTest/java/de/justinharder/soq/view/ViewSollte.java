@@ -12,7 +12,7 @@ public class ViewSollte
 	protected static final String BANKEN = "/banken";
 	protected static final String BANKVERBINDUNGEN = "/bankverbindungen";
 	protected static final String KONTOINHABER = "/kontoinhaber";
-	protected static final String BENUTZER = "/benutzer";
+	protected static final String PRIVATPERSONEN = "/privatpersonen";
 	// -- EINGABEDATEN -------------------------------------------------------------------------------------------------
 	protected static final String BEZEICHNUNG = "bezeichnung";
 	protected static final String BANK_ID = "bankId";

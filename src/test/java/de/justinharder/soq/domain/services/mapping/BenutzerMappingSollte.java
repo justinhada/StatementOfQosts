@@ -32,7 +32,7 @@ class BenutzerMappingSollte extends DtoTestdaten
 	void test02()
 	{
 		assertAll(
-			() -> assertThat(sut.mappe(BENUTZER_1)).isEqualTo(GESPEICHERTER_BENUTZER_1),
-			() -> assertThat(sut.mappe(BENUTZER_2)).isEqualTo(GESPEICHERTER_BENUTZER_2));
+			() -> assertThat(sut.mappe(BENUTZER_1)).isEqualTo(GESPEICHERTE_PRIVATPERSON_1),
+			() -> assertThat(sut.mappe(BENUTZER_2)).isEqualTo(GESPEICHERTE_PRIVATPERSON_2));
 	}
 }

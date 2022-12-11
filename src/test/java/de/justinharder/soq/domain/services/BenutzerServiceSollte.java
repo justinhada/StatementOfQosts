@@ -5,7 +5,7 @@ import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BenutzerRepository;
-import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
+import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
 import de.justinharder.soq.domain.services.mapping.BenutzerMapping;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -51,17 +51,17 @@ class BenutzerServiceSollte extends DtoTestdaten
 	void test02()
 	{
 		when(benutzerRepository.findeAlle()).thenReturn(List.of(BENUTZER_1, BENUTZER_2));
-		when(benutzerMapping.mappe(BENUTZER_1)).thenReturn(GESPEICHERTER_BENUTZER_1);
-		when(benutzerMapping.mappe(BENUTZER_2)).thenReturn(GESPEICHERTER_BENUTZER_2);
+		when(benutzerMapping.mappe(BENUTZER_1)).thenReturn(GESPEICHERTE_PRIVATPERSON_1);
+		when(benutzerMapping.mappe(BENUTZER_2)).thenReturn(GESPEICHERTE_PRIVATPERSON_2);
 
-		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTER_BENUTZER_1, GESPEICHERTER_BENUTZER_2);
+		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTE_PRIVATPERSON_1, GESPEICHERTE_PRIVATPERSON_2);
 	}
 
 	@Test
 	@DisplayName("invaliden Benutzer nicht registrieren")
 	void test03()
 	{
-		var neuerBenutzer = new NeuerBenutzer(LEER, LEER);
+		var neuerBenutzer = new NeuePrivatperson(LEER, LEER);
 
 		var ergebnis = sut.erstelle(neuerBenutzer);
 
@@ -75,7 +75,7 @@ class BenutzerServiceSollte extends DtoTestdaten
 	@DisplayName("Benutzer erstellen")
 	void test04()
 	{
-		var neuerBenutzer = new NeuerBenutzer(NACHNAME_1_WERT, VORNAME_1_WERT);
+		var neuerBenutzer = new NeuePrivatperson(NACHNAME_1_WERT, VORNAME_1_WERT);
 
 		var ergebnis = sut.erstelle(neuerBenutzer);
 

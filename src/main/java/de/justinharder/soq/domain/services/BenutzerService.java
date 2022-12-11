@@ -6,8 +6,8 @@ import de.justinharder.soq.domain.model.attribute.Vorname;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.repository.BenutzerRepository;
-import de.justinharder.soq.domain.services.dto.GespeicherterBenutzer;
-import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
+import de.justinharder.soq.domain.services.dto.GespeichertePrivatperson;
+import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
 import de.justinharder.soq.domain.services.mapping.BenutzerMapping;
 import io.vavr.control.Validation;
 import lombok.NonNull;
@@ -34,7 +34,7 @@ public class BenutzerService
 		this.benutzerMapping = benutzerMapping;
 	}
 
-	public List<GespeicherterBenutzer> findeAlle()
+	public List<GespeichertePrivatperson> findeAlle()
 	{
 		return benutzerRepository.findeAlle().stream()
 			.map(benutzerMapping::mappe)
@@ -42,17 +42,17 @@ public class BenutzerService
 	}
 
 	@Transactional
-	public NeuerBenutzer erstelle(@NonNull NeuerBenutzer neuerBenutzer)
+	public NeuePrivatperson erstelle(@NonNull NeuePrivatperson neuePrivatperson)
 	{
 		return Validation.combine(
-				Nachname.aus(neuerBenutzer.getNachname()),
-				Vorname.aus(neuerBenutzer.getVorname()))
+				Nachname.aus(neuePrivatperson.getNachname()),
+				Vorname.aus(neuePrivatperson.getVorname()))
 			.ap(Benutzer::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.fold(neuerBenutzer::fuegeMeldungenHinzu, benutzer -> {
+			.fold(neuePrivatperson::fuegeMeldungenHinzu, benutzer -> {
 				benutzerRepository.speichere(benutzer);
-				return new NeuerBenutzer().fuegeMeldungHinzu(Meldung.BENUTZER_ERSTELLT);
+				return new NeuePrivatperson().fuegeMeldungHinzu(Meldung.BENUTZER_ERSTELLT);
 			});
 	}
 }

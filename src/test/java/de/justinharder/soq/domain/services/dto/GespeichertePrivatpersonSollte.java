@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("GespeicherterBenutzer sollte")
-class GespeicherterBenutzerSollte extends DtoTestdaten
+@DisplayName("GespeichertePrivatperson sollte")
+class GespeichertePrivatpersonSollte extends DtoTestdaten
 {
 	private static final String ID = BENUTZER_1.getId().getWert().toString();
 	private static final String NACHNAME = BENUTZER_1.getNachname().getWert();
@@ -18,7 +18,7 @@ class GespeicherterBenutzerSollte extends DtoTestdaten
 	@DisplayName("RequiredArgsConstructor und Getter besitzen")
 	void test01()
 	{
-		var sut = new GespeicherterBenutzer(ID, NACHNAME, VORNAME);
+		var sut = new GespeichertePrivatperson(ID, NACHNAME, VORNAME);
 
 		assertAll(
 			() -> assertThat(sut.getId()).isEqualTo(ID),

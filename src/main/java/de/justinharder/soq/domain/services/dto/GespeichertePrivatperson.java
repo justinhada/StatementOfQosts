@@ -6,7 +6,7 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherterBenutzer
+public class GespeichertePrivatperson
 {
 	@NonNull
 	private final String id;

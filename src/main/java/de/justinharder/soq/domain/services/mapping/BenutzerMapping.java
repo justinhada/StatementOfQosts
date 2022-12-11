@@ -1,18 +1,18 @@
 package de.justinharder.soq.domain.services.mapping;
 
 import de.justinharder.soq.domain.model.Benutzer;
-import de.justinharder.soq.domain.services.dto.GespeicherterBenutzer;
+import de.justinharder.soq.domain.services.dto.GespeichertePrivatperson;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
 
 @Dependent
-public class BenutzerMapping implements Mapping<Benutzer, GespeicherterBenutzer>
+public class BenutzerMapping implements Mapping<Benutzer, GespeichertePrivatperson>
 {
 	@Override
-	public GespeicherterBenutzer mappe(@NonNull Benutzer benutzer)
+	public GespeichertePrivatperson mappe(@NonNull Benutzer benutzer)
 	{
-		return new GespeicherterBenutzer(
+		return new GespeichertePrivatperson(
 			benutzer.getId().getWert().toString(),
 			benutzer.getNachname().getWert(),
 			benutzer.getVorname().getWert());

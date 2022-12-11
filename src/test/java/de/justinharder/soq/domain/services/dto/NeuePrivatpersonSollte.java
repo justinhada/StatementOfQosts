@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("NeuerBenutzer sollte")
-class NeuerBenutzerSollte extends DtoSollte<NeuerBenutzer>
+@DisplayName("NeuePrivatperson sollte")
+class NeuePrivatpersonSollte extends DtoSollte<NeuePrivatperson>
 {
 	@BeforeEach
 	void setup()
 	{
 		super.setup(
-			new NeuerBenutzer(NACHNAME_1_WERT, VORNAME_1_WERT),
+			new NeuePrivatperson(NACHNAME_1_WERT, VORNAME_1_WERT),
 			Meldung.BENUTZER_ERSTELLT,
 			Meldung.NACHNAME,
 			Meldung.VORNAME);
@@ -25,7 +25,7 @@ class NeuerBenutzerSollte extends DtoSollte<NeuerBenutzer>
 	@DisplayName("NoArgsConstructor, Getter und Setter besitzen")
 	void test01()
 	{
-		var sut = new NeuerBenutzer();
+		var sut = new NeuePrivatperson();
 		sut.setNachname(NACHNAME_1_WERT);
 		sut.setVorname(VORNAME_1_WERT);
 

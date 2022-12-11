@@ -19,19 +19,19 @@ public class Templates
 	public static native TemplateInstance bankverbindungen(
 		NeueBankverbindung neueBankverbindung,
 		List<GespeicherteBankverbindung> bankverbindungen,
-		List<GespeicherterBenutzer> alleBenutzer,
+		List<GespeichertePrivatperson> alleBenutzer,
 		List<GespeicherteBank> banken);
 
 	public static native TemplateInstance imports();
 
 	public static native TemplateInstance kontoinhaberWeiterleitung(
 		NeuerKontoinhaber neuerKontoinhaber,
-		List<GespeicherterBenutzer> alleBenutzer,
+		List<GespeichertePrivatperson> alleBenutzer,
 		GespeicherteBankverbindung bankverbindung);
 
-	public static native TemplateInstance benutzer(
-		NeuerBenutzer neuerBenutzer,
-		List<GespeicherterBenutzer> alleBenutzer);
+	public static native TemplateInstance privatpersonen(
+		NeuePrivatperson neuePrivatperson,
+		List<GespeichertePrivatperson> privatpersonen);
 
 	public static native TemplateInstance start();
 
