@@ -65,6 +65,8 @@ public class Testdaten
 	protected static final Bank BANK_2 = Bank.aus(BEZEICHNUNG_1, BIC_1).get();
 	protected static final Benutzer BENUTZER_1 = Benutzer.aus(NACHNAME_1, VORNAME_1).get();
 	protected static final Benutzer BENUTZER_2 = Benutzer.aus(NACHNAME_2, VORNAME_2).get();
+	protected static final Benutzer BENUTZER_3 = Benutzer.aus(FIRMA_1).get();
+	protected static final Benutzer BENUTZER_4 = Benutzer.aus(FIRMA_2).get();
 	protected static final Bankverbindung BANKVERBINDUNG_1 = Bankverbindung.aus(IBAN_1, BANK_1).get();
 	protected static final Bankverbindung BANKVERBINDUNG_2 = Bankverbindung.aus(IBAN_2, BANK_2).get();
 	protected static final Kategorie KATEGORIE_1 = Kategorie.aus(BEZEICHNUNG_3).get();

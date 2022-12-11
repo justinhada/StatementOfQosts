@@ -26,6 +26,11 @@ class BenutzerSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME, Meldung.VORNAME));
+
+		validierung = Benutzer.aus(null);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
 	}
 
 	@Test
@@ -37,21 +42,42 @@ class BenutzerSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getNachname()).isEqualTo(NACHNAME_1),
-			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_1));
+			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_1),
+			() -> assertThat(sut.getFirma()).isNull());
 
 		validierung = Benutzer.aus(NACHNAME_2, VORNAME_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getNachname()).isEqualTo(NACHNAME_2),
-			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_2));
+			() -> assertThat(sut.getVorname()).isEqualTo(VORNAME_2),
+			() -> assertThat(sut.getFirma()).isNull());
+
+		validierung = Benutzer.aus(FIRMA_1);
+		sut = validierung.get();
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::getError),
+			() -> assertThat(sut.getNachname()).isNull(),
+			() -> assertThat(sut.getVorname()).isNull(),
+			() -> assertThat(sut.getFirma()).isEqualTo(FIRMA_1));
+
+		validierung = Benutzer.aus(FIRMA_2);
+		sut = validierung.get();
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::getError),
+			() -> assertThat(sut.getNachname()).isNull(),
+			() -> assertThat(sut.getVorname()).isNull(),
+			() -> assertThat(sut.getFirma()).isEqualTo(FIRMA_2));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(BENUTZER_1).hasToString(
-			"Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}");
+		assertAll(
+			() -> assertThat(BENUTZER_1).hasToString(
+				"Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}"),
+			() -> assertThat(BENUTZER_3).hasToString(
+				"Benutzer{ID=" + BENUTZER_3.getId() + ", Firma=Rewe-Markt GmbH, Art=Unternehmen}"));
 	}
 }
