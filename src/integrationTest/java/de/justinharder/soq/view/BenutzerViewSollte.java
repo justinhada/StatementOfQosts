@@ -13,8 +13,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
-@DisplayName("RegistrierungView sollte")
-class RegistrierungViewSollte extends ViewSollte
+@DisplayName("BenutzerView sollte")
+class BenutzerViewSollte extends ViewSollte
 {
 	@Test
 	@DisplayName("Formular aufrufen")
@@ -22,7 +22,7 @@ class RegistrierungViewSollte extends ViewSollte
 	{
 		given()
 			.when()
-			.get(REGISTRIERUNG)
+			.get(BENUTZER)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
@@ -33,44 +33,30 @@ class RegistrierungViewSollte extends ViewSollte
 	void test02()
 	{
 		given()
-			.formParam(E_MAIL_ADRESSE, LEER)
-			.formParam(BENUTZERNAME, LEER)
 			.formParam(NACHNAME, LEER)
 			.formParam(VORNAME, LEER)
-			.formParam(PASSWORT, LEER)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(REGISTRIERUNG)
+			.post(BENUTZER)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
-			.body(
-				containsString(Meldung.E_MAIL_ADRESSE_LEER.text()),
-				containsString(Meldung.BENUTZERNAME_LEER.text()),
-				containsString(Meldung.NACHNAME.text()),
-				containsString(Meldung.VORNAME.text()),
-				containsString(Meldung.PASSWORT_LEER.text()));
+			.body(containsString(Meldung.NACHNAME.text()), containsString(Meldung.VORNAME.text()));
 	}
 
 	@Test
-	@DisplayName("Meldung anzeigen, wenn Benutzer und Login erstellt wurden")
+	@DisplayName("Meldung anzeigen, wenn Benutzer erstellt wurde")
 	void test04()
 	{
-		var eMailAdresse = "justinharder@gmail.com";
-		var benutzername = "justinharder";
 		var nachname = "Harder";
 		var vorname = "Justin";
-		var passwort = "Justinharder#1234";
 
 		given()
-			.formParam(E_MAIL_ADRESSE, eMailAdresse)
-			.formParam(BENUTZERNAME, benutzername)
 			.formParam(NACHNAME, nachname)
 			.formParam(VORNAME, vorname)
-			.formParam(PASSWORT, passwort)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(REGISTRIERUNG)
+			.post(BENUTZER)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)

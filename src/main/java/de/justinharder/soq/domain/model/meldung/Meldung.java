@@ -57,21 +57,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Es muss mindestens ein Benutzer ausgewählt werden!");
 
-	public static final Meldung BENUTZERNAME_EXISTIERT_NICHT = new Meldung(
-		Schluessel.BENUTZERNAME,
-		Ebene.FEHLER,
-		"Der Benutzername existiert nicht!");
-
-	public static final Meldung BENUTZERNAME_LEER = new Meldung(
-		Schluessel.BENUTZERNAME,
-		Ebene.FEHLER,
-		"Der Benutzername darf nicht leer sein!");
-
-	public static final Meldung BENUTZERNAME_EXISTIERT_BEREITS = new Meldung(
-		Schluessel.BENUTZERNAME,
-		Ebene.FEHLER,
-		"Der Benutzername existiert bereits!");
-
 	public static final Meldung BETRAG = new Meldung(
 		Schluessel.BETRAG,
 		Ebene.FEHLER,
@@ -106,16 +91,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.DATUM,
 		Ebene.FEHLER,
 		"Das Datum darf nicht leer sein!");
-
-	public static final Meldung E_MAIL_ADRESSE_LEER = new Meldung(
-		Schluessel.E_MAIL_ADRESSE,
-		Ebene.FEHLER,
-		"Die E-Mail-Adresse darf nicht leer sein!");
-
-	public static final Meldung E_MAIL_ADRESSE_UNGUELTIG = new Meldung(
-		Schluessel.E_MAIL_ADRESSE,
-		Ebene.FEHLER,
-		"Die E-Mail-Adresse ist ungültig!");
 
 	public static final Meldung FIRMA = new Meldung(
 		Schluessel.FIRMA,
@@ -157,40 +132,10 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Der Kontoinhaber wurde erfolgreich erstellt!");
 
-	public static final Meldung LOGIN_ERFOLGREICH = new Meldung(
-		Schluessel.ALLGEMEIN,
-		Ebene.ERFOLG,
-		"Der Login war erfolgreich!");
-
 	public static final Meldung NACHNAME = new Meldung(
 		Schluessel.NACHNAME,
 		Ebene.FEHLER,
 		"Der Nachname darf nicht leer sein!");
-
-	public static final Meldung PASSWORT_FALSCH = new Meldung(
-		Schluessel.PASSWORT,
-		Ebene.FEHLER,
-		"Der Benutzername oder das Passwort ist falsch!");
-
-	public static final Meldung PASSWORT_HASH = new Meldung(
-		Schluessel.PASSWORT,
-		Ebene.FEHLER,
-		"Das Passwort konnte nicht gehasht werden!");
-
-	public static final Meldung PASSWORT_LEER = new Meldung(
-		Schluessel.PASSWORT,
-		Ebene.FEHLER,
-		"Das Passwort darf nicht leer sein!");
-
-	public static final Meldung PASSWORT_UNGUELTIG = new Meldung(
-		Schluessel.PASSWORT,
-		Ebene.FEHLER,
-		"Das Passwort ist ungültig!");
-
-	public static final Meldung SALT = new Meldung(
-		Schluessel.SALT,
-		Ebene.FEHLER,
-		"Der Salt darf nicht leer sein!");
 
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,

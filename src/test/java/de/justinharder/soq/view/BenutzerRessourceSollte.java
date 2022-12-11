@@ -1,6 +1,6 @@
 package de.justinharder.soq.view;
 
-import de.justinharder.soq.domain.services.RegistrierungService;
+import de.justinharder.soq.domain.services.BenutzerService;
 import de.justinharder.soq.domain.services.dto.NeuerBenutzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,16 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-@DisplayName("RegistrierungRessource sollte")
-class RegistrierungRessourceSollte
+@DisplayName("BenutzerRessource sollte")
+class BenutzerRessourceSollte
 {
-	private RegistrierungService registrierungService;
+	private BenutzerService benutzerService;
 	private NeuerBenutzer neuerBenutzer;
 
 	@BeforeEach
 	void setup()
 	{
-		registrierungService = mock(RegistrierungService.class);
+		benutzerService = mock(BenutzerService.class);
 		neuerBenutzer = mock(NeuerBenutzer.class);
 	}
 
@@ -28,9 +28,7 @@ class RegistrierungRessourceSollte
 	void test01()
 	{
 		assertAll(
-			() -> assertThrows(NullPointerException.class,
-				() -> new RegistrierungRessource(null, neuerBenutzer)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new RegistrierungRessource(registrierungService, null)));
+			() -> assertThrows(NullPointerException.class, () -> new BenutzerRessource(null, neuerBenutzer)),
+			() -> assertThrows(NullPointerException.class, () -> new BenutzerRessource(benutzerService, null)));
 	}
 }

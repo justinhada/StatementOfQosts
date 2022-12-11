@@ -24,15 +24,12 @@ public class Templates
 
 	public static native TemplateInstance imports();
 
-	public static native TemplateInstance login(
-		AngemeldeterBenutzer angemeldeterBenutzer);
-
 	public static native TemplateInstance kontoinhaberWeiterleitung(
 		NeuerKontoinhaber neuerKontoinhaber,
 		List<GespeicherterBenutzer> alleBenutzer,
 		GespeicherteBankverbindung bankverbindung);
 
-	public static native TemplateInstance registrierung(
+	public static native TemplateInstance benutzer(
 		NeuerBenutzer neuerBenutzer);
 
 	public static native TemplateInstance start();

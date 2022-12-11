@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Benutzer - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+        {#include header /}
+
+        <section>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Benutzer erstellen</h1>
+
+                <form method="post"
+                      action="/benutzer">
+                    {#if neuerBenutzer.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neuerBenutzer.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neuerBenutzer.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="nachname"
+                                   class="form-label mt-2 fw-bold">
+                                Nachname
+                            </label>
+
+                            <input id="nachname"
+                                   name="nachname"
+                                   type="text"
+                                   class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:NACHNAME)}is-invalid{/if}"
+                                   placeholder="Mustermann"
+                                   aria-label="nachname"
+                                   value="{neuerBenutzer.nachname}" />
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuerBenutzer.getMeldungen(Schluessel:NACHNAME)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+
+                        <div class="col">
+                            <label for="vorname"
+                                   class="form-label mt-2 fw-bold">
+                                Vorname
+                            </label>
+
+                            <input id="vorname"
+                                   name="vorname"
+                                   type="text"
+                                   class="form-control {#if neuerBenutzer.hatMeldungen(Schluessel:VORNAME)}is-invalid{/if}"
+                                   placeholder="Max"
+                                   aria-label="vorname"
+                                   value="{neuerBenutzer.vorname}">
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuerBenutzer.getMeldungen(Schluessel:VORNAME)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Benutzer erstellen
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        {#include footer /}
+    </body>
+</html>

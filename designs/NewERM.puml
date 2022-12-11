@@ -8,16 +8,6 @@ entity Benutzer
     * Art
 }
 
-entity Login
-{
-    * **ID <<PK>>**
-    * E-Mail-Adresse
-    * Benutzername
-    * Salt
-    * Passwort
-    * **BenutzerID <<FK>>**
-}
-
 entity Bank
 {
     * **ID <<PK>>**
@@ -63,7 +53,6 @@ entity Kategorie
     * Bezeichnung
 }
 
-Benutzer ||--|| Login
 Benutzer ||--o{ Kontoinhaber
 Bankverbindung ||--o{ Kontoinhaber
 Bank ||--o{ Bankverbindung

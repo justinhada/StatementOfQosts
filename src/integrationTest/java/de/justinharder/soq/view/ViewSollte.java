@@ -12,18 +12,14 @@ public class ViewSollte
 	protected static final String BANKEN = "/banken";
 	protected static final String BANKVERBINDUNGEN = "/bankverbindungen";
 	protected static final String KONTOINHABER = "/kontoinhaber";
-	protected static final String LOGIN = "/login";
-	protected static final String REGISTRIERUNG = "/registrierung";
+	protected static final String BENUTZER = "/benutzer";
 	// -- EINGABEDATEN -------------------------------------------------------------------------------------------------
 	protected static final String BEZEICHNUNG = "bezeichnung";
 	protected static final String BANK_ID = "bankId";
-	protected static final String BENUTZERNAME = "benutzername";
 	protected static final String BENUTZER_ID = "benutzerId";
 	protected static final String BIC = "bic";
-	protected static final String E_MAIL_ADRESSE = "emailadresse";
 	protected static final String IBAN = "iban";
 	protected static final String NACHNAME = "nachname";
-	protected static final String PASSWORT = "passwort";
 	protected static final String VORNAME = "vorname";
 
 	@BeforeAll
