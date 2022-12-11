@@ -1,6 +1,7 @@
 package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.domain.model.Benutzer;
+import de.justinharder.soq.domain.model.attribute.Firma;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.attribute.Nachname;
 import de.justinharder.soq.domain.model.attribute.Vorname;
@@ -29,9 +30,15 @@ class BenutzerJpaRepositorySollte
 	void test01()
 	{
 		assertAll(
-			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde((ID) null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.speichere(null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null, Vorname.aus("Justin").get())),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(Nachname.aus("Harder").get(), null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde((Firma) null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(null, Vorname.aus("Justin").get())),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(Nachname.aus("Harder").get(), null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(null)));
 	}
 
 	@Test

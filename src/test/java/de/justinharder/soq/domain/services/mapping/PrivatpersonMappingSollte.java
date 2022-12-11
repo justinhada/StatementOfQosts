@@ -9,15 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("BenutzerMapping sollte")
-class BenutzerMappingSollte extends DtoTestdaten
+@DisplayName("PrivatpersonMapping sollte")
+class PrivatpersonMappingSollte extends DtoTestdaten
 {
-	private BenutzerMapping sut;
+	private PrivatpersonMapping sut;
 
 	@BeforeEach
 	void setup()
 	{
-		sut = new BenutzerMapping();
+		sut = new PrivatpersonMapping();
 	}
 
 	@Test

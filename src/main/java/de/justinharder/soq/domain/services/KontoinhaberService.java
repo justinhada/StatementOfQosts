@@ -62,7 +62,7 @@ public class KontoinhaberService
 
 		if(neuerKontoinhaber.getBenutzerIds().isEmpty())
 		{
-			return neuerKontoinhaber.fuegeMeldungHinzu(Meldung.BENUTZER_MINDESTENSAUSWAHL);
+			return neuerKontoinhaber.fuegeMeldungHinzu(Meldung.BENUTZER_MINDESTAUSWAHL);
 		}
 
 		return neuerKontoinhaber.getBenutzerIds().stream()

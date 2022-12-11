@@ -16,9 +16,9 @@ class NeuePrivatpersonSollte extends DtoSollte<NeuePrivatperson>
 	{
 		super.setup(
 			new NeuePrivatperson(NACHNAME_1_WERT, VORNAME_1_WERT),
-			Meldung.BENUTZER_ERSTELLT,
-			Meldung.NACHNAME,
-			Meldung.VORNAME);
+			Meldung.PRIVATPERSON_ERSTELLT,
+			Meldung.NACHNAME_LEER,
+			Meldung.VORNAME_LEER);
 	}
 
 	@Test

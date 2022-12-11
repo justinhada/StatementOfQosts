@@ -1,9 +1,6 @@
 package de.justinharder;
 
-import de.justinharder.soq.domain.services.dto.GespeicherteBank;
-import de.justinharder.soq.domain.services.dto.GespeicherteBankverbindung;
-import de.justinharder.soq.domain.services.dto.GespeichertePrivatperson;
-import de.justinharder.soq.domain.services.dto.GespeicherterKontoinhaber;
+import de.justinharder.soq.domain.services.dto.*;
 
 public class DtoTestdaten extends Testdaten
 {
@@ -23,6 +20,12 @@ public class DtoTestdaten extends Testdaten
 		BENUTZER_2.getId().getWert().toString(),
 		BENUTZER_2.getNachname().getWert(),
 		BENUTZER_2.getVorname().getWert());
+	protected static final GespeichertesUnternehmen GESPEICHERTES_UNTERNEHMEN_1 = new GespeichertesUnternehmen(
+		BENUTZER_3.getId().getWert().toString(),
+		BENUTZER_3.getFirma().getWert());
+	protected static final GespeichertesUnternehmen GESPEICHERTES_UNTERNEHMEN_2 = new GespeichertesUnternehmen(
+		BENUTZER_4.getId().getWert().toString(),
+		BENUTZER_4.getFirma().getWert());
 	protected static final GespeicherteBankverbindung GESPEICHERTE_BANKVERBINDUNG_1 = new GespeicherteBankverbindung(
 		BANKVERBINDUNG_1.getId().getWert().toString(),
 		BANKVERBINDUNG_1.getIban().getWert(),

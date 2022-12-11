@@ -23,7 +23,7 @@ public class Firma extends WertObjekt<String>
 
 	public static Validation<Meldungen, Firma> aus(String wert)
 	{
-		return validiereString(wert, Meldung.FIRMA)
+		return validiereString(wert, Meldung.FIRMA_LEER)
 			.map(Firma::new);
 	}
 }

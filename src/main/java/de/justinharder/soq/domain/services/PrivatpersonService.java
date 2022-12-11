@@ -8,7 +8,7 @@ import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.repository.BenutzerRepository;
 import de.justinharder.soq.domain.services.dto.GespeichertePrivatperson;
 import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
-import de.justinharder.soq.domain.services.mapping.BenutzerMapping;
+import de.justinharder.soq.domain.services.mapping.PrivatpersonMapping;
 import io.vavr.control.Validation;
 import lombok.NonNull;
 
@@ -18,26 +18,31 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Function;
 
+import static java.util.function.Predicate.not;
+
 @Dependent
-public class BenutzerService
+public class PrivatpersonService
 {
 	@NonNull
 	private final BenutzerRepository benutzerRepository;
 
 	@NonNull
-	private final BenutzerMapping benutzerMapping;
+	private final PrivatpersonMapping privatpersonMapping;
 
 	@Inject
-	public BenutzerService(@NonNull BenutzerRepository benutzerRepository, @NonNull BenutzerMapping benutzerMapping)
+	public PrivatpersonService(
+		@NonNull BenutzerRepository benutzerRepository,
+		@NonNull PrivatpersonMapping privatpersonMapping)
 	{
 		this.benutzerRepository = benutzerRepository;
-		this.benutzerMapping = benutzerMapping;
+		this.privatpersonMapping = privatpersonMapping;
 	}
 
 	public List<GespeichertePrivatperson> findeAlle()
 	{
 		return benutzerRepository.findeAlle().stream()
-			.map(benutzerMapping::mappe)
+			.filter(Benutzer::istPrivatperson)
+			.map(privatpersonMapping::mappe)
 			.toList();
 	}
 
@@ -50,9 +55,12 @@ public class BenutzerService
 			.ap(Benutzer::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.fold(neuePrivatperson::fuegeMeldungenHinzu, benutzer -> {
-				benutzerRepository.speichere(benutzer);
-				return new NeuePrivatperson().fuegeMeldungHinzu(Meldung.BENUTZER_ERSTELLT);
+			.filter(not(benutzer -> benutzerRepository.istVorhanden(benutzer.getNachname(), benutzer.getVorname())))
+			.getOrElse(Validation.invalid(
+				Meldungen.aus(Meldung.NACHNAME_EXISTIERT_BEREITS, Meldung.VORNAME_EXISTIERT_BEREITS)))
+			.fold(neuePrivatperson::fuegeMeldungenHinzu, privatperson -> {
+				benutzerRepository.speichere(privatperson);
+				return new NeuePrivatperson().fuegeMeldungHinzu(Meldung.PRIVATPERSON_ERSTELLT);
 			});
 	}
 }

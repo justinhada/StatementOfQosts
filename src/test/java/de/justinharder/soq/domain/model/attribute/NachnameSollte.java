@@ -25,22 +25,22 @@ class NachnameSollte extends Testdaten
 		validierung = Nachname.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME_LEER));
 
 		validierung = Nachname.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME_LEER));
 
 		validierung = Nachname.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME_LEER));
 
 		validierung = Nachname.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME_LEER));
 	}
 
 	@Test

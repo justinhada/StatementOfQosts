@@ -1,7 +1,7 @@
 package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankverbindungService;
-import de.justinharder.soq.domain.services.BenutzerService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.KontoinhaberService;
 import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
 import io.quarkus.qute.TemplateInstance;
@@ -20,7 +20,7 @@ public class KontoinhaberRessource
 	private final KontoinhaberService kontoinhaberService;
 
 	@NonNull
-	private final BenutzerService benutzerService;
+	private final PrivatpersonService privatpersonService;
 
 	@NonNull
 	private final BankverbindungService bankverbindungService;
@@ -31,12 +31,12 @@ public class KontoinhaberRessource
 	@Inject
 	public KontoinhaberRessource(
 		@NonNull KontoinhaberService kontoinhaberService,
-		@NonNull BenutzerService benutzerService,
+		@NonNull PrivatpersonService privatpersonService,
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
 		this.kontoinhaberService = kontoinhaberService;
-		this.benutzerService = benutzerService;
+		this.privatpersonService = privatpersonService;
 		this.bankverbindungService = bankverbindungService;
 		this.neuerKontoinhaber = neuerKontoinhaber;
 	}
@@ -57,7 +57,7 @@ public class KontoinhaberRessource
 	{
 		return Templates.kontoinhaberWeiterleitung(
 			neuerKontoinhaber,
-			benutzerService.findeAlle(),
+			privatpersonService.findeAlle(),
 			bankverbindungService.finde(bankverbindungId));
 	}
 
@@ -73,7 +73,7 @@ public class KontoinhaberRessource
 		}
 		return Templates.kontoinhaberWeiterleitung(
 			neuerKontoinhaber,
-			benutzerService.findeAlle(),
+			privatpersonService.findeAlle(),
 			bankverbindungService.finde(neuerKontoinhaber.getBankverbindungId()));
 	}
 }

@@ -55,16 +55,26 @@ public class Benutzer extends Entitaet
 	public static Validation<Meldungen, Benutzer> aus(Nachname nachname, Vorname vorname)
 	{
 		return Validation.combine(
-				validiere(nachname, Meldung.NACHNAME),
-				validiere(vorname, Meldung.VORNAME))
+				validiere(nachname, Meldung.NACHNAME_LEER),
+				validiere(vorname, Meldung.VORNAME_LEER))
 			.ap(Benutzer::new)
 			.mapError(Meldungen::aus);
 	}
 
 	public static Validation<Meldungen, Benutzer> aus(Firma firma)
 	{
-		return validiere(firma, Meldung.FIRMA)
+		return validiere(firma, Meldung.FIRMA_LEER)
 			.map(Benutzer::new);
+	}
+
+	public boolean istPrivatperson()
+	{
+		return art.equals(Art.PRIVATPERSON);
+	}
+
+	public boolean istUnternehmen()
+	{
+		return !istPrivatperson();
 	}
 
 	@Override

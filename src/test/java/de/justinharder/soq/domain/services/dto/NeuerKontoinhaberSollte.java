@@ -23,7 +23,7 @@ class NeuerKontoinhaberSollte extends DtoSollte<NeuerKontoinhaber>
 			new NeuerKontoinhaber(BENUTZER_IDS, BANKVERBINDUNG_ID),
 			Meldung.KONTOINHABER_ERSTELLT,
 			Meldung.BANKVERBINDUNG_EXISTIERT_NICHT,
-			Meldung.BENUTZER_MINDESTENSAUSWAHL);
+			Meldung.BENUTZER_MINDESTAUSWAHL);
 	}
 
 	@Test

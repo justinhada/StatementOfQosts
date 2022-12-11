@@ -1,6 +1,6 @@
 package de.justinharder.soq.view;
 
-import de.justinharder.soq.domain.services.BenutzerService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
@@ -15,15 +15,15 @@ import javax.ws.rs.core.MediaType;
 public class PrivatpersonenRessource
 {
 	@NonNull
-	private final BenutzerService benutzerService;
+	private final PrivatpersonService privatpersonService;
 
 	@NonNull
 	private NeuePrivatperson neuePrivatperson;
 
 	@Inject
-	public PrivatpersonenRessource(@NonNull BenutzerService benutzerService, @NonNull NeuePrivatperson neuePrivatperson)
+	public PrivatpersonenRessource(@NonNull PrivatpersonService privatpersonService, @NonNull NeuePrivatperson neuePrivatperson)
 	{
-		this.benutzerService = benutzerService;
+		this.privatpersonService = privatpersonService;
 		this.neuePrivatperson = neuePrivatperson;
 	}
 
@@ -31,7 +31,7 @@ public class PrivatpersonenRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeFormular()
 	{
-		return Templates.privatpersonen(neuePrivatperson, benutzerService.findeAlle());
+		return Templates.privatpersonen(neuePrivatperson, privatpersonService.findeAlle());
 	}
 
 	@POST
@@ -39,7 +39,7 @@ public class PrivatpersonenRessource
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public TemplateInstance erstelle(@BeanParam NeuePrivatperson neuePrivatperson)
 	{
-		this.neuePrivatperson = benutzerService.erstelle(neuePrivatperson);
+		this.neuePrivatperson = privatpersonService.erstelle(neuePrivatperson);
 		return zeigeFormular();
 	}
 }

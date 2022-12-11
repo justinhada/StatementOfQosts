@@ -1,7 +1,7 @@
 package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankverbindungService;
-import de.justinharder.soq.domain.services.BenutzerService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.KontoinhaberService;
 import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 class KontoinhaberRessourceSollte
 {
 	private KontoinhaberService kontoinhaberService;
-	private BenutzerService benutzerService;
+	private PrivatpersonService privatpersonService;
 	private BankverbindungService bankverbindungService;
 	private NeuerKontoinhaber neuerKontoinhaber;
 
@@ -24,7 +24,7 @@ class KontoinhaberRessourceSollte
 	void setup()
 	{
 		kontoinhaberService = mock(KontoinhaberService.class);
-		benutzerService = mock(BenutzerService.class);
+		privatpersonService = mock(PrivatpersonService.class);
 		bankverbindungService = mock(BankverbindungService.class);
 		neuerKontoinhaber = mock(NeuerKontoinhaber.class);
 	}
@@ -35,12 +35,12 @@ class KontoinhaberRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(null, benutzerService, bankverbindungService, neuerKontoinhaber)),
+				() -> new KontoinhaberRessource(null, privatpersonService, bankverbindungService, neuerKontoinhaber)),
 			() -> assertThrows(NullPointerException.class,
 				() -> new KontoinhaberRessource(kontoinhaberService, null, bankverbindungService, neuerKontoinhaber)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(kontoinhaberService, benutzerService, null, neuerKontoinhaber)),
+				() -> new KontoinhaberRessource(kontoinhaberService, privatpersonService, null, neuerKontoinhaber)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(kontoinhaberService, benutzerService, bankverbindungService, null)));
+				() -> new KontoinhaberRessource(kontoinhaberService, privatpersonService, bankverbindungService, null)));
 	}
 }

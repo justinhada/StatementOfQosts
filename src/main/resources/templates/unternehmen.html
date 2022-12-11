@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Unternehmen - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+        {#include header /}
+
+        <section>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Unternehmen erstellen</h1>
+
+                <form method="post"
+                      action="/unternehmen">
+                    {#if neuesUnternehmen.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neuesUnternehmen.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neuesUnternehmen.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="firma"
+                                   class="form-label mt-2 fw-bold">
+                                Firma
+                            </label>
+
+                            <input id="firma"
+                                   name="firma"
+                                   type="text"
+                                   class="form-control {#if neuesUnternehmen.hatMeldungen(Schluessel:FIRMA)}is-invalid{/if}"
+                                   placeholder="Muster GmbH"
+                                   aria-label="firma"
+                                   value="{neuesUnternehmen.firma}" />
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuesUnternehmen.getMeldungen(Schluessel:FIRMA)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Unternehmen erstellen
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped table-hover mt-5">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Firma</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#for unternehmen in alleUnternehmen}
+                            <tr>
+                            <td>{unternehmen.id}</td>
+                            <td>{unternehmen.firma}</td>
+                            </tr>
+                        {/for}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        {#include footer /}
+    </body>
+</html>

@@ -7,7 +7,7 @@ import lombok.NonNull;
 import javax.enterprise.context.Dependent;
 
 @Dependent
-public class BenutzerMapping implements Mapping<Benutzer, GespeichertePrivatperson>
+public class PrivatpersonMapping implements Mapping<Benutzer, GespeichertePrivatperson>
 {
 	@Override
 	public GespeichertePrivatperson mappe(@NonNull Benutzer benutzer)

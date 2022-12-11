@@ -2,7 +2,7 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.BankverbindungService;
-import de.justinharder.soq.domain.services.BenutzerService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
 import io.quarkus.qute.TemplateInstance;
@@ -21,7 +21,7 @@ public class BankverbindungenRessource
 	private final BankverbindungService bankverbindungService;
 
 	@NonNull
-	private final BenutzerService benutzerService;
+	private final PrivatpersonService privatpersonService;
 
 	@NonNull
 	private final BankService bankService;
@@ -32,12 +32,12 @@ public class BankverbindungenRessource
 	@Inject
 	public BankverbindungenRessource(
 		@NonNull BankverbindungService bankverbindungService,
-		@NonNull BenutzerService benutzerService,
+		@NonNull PrivatpersonService privatpersonService,
 		@NonNull BankService bankService,
 		@NonNull NeueBankverbindung neueBankverbindung)
 	{
 		this.bankverbindungService = bankverbindungService;
-		this.benutzerService = benutzerService;
+		this.privatpersonService = privatpersonService;
 		this.bankService = bankService;
 		this.neueBankverbindung = neueBankverbindung;
 	}
@@ -49,7 +49,7 @@ public class BankverbindungenRessource
 		return Templates.bankverbindungen(
 			neueBankverbindung,
 			bankverbindungService.findeAlle(),
-			benutzerService.findeAlle(),
+			privatpersonService.findeAlle(),
 			bankService.findeAlle());
 	}
 
@@ -63,7 +63,7 @@ public class BankverbindungenRessource
 		{
 			return Templates.kontoinhaberWeiterleitung(
 				new NeuerKontoinhaber(),
-				benutzerService.findeAlle(),
+				privatpersonService.findeAlle(),
 				bankverbindungService.finde(this.neueBankverbindung.getId()));
 		}
 		return zeigeFormular();

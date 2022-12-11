@@ -2,7 +2,7 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.BankverbindungService;
-import de.justinharder.soq.domain.services.BenutzerService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 class BankverbindungenRessourceSollte
 {
 	private BankverbindungService bankverbindungService;
-	private BenutzerService benutzerService;
+	private PrivatpersonService privatpersonService;
 	private BankService bankService;
 	private NeueBankverbindung neueBankverbindung;
 
@@ -24,7 +24,7 @@ class BankverbindungenRessourceSollte
 	void setup()
 	{
 		bankverbindungService = mock(BankverbindungService.class);
-		benutzerService = mock(BenutzerService.class);
+		privatpersonService = mock(PrivatpersonService.class);
 		bankService = mock(BankService.class);
 		neueBankverbindung = mock(NeueBankverbindung.class);
 	}
@@ -35,12 +35,12 @@ class BankverbindungenRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(null, benutzerService, bankService, neueBankverbindung)),
+				() -> new BankverbindungenRessource(null, privatpersonService, bankService, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
 				() -> new BankverbindungenRessource(bankverbindungService, null, bankService, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, null, neueBankverbindung)),
+				() -> new BankverbindungenRessource(bankverbindungService, privatpersonService, null, neueBankverbindung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungenRessource(bankverbindungService, benutzerService, bankService, null)));
+				() -> new BankverbindungenRessource(bankverbindungService, privatpersonService, bankService, null)));
 	}
 }

@@ -37,11 +37,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Bankverbindung darf nicht leer sein!");
 
-	public static final Meldung BENUTZER_ERSTELLT = new Meldung(
-		Schluessel.ALLGEMEIN,
-		Ebene.ERFOLG,
-		"Der Benutzer wurde erfolgreich erstellt!");
-
 	public static final Meldung BENUTZER_EXISTIERT_NICHT = new Meldung(
 		Schluessel.BENUTZER,
 		Ebene.FEHLER,
@@ -52,7 +47,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Benutzer darf nicht leer sein!");
 
-	public static final Meldung BENUTZER_MINDESTENSAUSWAHL = new Meldung(
+	public static final Meldung BENUTZER_MINDESTAUSWAHL = new Meldung(
 		Schluessel.BENUTZER,
 		Ebene.FEHLER,
 		"Es muss mindestens ein Benutzer ausgewählt werden!");
@@ -92,7 +87,12 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Das Datum darf nicht leer sein!");
 
-	public static final Meldung FIRMA = new Meldung(
+	public static final Meldung FIRMA_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.FIRMA,
+		Ebene.FEHLER,
+		"Die Firma existiert bereits!");
+
+	public static final Meldung FIRMA_LEER = new Meldung(
 		Schluessel.FIRMA,
 		Ebene.FEHLER,
 		"Die Firma darf nicht leer sein!");
@@ -132,22 +132,42 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Der Kontoinhaber wurde erfolgreich erstellt!");
 
-	public static final Meldung NACHNAME = new Meldung(
+	public static final Meldung NACHNAME_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.NACHNAME,
+		Ebene.FEHLER,
+		"Der Nachname in Kombination mit dem Vornamen existiert bereits!");
+
+	public static final Meldung NACHNAME_LEER = new Meldung(
 		Schluessel.NACHNAME,
 		Ebene.FEHLER,
 		"Der Nachname darf nicht leer sein!");
+
+	public static final Meldung PRIVATPERSON_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Privatperson wurde erfolgreich erstellt!");
 
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,
 		Ebene.FEHLER,
 		"Der Umsatz darf nicht leer sein!");
 
+	public static final Meldung UNTERNEHMEN_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Das Unternehmen wurde erfolgreich erstellt!");
+
 	public static final Meldung VERWENDUNGSZWECK = new Meldung(
 		Schluessel.VERWENDUNGSZWECK,
 		Ebene.FEHLER,
 		"Der Verwendungszweck darf nicht leer sein!");
 
-	public static final Meldung VORNAME = new Meldung(
+	public static final Meldung VORNAME_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.VORNAME,
+		Ebene.FEHLER,
+		"Der Vorname in Kombination mit dem Nachnamen existiert bereits!");
+
+	public static final Meldung VORNAME_LEER = new Meldung(
 		Schluessel.VORNAME,
 		Ebene.FEHLER,
 		"Der Vorname darf nicht leer sein!");

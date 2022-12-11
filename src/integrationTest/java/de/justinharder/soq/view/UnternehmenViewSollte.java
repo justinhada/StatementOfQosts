@@ -13,8 +13,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
-@DisplayName("BenutzerView sollte")
-class PrivatpersonenViewSollte extends ViewSollte
+@DisplayName("UnternehmenView sollte")
+class UnternehmenViewSollte extends ViewSollte
 {
 	@Test
 	@DisplayName("Formular aufrufen")
@@ -22,17 +22,15 @@ class PrivatpersonenViewSollte extends ViewSollte
 	{
 		given()
 			.when()
-			.get(PRIVATPERSONEN)
+			.get(UNTERNEHMEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
 			.body(
-				containsString("1eaa1624-69f3-4634-a96f-a3a9fd9c7bb4"),
-				containsString("Harder"),
-				containsString("Justin"),
-				containsString("c09e5a5d-96c7-4607-b053-e8091a9481a7"),
-				containsString("Tiemerding"),
-				containsString("Laura"));
+				containsString("cd4fb688-8854-426f-a3e9-d5c380b4e984"),
+				containsString("Rewe-Markt GmbH"),
+				containsString("bb1d3c64-468d-4109-971c-24dcf08993fc"),
+				containsString("ALTE OLDENBURGER Krankenversicherung AG"));
 	}
 
 	@Test
@@ -40,36 +38,32 @@ class PrivatpersonenViewSollte extends ViewSollte
 	void test02()
 	{
 		given()
-			.formParam(NACHNAME, LEER)
-			.formParam(VORNAME, LEER)
+			.formParam(FIRMA, LEER)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(PRIVATPERSONEN)
+			.post(UNTERNEHMEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
-			.body(containsString(Meldung.NACHNAME_LEER.text()), containsString(Meldung.VORNAME_LEER.text()));
+			.body(containsString(Meldung.FIRMA_LEER.text()));
 	}
 
 	@Test
-	@DisplayName("Meldung anzeigen, wenn Privatperson erstellt wurde")
+	@DisplayName("Meldung anzeigen, wenn Unternehmen erstellt wurde")
 	void test04()
 	{
-		var nachname = "Harder";
-		var vorname = "Nicole";
+		var firma = "Amazon.com, Inc.";
 
 		given()
-			.formParam(NACHNAME, nachname)
-			.formParam(VORNAME, vorname)
+			.formParam(FIRMA, firma)
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
-			.post(PRIVATPERSONEN)
+			.post(UNTERNEHMEN)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
 			.body(
-				containsString(Meldung.PRIVATPERSON_ERSTELLT.text()),
-				containsString(nachname),
-				containsString(vorname));
+				containsString(Meldung.UNTERNEHMEN_ERSTELLT.text()),
+				containsString(firma));
 	}
 }

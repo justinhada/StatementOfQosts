@@ -19,12 +19,12 @@ public class Nachname extends WertObjekt<String>
 	private static final long serialVersionUID = 2632717840087524114L;
 
 	@NonNull
-	@Column(name = "Nachname", nullable = false)
+	@Column(name = "Nachname")
 	private String wert;
 
 	public static Validation<Meldungen, Nachname> aus(String wert)
 	{
-		return validiereString(wert, Meldung.NACHNAME)
+		return validiereString(wert, Meldung.NACHNAME_LEER)
 			.map(Nachname::new);
 	}
 }

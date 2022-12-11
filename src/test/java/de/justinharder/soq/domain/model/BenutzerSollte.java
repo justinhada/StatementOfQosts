@@ -25,12 +25,12 @@ class BenutzerSollte extends Testdaten
 		validierung = Benutzer.aus(null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME, Meldung.VORNAME));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.NACHNAME_LEER, Meldung.VORNAME_LEER));
 
 		validierung = Benutzer.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA_LEER));
 	}
 
 	@Test

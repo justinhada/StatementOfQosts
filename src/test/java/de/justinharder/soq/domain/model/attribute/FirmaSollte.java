@@ -25,22 +25,22 @@ class FirmaSollte extends Testdaten
 		validierung = Firma.aus(null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA_LEER));
 
 		validierung = Firma.aus(LEER);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA_LEER));
 
 		validierung = Firma.aus(LEER_KURZ);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA_LEER));
 
 		validierung = Firma.aus(LEER_LANG);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.FIRMA_LEER));
 	}
 
 	@Test

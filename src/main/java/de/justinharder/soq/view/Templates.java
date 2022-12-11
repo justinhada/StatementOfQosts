@@ -38,4 +38,8 @@ public class Templates
 	public static native TemplateInstance kontoinhaber(
 		NeuerKontoinhaber neuerKontoinhaber,
 		List<GespeicherterKontoinhaber> alleKontoinhaber);
+
+	public static native TemplateInstance unternehmen(
+		NeuesUnternehmen neuesUnternehmen,
+		List<GespeichertesUnternehmen> alleUnternehmen);
 }
