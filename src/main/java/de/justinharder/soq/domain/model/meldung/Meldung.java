@@ -122,6 +122,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		return new Meldung(schluessel, Ebene.FEHLER, "Die ID ist ungültig!");
 	}
 
+	public static final Meldung KATEGORIE_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Kategorie wurde erfolgreich erstellt!");
+
 	public static final Meldung KATEGORIE_LEER = new Meldung(
 		Schluessel.KATEGORIE,
 		Ebene.FEHLER,

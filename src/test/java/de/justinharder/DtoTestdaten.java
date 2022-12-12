@@ -34,6 +34,12 @@ public class DtoTestdaten extends Testdaten
 		BANKVERBINDUNG_2.getId().getWert().toString(),
 		BANKVERBINDUNG_2.getIban().getWert(),
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert());
+	protected static final GespeicherteKategorie GESPEICHERTE_KATEGORIE_1 = new GespeicherteKategorie(
+		KATEGORIE_1.getId().getWert().toString(),
+		KATEGORIE_1.getBezeichnung().getWert());
+	protected static final GespeicherteKategorie GESPEICHERTE_KATEGORIE_2 = new GespeicherteKategorie(
+		KATEGORIE_2.getId().getWert().toString(),
+		KATEGORIE_2.getBezeichnung().getWert());
 	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_1 = new GespeicherterKontoinhaber(
 		KONTOINHABER_1.getId().getWert().toString(),
 		KONTOINHABER_1.getBenutzer().getNachname().getWert(),

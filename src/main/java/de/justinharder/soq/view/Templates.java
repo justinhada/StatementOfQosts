@@ -24,6 +24,10 @@ public class Templates
 
 	public static native TemplateInstance imports();
 
+	public static native TemplateInstance kategorien(
+		NeueKategorie neueKategorie,
+		List<GespeicherteKategorie> kategorien);
+
 	public static native TemplateInstance kontoinhaberWeiterleitung(
 		NeuerKontoinhaber neuerKontoinhaber,
 		List<GespeichertePrivatperson> alleBenutzer,

@@ -14,3 +14,6 @@ VALUES ("bc01e451-051b-4bfa-979f-2acff87ba5a2", "1eaa1624-69f3-4634-a96f-a3a9fd9
         "37854473-fa07-4570-a094-3794cd555aa4"),
        ("7f94d5e5-3972-4f44-b81b-994a244ba3ad", "c09e5a5d-96c7-4607-b053-e8091a9481a7",
         "87ada42c-a758-4595-a158-f69ba73fd77a");
+INSERT INTO Kategorie(ID, Bezeichnung)
+VALUES ("c69a09ed-e5ff-4ac6-90dd-d319ff43b9d6", "Lebensmittel"),
+       ("8a977e9d-68e5-415e-948d-09b63b1e2907", "Supplements");

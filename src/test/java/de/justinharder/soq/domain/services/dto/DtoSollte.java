@@ -76,7 +76,7 @@ abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
 			() -> assertThat(sut.hatMeldungen(fehlerMeldung1.schluessel())).isTrue(),
 			() -> assertThat(sut.hatMeldungen(fehlerMeldung2.schluessel())).isTrue(),
 			() -> assertThat(sut.getMeldungen(erfolgMeldung.schluessel())).isEmpty(),
-			() -> assertThat(sut.getMeldungen(fehlerMeldung1.schluessel())).containsExactlyInAnyOrder(fehlerMeldung1),
-			() -> assertThat(sut.getMeldungen(fehlerMeldung2.schluessel())).containsExactlyInAnyOrder(fehlerMeldung2));
+			() -> assertThat(sut.getMeldungen(fehlerMeldung1.schluessel())).contains(fehlerMeldung1),
+			() -> assertThat(sut.getMeldungen(fehlerMeldung2.schluessel())).contains(fehlerMeldung2));
 	}
 }
