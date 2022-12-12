@@ -20,7 +20,7 @@ class KontoinhaberViewSollte extends ViewSollte
 	{
 		given()
 			.when()
-			.get(BANKVERBINDUNGEN)
+			.get(KONTOINHABER)
 			.then()
 			.statusCode(Response.Status.OK.getStatusCode())
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
