@@ -54,6 +54,9 @@ class BankServiceSollte extends DtoTestdaten
 		when(bankMapping.mappe(BANK_2)).thenReturn(GESPEICHERTE_BANK_2);
 
 		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTE_BANK_1, GESPEICHERTE_BANK_2);
+		verify(bankRepository).findeAlle();
+		verify(bankMapping).mappe(BANK_1);
+		verify(bankMapping).mappe(BANK_2);
 	}
 
 	@Test

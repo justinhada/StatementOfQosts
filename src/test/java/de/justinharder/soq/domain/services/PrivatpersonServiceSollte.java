@@ -55,6 +55,9 @@ class PrivatpersonServiceSollte extends DtoTestdaten
 		when(privatpersonMapping.mappe(BENUTZER_2)).thenReturn(GESPEICHERTE_PRIVATPERSON_2);
 
 		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTE_PRIVATPERSON_1, GESPEICHERTE_PRIVATPERSON_2);
+		verify(benutzerRepository).findeAlle();
+		verify(privatpersonMapping).mappe(BENUTZER_1);
+		verify(privatpersonMapping).mappe(BENUTZER_2);
 	}
 
 	@Test

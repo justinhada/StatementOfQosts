@@ -1,7 +1,6 @@
 package de.justinharder.soq.domain.services.dto;
 
 import de.justinharder.DtoTestdaten;
-import lombok.NonNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class GespeicherteBankSollte extends DtoTestdaten
 {
 	private static final String ID = BANK_1.getId().getWert().toString();
-	private static final @NonNull String BEZEICHNUNG = BANK_1.getBezeichnung().getWert();
-	private static final @NonNull String BIC = BANK_1.getBic().getWert();
+	private static final String BEZEICHNUNG = BANK_1.getBezeichnung().getWert();
+	private static final String BIC = BANK_1.getBic().getWert();
 
 	@Test
 	@DisplayName("RequiredArgsConstructor und Getter besitzen")

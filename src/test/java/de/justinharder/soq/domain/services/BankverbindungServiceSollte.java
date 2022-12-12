@@ -64,6 +64,9 @@ class BankverbindungServiceSollte extends DtoTestdaten
 
 		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTE_BANKVERBINDUNG_1,
 			GESPEICHERTE_BANKVERBINDUNG_2);
+		verify(bankverbindungRepository).findeAlle();
+		verify(bankverbindungMapping).mappe(BANKVERBINDUNG_1);
+		verify(bankverbindungMapping).mappe(BANKVERBINDUNG_2);
 	}
 
 	@Test

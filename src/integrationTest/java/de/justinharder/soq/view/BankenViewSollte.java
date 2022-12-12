@@ -29,7 +29,10 @@ class BankenViewSollte extends ViewSollte
 			.body(
 				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
 				containsString("Oldenburgische Landesbank AG"),
-				containsString("OLBODEH2XXX"));
+				containsString("OLBODEH2XXX"),
+				containsString("aaa8a25c-7589-4434-b668-4a78ab000628"),
+				containsString("VR BANK Dinklage-Steinfeld eG"),
+				containsString("GENODEF1DIK"));
 	}
 
 	@Test
