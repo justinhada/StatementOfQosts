@@ -56,11 +56,13 @@ public class KontoinhaberService
 	@Transactional
 	public NeuerKontoinhaber erstelle(@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
+		// TODO: Bankverbindung m:n Benutzer nicht doppelt speichern, z. B. JH für IBAN OLB
+		// TODO: kontoinhaberRepository.istVorhanden(benutzerId, bankverbindungId) prüfen, ob bereits existiert.
 		var bankverbindung = ID.aus(neuerKontoinhaber.getBankverbindungId(), Schluessel.BANKVERBINDUNG)
 			.map(bankverbindungRepository::finde)
 			.flatMap(bv -> bv.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)));
 
-		if(neuerKontoinhaber.getBenutzerIds().isEmpty())
+		if (neuerKontoinhaber.getBenutzerIds().isEmpty())
 		{
 			return neuerKontoinhaber.fuegeMeldungHinzu(Meldung.BENUTZER_MINDESTAUSWAHL);
 		}
