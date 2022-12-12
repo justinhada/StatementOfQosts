@@ -55,6 +55,9 @@ class UnternehmenServiceSollte extends DtoTestdaten
 		when(unternehmenMapping.mappe(BENUTZER_4)).thenReturn(GESPEICHERTES_UNTERNEHMEN_2);
 
 		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(GESPEICHERTES_UNTERNEHMEN_1, GESPEICHERTES_UNTERNEHMEN_2);
+		verify(benutzerRepository).findeAlle();
+		verify(unternehmenMapping).mappe(BENUTZER_3);
+		verify(unternehmenMapping).mappe(BENUTZER_4);
 	}
 
 	@Test
