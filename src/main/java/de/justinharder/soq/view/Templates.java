@@ -28,6 +28,10 @@ public class Templates
 		NeueKategorie neueKategorie,
 		List<GespeicherteKategorie> kategorien);
 
+	public static native TemplateInstance kontoinhaber(
+		NeuerKontoinhaber neuerKontoinhaber,
+		List<GespeicherterKontoinhaber> alleKontoinhaber);
+
 	public static native TemplateInstance kontoinhaberWeiterleitung(
 		NeuerKontoinhaber neuerKontoinhaber,
 		List<GespeichertePrivatperson> alleBenutzer,
