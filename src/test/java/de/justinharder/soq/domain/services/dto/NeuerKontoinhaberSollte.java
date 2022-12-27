@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.dto;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,19 @@ class NeuerKontoinhaberSollte extends DtoSollte<NeuerKontoinhaber>
 			() -> assertThat(sut.getBenutzerIds()).isEqualTo(BENUTZER_IDS),
 			() -> assertThat(sut.getBankverbindungId()).isEqualTo(BANKVERBINDUNG_ID),
 			() -> assertThat(sut.myself()).isEqualTo(sut));
+	}
+
+	@Test
+	@DisplayName("zusammenfassen")
+	void test02()
+	{
+		var sut = new NeuerKontoinhaber(BENUTZER_IDS, LEER)
+			.fuegeMeldungHinzu(Meldung.BENUTZER_EXISTIERT_NICHT)
+			.fasseZusammen(new NeuerKontoinhaber(BENUTZER_IDS, BANKVERBINDUNG_ID)
+				.fuegeMeldungHinzu(Meldung.KONTOINHABER_ERSTELLT));
+
+		assertAll(
+			() -> assertThat(sut.getMeldungen(Schluessel.BENUTZER)).contains(Meldung.BENUTZER_EXISTIERT_NICHT),
+			() -> assertThat(sut.getMeldungen(Schluessel.ALLGEMEIN)).contains(Meldung.KONTOINHABER_ERSTELLT));
 	}
 }
