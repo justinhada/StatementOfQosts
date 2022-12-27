@@ -26,6 +26,7 @@ dependencies {
             "io.quarkus:quarkus-resteasy",
             "io.quarkus:quarkus-agroal",
             "io.quarkus:quarkus-resteasy-qute",
+            'io.quarkus:quarkus-resteasy-multipart',
             "io.quarkus:quarkus-arc",
             "io.quarkus:quarkus-test-common",
             "io.quarkus:quarkus-security-jpa",

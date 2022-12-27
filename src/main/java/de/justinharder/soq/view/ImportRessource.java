@@ -1,14 +1,14 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.services.dto.NeuerImport;
 import de.justinharder.soq.domain.services.imports.ImportService;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @RequestScoped
@@ -18,10 +18,14 @@ public class ImportRessource
 	@NonNull
 	private final ImportService importService;
 
+	@NonNull
+	private NeuerImport neuerImport;
+
 	@Inject
-	public ImportRessource(@NonNull ImportService importService)
+	public ImportRessource(@NonNull ImportService importService, @NonNull NeuerImport neuerImport)
 	{
 		this.importService = importService;
+		this.neuerImport = neuerImport;
 	}
 
 	@GET
@@ -29,5 +33,14 @@ public class ImportRessource
 	public TemplateInstance zeigeFormular()
 	{
 		return Templates.imports();
+	}
+
+	@POST
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public TemplateInstance importiere(@MultipartForm NeuerImport neuerImport)
+	{
+		neuerImport = importService.importiere(neuerImport);
+		return zeigeFormular();
 	}
 }
