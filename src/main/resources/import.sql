@@ -17,3 +17,9 @@ VALUES ("bc01e451-051b-4bfa-979f-2acff87ba5a2", "1eaa1624-69f3-4634-a96f-a3a9fd9
 INSERT INTO Kategorie(ID, Bezeichnung)
 VALUES ("c69a09ed-e5ff-4ac6-90dd-d319ff43b9d6", "Lebensmittel"),
        ("8a977e9d-68e5-415e-948d-09b63b1e2907", "Supplements");
+INSERT INTO Umsatz(ID, Datum, Betrag, Verwendungszweck, BankverbindungAuftraggeberID,
+                   BankverbindungZahlungsbeteiligterID)
+VALUES ("188fae37-0294-4db9-b7e6-7f40c7f390f1", "2020-01-01", "1", "Wohnungsmiete",
+        "37854473-fa07-4570-a094-3794cd555aa4", "87ada42c-a758-4595-a158-f69ba73fd77a"),
+       ("1da15420-5b77-4d06-9fad-e62c0b62bb6f", "2021-01-01", "-1", "Lohn/Gehalt",
+        "87ada42c-a758-4595-a158-f69ba73fd77a", "37854473-fa07-4570-a094-3794cd555aa4");

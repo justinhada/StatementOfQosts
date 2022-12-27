@@ -2,6 +2,8 @@ package de.justinharder;
 
 import de.justinharder.soq.domain.services.dto.*;
 
+import java.time.format.DateTimeFormatter;
+
 public class DtoTestdaten extends Testdaten
 {
 	protected static final GespeicherteBank GESPEICHERTE_BANK_1 = new GespeicherteBank(
@@ -52,4 +54,18 @@ public class DtoTestdaten extends Testdaten
 		KONTOINHABER_2.getBenutzer().getVorname().getWert(),
 		KONTOINHABER_2.getBankverbindung().getIban().getWert(),
 		KONTOINHABER_2.getBankverbindung().getBank().getBezeichnung().getWert());
+	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_1 = new GespeicherterUmsatz(
+		UMSATZ_1.getId().getWert().toString(),
+		UMSATZ_1.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		"1,00",
+		UMSATZ_1.getVerwendungszweck().getWert(),
+		UMSATZ_1.getBankverbindungAuftraggeber().getIban().getWert(),
+		UMSATZ_1.getBankverbindungZahlungsbeteiligter().getIban().getWert());
+	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_2 = new GespeicherterUmsatz(
+		UMSATZ_2.getId().getWert().toString(),
+		UMSATZ_2.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		"-1,00",
+		UMSATZ_2.getVerwendungszweck().getWert(),
+		UMSATZ_2.getBankverbindungAuftraggeber().getIban().getWert(),
+		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().getWert());
 }

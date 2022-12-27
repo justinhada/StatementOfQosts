@@ -16,6 +16,7 @@ public class ViewSollte
 	protected static final String KATEGORIEN = "/kategorien";
 	protected static final String KONTOINHABER = "/kontoinhaber";
 	protected static final String PRIVATPERSONEN = "/privatpersonen";
+	protected static final String UMSAETZE = "/umsaetze";
 	protected static final String UNTERNEHMEN = "/unternehmen";
 	// -- EINGABEDATEN -------------------------------------------------------------------------------------------------
 	protected static final String BEZEICHNUNG = "bezeichnung";

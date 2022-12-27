@@ -43,9 +43,8 @@ public class Templates
 
 	public static native TemplateInstance start();
 
-	public static native TemplateInstance kontoinhaber(
-		NeuerKontoinhaber neuerKontoinhaber,
-		List<GespeicherterKontoinhaber> alleKontoinhaber);
+	public static native TemplateInstance umsaetze(
+		List<GespeicherterUmsatz> umsaetze);
 
 	public static native TemplateInstance unternehmen(
 		NeuesUnternehmen neuesUnternehmen,
