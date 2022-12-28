@@ -8,7 +8,73 @@
         {#include header /}
 
         <section>
-            <div class="container mt-5"></div>
+            <div class="container mt-5">
+                <h1 class="fw-bold">Import der Umsätze</h1>
+
+                <form method="post"
+                      action="/import">
+                    {#if neuerImport.hatMeldungen(Schluessel:ALLGEMEIN)}
+                        <ul class="list-unstyled alert {#if neuerImport.istErfolgreich()}alert-success{/if}">
+                        {#for meldung in neuerImport.getMeldungen(Schluessel:ALLGEMEIN)}
+                            <li>{meldung.text}</li>
+                        {/for}
+                        </ul>
+                    {/if}
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="von"
+                                   class="form-label mt-2 fw-bold">
+                                Von welcher Bank?
+                            </label>
+
+                            <select id="von"
+                                    name="von"
+                                    class="form-select {#if neuerImport.hatMeldungen(Schluessel:VON)}is-invalid{/if}">
+                                <option value="OLB">Oldenburgische Landesbank AG</option>
+                                <option value="VRB">VR BANK Dinklage-Steinfeld eG</option>
+                            </select>
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuerImport.getMeldungen(Schluessel:VON)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="datei"
+                                   class="form-label mt-2 fw-bold">
+                                Datei
+                            </label>
+
+                            <input id="datei"
+                                   name="datei"
+                                   type="file"
+                                   class="form-control {#if neuerImport.hatMeldungen(Schluessel:DATEI)}is-invalid{/if}"
+                                   aria-label="datei"
+                                   value="{neuerImport.datei}" />
+
+                            <ul class="list-unstyled invalid-feedback">
+                                {#for meldung in neuerImport.getMeldungen(Schluessel:DATEI)}
+                                    <li>{meldung.text}</li>
+                                {/for}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit"
+                                    class="btn btn-primary mt-3 fw-bold">
+                                Importieren
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </section>
 
         {#include footer /}

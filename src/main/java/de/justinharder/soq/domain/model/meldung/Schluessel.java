@@ -13,6 +13,7 @@ public enum Schluessel
 	BETRAG,
 	BEZEICHNUNG,
 	BIC,
+	DATEI,
 	DATUM,
 	FIRMA,
 	IBAN,
@@ -22,5 +23,6 @@ public enum Schluessel
 	TRANSAKTION,
 	UMSATZ,
 	VERWENDUNGSZWECK,
+	VON,
 	VORNAME
 }

@@ -22,7 +22,8 @@ public class Templates
 		List<GespeichertePrivatperson> alleBenutzer,
 		List<GespeicherteBank> banken);
 
-	public static native TemplateInstance imports();
+	public static native TemplateInstance imports(
+		NeuerImport neuerImport);
 
 	public static native TemplateInstance kategorien(
 		NeueKategorie neueKategorie,
