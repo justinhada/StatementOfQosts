@@ -15,8 +15,8 @@ import javax.ws.rs.FormParam;
 @AllArgsConstructor
 public class NeuerImport extends Dto<NeuerImport>
 {
-	@FormParam("von")
-	private String von;
+	@FormParam("herausgeber")
+	private int herausgeber;
 
 	@FormParam("datei")
 	private byte[] datei;

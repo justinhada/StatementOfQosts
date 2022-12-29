@@ -3,11 +3,13 @@ package de.justinharder;
 import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
+import de.justinharder.soq.domain.services.imports.model.Import;
 import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDaten;
 import de.justinharder.soq.domain.services.imports.model.UmsatzDaten;
 import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDaten;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 public class Testdaten
@@ -34,6 +36,10 @@ public class Testdaten
 	protected static final BIC BIC_2 = BIC.aus(BIC_2_WERT).get();
 	protected static final String BIC_3_WERT = "OLBODEH2";
 	protected static final BIC BIC_3 = BIC.aus(BIC_3_WERT).get();
+	protected static final byte[] DATEI_1_WERT = "CSV".getBytes(StandardCharsets.UTF_8);
+	protected static final Datei DATEI_1 = Datei.aus(DATEI_1_WERT).get();
+	protected static final byte[] DATEI_2_WERT = "PDF".getBytes(StandardCharsets.UTF_8);
+	protected static final Datei DATEI_2 = Datei.aus(DATEI_2_WERT).get();
 	protected static final LocalDate DATUM_1_WERT = LocalDate.of(2020, 1, 1);
 	protected static final Datum DATUM_1 = Datum.aus(DATUM_1_WERT).get();
 	protected static final LocalDate DATUM_2_WERT = LocalDate.of(2021, 1, 1);
@@ -82,6 +88,8 @@ public class Testdaten
 	protected static final AusgabeEinnahme AUSGABE_EINNAHME_2 =
 		AusgabeEinnahme.aus(Typ.EINNAHME, UMSATZ_2, KATEGORIE_2).get();
 	// -- Weiteres -----------------------------------------------------------------------------------------------------
+	protected static final Import IMPORT_1 = Import.aus(Herausgeber.OLB, DATEI_1).get();
+	protected static final Import IMPORT_2 = Import.aus(Herausgeber.VRB, DATEI_2).get();
 	protected static final OLBUmsatzDaten OLB_UMSATZ_DATEN = new OLBUmsatzDaten(
 		"DE87280200504008357800",
 		"31.10.2022",

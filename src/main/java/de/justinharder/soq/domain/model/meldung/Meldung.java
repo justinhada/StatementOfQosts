@@ -82,6 +82,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der BIC (Bank Identifier Code) ist ungültig!");
 
+	public static final Meldung DATEI = new Meldung(
+		Schluessel.DATEI,
+		Ebene.FEHLER,
+		"Die Datei ist ungültig!");
+
 	public static final Meldung DATUM = new Meldung(
 		Schluessel.DATUM,
 		Ebene.FEHLER,
@@ -96,6 +101,16 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.FIRMA,
 		Ebene.FEHLER,
 		"Die Firma darf nicht leer sein!");
+
+	public static final Meldung HERAUSGEBER_LEER = new Meldung(
+		Schluessel.HERAUSGEBER,
+		Ebene.FEHLER,
+		"Der Herausgeber darf nicht leer sein!");
+
+	public static final Meldung HERAUSGEBER_UNGUELTIG = new Meldung(
+		Schluessel.HERAUSGEBER,
+		Ebene.FEHLER,
+		"Der Herausgeber ist ungültig!");
 
 	public static final Meldung IBAN_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.IBAN,
@@ -156,6 +171,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.UMSATZ,
 		Ebene.FEHLER,
 		"Der Umsatz darf nicht leer sein!");
+
+	public static final Meldung UMSAETZE_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Umsätze wurden erfolgreich erstellt!");
 
 	public static final Meldung UNTERNEHMEN_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
