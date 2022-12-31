@@ -53,6 +53,6 @@ class ImportSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(IMPORT_1).hasToString("Import{Herausgeber=Herausgeber.OLB(code=1, wert=Oldenburgische Landesbank AG), datei=CSV}");
+		assertThat(IMPORT_1).hasToString("Import{Herausgeber=Herausgeber.OLB(code=1, wert=Oldenburgische Landesbank AG), Datei=CSV}");
 	}
 }

@@ -4,9 +4,9 @@ import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.services.imports.model.Import;
-import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDaten;
-import de.justinharder.soq.domain.services.imports.model.UmsatzDaten;
-import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDaten;
+import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDatum;
+import de.justinharder.soq.domain.services.imports.model.UmsatzDatum;
+import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDatum;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -90,7 +90,7 @@ public class Testdaten
 	// -- Weiteres -----------------------------------------------------------------------------------------------------
 	protected static final Import IMPORT_1 = Import.aus(Herausgeber.OLB, DATEI_1).get();
 	protected static final Import IMPORT_2 = Import.aus(Herausgeber.VRB, DATEI_2).get();
-	protected static final OLBUmsatzDaten OLB_UMSATZ_DATEN = new OLBUmsatzDaten(
+	protected static final OLBUmsatzDatum OLB_UMSATZ_DATUM = new OLBUmsatzDatum(
 		"DE87280200504008357800",
 		"31.10.2022",
 		"31.10.2022",
@@ -105,7 +105,7 @@ public class Testdaten
 		"0004770",
 		"152",
 		"DA-GUTSCHR");
-	protected static final UmsatzDaten UMSATZ_DATEN_AUS_OLB = new UmsatzDaten(
+	protected static final UmsatzDatum UMSATZ_DATUM_AUS_OLB = new UmsatzDatum(
 		"DE87280200504008357800",
 		"31.10.2022",
 		"Laura Tiemerding",
@@ -113,7 +113,7 @@ public class Testdaten
 		"GENODEF1DIK",
 		"Wohnungsmiete",
 		"447,48");
-	protected static final VRBUmsatzDaten VRB_UMSATZ_DATEN = new VRBUmsatzDaten(
+	protected static final VRBUmsatzDatum VRB_UMSATZ_DATUM = new VRBUmsatzDatum(
 		"VR Start",
 		"DE28280651080012888000",
 		"GENODEF1DIK",
@@ -133,7 +133,7 @@ public class Testdaten
 		"",
 		"",
 		"");
-	protected static final UmsatzDaten UMSATZ_DATEN_AUS_VRB = new UmsatzDaten(
+	protected static final UmsatzDatum UMSATZ_DATUM_AUS_VRB = new UmsatzDatum(
 		"DE28280651080012888000",
 		"31.10.2022",
 		"Justin Harder",

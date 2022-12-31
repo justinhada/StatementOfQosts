@@ -2,7 +2,7 @@ package de.justinharder.soq.domain.services.imports.model;
 
 import com.google.common.base.MoreObjects;
 
-public record UmsatzDaten(
+public record UmsatzDatum(
 	String auftraggeberIBAN,
 	String datum,
 	String zahlungsbeteiligterName,
@@ -11,28 +11,28 @@ public record UmsatzDaten(
 	String verwendungszweck,
 	String betrag)
 {
-	public static UmsatzDaten aus(OLBUmsatzDaten olbUmsatzDaten)
+	public static UmsatzDatum aus(OLBUmsatzDatum olbUmsatzDatum)
 	{
-		return new UmsatzDaten(
-			olbUmsatzDaten.inhaberkonto(),
-			olbUmsatzDaten.buchungsdatum(),
-			olbUmsatzDaten.auftraggeber(),
-			olbUmsatzDaten.iban(),
-			olbUmsatzDaten.bic(),
-			olbUmsatzDaten.verwendungszweck(),
-			olbUmsatzDaten.betrag());
+		return new UmsatzDatum(
+			olbUmsatzDatum.inhaberkonto(),
+			olbUmsatzDatum.buchungsdatum(),
+			olbUmsatzDatum.auftraggeber(),
+			olbUmsatzDatum.iban(),
+			olbUmsatzDatum.bic(),
+			olbUmsatzDatum.verwendungszweck(),
+			olbUmsatzDatum.betrag());
 	}
 
-	public static UmsatzDaten aus(VRBUmsatzDaten vrbUmsatzDaten)
+	public static UmsatzDatum aus(VRBUmsatzDatum vrbUmsatzDatum)
 	{
-		return new UmsatzDaten(
-			vrbUmsatzDaten.ibanAuftragskonto(),
-			vrbUmsatzDaten.buchungstag(),
-			vrbUmsatzDaten.nameZahlungsbeteiligter(),
-			vrbUmsatzDaten.ibanZahlungsbeteiligter(),
-			vrbUmsatzDaten.bicZahlungsbeteiligter(),
-			vrbUmsatzDaten.verwendungszweck(),
-			vrbUmsatzDaten.betrag());
+		return new UmsatzDatum(
+			vrbUmsatzDatum.ibanAuftragskonto(),
+			vrbUmsatzDatum.buchungstag(),
+			vrbUmsatzDatum.nameZahlungsbeteiligter(),
+			vrbUmsatzDatum.ibanZahlungsbeteiligter(),
+			vrbUmsatzDatum.bicZahlungsbeteiligter(),
+			vrbUmsatzDatum.verwendungszweck(),
+			vrbUmsatzDatum.betrag());
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package de.justinharder.soq.domain.services.imports.model;
 
 import com.google.common.base.MoreObjects;
 
-public record OLBUmsatzDaten(
+public record OLBUmsatzDatum(
 	String inhaberkonto,
 	String buchungsdatum,
 	String valuta,

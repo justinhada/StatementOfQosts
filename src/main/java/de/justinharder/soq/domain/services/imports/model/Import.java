@@ -48,7 +48,7 @@ public class Import implements Serializable
 	{
 		return MoreObjects.toStringHelper(this)
 			.add("Herausgeber", herausgeber)
-			.add("datei", datei)
+			.add("Datei", datei)
 			.toString();
 	}
 }

@@ -2,7 +2,7 @@ package de.justinharder.soq.domain.services.imports.model;
 
 import com.google.common.base.MoreObjects;
 
-public record VRBUmsatzDaten(
+public record VRBUmsatzDatum(
 	String bezeichnungAuftragskonto,
 	String ibanAuftragskonto,
 	String bicAuftragskonto,
