@@ -12,7 +12,9 @@
                 <h1 class="fw-bold">Import der Umsätze</h1>
 
                 <form method="post"
-                      action="/import">
+                      action="/import"
+                      enctype="multipart/form-data"
+                      accept-charset="UTF-8">
                     {#if neuerImport.hatMeldungen(Schluessel:ALLGEMEIN)}
                         <ul class="list-unstyled alert {#if neuerImport.istErfolgreich()}alert-success{/if}">
                         {#for meldung in neuerImport.getMeldungen(Schluessel:ALLGEMEIN)}
@@ -23,20 +25,20 @@
 
                     <div class="row">
                         <div class="col">
-                            <label for="von"
+                            <label for="herausgeber"
                                    class="form-label mt-2 fw-bold">
-                                Von welcher Bank?
+                                Herausgeber
                             </label>
 
-                            <select id="von"
-                                    name="von"
-                                    class="form-select {#if neuerImport.hatMeldungen(Schluessel:VON)}is-invalid{/if}">
-                                <option value="OLB">Oldenburgische Landesbank AG</option>
-                                <option value="VRB">VR BANK Dinklage-Steinfeld eG</option>
+                            <select id="herausgeber"
+                                    name="herausgeber"
+                                    class="form-select {#if neuerImport.hatMeldungen(Schluessel:HERAUSGEBER)}is-invalid{/if}">
+                                <option value="1">Oldenburgische Landesbank AG</option>
+                                <option value="2">VR BANK Dinklage-Steinfeld eG</option>
                             </select>
 
                             <ul class="list-unstyled invalid-feedback">
-                                {#for meldung in neuerImport.getMeldungen(Schluessel:VON)}
+                                {#for meldung in neuerImport.getMeldungen(Schluessel:HERAUSGEBER)}
                                     <li>{meldung.text}</li>
                                 {/for}
                             </ul>
