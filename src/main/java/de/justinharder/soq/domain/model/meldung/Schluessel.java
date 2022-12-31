@@ -17,6 +17,7 @@ public enum Schluessel
 	DATUM,
 	FIRMA,
 	IBAN,
+	IMPORT,
 	KATEGORIE,
 	KONTOINHABER,
 	NACHNAME,

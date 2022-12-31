@@ -152,6 +152,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Der Kontoinhaber wurde erfolgreich erstellt!");
 
+	public static final Meldung IMPORT = new Meldung(
+		Schluessel.IMPORT,
+		Ebene.FEHLER,
+		"Der Import darf nicht leer sein!");
+
 	public static final Meldung NACHNAME_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.NACHNAME,
 		Ebene.FEHLER,
