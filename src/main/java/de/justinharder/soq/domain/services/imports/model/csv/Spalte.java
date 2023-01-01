@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.imports.model.csv;
 
-record Spalte(String wert)
+public record Spalte(String wert)
 {
 	@Override
 	public String toString()

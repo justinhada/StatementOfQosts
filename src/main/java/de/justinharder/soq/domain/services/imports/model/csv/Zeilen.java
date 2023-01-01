@@ -6,7 +6,7 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
-class Zeilen extends ArrayList<Zeile>
+public class Zeilen extends ArrayList<Zeile>
 {
 	@Serial
 	private static final long serialVersionUID = 7457338124776091513L;

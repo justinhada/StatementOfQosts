@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 @Getter
 @EqualsAndHashCode
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-class Zeile implements Serializable
+public class Zeile implements Serializable
 {
 	@Serial
 	private static final long serialVersionUID = -7797571939942999455L;
