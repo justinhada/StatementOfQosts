@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.imports.model;
 
-import de.justinharder.Testdaten;
+import de.justinharder.ImportTestdaten;
 import de.justinharder.soq.domain.model.attribute.Herausgeber;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Import sollte")
-class ImportSollte extends Testdaten
+class ImportSollte extends ImportTestdaten
 {
 	private Import sut;
 
@@ -55,6 +55,6 @@ class ImportSollte extends Testdaten
 	{
 		assertThat(IMPORT_1).hasToString(
 			"Import{Herausgeber=Herausgeber.OLB(code=1, wert=Oldenburgische Landesbank AG), Datei=Inhaberkonto;Buchungsdatum;Valuta;Empfaenger/Auftraggeber;IBAN;BIC;Verwendungszweck;Betrag;Waehrung;Kundenreferenz;Bankreferenz;Primatnota;Transaktions-Code;Transaktions-Text\n" +
-				"DE87280200504008357800;31.10.2022;31.10.2022;LAURA TIEMERDING;DE28280651080012888000;GENODEF1DIK;WOHNUNGSMIETE ;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR\n}");
+				"DE87280200504008357800;31.10.2022;31.10.2022;Laura Tiemerding;DE28280651080012888000;GENODEF1DIK;Wohnungsmiete;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR\n}");
 	}
 }

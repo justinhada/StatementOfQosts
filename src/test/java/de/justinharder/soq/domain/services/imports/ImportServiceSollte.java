@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.imports;
 
-import de.justinharder.Testdaten;
+import de.justinharder.ImportTestdaten;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 @DisplayName("ImportService sollte")
-class ImportServiceSollte extends Testdaten
+class ImportServiceSollte extends ImportTestdaten
 {
 	private ImportService sut;
 

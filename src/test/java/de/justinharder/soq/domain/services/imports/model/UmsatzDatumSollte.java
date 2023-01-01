@@ -1,13 +1,13 @@
 package de.justinharder.soq.domain.services.imports.model;
 
-import de.justinharder.Testdaten;
+import de.justinharder.ImportTestdaten;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("UmsatzDaten sollte")
-class UmsatzDatumSollte extends Testdaten
+class UmsatzDatumSollte extends ImportTestdaten
 {
 	@Test
 	@DisplayName("aus OLB-Import erstellt werden")

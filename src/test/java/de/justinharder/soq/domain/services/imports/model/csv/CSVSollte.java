@@ -46,6 +46,6 @@ class CSVSollte extends Testdaten
 	void test03()
 	{
 		assertThat(CSV_1).hasToString(
-			"CSV{Zeilen=[Zeile{Spalten=[Inhaberkonto, Buchungsdatum, Valuta, Empfaenger/Auftraggeber, IBAN, BIC, Verwendungszweck, Betrag, Waehrung, Kundenreferenz, Bankreferenz, Primatnota, Transaktions-Code, Transaktions-Text]}, Zeile{Spalten=[DE87280200504008357800, 31.10.2022, 31.10.2022, LAURA TIEMERDING, DE28280651080012888000, GENODEF1DIK, WOHNUNGSMIETE , 447,48, EUR, NONREF, , 0004770, 152, DA-GUTSCHR]}]}");
+			"CSV{Zeilen=[Zeile{Spalten=[Inhaberkonto, Buchungsdatum, Valuta, Empfaenger/Auftraggeber, IBAN, BIC, Verwendungszweck, Betrag, Waehrung, Kundenreferenz, Bankreferenz, Primatnota, Transaktions-Code, Transaktions-Text]}, Zeile{Spalten=[DE87280200504008357800, 31.10.2022, 31.10.2022, Laura Tiemerding, DE28280651080012888000, GENODEF1DIK, Wohnungsmiete, 447,48, EUR, NONREF, , 0004770, 152, DA-GUTSCHR]}]}");
 	}
 }

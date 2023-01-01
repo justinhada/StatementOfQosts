@@ -1,13 +1,13 @@
 package de.justinharder.soq.domain.services.imports.model;
 
-import de.justinharder.Testdaten;
+import de.justinharder.ImportTestdaten;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("OLBUmsatzDatum sollte")
-class OLBUmsatzDatumSollte extends Testdaten
+class OLBUmsatzDatumSollte extends ImportTestdaten
 {
 	@Test
 	@DisplayName("sich drucken")

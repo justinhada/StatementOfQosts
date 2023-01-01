@@ -3,10 +3,6 @@ package de.justinharder;
 import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.*;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
-import de.justinharder.soq.domain.services.imports.model.Import;
-import de.justinharder.soq.domain.services.imports.model.OLBUmsatzDatum;
-import de.justinharder.soq.domain.services.imports.model.UmsatzDatum;
-import de.justinharder.soq.domain.services.imports.model.VRBUmsatzDatum;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +34,7 @@ public class Testdaten
 	protected static final BIC BIC_3 = BIC.aus(BIC_3_WERT).get();
 	protected static final byte[] DATEI_1_WERT = """
 		Inhaberkonto;Buchungsdatum;Valuta;Empfaenger/Auftraggeber;IBAN;BIC;Verwendungszweck;Betrag;Waehrung;Kundenreferenz;Bankreferenz;Primatnota;Transaktions-Code;Transaktions-Text
-		DE87280200504008357800;31.10.2022;31.10.2022;LAURA TIEMERDING;DE28280651080012888000;GENODEF1DIK;WOHNUNGSMIETE ;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR
+		DE87280200504008357800;31.10.2022;31.10.2022;Laura Tiemerding;DE28280651080012888000;GENODEF1DIK;Wohnungsmiete;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR
 		""".getBytes(StandardCharsets.UTF_8);
 	protected static final Datei DATEI_1 = Datei.aus(DATEI_1_WERT).get();
 	protected static final byte[] DATEI_2_WERT = "PDF".getBytes(StandardCharsets.UTF_8);
@@ -90,59 +86,5 @@ public class Testdaten
 		AusgabeEinnahme.aus(Typ.AUSGABE, UMSATZ_1, KATEGORIE_1).get();
 	protected static final AusgabeEinnahme AUSGABE_EINNAHME_2 =
 		AusgabeEinnahme.aus(Typ.EINNAHME, UMSATZ_2, KATEGORIE_2).get();
-	// -- Weiteres -----------------------------------------------------------------------------------------------------
-	protected static final Import IMPORT_1 = Import.aus(Herausgeber.OLB, DATEI_1).get();
-	protected static final Import IMPORT_2 = Import.aus(Herausgeber.VRB, DATEI_2).get();
-	protected static final OLBUmsatzDatum OLB_UMSATZ_DATUM = new OLBUmsatzDatum(
-		"DE87280200504008357800",
-		"31.10.2022",
-		"31.10.2022",
-		"Laura Tiemerding",
-		"DE28280651080012888000",
-		"GENODEF1DIK",
-		"Wohnungsmiete",
-		"447,48",
-		"EUR",
-		"NONREF",
-		"",
-		"0004770",
-		"152",
-		"DA-GUTSCHR");
-	protected static final UmsatzDatum UMSATZ_DATUM_AUS_OLB = new UmsatzDatum(
-		"DE87280200504008357800",
-		"31.10.2022",
-		"Laura Tiemerding",
-		"DE28280651080012888000",
-		"GENODEF1DIK",
-		"Wohnungsmiete",
-		"447,48");
-	protected static final VRBUmsatzDatum VRB_UMSATZ_DATUM = new VRBUmsatzDatum(
-		"VR Start",
-		"DE28280651080012888000",
-		"GENODEF1DIK",
-		"VR BANK Dinklage-Steinfeld eG",
-		"31.10.2022",
-		"31.10.2022",
-		"Justin Harder",
-		"DE87280200504008357800",
-		"OLBODEH2XXX",
-		"Dauerauftragsbelast",
-		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
-		"-447,48",
-		"EUR",
-		"10.000,00",
-		"",
-		"Sonstiges",
-		"",
-		"",
-		"");
-	protected static final UmsatzDatum UMSATZ_DATUM_AUS_VRB = new UmsatzDatum(
-		"DE28280651080012888000",
-		"31.10.2022",
-		"Justin Harder",
-		"DE87280200504008357800",
-		"OLBODEH2XXX",
-		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
-		"-447,48");
 	// -----------------------------------------------------------------------------------------------------------------
 }
