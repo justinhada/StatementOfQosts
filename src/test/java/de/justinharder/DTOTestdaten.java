@@ -4,7 +4,7 @@ import de.justinharder.soq.domain.services.dto.*;
 
 import java.time.format.DateTimeFormatter;
 
-public class DtoTestdaten extends Testdaten
+public class DTOTestdaten extends Testdaten
 {
 	protected static final GespeicherteBank GESPEICHERTE_BANK_1 = new GespeicherteBank(
 		BANK_1.getId().getWert().toString(),

@@ -13,7 +13,7 @@ import javax.ws.rs.FormParam;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeueKategorie extends Dto<NeueKategorie>
+public class NeueKategorie extends DTO<NeueKategorie>
 {
 	@FormParam("bezeichnung")
 	private String bezeichnung;

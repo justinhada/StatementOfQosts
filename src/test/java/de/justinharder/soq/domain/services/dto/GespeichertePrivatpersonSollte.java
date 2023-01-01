@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.dto;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("GespeichertePrivatperson sollte")
-class GespeichertePrivatpersonSollte extends DtoTestdaten
+class GespeichertePrivatpersonSollte extends DTOTestdaten
 {
 	private static final String ID = BENUTZER_1.getId().getWert().toString();
 	private static final String NACHNAME = BENUTZER_1.getNachname().getWert();

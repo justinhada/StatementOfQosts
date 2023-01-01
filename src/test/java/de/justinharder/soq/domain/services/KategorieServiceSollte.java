@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.Kategorie;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @DisplayName("KategorieService sollte")
-class KategorieServiceSollte extends DtoTestdaten
+class KategorieServiceSollte extends DTOTestdaten
 {
 	private KategorieService sut;
 

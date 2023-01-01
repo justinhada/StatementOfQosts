@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.mapping;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("PrivatpersonMapping sollte")
-class PrivatpersonMappingSollte extends DtoTestdaten
+class PrivatpersonMappingSollte extends DTOTestdaten
 {
 	private PrivatpersonMapping sut;
 

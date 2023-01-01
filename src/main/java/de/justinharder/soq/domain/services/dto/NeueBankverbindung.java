@@ -11,7 +11,7 @@ import javax.ws.rs.FormParam;
 @Setter
 @Dependent
 @NoArgsConstructor
-public class NeueBankverbindung extends Dto<NeueBankverbindung>
+public class NeueBankverbindung extends DTO<NeueBankverbindung>
 {
 	private String id;
 

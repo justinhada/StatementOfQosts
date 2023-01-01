@@ -13,7 +13,7 @@ import javax.ws.rs.FormParam;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeuesUnternehmen extends Dto<NeuesUnternehmen>
+public class NeuesUnternehmen extends DTO<NeuesUnternehmen>
 {
 	@FormParam("firma")
 	private String firma;

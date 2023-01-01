@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.Kontoinhaber;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @DisplayName("KontoinhaberService sollte")
-class KontoinhaberServiceSollte extends DtoTestdaten
+class KontoinhaberServiceSollte extends DTOTestdaten
 {
 	private KontoinhaberService sut;
 

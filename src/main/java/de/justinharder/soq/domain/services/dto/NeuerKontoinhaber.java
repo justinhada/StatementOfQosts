@@ -14,7 +14,7 @@ import java.util.List;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeuerKontoinhaber extends Dto<NeuerKontoinhaber>
+public class NeuerKontoinhaber extends DTO<NeuerKontoinhaber>
 {
 	@FormParam("benutzerIds")
 	private List<String> benutzerIds;

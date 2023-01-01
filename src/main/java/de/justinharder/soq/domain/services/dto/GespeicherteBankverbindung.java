@@ -10,7 +10,7 @@ import javax.enterprise.context.Dependent;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherteBankverbindung extends Dto<GespeicherteBankverbindung>
+public class GespeicherteBankverbindung extends DTO<GespeicherteBankverbindung>
 {
 	private String id;
 

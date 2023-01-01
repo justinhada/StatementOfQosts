@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.Benutzer;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @DisplayName("UnternehmenService sollte")
-class UnternehmenServiceSollte extends DtoTestdaten
+class UnternehmenServiceSollte extends DTOTestdaten
 {
 	private UnternehmenService sut;
 

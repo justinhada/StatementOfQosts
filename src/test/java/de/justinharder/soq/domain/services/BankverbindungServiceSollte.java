@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.Bankverbindung;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @DisplayName("BankverbindungService sollte")
-class BankverbindungServiceSollte extends DtoTestdaten
+class BankverbindungServiceSollte extends DTOTestdaten
 {
 	private BankverbindungService sut;
 

@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
 import de.justinharder.soq.domain.services.mapping.UmsatzMapping;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
 @DisplayName("UmsatzService sollte")
-class UmsatzServiceSollte extends DtoTestdaten
+class UmsatzServiceSollte extends DTOTestdaten
 {
 	private UmsatzService sut;
 

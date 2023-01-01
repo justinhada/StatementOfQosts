@@ -13,7 +13,7 @@ import javax.ws.rs.FormParam;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeuerImport extends Dto<NeuerImport>
+public class NeuerImport extends DTO<NeuerImport>
 {
 	@FormParam("herausgeber")
 	private int herausgeber;

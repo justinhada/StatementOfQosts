@@ -10,7 +10,7 @@ import javax.ws.rs.FormParam;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeueBank extends Dto<NeueBank>
+public class NeueBank extends DTO<NeueBank>
 {
 	@FormParam("bezeichnung")
 	private String bezeichnung;

@@ -13,7 +13,7 @@ import javax.ws.rs.FormParam;
 @Dependent
 @NoArgsConstructor
 @AllArgsConstructor
-public class NeuePrivatperson extends Dto<NeuePrivatperson>
+public class NeuePrivatperson extends DTO<NeuePrivatperson>
 {
 	@FormParam("nachname")
 	private String nachname;

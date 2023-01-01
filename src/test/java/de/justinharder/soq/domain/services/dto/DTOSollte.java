@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.dto;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Dto sollte")
-abstract class DtoSollte<T extends Dto<T>> extends DtoTestdaten
+abstract class DTOSollte<T extends DTO<T>> extends DTOTestdaten
 {
 	private T sut;
 	private Meldung erfolgMeldung;

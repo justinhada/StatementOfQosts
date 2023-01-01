@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("NeuerKontoinhaber sollte")
-class NeuerKontoinhaberSollte extends DtoSollte<NeuerKontoinhaber>
+class NeuerKontoinhaberSollte extends DTOSollte<NeuerKontoinhaber>
 {
 	private static final List<String> BENUTZER_IDS = List.of(BENUTZER_1.getId().getWert().toString());
 	private static final String BANKVERBINDUNG_ID = BANKVERBINDUNG_1.getId().getWert().toString();

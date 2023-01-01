@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("NeuesUnternehmen sollte")
-class NeuesUnternehmenSollte extends DtoSollte<NeuesUnternehmen>
+class NeuesUnternehmenSollte extends DTOSollte<NeuesUnternehmen>
 {
 	@BeforeEach
 	void setup()

@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.dto;
 
-import de.justinharder.DtoTestdaten;
+import de.justinharder.DTOTestdaten;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("GespeicherteBank sollte")
-class GespeicherteBankSollte extends DtoTestdaten
+class GespeicherteBankSollte extends DTOTestdaten
 {
 	private static final String ID = BANK_1.getId().getWert().toString();
 	private static final String BEZEICHNUNG = BANK_1.getBezeichnung().getWert();

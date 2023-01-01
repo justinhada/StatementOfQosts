@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("NeueBankverbindung sollte")
-class NeueBankverbindungSollte extends DtoSollte<NeueBankverbindung>
+class NeueBankverbindungSollte extends DTOSollte<NeueBankverbindung>
 {
 	@BeforeEach
 	void setup()
