@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.services.imports.model;
 
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.services.imports.model.csv.CSV;
 import io.vavr.control.Option;
 import io.vavr.control.Validation;
 
@@ -17,7 +18,8 @@ public class UmsatzDaten extends ArrayList<UmsatzDatum>
 	{
 		Option.of(importObjekt)
 			.toValidation(Meldungen.aus(Meldung.IMPORT))
-			.map(Import::getDatei);
+			.map(Import::getDatei)
+			.flatMap(CSV::aus);
 
 		return null;
 	}

@@ -36,7 +36,10 @@ public class Testdaten
 	protected static final BIC BIC_2 = BIC.aus(BIC_2_WERT).get();
 	protected static final String BIC_3_WERT = "OLBODEH2";
 	protected static final BIC BIC_3 = BIC.aus(BIC_3_WERT).get();
-	protected static final byte[] DATEI_1_WERT = "CSV".getBytes(StandardCharsets.UTF_8);
+	protected static final byte[] DATEI_1_WERT = """
+		Inhaberkonto;Buchungsdatum;Valuta;Empfaenger/Auftraggeber;IBAN;BIC;Verwendungszweck;Betrag;Waehrung;Kundenreferenz;Bankreferenz;Primatnota;Transaktions-Code;Transaktions-Text
+		DE87280200504008357800;31.10.2022;31.10.2022;LAURA TIEMERDING;DE28280651080012888000;GENODEF1DIK;WOHNUNGSMIETE ;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR
+		""".getBytes(StandardCharsets.UTF_8);
 	protected static final Datei DATEI_1 = Datei.aus(DATEI_1_WERT).get();
 	protected static final byte[] DATEI_2_WERT = "PDF".getBytes(StandardCharsets.UTF_8);
 	protected static final Datei DATEI_2 = Datei.aus(DATEI_2_WERT).get();

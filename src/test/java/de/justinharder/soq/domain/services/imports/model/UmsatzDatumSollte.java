@@ -28,6 +28,6 @@ class UmsatzDatumSollte extends Testdaten
 	void test03()
 	{
 		assertThat(UMSATZ_DATUM_AUS_OLB).hasToString(
-			"UmsatzDaten{AuftraggeberIBAN=DE87280200504008357800, Datum=31.10.2022, ZahlungsbeteiligterName=Laura Tiemerding, ZahlungsbeteiligterIBAN=DE28280651080012888000, ZahlungsbeteiligterBIC=GENODEF1DIK, Verwendungszweck=Wohnungsmiete, Betrag=447,48}");
+			"UmsatzDatum{AuftraggeberIBAN=DE87280200504008357800, Datum=31.10.2022, ZahlungsbeteiligterName=Laura Tiemerding, ZahlungsbeteiligterIBAN=DE28280651080012888000, ZahlungsbeteiligterBIC=GENODEF1DIK, Verwendungszweck=Wohnungsmiete, Betrag=447,48}");
 	}
 }
