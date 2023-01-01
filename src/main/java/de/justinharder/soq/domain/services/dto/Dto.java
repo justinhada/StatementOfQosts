@@ -8,6 +8,7 @@ import lombok.NonNull;
 
 import java.util.List;
 
+// TODO: Umbenennen zu DTO
 public abstract class Dto<T extends Dto<T>>
 {
 	protected final Meldungen meldungen = new Meldungen();
