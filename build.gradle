@@ -34,7 +34,9 @@ dependencies {
             "io.vavr:vavr:$project.vavrVersion",
             "org.projectlombok:lombok:$project.lombokVersion",
             "com.google.guava:guava:$project.guavaVersion",
-            "commons-validator:commons-validator:$project.apacheVersion"
+            "commons-validator:commons-validator:$project.apacheVersion",
+            "com.prowidesoftware:pw-swift-core:$project.swiftVersion"
+
 
     annotationProcessor "org.projectlombok:lombok:$project.lombokVersion"
 }
