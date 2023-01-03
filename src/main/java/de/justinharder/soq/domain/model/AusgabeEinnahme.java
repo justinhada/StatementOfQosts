@@ -10,6 +10,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 
+// TODO: Umbenennen zu "Buchung"
 @Entity
 @Getter
 @Table(name = "AusgabeEinnahme")
