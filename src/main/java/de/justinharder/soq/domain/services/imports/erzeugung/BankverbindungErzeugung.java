@@ -36,19 +36,14 @@ public class BankverbindungErzeugung
 		return bankverbindungRepository.finde(iban).toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT));
 	}
 
-	// TODO: Funktionaler gestalten
 	public Validation<Meldungen, Bankverbindung> findeOderErzeuge(@NonNull IBAN iban, @NonNull BIC bic)
 	{
-		var bankverbindung = bankverbindungRepository.finde(iban);
-		if (bankverbindung.isDefined())
-		{
-			return bankverbindung.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT));
-		}
 		return Validation.combine(
 				Validation.valid(iban),
 				bankErzeugung.findeOderErzeuge(bic))
 			.ap(Bankverbindung::aus)
 			.mapError(Meldungen::aus)
-			.flatMap(Function.identity());
+			.flatMap(Function.identity())
+			.map(bankverbindung -> bankverbindungRepository.finde(bankverbindung.getIban()).getOrElse(bankverbindung));
 	}
 }

@@ -45,10 +45,11 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 	}
 
 	@Test
-	@DisplayName("Bank finden und nicht neu erzeugen")
+	@DisplayName("Bankverbindung finden und nicht neu erzeugen")
 	void test02()
 	{
 		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.of(BANKVERBINDUNG_1));
+		when(bankErzeugung.findeOderErzeuge(BIC_1)).thenReturn(Validation.valid(BANK_1));
 
 		var ergebnis = sut.findeOderErzeuge(IBAN_1, BIC_1);
 		assertAll(
@@ -58,7 +59,7 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 	}
 
 	@Test
-	@DisplayName("Bank nicht finden und neu erzeugen")
+	@DisplayName("Bankverbindung nicht finden und neu erzeugen")
 	void test03()
 	{
 		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.none());
