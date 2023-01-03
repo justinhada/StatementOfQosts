@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.imports;
 
-import de.justinharder.soq.domain.model.attribute.*;
+import de.justinharder.soq.domain.model.attribute.Datei;
+import de.justinharder.soq.domain.model.attribute.Herausgeber;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
 import de.justinharder.soq.domain.services.dto.NeuerImport;
@@ -52,11 +53,12 @@ public class ImportService
 			  c Umsatz aus Attributen erstellen.
 		 */
 
-		return Validation.combine(Herausgeber.aus(neuerImport.getHerausgeber()), Datei.aus(neuerImport.getDatei()))
+		Validation.combine(Herausgeber.aus(neuerImport.getHerausgeber()), Datei.aus(neuerImport.getDatei()))
 			.ap(Import::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.flatMap(UmsatzDaten::aus)
-			.fold(neuerImport::fuegeMeldungenHinzu, umsatzErzeugung::erzeugeUmsaetze);
+			.flatMap(UmsatzDaten::aus);
+
+		return null;
 	}
 }
