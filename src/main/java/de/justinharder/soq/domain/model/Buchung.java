@@ -10,13 +10,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 
-// TODO: Umbenennen zu "Buchung"
 @Entity
 @Getter
-@Table(name = "AusgabeEinnahme")
+@Table(name = "Buchung")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class AusgabeEinnahme extends Entitaet
+public class Buchung extends Entitaet
 {
 	@Serial
 	private static final long serialVersionUID = 5466553537615787882L;
@@ -36,13 +35,13 @@ public class AusgabeEinnahme extends Entitaet
 	@JoinColumn(name = "KategorieID", nullable = false)
 	private Kategorie kategorie;
 
-	public static Validation<Meldungen, AusgabeEinnahme> aus(Typ typ, Umsatz umsatz, Kategorie kategorie)
+	public static Validation<Meldungen, Buchung> aus(Typ typ, Umsatz umsatz, Kategorie kategorie)
 	{
 		return Validation.combine(
 				validiere(typ, Meldung.ART),
 				validiere(umsatz, Meldung.UMSATZ_LEER),
 				validiere(kategorie, Meldung.KATEGORIE_LEER))
-			.ap(AusgabeEinnahme::new)
+			.ap(Buchung::new)
 			.mapError(Meldungen::aus);
 	}
 

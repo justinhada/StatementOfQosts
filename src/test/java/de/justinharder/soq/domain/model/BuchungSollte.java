@@ -13,17 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("AusgabeEinnahme sollte")
-class AusgabeEinnahmeSollte extends Testdaten
+class BuchungSollte extends Testdaten
 {
-	private AusgabeEinnahme sut;
+	private Buchung sut;
 
-	private Validation<Meldungen, AusgabeEinnahme> validierung;
+	private Validation<Meldungen, Buchung> validierung;
 
 	@Test
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = AusgabeEinnahme.aus(null, null, null);
+		validierung = Buchung.aus(null, null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.ART, Meldung.UMSATZ_LEER,
@@ -34,7 +34,7 @@ class AusgabeEinnahmeSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = AusgabeEinnahme.aus(Typ.AUSGABE, UMSATZ_1, KATEGORIE_1);
+		validierung = Buchung.aus(Typ.AUSGABE, UMSATZ_1, KATEGORIE_1);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -42,7 +42,7 @@ class AusgabeEinnahmeSollte extends Testdaten
 			() -> assertThat(sut.getUmsatz()).isEqualTo(UMSATZ_1),
 			() -> assertThat(sut.getKategorie()).isEqualTo(KATEGORIE_1));
 
-		validierung = AusgabeEinnahme.aus(Typ.EINNAHME, UMSATZ_2, KATEGORIE_2);
+		validierung = Buchung.aus(Typ.EINNAHME, UMSATZ_2, KATEGORIE_2);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
@@ -55,7 +55,7 @@ class AusgabeEinnahmeSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(AUSGABE_EINNAHME_1).hasToString(
-			"AusgabeEinnahme{ID=" + AUSGABE_EINNAHME_1.getId() + ", Typ=AUSGABE, Umsatz=Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}, Kategorie=Kategorie{ID=" + KATEGORIE_1.getId() + ", Bezeichnung=Lebensmittel}}");
+		assertThat(BUCHUNG_1).hasToString(
+			"Buchung{ID=" + BUCHUNG_1.getId() + ", Typ=AUSGABE, Umsatz=Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}, Kategorie=Kategorie{ID=" + KATEGORIE_1.getId() + ", Bezeichnung=Lebensmittel}}");
 	}
 }

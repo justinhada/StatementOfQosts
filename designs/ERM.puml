@@ -39,7 +39,7 @@ entity Umsatz
     * **BankverbindungZahlungsbeteiligterID <<FK>>**
 }
 
-entity EinnahmeAusgabe
+entity Buchung
 {
     * **ID <<PK>>**
     * Typ
@@ -57,6 +57,6 @@ Benutzer ||--o{ Kontoinhaber
 Bankverbindung ||--o{ Kontoinhaber
 Bank ||--o{ Bankverbindung
 Bankverbindung }o--o{ Umsatz
-Kategorie ||--o{ EinnahmeAusgabe
-Umsatz ||--|| EinnahmeAusgabe
+Kategorie ||--o{ Buchung
+Umsatz ||--|| Buchung
 @enduml
