@@ -2,6 +2,7 @@ package de.justinharder.soq.domain.services.imports;
 
 import de.justinharder.soq.domain.model.attribute.Datei;
 import de.justinharder.soq.domain.model.attribute.Herausgeber;
+import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
 import de.justinharder.soq.domain.services.dto.NeuerImport;
@@ -13,6 +14,7 @@ import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import java.util.List;
 import java.util.function.Function;
 
 @Dependent
@@ -51,14 +53,31 @@ public class ImportService
 			    d Wenn nicht vorhanden, Bank erstellen mit Bezeichnung und BIC.
 			    e Bankverbindung erstellen.
 			  c Umsatz aus Attributen erstellen.
+			7 Umsatz speichern.
+			  a Banken speichern.
+			  b Bankverbindungen speichern.
+			  c Umsatz speichern.
 		 */
 
-		Validation.combine(Herausgeber.aus(neuerImport.getHerausgeber()), Datei.aus(neuerImport.getDatei()))
+		return Validation.combine(Herausgeber.aus(neuerImport.getHerausgeber()), Datei.aus(neuerImport.getDatei()))
 			.ap(Import::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.flatMap(UmsatzDaten::aus);
+			.flatMap(UmsatzDaten::aus)
+			.map(umsatzDaten -> importiere(neuerImport, umsatzDaten))
+			.fold(neuerImport::fuegeMeldungenHinzu, neueImports -> neueImports.stream()
+				.reduce(NeuerImport::fasseZusammen)
+				.orElseThrow());
+	}
 
-		return null;
+	private List<NeuerImport> importiere(NeuerImport neuerImport, UmsatzDaten umsatzDaten)
+	{
+		return umsatzDaten.stream()
+			.map(umsatzErzeugung::findeOderErzeuge)
+			.map(validierung -> validierung.fold(neuerImport::fuegeMeldungenHinzu, umsatz -> {
+				umsatzRepository.speichere(umsatz);
+				return new NeuerImport().fuegeMeldungHinzu(Meldung.UMSATZ_ERSTELLT);
+			}))
+			.toList();
 	}
 }

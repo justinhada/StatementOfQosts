@@ -1,10 +1,11 @@
 package de.justinharder;
 
+import de.justinharder.soq.domain.model.attribute.Herausgeber;
 import de.justinharder.soq.domain.services.dto.*;
 
 import java.time.format.DateTimeFormatter;
 
-public class DTOTestdaten extends Testdaten
+public class DTOTestdaten extends ImportTestdaten
 {
 	protected static final GespeicherteBank GESPEICHERTE_BANK_1 = new GespeicherteBank(
 		BANK_1.getId().getWert().toString(),
@@ -68,4 +69,5 @@ public class DTOTestdaten extends Testdaten
 		UMSATZ_2.getVerwendungszweck().getWert(),
 		UMSATZ_2.getBankverbindungAuftraggeber().getIban().getWert(),
 		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().getWert());
+	protected static final NeuerImport NEUER_IMPORT = new NeuerImport(Herausgeber.OLB.getCode(), DATEI_1_WERT);
 }

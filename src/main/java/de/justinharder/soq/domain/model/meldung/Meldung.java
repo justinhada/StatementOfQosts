@@ -172,15 +172,15 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Die Privatperson wurde erfolgreich erstellt!");
 
+	public static final Meldung UMSATZ_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Der Umsatz wurde erfolgreich erstellt!");
+
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,
 		Ebene.FEHLER,
 		"Der Umsatz darf nicht leer sein!");
-
-	public static final Meldung UMSAETZE_ERSTELLT = new Meldung(
-		Schluessel.ALLGEMEIN,
-		Ebene.ERFOLG,
-		"Der Umsätze wurden erfolgreich erstellt!");
 
 	public static final Meldung UNTERNEHMEN_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,

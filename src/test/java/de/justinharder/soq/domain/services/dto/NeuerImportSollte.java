@@ -21,7 +21,7 @@ public class NeuerImportSollte extends DTOSollte<NeuerImport>
 	{
 		super.setup(
 			new NeuerImport(HERAUSGEBER, DATEI),
-			Meldung.UMSAETZE_ERSTELLT,
+			Meldung.UMSATZ_ERSTELLT,
 			Meldung.HERAUSGEBER_UNGUELTIG,
 			Meldung.DATEI);
 	}
