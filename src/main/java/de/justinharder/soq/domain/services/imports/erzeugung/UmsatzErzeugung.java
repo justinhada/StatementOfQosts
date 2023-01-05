@@ -59,6 +59,7 @@ public class UmsatzErzeugung
 					umsatz.getVerwendungszweck(),
 					umsatz.getBankverbindungAuftraggeber(),
 					umsatz.getBankverbindungZahlungsbeteiligter())
-				.getOrElse(umsatz));
+				.getOrElse(umsatz))
+			.peek(umsatzRepository::speichere);
 	}
 }

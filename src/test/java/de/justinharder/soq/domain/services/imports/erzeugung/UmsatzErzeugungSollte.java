@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.imports.erzeugung;
 
 import de.justinharder.ImportTestdaten;
+import de.justinharder.soq.domain.model.Umsatz;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
 import io.vavr.control.Option;
 import io.vavr.control.Validation;
@@ -64,10 +65,11 @@ class UmsatzErzeugungSollte extends ImportTestdaten
 			UMSATZ_DATUM_VERWENDUNGSZWECK,
 			BANKVERBINDUNG_1,
 			BANKVERBINDUNG_2);
+		verify(umsatzRepository).speichere(UMSATZ);
 	}
 
 	@Test
-	@DisplayName("Bank nicht finden und neu erzeugen")
+	@DisplayName("Umsatz nicht finden und neu erzeugen")
 	void test03()
 	{
 		when(umsatzRepository.finde(
@@ -92,5 +94,6 @@ class UmsatzErzeugungSollte extends ImportTestdaten
 			UMSATZ_DATUM_VERWENDUNGSZWECK,
 			BANKVERBINDUNG_1,
 			BANKVERBINDUNG_2);
+		verify(umsatzRepository).speichere(any(Umsatz.class));
 	}
 }

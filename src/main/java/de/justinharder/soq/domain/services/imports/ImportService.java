@@ -76,10 +76,9 @@ public class ImportService
 	{
 		return umsatzDaten.stream()
 			.map(umsatzErzeugung::findeOderErzeuge)
-			.map(validierung -> validierung.fold(neuerImport::fuegeMeldungenHinzu, umsatz -> {
-				umsatzRepository.speichere(umsatz);
-				return new NeuerImport().fuegeMeldungHinzu(Meldung.UMSATZ_ERSTELLT);
-			}))
+			.map(validierung -> validierung.fold(
+				neuerImport::fuegeMeldungenHinzu,
+				umsatz -> new NeuerImport().fuegeMeldungHinzu(Meldung.UMSATZ_ERSTELLT)))
 			.toList();
 	}
 }

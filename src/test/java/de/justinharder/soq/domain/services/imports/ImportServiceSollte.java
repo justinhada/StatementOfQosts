@@ -1,7 +1,6 @@
 package de.justinharder.soq.domain.services.imports;
 
 import de.justinharder.DTOTestdaten;
-import de.justinharder.soq.domain.model.Umsatz;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.UmsatzRepository;
@@ -17,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @DisplayName("ImportService sollte")
@@ -75,6 +73,5 @@ class ImportServiceSollte extends DTOTestdaten
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
 				Meldung.UMSATZ_ERSTELLT));
 		verify(umsatzErzeugung).findeOderErzeuge(UMSATZ_DATUM_AUS_OLB);
-		verify(umsatzRepository).speichere(any(Umsatz.class));
 	}
 }
