@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.imports.erzeugung;
 
 import de.justinharder.ImportTestdaten;
+import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
 import io.vavr.control.Option;
 import io.vavr.control.Validation;
@@ -40,13 +41,42 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 			() -> assertThrows(NullPointerException.class, () -> new BankverbindungErzeugung(null, bankErzeugung)),
 			() -> assertThrows(NullPointerException.class,
 				() -> new BankverbindungErzeugung(bankverbindungRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.findeAuftraggeber(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.findeOderErzeuge(null, BIC_1)),
 			() -> assertThrows(NullPointerException.class, () -> sut.findeOderErzeuge(IBAN_1, null)));
 	}
 
 	@Test
-	@DisplayName("Bankverbindung finden und nicht neu erzeugen")
+	@DisplayName("melden, wenn Auftraggeber-Bankverbindung nicht existiert")
 	void test02()
+	{
+		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.none());
+
+		var ergebnis = sut.findeAuftraggeber(IBAN_1);
+
+		assertAll(
+			() -> assertThrows(RuntimeException.class, ergebnis::get),
+			() -> assertThat(ergebnis.getError()).containsExactlyInAnyOrder(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT));
+		verify(bankverbindungRepository).finde(IBAN_1);
+	}
+
+	@Test
+	@DisplayName("Auftraggeber-Bankverbindung finden")
+	void test03()
+	{
+		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.of(BANKVERBINDUNG_1));
+
+		var ergebnis = sut.findeAuftraggeber(IBAN_1);
+
+		assertAll(
+			() -> assertThrows(RuntimeException.class, ergebnis::getError),
+			() -> assertThat(ergebnis.get()).isEqualTo(BANKVERBINDUNG_1));
+		verify(bankverbindungRepository).finde(IBAN_1);
+	}
+
+	@Test
+	@DisplayName("Bankverbindung finden und nicht neu erzeugen")
+	void test04()
 	{
 		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.of(BANKVERBINDUNG_1));
 		when(bankErzeugung.findeOderErzeuge(BIC_1)).thenReturn(Validation.valid(BANK_1));
@@ -60,7 +90,7 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 
 	@Test
 	@DisplayName("Bankverbindung nicht finden und neu erzeugen")
-	void test03()
+	void test05()
 	{
 		when(bankverbindungRepository.finde(IBAN_1)).thenReturn(Option.none());
 		when(bankErzeugung.findeOderErzeuge(BIC_1)).thenReturn(Validation.valid(BANK_1));

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("NeuerImport sollte")
-public class NeuerImportSollte extends DTOSollte<NeuerImport>
+class NeuerImportSollte extends DTOSollte<NeuerImport>
 {
 	private static final int HERAUSGEBER = 1;
 	private static final byte[] DATEI = "CSV-Datei".getBytes(StandardCharsets.UTF_8);

@@ -43,7 +43,8 @@ class ImportServiceSollte extends DTOTestdaten
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class, () -> new ImportService(null, umsatzErzeugung)),
-			() -> assertThrows(NullPointerException.class, () -> new ImportService(umsatzRepository, null)));
+			() -> assertThrows(NullPointerException.class, () -> new ImportService(umsatzRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.importiere(null)));
 	}
 
 	@Test

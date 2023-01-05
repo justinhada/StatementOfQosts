@@ -1,6 +1,6 @@
 package de.justinharder.soq.domain.services.imports.model.csv;
 
-import de.justinharder.Testdaten;
+import de.justinharder.ImportTestdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import io.vavr.control.Validation;
@@ -12,10 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("CSV sollte")
-class CSVSollte extends Testdaten
+class CSVSollte extends ImportTestdaten
 {
-	private static final CSV CSV_1 = CSV.aus(DATEI_1).get();
-
 	private CSV sut;
 
 	private Validation<Meldungen, CSV> validierung;
@@ -39,13 +37,22 @@ class CSVSollte extends Testdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getZeilen()).isEqualTo(Zeilen.aus(DATEI_1)));
+
+		validierung = CSV.aus(DATEI_2);
+		sut = validierung.get();
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::getError),
+			() -> assertThat(sut.getZeilen()).isEqualTo(Zeilen.aus(DATEI_2)));
 	}
 
 	@Test
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(CSV_1).hasToString(
-			"CSV{Zeilen=[Zeile{Spalten=[Inhaberkonto, Buchungsdatum, Valuta, Empfaenger/Auftraggeber, IBAN, BIC, Verwendungszweck, Betrag, Waehrung, Kundenreferenz, Bankreferenz, Primatnota, Transaktions-Code, Transaktions-Text]}, Zeile{Spalten=[DE87280200504008357800, 31.10.2022, 31.10.2022, Laura Tiemerding, DE28280651080012888000, GENODEF1DIK, Wohnungsmiete, 447,48, EUR, NONREF, , 0004770, 152, DA-GUTSCHR]}]}");
+		assertAll(
+			() -> assertThat(CSV.aus(DATEI_1).get()).hasToString(
+				"CSV{Zeilen=[Zeile{Spalten=[Inhaberkonto, Buchungsdatum, Valuta, Empfaenger/Auftraggeber, IBAN, BIC, Verwendungszweck, Betrag, Waehrung, Kundenreferenz, Bankreferenz, Primatnota, Transaktions-Code, Transaktions-Text]}, Zeile{Spalten=[DE87280200504008357800, 31.10.2022, 31.10.2022, Laura Tiemerding, DE28280651080012888000, GENODEF1DIK, Wohnungsmiete, 447,48, EUR, NONREF, , 0004770, 152, DA-GUTSCHR]}]}"),
+			() -> assertThat(CSV.aus(DATEI_2).get()).hasToString(
+				"CSV{Zeilen=[Zeile{Spalten=[Bezeichnung Auftragskonto, IBAN Auftragskonto, BIC Auftragskonto, Bankname Auftragskonto, Buchungstag, Valutadatum, Name Zahlungsbeteiligter, IBAN Zahlungsbeteiligter, BIC (SWIFT-Code) Zahlungsbeteiligter, Buchungstext, Verwendungszweck, Betrag, Waehrung, Saldo nach Buchung, Bemerkung, Kategorie, Steuerrelevant, Glaeubiger ID, Mandatsreferenz]}, Zeile{Spalten=[VR Start, DE28280651080012888000, GENODEF1DIK, VR BANK Dinklage-Steinfeld eG, 31.10.2022, 31.10.2022, Justin Harder, DE87280200504008357800, OLBODEH2XXX, Dauerauftragsbelast, Wohnungsmiete, -447,48, EUR, 10000,00, , Sonstiges, , , ]}]}"));
 	}
 }

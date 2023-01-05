@@ -57,10 +57,10 @@ public class ImportTestdaten extends Testdaten
 		"DE87280200504008357800",
 		"OLBODEH2XXX",
 		"Dauerauftragsbelast",
-		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
+		"Wohnungsmiete",
 		"-447,48",
 		"EUR",
-		"10.000,00",
+		"10000,00",
 		"",
 		"Sonstiges",
 		"",
@@ -72,7 +72,7 @@ public class ImportTestdaten extends Testdaten
 		"Justin Harder",
 		"DE87280200504008357800",
 		"OLBODEH2XXX",
-		"Wohnungsmiete /*DA-3* IBAN: DE87280200504008357800 BIC: OLBODEH2XXX",
+		"Wohnungsmiete",
 		"-447,48");
 	protected static final UmsatzDaten UMSATZ_DATEN_1 = UmsatzDaten.aus(IMPORT_1).get();
 }

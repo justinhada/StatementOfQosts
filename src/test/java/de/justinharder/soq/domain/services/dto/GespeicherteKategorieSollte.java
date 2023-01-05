@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("GespeicherteKategorie sollte")
-public class GespeicherteKategorieSollte extends DTOTestdaten
+class GespeicherteKategorieSollte extends DTOTestdaten
 {
 	private static final String ID = KATEGORIE_1.getId().getWert().toString();
 	private static final String BEZEICHNUNG = KATEGORIE_1.getBezeichnung().getWert();

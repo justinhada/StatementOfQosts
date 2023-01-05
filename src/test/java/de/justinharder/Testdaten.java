@@ -37,7 +37,10 @@ public class Testdaten
 		DE87280200504008357800;31.10.2022;31.10.2022;Laura Tiemerding;DE28280651080012888000;GENODEF1DIK;Wohnungsmiete;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR
 		""".getBytes(StandardCharsets.UTF_8);
 	protected static final Datei DATEI_1 = Datei.aus(DATEI_1_WERT).get();
-	protected static final byte[] DATEI_2_WERT = "PDF".getBytes(StandardCharsets.UTF_8);
+	protected static final byte[] DATEI_2_WERT = """
+		Bezeichnung Auftragskonto;IBAN Auftragskonto;BIC Auftragskonto;Bankname Auftragskonto;Buchungstag;Valutadatum;Name Zahlungsbeteiligter;IBAN Zahlungsbeteiligter;BIC (SWIFT-Code) Zahlungsbeteiligter;Buchungstext;Verwendungszweck;Betrag;Waehrung;Saldo nach Buchung;Bemerkung;Kategorie;Steuerrelevant;Glaeubiger ID;Mandatsreferenz
+		VR Start;DE28280651080012888000;GENODEF1DIK;VR BANK Dinklage-Steinfeld eG;31.10.2022;31.10.2022;Justin Harder;DE87280200504008357800;OLBODEH2XXX;Dauerauftragsbelast;Wohnungsmiete;-447,48;EUR;10000,00;;Sonstiges;;;
+		""".getBytes(StandardCharsets.UTF_8);
 	protected static final Datei DATEI_2 = Datei.aus(DATEI_2_WERT).get();
 	protected static final LocalDate DATUM_1_WERT = LocalDate.of(2020, 1, 1);
 	protected static final Datum DATUM_1 = Datum.aus(DATUM_1_WERT).get();

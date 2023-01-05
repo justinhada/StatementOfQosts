@@ -37,6 +37,12 @@ class UmsatzDatenSollte extends ImportTestdaten
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut).containsExactlyInAnyOrder(UMSATZ_DATUM_AUS_OLB));
+
+		validierung = UmsatzDaten.aus(IMPORT_2);
+		sut = validierung.get();
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::getError),
+			() -> assertThat(sut).containsExactlyInAnyOrder(UMSATZ_DATUM_AUS_VRB));
 	}
 
 	@Test

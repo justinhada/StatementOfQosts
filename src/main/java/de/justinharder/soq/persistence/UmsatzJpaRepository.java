@@ -15,6 +15,15 @@ import javax.enterprise.context.Dependent;
 @Dependent
 public class UmsatzJpaRepository extends JpaRepository<Umsatz> implements UmsatzRepository
 {
+	private static final String ABFRAGE = """
+		SELECT umsatz
+		FROM Umsatz umsatz
+		WHERE umsatz.datum = :datum
+		AND umsatz.betrag = :betrag
+		AND umsatz.verwendungszweck = :verwendungszweck
+		AND umsatz.bankverbindungAuftraggeber = :bankverbindungAuftraggeber
+		AND umsatz.bankverbindungZahlungsbeteiligter = :bankverbindungZahlungsbeteiligter""";
+
 	public UmsatzJpaRepository()
 	{
 		super(Umsatz.class);
@@ -28,16 +37,7 @@ public class UmsatzJpaRepository extends JpaRepository<Umsatz> implements Umsatz
 		@NonNull Bankverbindung bankverbindungAuftraggeber,
 		@NonNull Bankverbindung bankverbindungZahlungsbeteiligter)
 	{
-		return Try.of(() -> entityManager.createQuery("""
-						SELECT umsatz
-						FROM Umsatz umsatz
-						WHERE umsatz.datum = :datum
-						AND umsatz.betrag = :betrag
-						AND umsatz.verwendungszweck = :verwendungszweck
-						AND umsatz.bankverbindungAuftraggeber = :bankverbindungAuftraggeber
-						AND umsatz.bankverbindungZahlungsbeteiligter = :bankverbindungZahlungsbeteiligter
-						""",
-					Umsatz.class)
+		return Try.of(() -> entityManager.createQuery(ABFRAGE, Umsatz.class)
 				.setParameter("datum", datum)
 				.setParameter("betrag", betrag)
 				.setParameter("verwendungszweck", verwendungszweck)

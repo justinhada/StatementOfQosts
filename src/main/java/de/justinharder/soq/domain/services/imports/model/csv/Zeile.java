@@ -22,7 +22,7 @@ public class Zeile implements Serializable
 
 	public static Zeile aus(String zeile)
 	{
-		return new Zeile(new Spalten(Stream.of(zeile.split(";"))
+		return new Zeile(new Spalten(Stream.of(zeile.split(";", -1))
 			.map(Spalte::new)
 			.toList()));
 	}
