@@ -19,6 +19,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Function;
 
+import static java.util.function.Predicate.not;
+
 @Dependent
 public class KontoinhaberService
 {
@@ -56,8 +58,6 @@ public class KontoinhaberService
 	@Transactional
 	public NeuerKontoinhaber erstelle(@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
-		// TODO: Bankverbindung m:n Benutzer nicht doppelt speichern, z. B. JH für IBAN OLB
-		// TODO: kontoinhaberRepository.istVorhanden(benutzerId, bankverbindungId) prüfen, ob bereits existiert.
 		var bankverbindung = ID.aus(neuerKontoinhaber.getBankverbindungId(), Schluessel.BANKVERBINDUNG)
 			.map(bankverbindungRepository::finde)
 			.flatMap(bv -> bv.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)));
@@ -77,6 +77,10 @@ public class KontoinhaberService
 				.ap(Kontoinhaber::aus)
 				.mapError(Meldungen::aus)
 				.flatMap(Function.identity())
+				.filter(not(kontoinhaber -> kontoinhaberRepository.istVorhanden(
+					kontoinhaber.getBenutzer(),
+					kontoinhaber.getBankverbindung())))
+				.getOrElse(Validation.invalid(Meldungen.aus(Meldung.KONTOINHABER_EXISTIERT_BEREITS)))
 				.fold(neuerKontoinhaber::fuegeMeldungenHinzu, kontoinhaber -> {
 					kontoinhaberRepository.speichere(kontoinhaber);
 					return new NeuerKontoinhaber().fuegeMeldungHinzu(Meldung.KONTOINHABER_ERSTELLT);

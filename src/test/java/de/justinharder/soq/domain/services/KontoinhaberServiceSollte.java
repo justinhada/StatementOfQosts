@@ -130,11 +130,33 @@ class KontoinhaberServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("erstellen")
+	@DisplayName("bereits existierenden Kontoinhaber melden")
 	void test06()
 	{
 		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.of(BANKVERBINDUNG_1));
 		when(benutzerRepository.finde(BENUTZER_1.getId())).thenReturn(Option.of(BENUTZER_1));
+		when(kontoinhaberRepository.istVorhanden(BENUTZER_1, BANKVERBINDUNG_1)).thenReturn(true);
+		var ergebnis = sut.erstelle(new NeuerKontoinhaber(
+			List.of(BENUTZER_1.getId().getWert().toString()),
+			BANKVERBINDUNG_1.getId().getWert().toString()));
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BENUTZER)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANKVERBINDUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
+				Meldung.KONTOINHABER_EXISTIERT_BEREITS));
+		verify(bankverbindungRepository).finde(BANKVERBINDUNG_1.getId());
+		verify(benutzerRepository).finde(BENUTZER_1.getId());
+		verify(kontoinhaberRepository).istVorhanden(BENUTZER_1, BANKVERBINDUNG_1);
+	}
+
+	@Test
+	@DisplayName("erstellen")
+	void test07()
+	{
+		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.of(BANKVERBINDUNG_1));
+		when(benutzerRepository.finde(BENUTZER_1.getId())).thenReturn(Option.of(BENUTZER_1));
+		when(kontoinhaberRepository.istVorhanden(BENUTZER_1, BANKVERBINDUNG_1)).thenReturn(false);
 		var ergebnis = sut.erstelle(new NeuerKontoinhaber(
 			List.of(BENUTZER_1.getId().getWert().toString()),
 			BANKVERBINDUNG_1.getId().getWert().toString()));
@@ -146,6 +168,7 @@ class KontoinhaberServiceSollte extends DTOTestdaten
 				Meldung.KONTOINHABER_ERSTELLT));
 		verify(bankverbindungRepository).finde(BANKVERBINDUNG_1.getId());
 		verify(benutzerRepository).finde(BENUTZER_1.getId());
+		verify(kontoinhaberRepository).istVorhanden(BENUTZER_1, BANKVERBINDUNG_1);
 		verify(kontoinhaberRepository).speichere(any(Kontoinhaber.class));
 	}
 }

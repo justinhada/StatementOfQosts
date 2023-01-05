@@ -152,6 +152,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Der Kontoinhaber wurde erfolgreich erstellt!");
 
+	public static final Meldung KONTOINHABER_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Der Kontoinhaber existiert bereits!");
+
 	public static final Meldung IMPORT = new Meldung(
 		Schluessel.IMPORT,
 		Ebene.FEHLER,
