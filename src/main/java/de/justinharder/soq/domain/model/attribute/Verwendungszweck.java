@@ -19,7 +19,7 @@ public class Verwendungszweck extends WertObjekt<String>
 	private static final long serialVersionUID = 6979677265045740322L;
 
 	@NonNull
-	@Column(name = "Verwendungszweck", nullable = false)
+	@Column(name = "Verwendungszweck", columnDefinition = "TEXT", nullable = false)
 	private String wert;
 
 	public static Validation<Meldungen, Verwendungszweck> aus(String wert)

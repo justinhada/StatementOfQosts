@@ -14,6 +14,7 @@ import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Function;
 
@@ -33,6 +34,7 @@ public class ImportService
 		this.umsatzErzeugung = umsatzErzeugung;
 	}
 
+	@Transactional
 	public NeuerImport importiere(@NonNull NeuerImport neuerImport)
 	{
 		/*
