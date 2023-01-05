@@ -26,7 +26,7 @@ class KontoinhaberJpaRepositorySollte
 	void test01()
 	{
 		assertAll(
-			() -> assertThrows(NullPointerException.class, () -> sut.finde((ID) null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.speichere(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)));
 	}

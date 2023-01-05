@@ -51,7 +51,7 @@ class ImportServiceSollte extends DTOTestdaten
 	@DisplayName("ungültige Eingabedaten melden")
 	void test02()
 	{
-		var neuerImport = new NeuerImport(0, "".getBytes(StandardCharsets.UTF_8));
+		var neuerImport = new NeuerImport("0", "".getBytes(StandardCharsets.UTF_8));
 		var ergebnis = sut.importiere(neuerImport);
 
 		assertAll(

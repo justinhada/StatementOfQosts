@@ -69,5 +69,6 @@ public class DTOTestdaten extends ImportTestdaten
 		UMSATZ_2.getVerwendungszweck().getWert(),
 		UMSATZ_2.getBankverbindungAuftraggeber().getIban().getWert(),
 		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().getWert());
-	protected static final NeuerImport NEUER_IMPORT = new NeuerImport(Herausgeber.OLB.getCode(), DATEI_1_WERT);
+	protected static final NeuerImport NEUER_IMPORT =
+		new NeuerImport(String.valueOf(Herausgeber.OLB.getCode()), DATEI_1_WERT);
 }

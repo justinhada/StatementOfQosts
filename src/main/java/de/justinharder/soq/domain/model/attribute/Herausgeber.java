@@ -22,10 +22,10 @@ public enum Herausgeber
 	private final int code;
 	private final String wert;
 
-	public static Validation<Meldungen, Herausgeber> aus(int code)
+	public static Validation<Meldungen, Herausgeber> aus(String code)
 	{
 		return Option.ofOptional(Stream.of(values())
-				.filter(herausgeber -> herausgeber.code == code)
+				.filter(herausgeber -> herausgeber.code == Integer.parseInt(code))
 				.findAny())
 			.toValidation(Meldungen.aus(Meldung.HERAUSGEBER_UNGUELTIG));
 	}

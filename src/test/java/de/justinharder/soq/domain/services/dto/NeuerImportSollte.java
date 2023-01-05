@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("NeuerImport sollte")
 class NeuerImportSollte extends DTOSollte<NeuerImport>
 {
-	private static final int HERAUSGEBER = 1;
+	private static final String HERAUSGEBER = "1";
 	private static final byte[] DATEI = "CSV-Datei".getBytes(StandardCharsets.UTF_8);
 
 	@BeforeEach

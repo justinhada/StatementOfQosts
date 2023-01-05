@@ -22,12 +22,12 @@ class HerausgeberSollte extends Testdaten
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Herausgeber.aus(0);
+		validierung = Herausgeber.aus("0");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.HERAUSGEBER_UNGUELTIG));
 
-		validierung = Herausgeber.aus(3);
+		validierung = Herausgeber.aus("3");
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.HERAUSGEBER_UNGUELTIG));
@@ -37,14 +37,14 @@ class HerausgeberSollte extends Testdaten
 	@DisplayName("valide sein")
 	void test02()
 	{
-		validierung = Herausgeber.aus(1);
+		validierung = Herausgeber.aus("1");
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
 			() -> assertThat(sut.getCode()).isEqualTo(1),
 			() -> assertThat(sut.getWert()).isEqualTo("Oldenburgische Landesbank AG"));
 
-		validierung = Herausgeber.aus(2);
+		validierung = Herausgeber.aus("2");
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
