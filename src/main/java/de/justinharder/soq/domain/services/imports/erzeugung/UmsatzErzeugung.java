@@ -37,7 +37,9 @@ public class UmsatzErzeugung
 	{
 		return Validation.combine(
 				Datum.aus(LocalDate.parse(umsatzDatum.datum(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))),
-				Betrag.aus(new BigDecimal(umsatzDatum.betrag().replace(",", "."))),
+				Betrag.aus(new BigDecimal(umsatzDatum.betrag()
+					.replace(".", "")
+					.replace(",", "."))),
 				Verwendungszweck.aus(umsatzDatum.verwendungszweck()),
 				IBAN.aus(umsatzDatum.auftraggeberIBAN())
 					.map(bankverbindungErzeugung::findeAuftraggeber)
