@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.imports.erzeugung;
 
 import de.justinharder.ImportTestdaten;
+import de.justinharder.soq.domain.model.Bank;
 import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.repository.BankRepository;
 import io.vavr.control.Option;
@@ -48,6 +49,7 @@ class BankErzeugungSollte extends ImportTestdaten
 			() -> assertThrows(RuntimeException.class, ergebnis::getError),
 			() -> assertThat(ergebnis.get()).isEqualTo(BANK_1));
 		verify(bankRepository).finde(BIC_1);
+		verify(bankRepository).speichere(BANK_1);
 	}
 
 	@Test
@@ -63,5 +65,6 @@ class BankErzeugungSollte extends ImportTestdaten
 			() -> assertThat(ergebnis.getBezeichnung()).isEqualTo(Bezeichnung.aus("OLBO").get()),
 			() -> assertThat(ergebnis.getBic()).isEqualTo(BIC_1));
 		verify(bankRepository).finde(BIC_1);
+		verify(bankRepository).speichere(any(Bank.class));
 	}
 }

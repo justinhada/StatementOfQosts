@@ -32,6 +32,7 @@ public class BankErzeugung
 			.ap(Bank::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.map(bank -> bankRepository.finde(bank.getBic()).getOrElse(bank));
+			.map(bank -> bankRepository.finde(bank.getBic()).getOrElse(bank))
+			.peek(bankRepository::speichere);
 	}
 }

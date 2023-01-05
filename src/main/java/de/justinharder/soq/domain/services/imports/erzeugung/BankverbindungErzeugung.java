@@ -44,6 +44,7 @@ public class BankverbindungErzeugung
 			.ap(Bankverbindung::aus)
 			.mapError(Meldungen::aus)
 			.flatMap(Function.identity())
-			.map(bankverbindung -> bankverbindungRepository.finde(bankverbindung.getIban()).getOrElse(bankverbindung));
+			.map(bankverbindung -> bankverbindungRepository.finde(bankverbindung.getIban()).getOrElse(bankverbindung))
+			.peek(bankverbindungRepository::speichere);
 	}
 }

@@ -1,6 +1,7 @@
 package de.justinharder.soq.domain.services.imports.erzeugung;
 
 import de.justinharder.ImportTestdaten;
+import de.justinharder.soq.domain.model.Bankverbindung;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
 import io.vavr.control.Option;
@@ -17,8 +18,6 @@ import static org.mockito.Mockito.*;
 @DisplayName("BankverbindungErzeugung sollte")
 class BankverbindungErzeugungSollte extends ImportTestdaten
 {
-	private static final String NAME = "Laura Tiemerding";
-
 	private BankverbindungErzeugung sut;
 
 	private BankverbindungRepository bankverbindungRepository;
@@ -86,6 +85,7 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 			() -> assertThrows(RuntimeException.class, ergebnis::getError),
 			() -> assertThat(ergebnis.get()).isEqualTo(BANKVERBINDUNG_1));
 		verify(bankverbindungRepository).finde(IBAN_1);
+		verify(bankverbindungRepository).speichere(BANKVERBINDUNG_1);
 	}
 
 	@Test
@@ -103,5 +103,6 @@ class BankverbindungErzeugungSollte extends ImportTestdaten
 			() -> assertThat(ergebnis.getBank()).isEqualTo(BANK_1));
 		verify(bankverbindungRepository).finde(IBAN_1);
 		verify(bankErzeugung).findeOderErzeuge(BIC_1);
+		verify(bankverbindungRepository).speichere(any(Bankverbindung.class));
 	}
 }
