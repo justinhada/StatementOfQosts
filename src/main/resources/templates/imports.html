@@ -7,77 +7,75 @@
     <body>
         {#include header /}
 
-        <section>
-            <div class="container mt-5">
-                <h1 class="fw-bold">Import der Umsätze</h1>
+        <main class="container">
+            <h1 class="fw-bold">Import der Umsätze</h1>
 
-                <form method="post"
-                      action="/import"
-                      enctype="multipart/form-data"
-                      accept-charset="UTF-8">
-                    {#if neuerImport.hatMeldungen(Schluessel:ALLGEMEIN)}
-                        <ul class="list-unstyled alert {#if neuerImport.istErfolgreich()}alert-success{/if}">
-                        {#for meldung in neuerImport.getMeldungen(Schluessel:ALLGEMEIN)}
-                            <li>{meldung.text}</li>
-                        {/for}
+            <form method="post"
+                  action="/import"
+                  enctype="multipart/form-data"
+                  accept-charset="UTF-8">
+                {#if neuerImport.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if neuerImport.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in neuerImport.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                <div class="row">
+                    <div class="col">
+                        <label for="herausgeber"
+                               class="form-label mt-2 fw-bold">
+                            Herausgeber
+                        </label>
+
+                        <select id="herausgeber"
+                                name="herausgeber"
+                                class="form-select {#if neuerImport.hatMeldungen(Schluessel:HERAUSGEBER)}is-invalid{/if}">
+                            <option value="1">Oldenburgische Landesbank AG</option>
+                            <option value="2">VR BANK Dinklage-Steinfeld eG</option>
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerImport.getMeldungen(Schluessel:HERAUSGEBER)}
+                                <li>{meldung.text}</li>
+                            {/for}
                         </ul>
-                    {/if}
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="herausgeber"
-                                   class="form-label mt-2 fw-bold">
-                                Herausgeber
-                            </label>
-
-                            <select id="herausgeber"
-                                    name="herausgeber"
-                                    class="form-select {#if neuerImport.hatMeldungen(Schluessel:HERAUSGEBER)}is-invalid{/if}">
-                                <option value="1">Oldenburgische Landesbank AG</option>
-                                <option value="2">VR BANK Dinklage-Steinfeld eG</option>
-                            </select>
-
-                            <ul class="list-unstyled invalid-feedback">
-                                {#for meldung in neuerImport.getMeldungen(Schluessel:HERAUSGEBER)}
-                                    <li>{meldung.text}</li>
-                                {/for}
-                            </ul>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <label for="datei"
-                                   class="form-label mt-2 fw-bold">
-                                Datei
-                            </label>
+                <div class="row">
+                    <div class="col">
+                        <label for="datei"
+                               class="form-label mt-2 fw-bold">
+                            Datei
+                        </label>
 
-                            <input id="datei"
-                                   name="datei"
-                                   type="file"
-                                   class="form-control {#if neuerImport.hatMeldungen(Schluessel:DATEI)}is-invalid{/if}"
-                                   aria-label="datei"
-                                   value="{neuerImport.datei}" />
+                        <input id="datei"
+                               name="datei"
+                               type="file"
+                               class="form-control {#if neuerImport.hatMeldungen(Schluessel:DATEI)}is-invalid{/if}"
+                               aria-label="datei"
+                               value="{neuerImport.datei}" />
 
-                            <ul class="list-unstyled invalid-feedback">
-                                {#for meldung in neuerImport.getMeldungen(Schluessel:DATEI)}
-                                    <li>{meldung.text}</li>
-                                {/for}
-                            </ul>
-                        </div>
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerImport.getMeldungen(Schluessel:DATEI)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit"
-                                    class="btn btn-primary mt-3 fw-bold">
-                                Importieren
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Importieren
+                        </button>
                     </div>
-                </form>
-            </div>
-        </section>
+                </div>
+            </form>
+        </main>
 
         {#include footer /}
     </body>

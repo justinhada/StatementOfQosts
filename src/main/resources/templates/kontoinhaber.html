@@ -7,45 +7,43 @@
     <body>
         {#include header /}
 
-        <section>
-            <div class="container mt-5">
-                <h1 class="fw-bold">Kontoinhaber erstellen</h1>
+        <main class="container mt-5">
+            <h1 class="fw-bold">Kontoinhaber erstellen</h1>
 
-                <form method="post"
-                      action="/banken">
-                    {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
-                        <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
-                        {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                        </ul>
-                    {/if}
-                </form>
+            <form method="post"
+                  action="/banken">
+                {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+            </form>
 
-                <table class="table table-striped table-hover mt-5">
-                    <thead>
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nachname</th>
+                        <th>Vorname</th>
+                        <th>IBAN</th>
+                        <th>Bank</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#for kontoinhaber in alleKontoinhaber}
                         <tr>
-                            <th>ID</th>
-                            <th>Nachname</th>
-                            <th>Vorname</th>
-                            <th>IBAN</th>
-                            <th>Bank</th>
+                        <td>{kontoinhaber.id}</td>
+                        <td>{kontoinhaber.nachname}</td>
+                        <td>{kontoinhaber.vorname}</td>
+                        <td>{kontoinhaber.iban}</td>
+                        <td>{kontoinhaber.bank}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {#for kontoinhaber in alleKontoinhaber}
-                        <tr>
-                            <td>{kontoinhaber.id}</td>
-                            <td>{kontoinhaber.nachname}</td>
-                            <td>{kontoinhaber.vorname}</td>
-                            <td>{kontoinhaber.iban}</td>
-                            <td>{kontoinhaber.bank}</td>
-                        </tr>
-                        {/for}
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                    {/for}
+                </tbody>
+            </table>
+        </main>
 
         {#include footer /}
     </body>

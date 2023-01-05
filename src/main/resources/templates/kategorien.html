@@ -7,71 +7,69 @@
     <body>
         {#include header /}
 
-        <section>
-            <div class="container mt-5">
-                <h1 class="fw-bold">Kategorie erstellen</h1>
+        <main class="container mt-5">
+            <h1 class="fw-bold">Kategorie erstellen</h1>
 
-                <form method="post"
-                      action="/kategorien">
-                    {#if neueKategorie.hatMeldungen(Schluessel:ALLGEMEIN)}
-                        <ul class="list-unstyled alert {#if neueKategorie.istErfolgreich()}alert-success{/if}">
-                        {#for meldung in neueKategorie.getMeldungen(Schluessel:ALLGEMEIN)}
-                            <li>{meldung.text}</li>
-                        {/for}
+            <form method="post"
+                  action="/kategorien">
+                {#if neueKategorie.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if neueKategorie.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in neueKategorie.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                <div class="row">
+                    <div class="col">
+                        <label for="bezeichnung"
+                               class="form-label mt-2 fw-bold">
+                            Bezeichnung
+                        </label>
+
+                        <input id="bezeichnung"
+                               name="bezeichnung"
+                               type="text"
+                               class="form-control {#if neueKategorie.hatMeldungen(Schluessel:BEZEICHNUNG)}is-invalid{/if}"
+                               placeholder="Muster GmbH"
+                               aria-label="bezeichnung"
+                               value="{neueKategorie.bezeichnung}" />
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neueKategorie.getMeldungen(Schluessel:BEZEICHNUNG)}
+                                <li>{meldung.text}</li>
+                            {/for}
                         </ul>
-                    {/if}
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="bezeichnung"
-                                   class="form-label mt-2 fw-bold">
-                                Bezeichnung
-                            </label>
-
-                            <input id="bezeichnung"
-                                   name="bezeichnung"
-                                   type="text"
-                                   class="form-control {#if neueKategorie.hatMeldungen(Schluessel:BEZEICHNUNG)}is-invalid{/if}"
-                                   placeholder="Muster GmbH"
-                                   aria-label="bezeichnung"
-                                   value="{neueKategorie.bezeichnung}" />
-
-                            <ul class="list-unstyled invalid-feedback">
-                                {#for meldung in neueKategorie.getMeldungen(Schluessel:BEZEICHNUNG)}
-                                    <li>{meldung.text}</li>
-                                {/for}
-                            </ul>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit"
-                                    class="btn btn-primary mt-3 fw-bold">
-                                Kategorie erstellen
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Kategorie erstellen
+                        </button>
                     </div>
-                </form>
+                </div>
+            </form>
 
-                <table class="table table-striped table-hover mt-5">
-                    <thead>
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Bezeichnung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#for kategorie in kategorien}
                         <tr>
-                            <th>ID</th>
-                            <th>Bezeichnung</th>
+                        <td>{kategorie.id}</td>
+                        <td>{kategorie.bezeichnung}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {#for kategorie in kategorien}
-                            <tr>
-                            <td>{kategorie.id}</td>
-                            <td>{kategorie.bezeichnung}</td>
-                            </tr>
-                        {/for}
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                    {/for}
+                </tbody>
+            </table>
+        </main>
 
         {#include footer /}
     </body>

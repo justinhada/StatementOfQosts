@@ -5,98 +5,96 @@
     {/include}
 
     <body>
-            {#include header /}
+        {#include header /}
 
-        <section>
-            <div class="container mt-5">
-                <h1 class="fw-bold">Kontoinhaber erstellen</h1>
+        <main class="container mt-5">
+            <h1 class="fw-bold">Kontoinhaber erstellen</h1>
 
-                <form method="post"
-                      action="/kontoinhaber">
-                    {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
-                        <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
-                        {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
-                            <li>{meldung.text}</li>
-                        {/for}
+            <form method="post"
+                  action="/kontoinhaber">
+                {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if neuerKontoinhaber.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                {#if neuerKontoinhaber.hatMeldungen(Schluessel:BANKVERBINDUNG)}
+                    <div class="row">
+                    <div class="col">
+                    <ul class="list-unstyled alert alert-danger">
+                    {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BANKVERBINDUNG)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                    </div>
+                    </div>
+                {/if}
+
+                <div class="row">
+                    <h3 class="col fw-bold text-center">Bankverbindung</h3>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">ID</div>
+
+                    <div class="col font-monospace">{bankverbindung.id}</div>
+
+                    <input id="bankverbindungId"
+                           name="bankverbindungId"
+                           type="hidden"
+                           aria-label="bankverbindungId"
+                           value="{bankverbindung.id}" />
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">IBAN</div>
+
+                    <div class="col font-monospace">{bankverbindung.iban}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Bank</div>
+
+                    <div class="col font-monospace">{bankverbindung.bank}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="benutzerIds"
+                               class="form-label mt-2 fw-bold">
+                            Benutzer
+                        </label>
+
+                        <select id="benutzerIds"
+                                name="benutzerIds"
+                                multiple="multiple"
+                                class="form-select {#if neuerKontoinhaber.hatMeldungen(Schluessel:BENUTZER)}is-invalid{/if}">
+                            {#for benutzer in alleBenutzer}
+                                <option value="{benutzer.id}">{benutzer.vorname} {benutzer.nachname}</option>
+                            {/for}
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BENUTZER)}
+                                <li>{meldung.text}</li>
+                            {/for}
                         </ul>
-                    {/if}
-
-                    {#if neuerKontoinhaber.hatMeldungen(Schluessel:BANKVERBINDUNG)}
-                        <div class="row">
-                        <div class="col">
-                        <ul class="list-unstyled alert alert-danger">
-                        {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BANKVERBINDUNG)}
-                            <li>{meldung.text}</li>
-                        {/for}
-                        </ul>
-                        </div>
-                        </div>
-                    {/if}
-
-                    <div class="row">
-                        <h3 class="col fw-bold text-center">Bankverbindung</h3>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col fw-bold text-end">ID</div>
-
-                        <div class="col font-monospace">{bankverbindung.id}</div>
-
-                        <input id="bankverbindungId"
-                               name="bankverbindungId"
-                               type="hidden"
-                               aria-label="bankverbindungId"
-                               value="{bankverbindung.id}" />
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Kontoinhaber erstellen
+                        </button>
                     </div>
+                </div>
+            </form>
+        </main>
 
-                    <div class="row">
-                        <div class="col fw-bold text-end">IBAN</div>
-
-                        <div class="col font-monospace">{bankverbindung.iban}</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col fw-bold text-end">Bank</div>
-
-                        <div class="col font-monospace">{bankverbindung.bank}</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="benutzerIds"
-                                   class="form-label mt-2 fw-bold">
-                                Benutzer
-                            </label>
-
-                            <select id="benutzerIds"
-                                    name="benutzerIds"
-                                    multiple="multiple"
-                                    class="form-select {#if neuerKontoinhaber.hatMeldungen(Schluessel:BENUTZER)}is-invalid{/if}">
-                                {#for benutzer in alleBenutzer}
-                                    <option value="{benutzer.id}">{benutzer.vorname} {benutzer.nachname}</option>
-                                {/for}
-                            </select>
-
-                            <ul class="list-unstyled invalid-feedback">
-                                {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BENUTZER)}
-                                    <li>{meldung.text}</li>
-                                {/for}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit"
-                                    class="btn btn-primary mt-3 fw-bold">
-                                Kontoinhaber erstellen
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-            {#include footer /}
+        {#include footer /}
     </body>
 </html>
