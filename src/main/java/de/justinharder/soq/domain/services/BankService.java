@@ -3,8 +3,10 @@ package de.justinharder.soq.domain.services;
 import de.justinharder.soq.domain.model.Bank;
 import de.justinharder.soq.domain.model.attribute.BIC;
 import de.justinharder.soq.domain.model.attribute.Bezeichnung;
+import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
+import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
@@ -43,6 +45,14 @@ public class BankService
 			.toList();
 	}
 
+	public GespeicherteBank finde(@NonNull String id)
+	{
+		return ID.aus(id, Schluessel.BANK)
+			.map(bankRepository::finde)
+			.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT)))
+			.fold(meldungen -> new GespeicherteBank().fuegeMeldungenHinzu(meldungen), bankMapping::mappe);
+	}
+
 	@Transactional
 	public NeueBank erstelle(@NonNull NeueBank neueBank)
 	{
@@ -62,4 +72,15 @@ public class BankService
 			});
 	}
 
+	@Transactional
+	public GespeicherteBank aktualisiere(@NonNull GespeicherteBank gespeicherteBank)
+	{
+		/*
+		 TODO: Wie sollen Banken aktualisiert werden?
+		       Wie sollen vergebene Bezeichnungen und BIC geprüft werden?
+		       Die gleiche Bezeichnung und BIC müssen möglich sein.
+		 */
+
+		return null;
+	}
 }

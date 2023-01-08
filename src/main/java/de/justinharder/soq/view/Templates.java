@@ -12,6 +12,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Templates
 {
+	public static native TemplateInstance bank(
+		GespeicherteBank gespeicherteBank);
+
 	public static native TemplateInstance banken(
 		NeueBank neueBank,
 		List<GespeicherteBank> banken);

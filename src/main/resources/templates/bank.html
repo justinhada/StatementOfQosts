@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Banken - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+        {#include header /}
+
+        <main class="container mt-5">
+            <h1 class="fw-bold">Bank: {gespeicherteBank.id}</h1>
+
+            <form method="post"
+                  action="/banken/{gespeicherteBank.id}">
+                {#if gespeicherteBank.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if gespeicherteBank.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in gespeicherteBank.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                <input id="id"
+                       name="id"
+                       type="hidden"
+                       value="{gespeicherteBank.id}" />
+
+                <div class="row">
+                    <div class="col">
+                        <label for="bezeichnung"
+                               class="form-label mt-2 fw-bold">
+                            Bezeichnung
+                        </label>
+
+                        <input id="bezeichnung"
+                               name="bezeichnung"
+                               type="text"
+                               class="form-control {#if gespeicherteBank.hatMeldungen(Schluessel:BEZEICHNUNG)}is-invalid{/if}"
+                               placeholder="Musterbank AG"
+                               aria-label="bezeichnung"
+                               value="{gespeicherteBank.bezeichnung}" />
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in gespeicherteBank.getMeldungen(Schluessel:BEZEICHNUNG)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <label for="bic"
+                               class="form-label mt-2 fw-bold">
+                            BIC
+                        </label>
+
+                        <input id="bic"
+                               name="bic"
+                               type="text"
+                               class="form-control {#if gespeicherteBank.hatMeldungen(Schluessel:BIC)}is-invalid{/if}"
+                               placeholder="BBBBCCLLbbb"
+                               aria-label="bic"
+                               value="{gespeicherteBank.bic}" />
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in gespeicherteBank.getMeldungen(Schluessel:BIC)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Bank aktualisieren
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
+
+        {#include footer /}
+    </body>
+</html>
