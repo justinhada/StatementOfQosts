@@ -8,7 +8,140 @@
         {#include header /}
 
         <main class="container mt-5">
-            <h1 class="fw-bold">Umsätze</h1>
+            <h1 class="fw-bold">Umsatz erstellen</h1>
+
+            <form method="post"
+                  action="/umsaetze">
+                {#if neuerUmsatz.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled alert {#if neuerUmsatz.istErfolgreich()}alert-success{/if}">
+                    {#for meldung in neuerUmsatz.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li>{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                <div class="row">
+                    <div class="col">
+                        <label for="datum"
+                               class="form-label mt-2 fw-bold">
+                            Datum
+                        </label>
+
+                        <input id="datum"
+                               name="datum"
+                               type="date"
+                               class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:DATUM)}is-invalid{/if}"
+                               placeholder="dd.MM.yyyy"
+                               aria-label="datum"
+                               value="{neuerUmsatz.datum}" />
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:DATUM)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <label for="betrag"
+                               class="form-label mt-2 fw-bold">
+                            Betrag
+                        </label>
+
+                        <input id="betrag"
+                               name="betrag"
+                               type="number"
+                               class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:BETRAG)}is-invalid{/if}"
+                               placeholder="1.234,56"
+                               aria-label="betrag"
+                               value="{neuerUmsatz.betrag}" />
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:BETRAG)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="verwendungszweck"
+                               class="form-label mt-2 fw-bold">
+                            Verwendungszweck
+                        </label>
+
+                        <textarea id="verwendungszweck"
+                                  name="verwendungszweck"
+                                  class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:VERWENDUNGSZWECK)}is-invalid{/if}"
+                                  aria-label="verwendungszweck"
+                                  rows="3">{neuerUmsatz.verwendungszweck}</textarea>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:VERWENDUNGSZWECK)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="auftraggeberIds"
+                               class="form-label mt-2 fw-bold">
+                            Auftraggeber
+                        </label>
+
+                        <select id="auftraggeberIds"
+                                name="auftraggeberIds"
+                                class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:AUFTRAGGEBER)}is-invalid{/if}">
+                            {#for auftraggeber in alleAuftraggeber}
+                                <option value="{auftraggeber.id}">
+                                {auftraggeber.iban} {#if auftraggeber.hatKontoinhaber()}({auftraggeber.alleKontoinhaber}){/if}
+                                </option>
+                            {/for}
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:AUFTRAGGEBER)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <label for="zahlungsbeteiligterIds"
+                               class="form-label mt-2 fw-bold">
+                            Zahlungsbeteiligter
+                        </label>
+
+                        <select id="zahlungsbeteiligterIds"
+                                name="zahlungsbeteiligterIds"
+                                class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}is-invalid{/if}">
+                            {#for zahlungsbeteiligter in zahlungsbeteiligte}
+                                <option value="{zahlungsbeteiligter.id}">
+                                {zahlungsbeteiligter.iban} {#if zahlungsbeteiligter.hatKontoinhaber()}({zahlungsbeteiligter.alleKontoinhaber}){/if}
+                                </option>
+                            {/for}
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Umsatz erstellen
+                        </button>
+                    </div>
+                </div>
+            </form>
 
             <table class="table table-striped table-hover mt-5">
                 <thead>

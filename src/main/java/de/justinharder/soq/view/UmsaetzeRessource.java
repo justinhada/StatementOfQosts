@@ -1,6 +1,8 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.UmsatzService;
+import de.justinharder.soq.domain.services.dto.NeuerUmsatz;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 
@@ -18,16 +20,31 @@ public class UmsaetzeRessource
 	@NonNull
 	private final UmsatzService umsatzService;
 
+	@NonNull
+	private final BankverbindungService bankverbindungService;
+
+	@NonNull
+	private NeuerUmsatz neuerUmsatz;
+
 	@Inject
-	public UmsaetzeRessource(@NonNull UmsatzService umsatzService)
+	public UmsaetzeRessource(
+		@NonNull UmsatzService umsatzService,
+		@NonNull BankverbindungService bankverbindungService,
+		@NonNull NeuerUmsatz neuerUmsatz)
 	{
 		this.umsatzService = umsatzService;
+		this.bankverbindungService = bankverbindungService;
+		this.neuerUmsatz = neuerUmsatz;
 	}
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeTabelle()
+	public TemplateInstance zeigeFormular()
 	{
-		return Templates.umsaetze(umsatzService.findeAlle());
+		return Templates.umsaetze(
+			neuerUmsatz,
+			bankverbindungService.findeAlleAuftraggeber(),
+			bankverbindungService.findeAlleZahlungsbeteiligten(),
+			umsatzService.findeAlle());
 	}
 }

@@ -6,6 +6,7 @@ import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
+import de.justinharder.soq.domain.repository.KontoinhaberRepository;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import de.justinharder.soq.domain.services.mapping.BankverbindungMapping;
 import io.vavr.control.Option;
@@ -27,6 +28,7 @@ class BankverbindungServiceSollte extends DTOTestdaten
 
 	private BankverbindungRepository bankverbindungRepository;
 	private BankRepository bankRepository;
+	private KontoinhaberRepository kontoinhaberRepository;
 	private BankverbindungMapping bankverbindungMapping;
 
 	@BeforeEach
@@ -34,9 +36,14 @@ class BankverbindungServiceSollte extends DTOTestdaten
 	{
 		bankverbindungRepository = mock(BankverbindungRepository.class);
 		bankRepository = mock(BankRepository.class);
+		kontoinhaberRepository = mock(KontoinhaberRepository.class);
 		bankverbindungMapping = mock(BankverbindungMapping.class);
 
-		sut = new BankverbindungService(bankverbindungRepository, bankRepository, bankverbindungMapping);
+		sut = new BankverbindungService(
+			bankverbindungRepository,
+			bankRepository,
+			kontoinhaberRepository,
+			bankverbindungMapping);
 	}
 
 	@Test
@@ -45,11 +52,15 @@ class BankverbindungServiceSollte extends DTOTestdaten
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungService(null, bankRepository, bankverbindungMapping)),
+				() -> new BankverbindungService(null, bankRepository, kontoinhaberRepository, bankverbindungMapping)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungService(bankverbindungRepository, null, bankverbindungMapping)),
+				() -> new BankverbindungService(bankverbindungRepository, null, kontoinhaberRepository,
+					bankverbindungMapping)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankverbindungService(bankverbindungRepository, bankRepository, null)),
+				() -> new BankverbindungService(bankverbindungRepository, bankRepository, null, bankverbindungMapping)),
+			() -> assertThrows(NullPointerException.class,
+				() -> new BankverbindungService(bankverbindungRepository, bankRepository, kontoinhaberRepository,
+					null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
 	}

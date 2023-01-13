@@ -9,6 +9,7 @@ import io.vavr.control.Try;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
+import java.util.List;
 
 @Dependent
 public class KontoinhaberJpaRepository extends JpaRepository<Kontoinhaber> implements KontoinhaberRepository
@@ -16,6 +17,18 @@ public class KontoinhaberJpaRepository extends JpaRepository<Kontoinhaber> imple
 	public KontoinhaberJpaRepository()
 	{
 		super(Kontoinhaber.class);
+	}
+
+	@Override
+	public List<Kontoinhaber> findeAlle(@NonNull Bankverbindung bankverbindung)
+	{
+		return entityManager.createQuery("""
+				SELECT kontoinhaber
+				FROM Kontoinhaber kontoinhaber
+				JOIN kontoinhaber.bankverbindung bv
+				WHERE bv = :bankverbindung""", Kontoinhaber.class)
+			.setParameter("bankverbindung", bankverbindung)
+			.getResultList();
 	}
 
 	@Override

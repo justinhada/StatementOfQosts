@@ -48,6 +48,9 @@ public class Templates
 	public static native TemplateInstance start();
 
 	public static native TemplateInstance umsaetze(
+		NeuerUmsatz neuerUmsatz,
+		List<GespeicherterAuftraggeber> alleAuftraggeber,
+		List<GespeicherterZahlungsbeteiligter> zahlungsbeteiligte,
 		List<GespeicherterUmsatz> umsaetze);
 
 	public static native TemplateInstance unternehmen(

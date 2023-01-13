@@ -8,7 +8,10 @@ import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
+import de.justinharder.soq.domain.repository.KontoinhaberRepository;
 import de.justinharder.soq.domain.services.dto.GespeicherteBankverbindung;
+import de.justinharder.soq.domain.services.dto.GespeicherterAuftraggeber;
+import de.justinharder.soq.domain.services.dto.GespeicherterZahlungsbeteiligter;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import de.justinharder.soq.domain.services.mapping.BankverbindungMapping;
 import io.vavr.control.Validation;
@@ -32,15 +35,20 @@ public class BankverbindungService
 	private final BankRepository bankRepository;
 
 	@NonNull
+	private final KontoinhaberRepository kontoinhaberRepository;
+
+	@NonNull
 	private final BankverbindungMapping bankverbindungMapping;
 
 	@Inject
 	public BankverbindungService(
 		@NonNull BankverbindungRepository bankverbindungRepository,
 		@NonNull BankRepository bankRepository,
+		@NonNull KontoinhaberRepository kontoinhaberRepository,
 		@NonNull BankverbindungMapping bankverbindungMapping)
 	{
 		this.bankverbindungRepository = bankverbindungRepository;
+		this.kontoinhaberRepository = kontoinhaberRepository;
 		this.bankRepository = bankRepository;
 		this.bankverbindungMapping = bankverbindungMapping;
 	}
@@ -49,6 +57,24 @@ public class BankverbindungService
 	{
 		return bankverbindungRepository.findeAlle().stream()
 			.map(bankverbindungMapping::mappe)
+			.toList();
+	}
+
+	public List<GespeicherterAuftraggeber> findeAlleAuftraggeber()
+	{
+		return bankverbindungRepository.findeAlle().stream()
+			.map(bankverbindung -> bankverbindungMapping.mappeZuAuftraggeber(
+				bankverbindung,
+				kontoinhaberRepository.findeAlle(bankverbindung)))
+			.toList();
+	}
+
+	public List<GespeicherterZahlungsbeteiligter> findeAlleZahlungsbeteiligten()
+	{
+		return bankverbindungRepository.findeAlle().stream()
+			.map(bankverbindung -> bankverbindungMapping.mappeZuZahlungsbeteiligter(
+				bankverbindung,
+				kontoinhaberRepository.findeAlle(bankverbindung)))
 			.toList();
 	}
 
