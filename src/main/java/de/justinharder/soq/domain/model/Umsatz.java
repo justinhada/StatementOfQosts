@@ -12,6 +12,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 
+import static java.util.function.Predicate.not;
+
 @Entity
 @Getter
 @Table(name = "Umsatz")
@@ -55,11 +57,11 @@ public class Umsatz extends Entitaet
 				validiere(datum, Meldung.DATUM),
 				validiere(betrag, Meldung.BETRAG),
 				validiere(verwendungszweck, Meldung.VERWENDUNGSZWECK),
-				validiere(bankverbindungAuftraggeber, Meldung.BANKVERBINDUNG_LEER),
-				validiere(bankverbindungZahlungsbeteiligter, Meldung.BANKVERBINDUNG_LEER))
+				validiere(bankverbindungAuftraggeber, Meldung.AUFTRAGGEBER_LEER),
+				validiere(bankverbindungZahlungsbeteiligter, Meldung.ZAHLUNGSBETEILIGTER_LEER))
 			.ap(Umsatz::new)
 			.mapError(Meldungen::aus)
-			.filter(umsatz -> umsatz.bankverbindungAuftraggeber.equals(umsatz.bankverbindungZahlungsbeteiligter))
+			.filter(not(umsatz -> umsatz.bankverbindungAuftraggeber.equals(umsatz.bankverbindungZahlungsbeteiligter)))
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BANKVERBINDUNGEN_GLEICH)));
 	}
 

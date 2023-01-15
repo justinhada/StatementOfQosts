@@ -7,6 +7,16 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Art darf nicht leer sein!");
 
+	public static final Meldung AUFTRAGGEBER_EXISTIERT_NICHT = new Meldung(
+		Schluessel.AUFTRAGGEBER,
+		Ebene.FEHLER,
+		"Der Auftraggeber existiert nicht!");
+
+	public static final Meldung AUFTRAGGEBER_LEER = new Meldung(
+		Schluessel.AUFTRAGGEBER,
+		Ebene.FEHLER,
+		"Der Auftraggeber darf nicht leer sein!");
+
 	public static final Meldung BANK_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
@@ -211,4 +221,14 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.VORNAME,
 		Ebene.FEHLER,
 		"Der Vorname darf nicht leer sein!");
+
+	public static final Meldung ZAHLUNGSBETEILIGTER_EXISTIERT_NICHT = new Meldung(
+		Schluessel.ZAHLUNGSBETEILIGTER,
+		Ebene.FEHLER,
+		"Der Zahlungsbeteiligte existiert nicht!");
+
+	public static final Meldung ZAHLUNGSBETEILIGTER_LEER = new Meldung(
+		Schluessel.ZAHLUNGSBETEILIGTER,
+		Ebene.FEHLER,
+		"Der Zahlungsbeteiligte darf nicht leer sein!");
 }
