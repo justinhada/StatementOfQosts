@@ -8,9 +8,7 @@ import lombok.NonNull;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @RequestScoped
@@ -46,5 +44,14 @@ public class UmsaetzeRessource
 			bankverbindungService.findeAlleAuftraggeber(),
 			bankverbindungService.findeAlleZahlungsbeteiligten(),
 			umsatzService.findeAlle());
+	}
+
+	@POST
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public TemplateInstance erstelle(@BeanParam NeuerUmsatz neuerUmsatz)
+	{
+		this.neuerUmsatz = umsatzService.erstelle(neuerUmsatz);
+		return zeigeFormular();
 	}
 }

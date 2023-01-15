@@ -25,7 +25,7 @@ public class NeuerUmsatz extends DTO<NeuerUmsatz>
 	private String verwendungszweck;
 
 	@FormParam("auftraggeberId")
-	private String auftraggeberrId;
+	private String auftraggeberId;
 
 	@FormParam("zahlungsbeteiligterId")
 	private String zahlungsbeteiligterId;

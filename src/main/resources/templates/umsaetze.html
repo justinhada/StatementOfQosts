@@ -87,13 +87,13 @@
 
                 <div class="row">
                     <div class="col">
-                        <label for="auftraggeberIds"
+                        <label for="auftraggeberId"
                                class="form-label mt-2 fw-bold">
                             Auftraggeber
                         </label>
 
-                        <select id="auftraggeberIds"
-                                name="auftraggeberIds"
+                        <select id="auftraggeberId"
+                                name="auftraggeberId"
                                 class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:AUFTRAGGEBER)}is-invalid{/if}">
                             {#for auftraggeber in alleAuftraggeber}
                                 <option value="{auftraggeber.id}">
@@ -110,13 +110,13 @@
                     </div>
 
                     <div class="col">
-                        <label for="zahlungsbeteiligterIds"
+                        <label for="zahlungsbeteiligterId"
                                class="form-label mt-2 fw-bold">
                             Zahlungsbeteiligter
                         </label>
 
-                        <select id="zahlungsbeteiligterIds"
-                                name="zahlungsbeteiligterIds"
+                        <select id="zahlungsbeteiligterId"
+                                name="zahlungsbeteiligterId"
                                 class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}is-invalid{/if}">
                             {#for zahlungsbeteiligter in zahlungsbeteiligte}
                                 <option value="{zahlungsbeteiligter.id}">
