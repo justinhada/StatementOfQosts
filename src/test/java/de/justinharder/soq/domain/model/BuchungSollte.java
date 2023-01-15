@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("AusgabeEinnahme sollte")
+@DisplayName("Buchung sollte")
 class BuchungSollte extends Testdaten
 {
 	private Buchung sut;
@@ -56,6 +56,6 @@ class BuchungSollte extends Testdaten
 	void test03()
 	{
 		assertThat(BUCHUNG_1).hasToString(
-			"Buchung{ID=" + BUCHUNG_1.getId() + ", Typ=AUSGABE, Umsatz=Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}, Kategorie=Kategorie{ID=" + KATEGORIE_1.getId() + ", Bezeichnung=Lebensmittel}}");
+			"Buchung{ID=" + BUCHUNG_1.getId() + ", Typ=AUSGABE, Umsatz=Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1.00, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28280651080012888000, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}, Kategorie=Kategorie{ID=" + KATEGORIE_1.getId() + ", Bezeichnung=Lebensmittel}}");
 	}
 }

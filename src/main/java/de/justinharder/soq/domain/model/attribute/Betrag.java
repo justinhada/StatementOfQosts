@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Getter
 @Embeddable
@@ -26,6 +27,7 @@ public class Betrag extends WertObjekt<BigDecimal>
 	public static Validation<Meldungen, Betrag> aus(BigDecimal wert)
 	{
 		return validiere(wert, Meldung.BETRAG)
+			.map(bigDecimal -> bigDecimal.setScale(2, RoundingMode.HALF_UP))
 			.map(Betrag::new);
 	}
 

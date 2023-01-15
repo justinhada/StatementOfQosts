@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -38,7 +39,7 @@ class BetragSollte extends Testdaten
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(BigDecimal.ZERO));
+			() -> assertThat(sut.getWert()).isEqualTo(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)));
 
 		validierung = Betrag.aus(BETRAG_1_WERT);
 		sut = validierung.get();
