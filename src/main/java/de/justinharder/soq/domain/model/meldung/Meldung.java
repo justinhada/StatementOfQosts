@@ -37,6 +37,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Bankverbindung darf nicht leer sein!");
 
+	public static final Meldung BANKVERBINDUNGEN_GLEICH = new Meldung(
+		Schluessel.BANKVERBINDUNG,
+		Ebene.FEHLER,
+		"Der Auftraggeber und der Zahlungsbeteiligte dürfen nicht gleich sein!");
+
 	public static final Meldung BENUTZER_EXISTIERT_NICHT = new Meldung(
 		Schluessel.BENUTZER,
 		Ebene.FEHLER,
