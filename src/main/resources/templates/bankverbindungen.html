@@ -13,9 +13,9 @@
             <form method="post"
                   action="/bankverbindungen">
                 {#if neueBankverbindung.hatMeldungen(Schluessel:ALLGEMEIN)}
-                    <ul class="list-unstyled alert {#if neueBankverbindung.istErfolgreich()}alert-success{/if}">
+                    <ul class="list-unstyled text-center fw-bold">
                     {#for meldung in neueBankverbindung.getMeldungen(Schluessel:ALLGEMEIN)}
-                        <li>{meldung.text}</li>
+                        <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
                     {/for}
                     </ul>
                 {/if}
