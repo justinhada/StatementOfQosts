@@ -16,4 +16,11 @@ public interface UmsatzRepository extends Repository<Umsatz>
 		@NonNull Verwendungszweck verwendungszweck,
 		@NonNull Bankverbindung bankverbindungAuftraggeber,
 		@NonNull Bankverbindung bankverbindungZahlungsbeteiligter);
+
+	boolean istVorhanden(
+		@NonNull Datum datum,
+		@NonNull Betrag betrag,
+		@NonNull Verwendungszweck verwendungszweck,
+		@NonNull Bankverbindung bankverbindungAuftraggeber,
+		@NonNull Bankverbindung bankverbindungZahlungsbeteiligter);
 }

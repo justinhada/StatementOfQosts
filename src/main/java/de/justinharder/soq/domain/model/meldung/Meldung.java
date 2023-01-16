@@ -12,6 +12,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Auftraggeber existiert nicht!");
 
+	public static final Meldung AUFTRAGGEBER_GLEICH = new Meldung(
+		Schluessel.AUFTRAGGEBER,
+		Ebene.FEHLER,
+		"Der Auftraggeber und der Zahlungsbeteiligte dürfen nicht gleich sein!");
+
 	public static final Meldung AUFTRAGGEBER_LEER = new Meldung(
 		Schluessel.AUFTRAGGEBER,
 		Ebene.FEHLER,
@@ -46,11 +51,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.BANKVERBINDUNG,
 		Ebene.FEHLER,
 		"Die Bankverbindung darf nicht leer sein!");
-
-	public static final Meldung BANKVERBINDUNGEN_GLEICH = new Meldung(
-		Schluessel.BANKVERBINDUNG,
-		Ebene.FEHLER,
-		"Der Auftraggeber und der Zahlungsbeteiligte dürfen nicht gleich sein!");
 
 	public static final Meldung BENUTZER_EXISTIERT_NICHT = new Meldung(
 		Schluessel.BENUTZER,
@@ -197,6 +197,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Der Umsatz wurde erfolgreich erstellt!");
 
+	public static final Meldung UMSATZ_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Der Umsatz existiert bereits!");
+
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,
 		Ebene.FEHLER,
@@ -226,6 +231,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.ZAHLUNGSBETEILIGTER,
 		Ebene.FEHLER,
 		"Der Zahlungsbeteiligte existiert nicht!");
+
+	public static final Meldung ZAHLUNGSBETEILIGTER_GLEICH = new Meldung(
+		Schluessel.ZAHLUNGSBETEILIGTER,
+		Ebene.FEHLER,
+		"Der Auftraggeber und der Zahlungsbeteiligte dürfen nicht gleich sein!");
 
 	public static final Meldung ZAHLUNGSBETEILIGTER_LEER = new Meldung(
 		Schluessel.ZAHLUNGSBETEILIGTER,

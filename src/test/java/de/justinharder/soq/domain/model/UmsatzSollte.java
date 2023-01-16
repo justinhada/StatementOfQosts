@@ -31,7 +31,8 @@ class UmsatzSollte extends Testdaten
 		validierung = Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_1);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BANKVERBINDUNGEN_GLEICH));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.AUFTRAGGEBER_GLEICH,
+				Meldung.ZAHLUNGSBETEILIGTER_GLEICH));
 	}
 
 	@Test

@@ -62,7 +62,9 @@ public class Umsatz extends Entitaet
 			.ap(Umsatz::new)
 			.mapError(Meldungen::aus)
 			.filter(not(umsatz -> umsatz.bankverbindungAuftraggeber.equals(umsatz.bankverbindungZahlungsbeteiligter)))
-			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BANKVERBINDUNGEN_GLEICH)));
+			.getOrElse(Validation.invalid(Meldungen.aus(
+				Meldung.AUFTRAGGEBER_GLEICH,
+				Meldung.ZAHLUNGSBETEILIGTER_GLEICH)));
 	}
 
 	@Override

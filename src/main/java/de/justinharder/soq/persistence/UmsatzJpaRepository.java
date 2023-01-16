@@ -46,4 +46,16 @@ public class UmsatzJpaRepository extends JpaRepository<Umsatz> implements Umsatz
 				.getSingleResult())
 			.toOption();
 	}
+
+	@Override
+	public boolean istVorhanden(
+		@NonNull Datum datum,
+		@NonNull Betrag betrag,
+		@NonNull Verwendungszweck verwendungszweck,
+		@NonNull Bankverbindung bankverbindungAuftraggeber,
+		@NonNull Bankverbindung bankverbindungZahlungsbeteiligter)
+	{
+		return finde(datum, betrag, verwendungszweck, bankverbindungAuftraggeber, bankverbindungZahlungsbeteiligter)
+			.isDefined();
+	}
 }

@@ -1,9 +1,6 @@
 package de.justinharder.soq.domain.services.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.enterprise.context.Dependent;
 import javax.ws.rs.FormParam;
