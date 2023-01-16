@@ -251,4 +251,19 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.ZAHLUNGSBETEILIGTER,
 		Ebene.FEHLER,
 		"Der Zahlungsbeteiligte darf nicht leer sein!");
+
+	public boolean istErfolg()
+	{
+		return ebene.equals(Ebene.ERFOLG);
+	}
+
+	public boolean istWarnung()
+	{
+		return ebene.equals(Ebene.WARNUNG);
+	}
+
+	public boolean istFehler()
+	{
+		return ebene.equals(Ebene.FEHLER);
+	}
 }
