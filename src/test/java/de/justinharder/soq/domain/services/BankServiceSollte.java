@@ -7,6 +7,7 @@ import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
 import de.justinharder.soq.domain.services.dto.NeueBank;
 import de.justinharder.soq.domain.services.mapping.BankMapping;
+import io.vavr.control.Option;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,9 @@ class BankServiceSollte extends DTOTestdaten
 		assertAll(
 			() -> assertThrows(NullPointerException.class, () -> new BankService(bankRepository, null)),
 			() -> assertThrows(NullPointerException.class, () -> new BankService(null, bankMapping)),
-			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.aktualisiere(null)));
 	}
 
 	@Test
@@ -60,8 +63,37 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("leere Eingabedaten melden")
+	@DisplayName("nicht finden, wenn ID nicht existiert")
 	void test03()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.finde(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.BANK))
+			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
+		verify(bankRepository).finde(BANK_1.getId());
+	}
+
+	@Test
+	@DisplayName("finden, wenn ID existiert")
+	void test04()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+		when(bankMapping.mappe(BANK_1)).thenReturn(GESPEICHERTE_BANK_1);
+
+		var ergebnis = sut.finde(BANK_1.getId().getWert().toString());
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANK)).isEmpty(),
+			() -> assertThat(ergebnis.getId()).isEqualTo(GESPEICHERTE_BANK_1.getId()),
+			() -> assertThat(ergebnis.getBezeichnung()).isEqualTo(GESPEICHERTE_BANK_1.getBezeichnung()),
+			() -> assertThat(ergebnis.getBic()).isEqualTo(GESPEICHERTE_BANK_1.getBic()));
+		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankMapping).mappe(BANK_1);
+	}
+
+	@Test
+	@DisplayName("leere Eingabedaten melden")
+	void test05()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(LEER, LEER));
 
@@ -74,7 +106,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("ungültige BIC melden")
-	void test04()
+	void test06()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(BEZEICHNUNG_1_WERT, "OLBODEH2XXXX"));
 
@@ -86,7 +118,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierende Daten melden")
-	void test05()
+	void test07()
 	{
 		when(bankRepository.istVorhanden(BEZEICHNUNG_1)).thenReturn(true);
 		when(bankRepository.istVorhanden(BIC_1)).thenReturn(true);
@@ -105,7 +137,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("erstellen")
-	void test06()
+	void test08()
 	{
 		when(bankRepository.istVorhanden(BEZEICHNUNG_1)).thenReturn(false);
 		when(bankRepository.istVorhanden(BIC_1)).thenReturn(false);

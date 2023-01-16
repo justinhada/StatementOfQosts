@@ -13,15 +13,12 @@ import javax.ws.rs.FormParam;
 @EqualsAndHashCode(callSuper = false)
 public class GespeicherteBank extends DTO<GespeicherteBank>
 {
-	@NonNull
 	@FormParam("id")
 	private String id;
 
-	@NonNull
 	@FormParam("bezeichnung")
 	private String bezeichnung;
 
-	@NonNull
 	@FormParam("bic")
 	private String bic;
 

@@ -51,7 +51,8 @@ class UmsatzServiceSollte extends DTOTestdaten
 			() -> assertThrows(NullPointerException.class,
 				() -> new UmsatzService(umsatzRepository, null, umsatzMapping)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new UmsatzService(umsatzRepository, bankverbindungRepository, null)));
+				() -> new UmsatzService(umsatzRepository, bankverbindungRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
 	}
 
 	@Test
@@ -82,8 +83,10 @@ class UmsatzServiceSollte extends DTOTestdaten
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BETRAG)).containsExactlyInAnyOrder(Meldung.BETRAG_LEER),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.VERWENDUNGSZWECK)).containsExactlyInAnyOrder(
 				Meldung.VERWENDUNGSZWECK),
-			() -> assertThat(ergebnis.getMeldungen(Schluessel.AUFTRAGGEBER)).containsExactlyInAnyOrder(Meldung.AUFTRAGGEBER_GLEICH),
-			() -> assertThat(ergebnis.getMeldungen(Schluessel.ZAHLUNGSBETEILIGTER)).containsExactlyInAnyOrder(Meldung.ZAHLUNGSBETEILIGTER_GLEICH),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.AUFTRAGGEBER)).containsExactlyInAnyOrder(
+				Meldung.AUFTRAGGEBER_GLEICH),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ZAHLUNGSBETEILIGTER)).containsExactlyInAnyOrder(
+				Meldung.ZAHLUNGSBETEILIGTER_GLEICH),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
 		verify(bankverbindungRepository, times(2)).finde(BANKVERBINDUNG_1.getId());
 	}

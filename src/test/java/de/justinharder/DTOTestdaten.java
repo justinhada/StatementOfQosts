@@ -71,4 +71,30 @@ public class DTOTestdaten extends ImportTestdaten
 		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().getWert());
 	protected static final NeuerImport NEUER_IMPORT =
 		new NeuerImport(String.valueOf(Herausgeber.OLB.getCode()), DATEI_1_WERT);
+	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_1 = new GespeicherterAuftraggeber(
+		BANKVERBINDUNG_1.getId().getWert().toString(),
+		BANKVERBINDUNG_1.getIban().getWert(),
+		BANKVERBINDUNG_1.getBank().getBezeichnung().getWert(),
+		KONTOINHABER_1.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_1.getBenutzer().getNachname()
+			.getWert());
+	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_2 = new GespeicherterAuftraggeber(
+		BANKVERBINDUNG_2.getId().getWert().toString(),
+		BANKVERBINDUNG_2.getIban().getWert(),
+		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
+		KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
+			.getWert());
+	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_1 =
+		new GespeicherterZahlungsbeteiligter(
+			BANKVERBINDUNG_1.getId().getWert().toString(),
+			BANKVERBINDUNG_1.getIban().getWert(),
+			BANKVERBINDUNG_1.getBank().getBezeichnung().getWert(),
+			KONTOINHABER_1.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_1.getBenutzer().getNachname()
+				.getWert());
+	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_2 =
+		new GespeicherterZahlungsbeteiligter(
+			BANKVERBINDUNG_2.getId().getWert().toString(),
+			BANKVERBINDUNG_2.getIban().getWert(),
+			BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
+			KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
+				.getWert());
 }
