@@ -28,6 +28,7 @@ public class Import implements Serializable
 
 	public static Validation<Meldungen, Import> aus(Herausgeber herausgeber, Datei datei)
 	{
+		// TODO: Fehler melden, wenn Herausgeber und Datei nicht zueinander passen.
 		return Validation.combine(
 				validiere(herausgeber, Meldung.HERAUSGEBER_LEER),
 				validiere(datei, Meldung.DATEI))
