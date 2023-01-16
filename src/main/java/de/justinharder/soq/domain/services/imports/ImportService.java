@@ -37,30 +37,6 @@ public class ImportService
 	@Transactional
 	public NeuerImport importiere(@NonNull NeuerImport neuerImport)
 	{
-		/*
-			1 Herausgeber validieren.
-			2 Datei validieren.
-			3 Import aus Herausgeber & Datei erstellen.
-			4 CSV aus Datei erstellen.
-			5 UmsatzDaten aus CSV - abhängig vom Herausgeber - erstellen.
-			  a OLB-/VRB-UmsatzDatum aus Zeile erstellen.
-			  b UmsatzDatum aus OLB-/VRB-UmsatzDatum erstellen.
-			  c UmsatzDaten aus allen UmsatzDatum erstellen.
-			6 Umsatz erstellen.
-			  a Datum, Betrag, Verwendungszweck erstellen.
-			  b Bankverbindungen finden/erstellen.
-			    a Bankverbindung finden mit IBAN.
-			    b Wenn nicht vorhanden, Bankverbindung erstellen mit IBAN und Bank.
-			    c Bank finden mit BIC.
-			    d Wenn nicht vorhanden, Bank erstellen mit Bezeichnung und BIC.
-			    e Bankverbindung erstellen.
-			  c Umsatz aus Attributen erstellen.
-			7 Umsatz speichern.
-			  a Banken speichern.
-			  b Bankverbindungen speichern.
-			  c Umsatz speichern.
-		 */
-
 		return Validation.combine(Herausgeber.aus(neuerImport.getHerausgeber()), Datei.aus(neuerImport.getDatei()))
 			.ap(Import::aus)
 			.mapError(Meldungen::aus)
