@@ -54,8 +54,8 @@ public class Umsatz extends Entitaet
 		Bankverbindung bankverbindungZahlungsbeteiligter)
 	{
 		return Validation.combine(
-				validiere(datum, Meldung.DATUM),
-				validiere(betrag, Meldung.BETRAG),
+				validiere(datum, Meldung.DATUM_LEER),
+				validiere(betrag, Meldung.BETRAG_LEER),
 				validiere(verwendungszweck, Meldung.VERWENDUNGSZWECK),
 				validiere(bankverbindungAuftraggeber, Meldung.AUFTRAGGEBER_LEER),
 				validiere(bankverbindungZahlungsbeteiligter, Meldung.ZAHLUNGSBETEILIGTER_LEER))

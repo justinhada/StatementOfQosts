@@ -67,7 +67,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Es muss mindestens ein Benutzer ausgewählt werden!");
 
-	public static final Meldung BETRAG = new Meldung(
+	public static final Meldung BETRAG_LEER = new Meldung(
 		Schluessel.BETRAG,
 		Ebene.FEHLER,
 		"Der Betrag darf nicht leer sein!");
@@ -102,7 +102,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Datei ist ungültig!");
 
-	public static final Meldung DATUM = new Meldung(
+	public static final Meldung DATUM_LEER = new Meldung(
 		Schluessel.DATUM,
 		Ebene.FEHLER,
 		"Das Datum darf nicht leer sein!");

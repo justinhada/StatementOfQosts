@@ -25,7 +25,7 @@ class UmsatzSollte extends Testdaten
 		validierung = Umsatz.aus(null, null, null, null, null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.DATUM, Meldung.BETRAG,
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.DATUM_LEER, Meldung.BETRAG_LEER,
 				Meldung.VERWENDUNGSZWECK, Meldung.AUFTRAGGEBER_LEER, Meldung.ZAHLUNGSBETEILIGTER_LEER));
 
 		validierung = Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_1);
