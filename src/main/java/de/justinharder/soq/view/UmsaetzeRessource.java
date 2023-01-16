@@ -51,6 +51,7 @@ public class UmsaetzeRessource
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public TemplateInstance erstelle(@BeanParam NeuerUmsatz neuerUmsatz)
 	{
+		// TODO: Wenn Umsatz erfolgreich erstellt wurde, weiterleiten auf View, in dem der Umsatz einer Kategorie zugeordnet werden kann -> Buchung erstellen.
 		this.neuerUmsatz = umsatzService.erstelle(neuerUmsatz);
 		return zeigeFormular();
 	}
