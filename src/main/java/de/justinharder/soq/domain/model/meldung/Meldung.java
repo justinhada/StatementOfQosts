@@ -107,6 +107,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Das Datum darf nicht leer sein!");
 
+	public static final Meldung DATUM_UNGUELTIG = new Meldung(
+		Schluessel.DATUM,
+		Ebene.FEHLER,
+		"Das Datum ist ungültig!");
+
 	public static final Meldung FIRMA_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.FIRMA,
 		Ebene.FEHLER,

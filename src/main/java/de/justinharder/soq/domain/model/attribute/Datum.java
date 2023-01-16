@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 @Getter
 @Embeddable
@@ -26,8 +27,24 @@ public class Datum extends WertObjekt<LocalDate>
 
 	public static Validation<Meldungen, Datum> aus(LocalDate wert)
 	{
-		return validiere(wert, Meldung.DATUM)
+		return validiere(wert, Meldung.DATUM_LEER)
 			.map(Datum::new);
+	}
+
+	public static Validation<Meldungen, Datum> aus(String wert)
+	{
+		return validiereString(wert, Meldung.DATUM_LEER)
+			.flatMap(string -> {
+				try
+				{
+					return Validation.valid(LocalDate.parse(string, DateTimeFormatter.ISO_DATE));
+				}
+				catch (DateTimeParseException e)
+				{
+					return Validation.invalid(Meldungen.aus(Meldung.DATUM_UNGUELTIG));
+				}
+			})
+			.flatMap(Datum::aus);
 	}
 
 	@Override
