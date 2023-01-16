@@ -26,9 +26,25 @@ public class Betrag extends WertObjekt<BigDecimal>
 
 	public static Validation<Meldungen, Betrag> aus(BigDecimal wert)
 	{
-		return validiere(wert, Meldung.BETRAG)
+		return validiere(wert, Meldung.BETRAG_LEER)
 			.map(bigDecimal -> bigDecimal.setScale(2, RoundingMode.HALF_UP))
 			.map(Betrag::new);
+	}
+
+	public static Validation<Meldungen, Betrag> aus(String wert)
+	{
+		return validiereString(wert, Meldung.BETRAG_LEER)
+			.flatMap(betrag -> {
+				try
+				{
+					return Validation.valid(new BigDecimal(betrag.replace(",", ".")));
+				}
+				catch (Exception e)
+				{
+					return Validation.invalid(Meldungen.aus(Meldung.BETRAG_UNGUELTIG));
+				}
+			})
+			.flatMap(Betrag::aus);
 	}
 
 	public boolean istNegativ()

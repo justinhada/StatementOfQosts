@@ -72,6 +72,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Betrag darf nicht leer sein!");
 
+	public static final Meldung BETRAG_UNGUELTIG = new Meldung(
+		Schluessel.BETRAG,
+		Ebene.FEHLER,
+		"Der Betrag ist ungültig!");
+
 	public static final Meldung BEZEICHNUNG_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.BEZEICHNUNG,
 		Ebene.FEHLER,

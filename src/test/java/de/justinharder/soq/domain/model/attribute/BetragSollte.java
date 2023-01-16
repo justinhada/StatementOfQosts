@@ -25,10 +25,55 @@ class BetragSollte extends Testdaten
 	@DisplayName("invalide sein")
 	void test01()
 	{
-		validierung = Betrag.aus(null);
+		validierung = Betrag.aus((BigDecimal) null);
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::get),
-			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG));
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_LEER));
+
+		validierung = Betrag.aus((String) null);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_LEER));
+
+		validierung = Betrag.aus(LEER);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_LEER));
+
+		validierung = Betrag.aus(LEER_KURZ);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_LEER));
+
+		validierung = Betrag.aus(LEER_LANG);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_LEER));
+
+		validierung = Betrag.aus("1.0.0");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_UNGUELTIG));
+
+		validierung = Betrag.aus("1,0,0");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_UNGUELTIG));
+
+		validierung = Betrag.aus("1.,0");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_UNGUELTIG));
+
+		validierung = Betrag.aus("1.0,0");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_UNGUELTIG));
+
+		validierung = Betrag.aus("1.00,0");
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.BETRAG_UNGUELTIG));
 	}
 
 	@Test

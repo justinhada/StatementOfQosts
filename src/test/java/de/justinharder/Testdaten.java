@@ -16,8 +16,10 @@ public class Testdaten
 	protected static final String LEER_LANG = "             ";
 	// -- Attribute ----------------------------------------------------------------------------------------------------
 	protected static final BigDecimal BETRAG_1_WERT = BigDecimal.ONE.setScale(2, RoundingMode.HALF_UP);
+	protected static final String BETRAG_1_STRING = BETRAG_1_WERT.toString().replace(".", ",");
 	protected static final Betrag BETRAG_1 = Betrag.aus(BETRAG_1_WERT).get();
 	protected static final BigDecimal BETRAG_2_WERT = new BigDecimal(-1).setScale(2, RoundingMode.HALF_UP);
+	protected static final String BETRAG_2_STRING = BETRAG_2_WERT.toString().replace(".", ",");
 	protected static final Betrag BETRAG_2 = Betrag.aus(BETRAG_2_WERT).get();
 	protected static final String BEZEICHNUNG_1_WERT = "Oldenburgische Landesbank AG";
 	protected static final Bezeichnung BEZEICHNUNG_1 = Bezeichnung.aus(BEZEICHNUNG_1_WERT).get();
