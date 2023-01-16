@@ -28,12 +28,14 @@ public class Import implements Serializable
 
 	public static Validation<Meldungen, Import> aus(Herausgeber herausgeber, Datei datei)
 	{
-		// TODO: Fehler melden, wenn Herausgeber und Datei nicht zueinander passen.
 		return Validation.combine(
 				validiere(herausgeber, Meldung.HERAUSGEBER_LEER),
 				validiere(datei, Meldung.DATEI))
 			.ap(Import::new)
-			.mapError(Meldungen::aus);
+			.mapError(Meldungen::aus)
+			.filter(importObjekt -> importObjekt.getHerausgeber().equals(Herausgeber.OLB) && datei.istOLB()
+				|| importObjekt.getHerausgeber().equals(Herausgeber.VRB) && !datei.istOLB())
+			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.IMPORT_UNGUELTIG)));
 	}
 
 	private static <T> Validation<Meldungen, T> validiere(T attribut, Meldung meldung)

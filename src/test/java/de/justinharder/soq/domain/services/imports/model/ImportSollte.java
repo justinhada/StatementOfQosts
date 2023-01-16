@@ -28,6 +28,16 @@ class ImportSollte extends ImportTestdaten
 			() -> assertThrows(RuntimeException.class, validierung::get),
 			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.HERAUSGEBER_LEER,
 				Meldung.DATEI));
+
+		validierung = Import.aus(Herausgeber.OLB, DATEI_2);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IMPORT_UNGUELTIG));
+
+		validierung = Import.aus(Herausgeber.VRB, DATEI_1);
+		assertAll(
+			() -> assertThrows(RuntimeException.class, validierung::get),
+			() -> assertThat(validierung.getError()).containsExactlyInAnyOrder(Meldung.IMPORT_UNGUELTIG));
 	}
 
 	@Test

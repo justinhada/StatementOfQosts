@@ -27,6 +27,11 @@ public class Datei extends WertObjekt<byte[]>
 			.map(Datei::new);
 	}
 
+	public boolean istOLB()
+	{
+		return toString().contains("Inhaberkonto");
+	}
+
 	@Override
 	public String toString()
 	{

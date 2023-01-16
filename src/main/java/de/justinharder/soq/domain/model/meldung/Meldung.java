@@ -162,6 +162,16 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		return new Meldung(schluessel, Ebene.FEHLER, "Die ID ist ungültig!");
 	}
 
+	public static final Meldung IMPORT = new Meldung(
+		Schluessel.IMPORT,
+		Ebene.FEHLER,
+		"Der Import darf nicht leer sein!");
+
+	public static final Meldung IMPORT_UNGUELTIG = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Der Herausgeber und die Datei passen nicht zusammen!");
+
 	public static final Meldung KATEGORIE_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
@@ -181,11 +191,6 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.ALLGEMEIN,
 		Ebene.FEHLER,
 		"Der Kontoinhaber existiert bereits!");
-
-	public static final Meldung IMPORT = new Meldung(
-		Schluessel.IMPORT,
-		Ebene.FEHLER,
-		"Der Import darf nicht leer sein!");
 
 	public static final Meldung NACHNAME_EXISTIERT_BEREITS = new Meldung(
 		Schluessel.NACHNAME,
