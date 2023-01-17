@@ -70,8 +70,41 @@ class UmsatzServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("invaliden Umsatz nicht erstellen")
+	@DisplayName("nicht finden, wenn ID nicht existiert")
 	void test03()
+	{
+		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.finde(UMSATZ_1.getId().getWert().toString()).getMeldungen(Schluessel.UMSATZ))
+			.containsExactlyInAnyOrder(Meldung.UMSATZ_EXISTIERT_NICHT);
+		verify(umsatzRepository).finde(UMSATZ_1.getId());
+	}
+
+	@Test
+	@DisplayName("finden, wenn ID existiert")
+	void test04()
+	{
+		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.of(UMSATZ_1));
+		when(umsatzMapping.mappe(UMSATZ_1)).thenReturn(GESPEICHERTER_UMSATZ_1);
+
+		var ergebnis = sut.finde(UMSATZ_1.getId().getWert().toString());
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANKVERBINDUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getId()).isEqualTo(GESPEICHERTER_UMSATZ_1.getId()),
+			() -> assertThat(ergebnis.getDatum()).isEqualTo(GESPEICHERTER_UMSATZ_1.getDatum()),
+			() -> assertThat(ergebnis.getBetrag()).isEqualTo(GESPEICHERTER_UMSATZ_1.getBetrag()),
+			() -> assertThat(ergebnis.getVerwendungszweck()).isEqualTo(GESPEICHERTER_UMSATZ_1.getVerwendungszweck()),
+			() -> assertThat(ergebnis.getAuftraggeber()).isEqualTo(GESPEICHERTER_UMSATZ_1.getAuftraggeber()),
+			() -> assertThat(ergebnis.getZahlungsbeteiligter()).isEqualTo(
+				GESPEICHERTER_UMSATZ_1.getZahlungsbeteiligter()));
+		verify(umsatzRepository).finde(UMSATZ_1.getId());
+		verify(umsatzMapping).mappe(UMSATZ_1);
+	}
+
+	@Test
+	@DisplayName("invaliden Umsatz nicht erstellen")
+	void test05()
 	{
 		var bankverbindungId = BANKVERBINDUNG_1.getId().getWert().toString();
 		var neuerUmsatz = new NeuerUmsatz(LEER, LEER, LEER, bankverbindungId, bankverbindungId);
@@ -93,7 +126,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierenden Umsatz nicht erstellen")
-	void test04()
+	void test06()
 	{
 		var neuerUmsatz =
 			new NeuerUmsatz(DATUM_1_WERT.format(DateTimeFormatter.ISO_DATE), BETRAG_1_STRING, VERWENDUNGSZWECK_1_WERT,
@@ -120,7 +153,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("Umsatz erstellen")
-	void test05()
+	void test07()
 	{
 		var neuerUmsatz =
 			new NeuerUmsatz(DATUM_1_WERT.format(DateTimeFormatter.ISO_DATE), BETRAG_1_STRING, VERWENDUNGSZWECK_1_WERT,

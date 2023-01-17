@@ -2,27 +2,37 @@ package de.justinharder.soq.domain.services.dto;
 
 import lombok.*;
 
+import javax.enterprise.context.Dependent;
+
 @Getter
 @ToString
-@RequiredArgsConstructor
+@Dependent
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherterUmsatz
+public class GespeicherterUmsatz extends DTO<GespeicherterUmsatz>
 {
 	@NonNull
-	private final String id;
+	private String id;
 
 	@NonNull
-	private final String datum;
+	private String datum;
 
 	@NonNull
-	private final String betrag;
+	private String betrag;
 
 	@NonNull
-	private final String verwendungszweck;
+	private String verwendungszweck;
 
 	@NonNull
-	private final String auftraggeber;
+	private String auftraggeber;
 
 	@NonNull
-	private final String zahlungsbeteiligter;
+	private String zahlungsbeteiligter;
+
+	@Override
+	protected GespeicherterUmsatz myself()
+	{
+		return this;
+	}
 }

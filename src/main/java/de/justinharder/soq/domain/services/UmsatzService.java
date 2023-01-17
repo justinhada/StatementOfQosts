@@ -55,6 +55,14 @@ public class UmsatzService
 			.toList();
 	}
 
+	public GespeicherterUmsatz finde(@NonNull String id)
+	{
+		return ID.aus(id, Schluessel.UMSATZ)
+			.map(umsatzRepository::finde)
+			.flatMap(umsatz -> umsatz.toValidation(Meldungen.aus(Meldung.UMSATZ_EXISTIERT_NICHT)))
+			.fold(new GespeicherterUmsatz()::fuegeMeldungenHinzu, umsatzMapping::mappe);
+	}
+
 	@Transactional
 	public NeuerUmsatz erstelle(@NonNull NeuerUmsatz neuerUmsatz)
 	{

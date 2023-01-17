@@ -212,6 +212,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Umsatz existiert bereits!");
 
+	public static final Meldung UMSATZ_EXISTIERT_NICHT = new Meldung(
+		Schluessel.UMSATZ,
+		Ebene.FEHLER,
+		"Der Umsatz existiert nicht!");
+
 	public static final Meldung UMSATZ_LEER = new Meldung(
 		Schluessel.UMSATZ,
 		Ebene.FEHLER,
