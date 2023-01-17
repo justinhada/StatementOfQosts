@@ -25,6 +25,15 @@ public class Templates
 		List<GespeichertePrivatperson> alleBenutzer,
 		List<GespeicherteBank> banken);
 
+	public static native TemplateInstance buchungen(
+		NeueBuchung neueBuchung,
+		List<GespeicherteBuchung> buchungen);
+
+	public static native TemplateInstance buchungenWeiterleitung(
+		NeueBuchung neueBuchung,
+		List<GespeicherteKategorie> kategorien,
+		GespeicherterUmsatz umsatz);
+
 	public static native TemplateInstance imports(
 		NeuerImport neuerImport);
 

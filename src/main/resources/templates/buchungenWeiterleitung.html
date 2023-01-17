@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+    {#include head}
+        {#title}Buchungen - Statement of Qosts{/title}
+    {/include}
+
+    <body>
+        {#include header /}
+
+        <main class="container">
+            <h1 class="fw-bold">Buchung erstellen</h1>
+
+            <form method="post"
+                  action="/buchungen">
+                {#if neueBuchung.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled text-center fw-bold">
+                    {#for meldung in neueBuchung.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
+                {#if neueBuchung.hatMeldungen(Schluessel:UMSATZ)}
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-unstyled text-center fw-bold">
+                            {#for meldung in neueBuchung.getMeldungen(Schluessel:UMSATZ)}
+                                <li class="alert alert-danger">{meldung.text}</li>
+                            {/for}
+                            </ul>
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="row">
+                    <h3 class="col fw-bold text-center">Umsatz</h3>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">ID</div>
+
+                    <div class="col font-monospace">{umsatz.id}</div>
+
+                    <input id="umsatzId"
+                           name="umsatzId"
+                           type="hidden"
+                           aria-label="umsatzId"
+                           value="{umsatz.id}" />
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Datum</div>
+
+                    <div class="col font-monospace">{umsatz.datum}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Betrag</div>
+
+                    <div class="col font-monospace">{umsatz.betrag}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Verwendungszweck</div>
+
+                    <div class="col font-monospace">{umsatz.verwendungszweck}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Auftraggeber</div>
+
+                    <div class="col font-monospace">{umsatz.auftraggeber}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col fw-bold text-end">Zahlungsbeteiligter</div>
+
+                    <div class="col font-monospace">{umsatz.zahlungsbeteiligter}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="kategorieId"
+                               class="form-label mt-2 fw-bold">
+                            Kategorie
+                        </label>
+
+                        <select id="kategorieId"
+                                name="kategorieId"
+                                class="form-select {#if neueBuchung.hatMeldungen(Schluessel:KATEGORIE)}is-invalid{/if}">
+                            {#for kategorie in kategorien}
+                                <option value="{kategorie.id}">{kategorie.bezeichnung}</option>
+                            {/for}
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in neueBuchung.getMeldungen(Schluessel:KATEGORIE)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary mt-3 fw-bold">
+                            Buchung erstellen
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
+
+        {#include footer /}
+    </body>
+</html>
