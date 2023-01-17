@@ -81,8 +81,37 @@ class BankverbindungServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("leere Eingabedaten melden")
+	@DisplayName("nicht finden, wenn ID nicht existiert")
 	void test03()
+	{
+		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.finde(BANKVERBINDUNG_1.getId().getWert().toString()).getMeldungen(Schluessel.BANKVERBINDUNG))
+			.containsExactlyInAnyOrder(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT);
+		verify(bankverbindungRepository).finde(BANKVERBINDUNG_1.getId());
+	}
+
+	@Test
+	@DisplayName("finden, wenn ID existiert")
+	void test04()
+	{
+		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.of(BANKVERBINDUNG_1));
+		when(bankverbindungMapping.mappe(BANKVERBINDUNG_1)).thenReturn(GESPEICHERTE_BANKVERBINDUNG_1);
+
+		var ergebnis = sut.finde(BANKVERBINDUNG_1.getId().getWert().toString());
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANKVERBINDUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getId()).isEqualTo(GESPEICHERTE_BANKVERBINDUNG_1.getId()),
+			() -> assertThat(ergebnis.getIban()).isEqualTo(GESPEICHERTE_BANKVERBINDUNG_1.getIban()),
+			() -> assertThat(ergebnis.getBank()).isEqualTo(GESPEICHERTE_BANKVERBINDUNG_1.getBank()));
+		verify(bankverbindungRepository).finde(BANKVERBINDUNG_1.getId());
+		verify(bankverbindungMapping).mappe(BANKVERBINDUNG_1);
+	}
+
+	@Test
+	@DisplayName("leere Eingabedaten melden")
+	void test05()
 	{
 		var ergebnis = sut.erstelle(new NeueBankverbindung(LEER, LEER));
 
@@ -95,7 +124,7 @@ class BankverbindungServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("ungültige Eingabedaten melden")
-	void test04()
+	void test06()
 	{
 		var ergebnis = sut.erstelle(new NeueBankverbindung(
 			"DE87280200504008357801",
@@ -110,7 +139,7 @@ class BankverbindungServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierende IBAN und nicht existierende IDs melden")
-	void test05()
+	void test07()
 	{
 		when(bankverbindungRepository.istVorhanden(IBAN_1)).thenReturn(true);
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
@@ -129,7 +158,7 @@ class BankverbindungServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("erstellen")
-	void test06()
+	void test08()
 	{
 		when(bankverbindungRepository.istVorhanden(IBAN_1)).thenReturn(false);
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));

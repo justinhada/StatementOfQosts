@@ -80,7 +80,7 @@ public class BankverbindungService
 
 	public GespeicherteBankverbindung finde(@NonNull String id)
 	{
-		return ID.aus(id, Schluessel.ALLGEMEIN)
+		return ID.aus(id, Schluessel.BANKVERBINDUNG)
 			.map(bankverbindungRepository::finde)
 			.flatMap(bankverbindung -> bankverbindung
 				.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)))
