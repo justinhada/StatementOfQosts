@@ -42,7 +42,6 @@ entity Umsatz
 entity Buchung
 {
     * **ID <<PK>>**
-    * Typ
     * **UmsatzID <<FK>>**
     * **KategorieID <<FK>>**
 }

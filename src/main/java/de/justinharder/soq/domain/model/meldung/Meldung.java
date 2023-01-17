@@ -2,11 +2,6 @@ package de.justinharder.soq.domain.model.meldung;
 
 public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 {
-	public static final Meldung ART = new Meldung(
-		Schluessel.ART,
-		Ebene.FEHLER,
-		"Die Art darf nicht leer sein!");
-
 	public static final Meldung AUFTRAGGEBER_EXISTIERT_NICHT = new Meldung(
 		Schluessel.AUFTRAGGEBER,
 		Ebene.FEHLER,
