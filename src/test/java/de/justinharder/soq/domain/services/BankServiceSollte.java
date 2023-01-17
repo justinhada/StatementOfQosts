@@ -63,8 +63,19 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("nicht finden, wenn ID nicht existiert")
+	@DisplayName("nicht finden, wenn ID leer oder ungültig ist")
 	void test03()
+	{
+		assertAll(
+			() -> assertThat(sut.finde(LEER).getMeldungen(Schluessel.BANK))
+				.containsExactlyInAnyOrder(Meldung.idLeer(Schluessel.BANK)),
+			() -> assertThat(sut.finde("3ef97d60-4a4d-4ef0-b7a6-9c1c3c06a3f3-123").getMeldungen(Schluessel.BANK))
+				.containsExactlyInAnyOrder(Meldung.idUngueltig(Schluessel.BANK)));
+	}
+
+	@Test
+	@DisplayName("nicht finden, wenn ID nicht existiert")
+	void test04()
 	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
 
@@ -75,7 +86,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("finden, wenn ID existiert")
-	void test04()
+	void test05()
 	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
 		when(bankMapping.mappe(BANK_1)).thenReturn(GESPEICHERTE_BANK_1);
@@ -93,7 +104,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("leere Eingabedaten melden")
-	void test05()
+	void test06()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(LEER, LEER));
 
@@ -106,7 +117,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("ungültige BIC melden")
-	void test06()
+	void test07()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(BEZEICHNUNG_1_WERT, "OLBODEH2XXXX"));
 
@@ -118,7 +129,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierende Daten melden")
-	void test07()
+	void test08()
 	{
 		when(bankRepository.istVorhanden(BEZEICHNUNG_1)).thenReturn(true);
 		when(bankRepository.istVorhanden(BIC_1)).thenReturn(true);
@@ -137,7 +148,7 @@ class BankServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("erstellen")
-	void test08()
+	void test09()
 	{
 		when(bankRepository.istVorhanden(BEZEICHNUNG_1)).thenReturn(false);
 		when(bankRepository.istVorhanden(BIC_1)).thenReturn(false);

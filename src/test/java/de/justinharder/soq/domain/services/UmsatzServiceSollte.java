@@ -70,8 +70,19 @@ class UmsatzServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("nicht finden, wenn ID nicht existiert")
+	@DisplayName("nicht finden, wenn ID leer oder ungültig ist")
 	void test03()
+	{
+		assertAll(
+			() -> assertThat(sut.finde(LEER).getMeldungen(Schluessel.UMSATZ))
+				.containsExactlyInAnyOrder(Meldung.idLeer(Schluessel.UMSATZ)),
+			() -> assertThat(sut.finde("3ef97d60-4a4d-4ef0-b7a6-9c1c3c06a3f3-123").getMeldungen(Schluessel.UMSATZ))
+				.containsExactlyInAnyOrder(Meldung.idUngueltig(Schluessel.UMSATZ)));
+	}
+
+	@Test
+	@DisplayName("nicht finden, wenn ID nicht existiert")
+	void test04()
 	{
 		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.none());
 
@@ -82,7 +93,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("finden, wenn ID existiert")
-	void test04()
+	void test05()
 	{
 		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.of(UMSATZ_1));
 		when(umsatzMapping.mappe(UMSATZ_1)).thenReturn(GESPEICHERTER_UMSATZ_1);
@@ -90,7 +101,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 		var ergebnis = sut.finde(UMSATZ_1.getId().getWert().toString());
 
 		assertAll(
-			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANKVERBINDUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.UMSATZ)).isEmpty(),
 			() -> assertThat(ergebnis.getId()).isEqualTo(GESPEICHERTER_UMSATZ_1.getId()),
 			() -> assertThat(ergebnis.getDatum()).isEqualTo(GESPEICHERTER_UMSATZ_1.getDatum()),
 			() -> assertThat(ergebnis.getBetrag()).isEqualTo(GESPEICHERTER_UMSATZ_1.getBetrag()),
@@ -104,7 +115,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("invaliden Umsatz nicht erstellen")
-	void test05()
+	void test06()
 	{
 		var bankverbindungId = BANKVERBINDUNG_1.getId().getWert().toString();
 		var neuerUmsatz = new NeuerUmsatz(LEER, LEER, LEER, bankverbindungId, bankverbindungId);
@@ -126,7 +137,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierenden Umsatz nicht erstellen")
-	void test06()
+	void test07()
 	{
 		var neuerUmsatz =
 			new NeuerUmsatz(DATUM_1_WERT.format(DateTimeFormatter.ISO_DATE), BETRAG_1_STRING, VERWENDUNGSZWECK_1_WERT,
@@ -153,7 +164,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("Umsatz erstellen")
-	void test07()
+	void test08()
 	{
 		var neuerUmsatz =
 			new NeuerUmsatz(DATUM_1_WERT.format(DateTimeFormatter.ISO_DATE), BETRAG_1_STRING, VERWENDUNGSZWECK_1_WERT,
