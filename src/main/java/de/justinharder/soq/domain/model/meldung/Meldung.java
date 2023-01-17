@@ -97,6 +97,16 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der BIC (Bank Identifier Code) ist ungültig!");
 
+	public static final Meldung BUCHUNG_ERSTELLT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Buchung wurde erfolgreich erstellt!");
+
+	public static final Meldung BUCHUNG_EXISTIERT_BEREITS = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Die Buchung existiert bereits!");
+
 	public static final Meldung DATEI = new Meldung(
 		Schluessel.DATEI,
 		Ebene.FEHLER,
@@ -171,6 +181,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
 		"Die Kategorie wurde erfolgreich erstellt!");
+
+	public static final Meldung KATEGORIE_EXISTIERT_NICHT = new Meldung(
+		Schluessel.KATEGORIE,
+		Ebene.FEHLER,
+		"Die Kategorie existiert nicht!");
 
 	public static final Meldung KATEGORIE_LEER = new Meldung(
 		Schluessel.KATEGORIE,

@@ -163,7 +163,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("Umsatz erstellen")
+	@DisplayName("erstellen")
 	void test08()
 	{
 		var neuerUmsatz =
@@ -171,11 +171,12 @@ class UmsatzServiceSollte extends DTOTestdaten
 				BANKVERBINDUNG_1.getId().getWert().toString(), BANKVERBINDUNG_2.getId().getWert().toString());
 		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.of(BANKVERBINDUNG_1));
 		when(bankverbindungRepository.finde(BANKVERBINDUNG_2.getId())).thenReturn(Option.of(BANKVERBINDUNG_2));
-		when(umsatzRepository.istVorhanden(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1,
-			BANKVERBINDUNG_2)).thenReturn(false);
+		when(umsatzRepository.istVorhanden(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2))
+			.thenReturn(false);
 
 		var ergebnis = sut.erstelle(neuerUmsatz);
 		assertAll(
+			() -> assertThat(ergebnis.getId()).isNotNull(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.DATUM)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BETRAG)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.VERWENDUNGSZWECK)).isEmpty(),

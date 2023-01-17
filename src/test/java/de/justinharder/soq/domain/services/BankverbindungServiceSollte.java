@@ -178,6 +178,7 @@ class BankverbindungServiceSollte extends DTOTestdaten
 		var ergebnis = sut.erstelle(new NeueBankverbindung(IBAN_1_WERT, BANK_1.getId().getWert().toString()));
 
 		assertAll(
+			() -> assertThat(ergebnis.getId()).isNotNull(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.IBAN)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.BANK)).isEmpty(),
 			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(

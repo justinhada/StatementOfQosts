@@ -97,4 +97,14 @@ public class DTOTestdaten extends ImportTestdaten
 			BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
 				.getWert());
+	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_1 = new GespeicherteBuchung(
+		BUCHUNG_1.getId().getWert().toString(),
+		BUCHUNG_1.getUmsatz().getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		"1,00",
+		BUCHUNG_1.getKategorie().getBezeichnung().getWert());
+	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_2 = new GespeicherteBuchung(
+		BUCHUNG_2.getId().getWert().toString(),
+		BUCHUNG_2.getUmsatz().getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		"-1,00",
+		BUCHUNG_2.getKategorie().getBezeichnung().getWert());
 }

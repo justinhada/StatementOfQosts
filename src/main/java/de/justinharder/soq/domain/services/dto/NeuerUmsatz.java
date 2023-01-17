@@ -9,9 +9,10 @@ import javax.ws.rs.FormParam;
 @Setter
 @Dependent
 @NoArgsConstructor
-@AllArgsConstructor
 public class NeuerUmsatz extends DTO<NeuerUmsatz>
 {
+	private String id;
+
 	@FormParam("datum")
 	private String datum;
 
@@ -26,6 +27,25 @@ public class NeuerUmsatz extends DTO<NeuerUmsatz>
 
 	@FormParam("zahlungsbeteiligterId")
 	private String zahlungsbeteiligterId;
+
+	public NeuerUmsatz(String id)
+	{
+		this.id = id;
+	}
+
+	public NeuerUmsatz(
+		String datum,
+		String betrag,
+		String verwendungszweck,
+		String auftraggeberId,
+		String zahlungsbeteiligterId)
+	{
+		this.datum = datum;
+		this.betrag = betrag;
+		this.verwendungszweck = verwendungszweck;
+		this.auftraggeberId = auftraggeberId;
+		this.zahlungsbeteiligterId = zahlungsbeteiligterId;
+	}
 
 	@Override
 	protected NeuerUmsatz myself()

@@ -94,7 +94,8 @@ public class UmsatzService
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.UMSATZ_EXISTIERT_BEREITS)))
 			.fold(neuerUmsatz::fuegeMeldungenHinzu, umsatz -> {
 				umsatzRepository.speichere(umsatz);
-				return new NeuerUmsatz().fuegeMeldungenHinzu(Meldungen.aus(Meldung.UMSATZ_ERSTELLT));
+				return new NeuerUmsatz(umsatz.getId().getWert().toString()).fuegeMeldungenHinzu(
+					Meldungen.aus(Meldung.UMSATZ_ERSTELLT));
 			});
 	}
 

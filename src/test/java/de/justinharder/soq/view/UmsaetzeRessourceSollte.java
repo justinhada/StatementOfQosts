@@ -1,6 +1,7 @@
 package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.BankverbindungService;
+import de.justinharder.soq.domain.services.KategorieService;
 import de.justinharder.soq.domain.services.UmsatzService;
 import de.justinharder.soq.domain.services.dto.NeuerUmsatz;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ class UmsaetzeRessourceSollte
 {
 	private UmsatzService umsatzService;
 	private BankverbindungService bankverbindungService;
+	private KategorieService kategorieService;
 	private NeuerUmsatz neuerUmsatz;
 
 	@BeforeEach
@@ -23,6 +25,7 @@ class UmsaetzeRessourceSollte
 	{
 		umsatzService = mock(UmsatzService.class);
 		bankverbindungService = mock(BankverbindungService.class);
+		kategorieService = mock(KategorieService.class);
 		neuerUmsatz = mock(NeuerUmsatz.class);
 	}
 
@@ -32,10 +35,12 @@ class UmsaetzeRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new UmsaetzeRessource(null, bankverbindungService, neuerUmsatz)),
+				() -> new UmsaetzeRessource(null, bankverbindungService, kategorieService, neuerUmsatz)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new UmsaetzeRessource(umsatzService, null, neuerUmsatz)),
+				() -> new UmsaetzeRessource(umsatzService, null, kategorieService, neuerUmsatz)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new UmsaetzeRessource(umsatzService, bankverbindungService, null)));
+				() -> new UmsaetzeRessource(umsatzService, bankverbindungService, null, neuerUmsatz)),
+			() -> assertThrows(NullPointerException.class,
+				() -> new UmsaetzeRessource(umsatzService, bankverbindungService, kategorieService, null)));
 	}
 }
