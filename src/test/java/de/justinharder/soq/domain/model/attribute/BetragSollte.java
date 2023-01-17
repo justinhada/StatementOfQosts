@@ -103,6 +103,6 @@ class BetragSollte extends Testdaten
 	@DisplayName("sich drucken")
 	void test03()
 	{
-		assertThat(BETRAG_1).hasToString(BETRAG_1_WERT.toString());
+		assertThat(BETRAG_1).hasToString(BETRAG_1_WERT.toString().replace(".", ","));
 	}
 }

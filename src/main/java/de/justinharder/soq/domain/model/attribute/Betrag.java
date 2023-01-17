@@ -10,6 +10,9 @@ import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 @Getter
 @Embeddable
@@ -47,8 +50,13 @@ public class Betrag extends WertObjekt<BigDecimal>
 			.flatMap(Betrag::aus);
 	}
 
-	public boolean istNegativ()
+	@Override
+	public String toString()
 	{
-		return wert.compareTo(BigDecimal.ZERO) < 0;
+		var symbols = new DecimalFormatSymbols(Locale.GERMAN);
+		symbols.setDecimalSeparator(',');
+		symbols.setGroupingSeparator('.');
+		var format = new DecimalFormat("###,###.00", symbols);
+		return format.format(getWert().setScale(2, RoundingMode.HALF_UP));
 	}
 }
