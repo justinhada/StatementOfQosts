@@ -23,3 +23,8 @@ VALUES ("188fae37-0294-4db9-b7e6-7f40c7f390f1", "2020-01-01", "1", "Wohnungsmiet
         "37854473-fa07-4570-a094-3794cd555aa4", "87ada42c-a758-4595-a158-f69ba73fd77a"),
        ("1da15420-5b77-4d06-9fad-e62c0b62bb6f", "2021-01-01", "-1", "Lohn/Gehalt",
         "87ada42c-a758-4595-a158-f69ba73fd77a", "37854473-fa07-4570-a094-3794cd555aa4");
+INSERT INTO Buchung(ID, UmsatzID, KategorieID)
+VALUES ("bbc67b44-9f75-4a8c-9271-6533f3e062e3", "188fae37-0294-4db9-b7e6-7f40c7f390f1",
+        "c69a09ed-e5ff-4ac6-90dd-d319ff43b9d6"),
+       ("f1b01d7c-8fc2-4367-ae1e-d4042aa4bd9e", "1da15420-5b77-4d06-9fad-e62c0b62bb6f",
+        "8a977e9d-68e5-415e-948d-09b63b1e2907");
