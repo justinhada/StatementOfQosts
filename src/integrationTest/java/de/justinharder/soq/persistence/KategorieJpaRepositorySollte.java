@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("KategorieJpaRepository sollte")
-public class KategorieJpaRepositorySollte
+public class KategorieJpaRepositorySollte extends JpaRepositorySollte
 {
 	@Inject
 	KategorieJpaRepository sut;

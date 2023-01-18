@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BenutzerJpaRepository sollte")
-class BenutzerJpaRepositorySollte
+class BenutzerJpaRepositorySollte extends JpaRepositorySollte
 {
 	@Inject
 	BenutzerJpaRepository sut;

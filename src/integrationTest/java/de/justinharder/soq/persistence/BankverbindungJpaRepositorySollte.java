@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BankverbindungJpaRepository sollte")
-class BankverbindungJpaRepositorySollte
+class BankverbindungJpaRepositorySollte extends JpaRepositorySollte
 {
 	@Inject
 	BankverbindungJpaRepository sut;
