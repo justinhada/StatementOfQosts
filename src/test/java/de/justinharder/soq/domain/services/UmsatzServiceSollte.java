@@ -52,6 +52,7 @@ class UmsatzServiceSollte extends DTOTestdaten
 				() -> new UmsatzService(umsatzRepository, null, umsatzMapping)),
 			() -> assertThrows(NullPointerException.class,
 				() -> new UmsatzService(umsatzRepository, bankverbindungRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
 	}
 
