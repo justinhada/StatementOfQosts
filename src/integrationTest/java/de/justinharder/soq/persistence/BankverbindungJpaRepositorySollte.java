@@ -38,7 +38,7 @@ class BankverbindungJpaRepositorySollte extends JpaRepositorySollte
 	@DisplayName("alle finden")
 	void test02()
 	{
-		assertThat(sut.findeAlle()).isNotEmpty();
+		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(bankverbindung1, bankverbindung2);
 	}
 
 	@Test
@@ -46,14 +46,14 @@ class BankverbindungJpaRepositorySollte extends JpaRepositorySollte
 	void test03()
 	{
 		assertAll(
-			() -> assertThat(
-				sut.finde(
-					ID.aus("37854473-fa07-4570-a094-3794cd555aa4", Schluessel.BANKVERBINDUNG).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(
-					ID.aus("87ada42c-a758-4595-a158-f69ba73fd77a", Schluessel.BANKVERBINDUNG).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.BANKVERBINDUNG).get())).isEmpty());
+			() -> assertThat(sut.finde(bankverbindung1.getId())).contains(bankverbindung1),
+			() -> assertThat(sut.finde(bankverbindung2.getId())).contains(bankverbindung2),
+			() -> assertThat(sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.BANKVERBINDUNG)
+				.get())).isEmpty(),
+			() -> assertThat(sut.finde(bankverbindung1.getIban())).contains(bankverbindung1),
+			() -> assertThat(sut.finde(IBAN.aus("DE68500105178152985159").get())).isEmpty(),
+			() -> assertThat(sut.istVorhanden(bankverbindung1.getIban())).isTrue(),
+			() -> assertThat(sut.istVorhanden(IBAN.aus("DE68500105178152985159").get())).isFalse());
 	}
 
 	@Test

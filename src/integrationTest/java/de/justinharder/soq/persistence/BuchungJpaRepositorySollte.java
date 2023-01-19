@@ -28,14 +28,18 @@ class BuchungJpaRepositorySollte extends JpaRepositorySollte
 		assertAll(
 			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.speichere(null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null, kategorie1)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(umsatz1, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(null, kategorie1)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(umsatz1, null)));
 	}
 
 	@Test
 	@DisplayName("alle finden")
 	void test02()
 	{
-		assertThat(sut.findeAlle()).isNotEmpty();
+		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(buchung1, buchung2);
 	}
 
 	@Test
@@ -43,12 +47,16 @@ class BuchungJpaRepositorySollte extends JpaRepositorySollte
 	void test03()
 	{
 		assertAll(
-			() -> assertThat(
-				sut.finde(ID.aus("bbc67b44-9f75-4a8c-9271-6533f3e062e3", Schluessel.BUCHUNG).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(ID.aus("f1b01d7c-8fc2-4367-ae1e-d4042aa4bd9e", Schluessel.BUCHUNG).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.BUCHUNG).get())).isEmpty());
+			() -> assertThat(sut.finde(buchung1.getId())).contains(buchung1),
+			() -> assertThat(sut.finde(buchung2.getId())).contains(buchung2),
+			() -> assertThat(sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.BUCHUNG).get()))
+				.isEmpty(),
+			() -> assertThat(sut.finde(umsatz1, kategorie1)).contains(buchung1),
+			() -> assertThat(sut.finde(umsatz2, kategorie2)).contains(buchung2),
+			() -> assertThat(sut.finde(umsatz2, kategorie1)).isEmpty(),
+			() -> assertThat(sut.istVorhanden(umsatz1, kategorie1)).isTrue(),
+			() -> assertThat(sut.istVorhanden(umsatz2, kategorie2)).isTrue(),
+			() -> assertThat(sut.istVorhanden(umsatz2, kategorie1)).isFalse());
 	}
 
 	@Test

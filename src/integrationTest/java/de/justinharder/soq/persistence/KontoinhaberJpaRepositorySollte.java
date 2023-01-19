@@ -28,14 +28,22 @@ class KontoinhaberJpaRepositorySollte extends JpaRepositorySollte
 		assertAll(
 			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.speichere(null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.findeAlle(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null, bankverbindung1)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(benutzer1, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(null, bankverbindung1)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(benutzer1, null)));
 	}
 
 	@Test
 	@DisplayName("alle finden")
 	void test02()
 	{
-		assertThat(sut.findeAlle()).isNotEmpty();
+		assertAll(
+			() -> assertThat(sut.findeAlle()).containsExactlyInAnyOrder(kontoinhaber1, kontoinhaber2),
+			() -> assertThat(sut.findeAlle(bankverbindung1)).containsExactlyInAnyOrder(kontoinhaber1),
+			() -> assertThat(sut.findeAlle(bankverbindung2)).containsExactlyInAnyOrder(kontoinhaber2));
 	}
 
 	@Test
@@ -43,12 +51,16 @@ class KontoinhaberJpaRepositorySollte extends JpaRepositorySollte
 	void test03()
 	{
 		assertAll(
-			() -> assertThat(sut.finde(
-				ID.aus("bc01e451-051b-4bfa-979f-2acff87ba5a2", Schluessel.BANKVERBINDUNG).get())).isNotEmpty(),
-			() -> assertThat(sut.finde(
-				ID.aus("7f94d5e5-3972-4f44-b81b-994a244ba3ad", Schluessel.BANKVERBINDUNG).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.BANKVERBINDUNG).get())).isEmpty());
+			() -> assertThat(sut.finde(kontoinhaber1.getId())).contains(kontoinhaber1),
+			() -> assertThat(sut.finde(kontoinhaber2.getId())).contains(kontoinhaber2),
+			() -> assertThat(sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.KONTOINHABER)
+				.get())).isEmpty(),
+			() -> assertThat(sut.finde(benutzer1, bankverbindung1)).contains(kontoinhaber1),
+			() -> assertThat(sut.finde(benutzer2, bankverbindung2)).contains(kontoinhaber2),
+			() -> assertThat(sut.finde(benutzer1, bankverbindung2)).isEmpty(),
+			() -> assertThat(sut.istVorhanden(benutzer1, bankverbindung1)).isTrue(),
+			() -> assertThat(sut.istVorhanden(benutzer2, bankverbindung2)).isTrue(),
+			() -> assertThat(sut.istVorhanden(benutzer1, bankverbindung2)).isFalse());
 	}
 
 	@Test

@@ -38,7 +38,7 @@ public class KategorieJpaRepositorySollte extends JpaRepositorySollte
 	@DisplayName("alle finden")
 	void test02()
 	{
-		assertThat(sut.findeAlle()).isNotEmpty();
+		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(kategorie1, kategorie2);
 	}
 
 	@Test
@@ -46,12 +46,14 @@ public class KategorieJpaRepositorySollte extends JpaRepositorySollte
 	void test03()
 	{
 		assertAll(
-			() -> assertThat(sut.finde(
-				ID.aus("c69a09ed-e5ff-4ac6-90dd-d319ff43b9d6", Schluessel.KATEGORIE).get())).isNotEmpty(),
-			() -> assertThat(sut.finde(
-				ID.aus("8a977e9d-68e5-415e-948d-09b63b1e2907", Schluessel.KATEGORIE).get())).isNotEmpty(),
-			() -> assertThat(
-				sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.KATEGORIE).get())).isEmpty());
+			() -> assertThat(sut.finde(kategorie1.getId())).contains(kategorie1),
+			() -> assertThat(sut.finde(kategorie2.getId())).contains(kategorie2),
+			() -> assertThat(sut.finde(ID.aus("f22396bf-a21b-4b0b-b5c2-798b130a24c1", Schluessel.KATEGORIE).get()))
+				.isEmpty(),
+			() -> assertThat(sut.finde(kategorie1.getBezeichnung())).contains(kategorie1),
+			() -> assertThat(sut.finde(Bezeichnung.aus("Tanken").get())).isEmpty(),
+			() -> assertThat(sut.istVorhanden(kategorie1.getBezeichnung())).isTrue(),
+			() -> assertThat(sut.istVorhanden(Bezeichnung.aus("Tanken").get())).isFalse());
 	}
 
 	@Test
