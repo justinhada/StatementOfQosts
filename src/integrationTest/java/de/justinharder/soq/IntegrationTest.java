@@ -1,4 +1,4 @@
-package de.justinharder.soq.persistence;
+package de.justinharder.soq;
 
 import de.justinharder.soq.domain.model.*;
 import de.justinharder.soq.domain.model.attribute.ID;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-class JpaRepositorySollte
+public class IntegrationTest
 {
 	@Inject
 	EntityManager entityManager;
@@ -73,7 +73,7 @@ class JpaRepositorySollte
 	}
 
 	@BeforeEach
-	void setup()
+	protected void setup()
 	{
 		bank1 = getBank("46c317ae-25dd-4805-98ca-273e45d32815");
 		bank2 = getBank("aaa8a25c-7589-4434-b668-4a78ab000628");

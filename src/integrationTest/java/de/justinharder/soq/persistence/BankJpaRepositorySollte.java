@@ -1,5 +1,6 @@
 package de.justinharder.soq.persistence;
 
+import de.justinharder.soq.IntegrationTest;
 import de.justinharder.soq.domain.model.Bank;
 import de.justinharder.soq.domain.model.attribute.BIC;
 import de.justinharder.soq.domain.model.attribute.Bezeichnung;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BankJpaRepository sollte")
-class BankJpaRepositorySollte extends JpaRepositorySollte
+class BankJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	BankJpaRepository sut;

@@ -1,5 +1,6 @@
 package de.justinharder.soq.persistence;
 
+import de.justinharder.soq.IntegrationTest;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("KontoinhaberJpaRepository sollte")
-class KontoinhaberJpaRepositorySollte extends JpaRepositorySollte
+class KontoinhaberJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	KontoinhaberJpaRepository sut;
