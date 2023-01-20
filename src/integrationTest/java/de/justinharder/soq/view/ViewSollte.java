@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.IntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.config.DecoderConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import java.nio.charset.StandardCharsets;
 
-public class ViewSollte
+public class ViewSollte extends IntegrationTest
 {
 	protected static final String LEER = "";
 	// -- PFADE --------------------------------------------------------------------------------------------------------
