@@ -4,7 +4,6 @@ import de.justinharder.soq.domain.model.attribute.Datei;
 import de.justinharder.soq.domain.model.attribute.Herausgeber;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
-import de.justinharder.soq.domain.repository.UmsatzRepository;
 import de.justinharder.soq.domain.services.dto.NeuerImport;
 import de.justinharder.soq.domain.services.imports.erzeugung.UmsatzErzeugung;
 import de.justinharder.soq.domain.services.imports.model.Import;
@@ -22,15 +21,11 @@ import java.util.function.Function;
 public class ImportService
 {
 	@NonNull
-	private final UmsatzRepository umsatzRepository;
-
-	@NonNull
 	private final UmsatzErzeugung umsatzErzeugung;
 
 	@Inject
-	public ImportService(@NonNull UmsatzRepository umsatzRepository, @NonNull UmsatzErzeugung umsatzErzeugung)
+	public ImportService(@NonNull UmsatzErzeugung umsatzErzeugung)
 	{
-		this.umsatzRepository = umsatzRepository;
 		this.umsatzErzeugung = umsatzErzeugung;
 	}
 
