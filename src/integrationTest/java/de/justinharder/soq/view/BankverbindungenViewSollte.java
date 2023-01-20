@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 class BankverbindungenViewSollte extends ViewSollte
 {
 	@Test
-	@DisplayName("Formular aufrufen")
+	@DisplayName("Formular zur Erstellung aufrufen")
 	void test01()
 	{
 		given()
@@ -33,7 +33,7 @@ class BankverbindungenViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn Eingabedaten leer sind")
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten zur Erstellung leer sind")
 	void test02()
 	{
 		given()
@@ -51,7 +51,7 @@ class BankverbindungenViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn IBAN bereits existiert und IDs nicht existieren")
+	@DisplayName("Meldungen anzeigen, wenn zur Erstellung IBAN bereits existiert und BankID nicht existiert")
 	void test03()
 	{
 		given()

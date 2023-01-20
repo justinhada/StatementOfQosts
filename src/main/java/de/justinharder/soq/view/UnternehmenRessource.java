@@ -29,7 +29,7 @@ public class UnternehmenRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.unternehmen(neuesUnternehmen, unternehmenService.findeAlle());
 	}
@@ -40,6 +40,6 @@ public class UnternehmenRessource
 	public TemplateInstance erstelle(@BeanParam NeuesUnternehmen neuesUnternehmen)
 	{
 		this.neuesUnternehmen = unternehmenService.erstelle(neuesUnternehmen);
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 }

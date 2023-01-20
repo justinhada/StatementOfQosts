@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 class BankenViewSollte extends ViewSollte
 {
 	@Test
-	@DisplayName("Formular aufrufen")
+	@DisplayName("Formular zur Erstellung aufrufen")
 	void test01()
 	{
 		given()
@@ -36,7 +36,7 @@ class BankenViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn Eingabedaten leer sind")
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten zur Erstellung leer sind")
 	void test02()
 	{
 		given()
@@ -52,7 +52,7 @@ class BankenViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn Eingabedaten bereits existieren")
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten zur Erstellung bereits existieren")
 	void test03()
 	{
 		given()
@@ -89,5 +89,21 @@ class BankenViewSollte extends ViewSollte
 				containsString(Meldung.BANK_ERSTELLT.text()),
 				containsString(bezeichnung),
 				containsString(bic));
+	}
+
+	@Test
+	@DisplayName("Formular zur Aktualisierung aufrufen")
+	void test05()
+	{
+		given()
+			.when()
+			.get(BANKEN + "/" + bank1.getId().getWert())
+			.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+			.body(
+				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
+				containsString("Oldenburgische Landesbank AG"),
+				containsString("OLBODEH2XXX"));
 	}
 }

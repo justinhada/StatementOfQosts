@@ -30,7 +30,7 @@ public class ImportRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeImportFormular()
 	{
 		return Templates.imports(neuerImport);
 	}
@@ -41,6 +41,6 @@ public class ImportRessource
 	public TemplateInstance importiere(@MultipartForm NeuerImport neuerImport)
 	{
 		this.neuerImport = importService.importiere(neuerImport);
-		return zeigeFormular();
+		return zeigeImportFormular();
 	}
 }

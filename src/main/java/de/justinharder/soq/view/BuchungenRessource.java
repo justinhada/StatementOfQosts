@@ -51,7 +51,7 @@ public class BuchungenRessource
 	@GET
 	@Path("/{umsatzId}")
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular(@PathParam("umsatzId") String umsatzId)
+	public TemplateInstance zeigeErstellungFormular(@PathParam("umsatzId") String umsatzId)
 	{
 		return Templates.buchungenWeiterleitung(
 			neueBuchung,

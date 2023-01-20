@@ -29,7 +29,7 @@ public class KategorienRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.kategorien(neueKategorie, kategorieService.findeAlle());
 	}
@@ -40,6 +40,6 @@ public class KategorienRessource
 	public TemplateInstance erstelle(@BeanParam NeueKategorie neueKategorie)
 	{
 		this.neueKategorie = kategorieService.erstelle(neueKategorie);
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 }

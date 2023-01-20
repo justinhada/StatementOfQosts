@@ -29,7 +29,7 @@ public class PrivatpersonenRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.privatpersonen(neuePrivatperson, privatpersonService.findeAlle());
 	}
@@ -40,6 +40,6 @@ public class PrivatpersonenRessource
 	public TemplateInstance erstelle(@BeanParam NeuePrivatperson neuePrivatperson)
 	{
 		this.neuePrivatperson = privatpersonService.erstelle(neuePrivatperson);
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 }

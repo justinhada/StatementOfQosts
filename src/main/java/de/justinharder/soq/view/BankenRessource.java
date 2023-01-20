@@ -37,7 +37,7 @@ public class BankenRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.banken(neueBank, bankService.findeAlle());
 	}
@@ -48,13 +48,13 @@ public class BankenRessource
 	public TemplateInstance erstelle(@BeanParam NeueBank neueBank)
 	{
 		this.neueBank = bankService.erstelle(neueBank);
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeBank(@PathParam("id") String id)
+	public TemplateInstance zeigeAktualisierungFormular(@PathParam("id") String id)
 	{
 		return Templates.bank(bankService.finde(id));
 	}
@@ -66,6 +66,6 @@ public class BankenRessource
 	public TemplateInstance aktualisiere(@PathParam("id") String id, @BeanParam GespeicherteBank gespeicherteBank)
 	{
 		this.gespeicherteBank = bankService.aktualisiere(gespeicherteBank);
-		return zeigeBank(gespeicherteBank.getId());
+		return zeigeAktualisierungFormular(gespeicherteBank.getId());
 	}
 }

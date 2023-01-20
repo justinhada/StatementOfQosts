@@ -53,7 +53,7 @@ public class KontoinhaberRessource
 	@GET
 	@Path("/{bankverbindungId}")
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular(@PathParam("bankverbindungId") String bankverbindungId)
+	public TemplateInstance zeigeErstellungFormular(@PathParam("bankverbindungId") String bankverbindungId)
 	{
 		return Templates.kontoinhaberWeiterleitung(
 			neuerKontoinhaber,

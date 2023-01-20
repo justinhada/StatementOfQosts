@@ -44,7 +44,7 @@ public class UmsaetzeRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.umsaetze(
 			neuerUmsatz,
@@ -66,6 +66,6 @@ public class UmsaetzeRessource
 				kategorieService.findeAlle(),
 				umsatzService.finde(this.neuerUmsatz.getId()));
 		}
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 }

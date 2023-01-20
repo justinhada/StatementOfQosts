@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 class KategorienViewSollte extends ViewSollte
 {
 	@Test
-	@DisplayName("Formular aufrufen")
+	@DisplayName("Formular zur Erstellung aufrufen")
 	void test01()
 	{
 		given()
@@ -34,7 +34,7 @@ class KategorienViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn Eingabedaten leer sind")
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten zur Erstellung leer sind")
 	void test02()
 	{
 		given()
@@ -49,7 +49,7 @@ class KategorienViewSollte extends ViewSollte
 	}
 
 	@Test
-	@DisplayName("Meldungen anzeigen, wenn Eingabedaten bereits existieren")
+	@DisplayName("Meldungen anzeigen, wenn Eingabedaten zur Erstellung bereits existieren")
 	void test03()
 	{
 		given()

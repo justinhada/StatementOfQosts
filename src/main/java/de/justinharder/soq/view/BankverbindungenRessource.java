@@ -44,7 +44,7 @@ public class BankverbindungenRessource
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeFormular()
+	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.bankverbindungen(
 			neueBankverbindung,
@@ -66,6 +66,6 @@ public class BankverbindungenRessource
 				privatpersonService.findeAlle(),
 				bankverbindungService.finde(this.neueBankverbindung.getId()));
 		}
-		return zeigeFormular();
+		return zeigeErstellungFormular();
 	}
 }
