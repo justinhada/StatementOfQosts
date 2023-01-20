@@ -46,6 +46,7 @@ public class UmsaetzeRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeErstellungFormular()
 	{
+		// TODO: Möglichkeit finden, hinter den Bankverbindungen auch die Kontoinhaber anzuzeigen.
 		return Templates.umsaetze(
 			neuerUmsatz,
 			bankverbindungService.findeAlleAuftraggeber(),

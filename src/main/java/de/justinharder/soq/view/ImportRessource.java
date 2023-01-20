@@ -40,6 +40,7 @@ public class ImportRessource
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public TemplateInstance importiere(@MultipartForm NeuerImport neuerImport)
 	{
+		// TODO: Nach erfolgreichem Import, weiterleiten auf BuchungenView zur Zuordnung zu einer Kategorie.
 		this.neuerImport = importService.importiere(neuerImport);
 		return zeigeImportFormular();
 	}

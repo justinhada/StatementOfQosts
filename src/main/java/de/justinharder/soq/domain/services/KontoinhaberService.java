@@ -58,6 +58,7 @@ public class KontoinhaberService
 	@Transactional
 	public NeuerKontoinhaber erstelle(@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
+		// TODO: Funktionaler gestalten.
 		var bankverbindung = ID.aus(neuerKontoinhaber.getBankverbindungId(), Schluessel.BANKVERBINDUNG)
 			.map(bankverbindungRepository::finde)
 			.flatMap(bv -> bv.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)));
@@ -86,6 +87,7 @@ public class KontoinhaberService
 					return new NeuerKontoinhaber().fuegeMeldungHinzu(Meldung.KONTOINHABER_ERSTELLT);
 				}))
 			.reduce(NeuerKontoinhaber::fasseZusammen)
+			// TODO: Mehrere gleiche Meldungen weiterhin zusammenfassen und daraufhin im Plural melden.
 			.orElseThrow();
 	}
 }

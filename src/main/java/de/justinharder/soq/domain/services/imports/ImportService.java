@@ -45,6 +45,7 @@ public class ImportService
 			.map(umsatzDaten -> importiere(neuerImport, umsatzDaten))
 			.fold(neuerImport::fuegeMeldungenHinzu, neueImports -> neueImports.stream()
 				.reduce(NeuerImport::fasseZusammen)
+				// TODO: Mehrere gleiche Meldungen weiterhin zusammenfassen und daraufhin im Plural melden.
 				.orElseThrow());
 	}
 

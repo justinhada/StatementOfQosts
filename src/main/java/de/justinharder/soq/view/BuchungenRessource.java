@@ -45,6 +45,7 @@ public class BuchungenRessource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeListe()
 	{
+		// TODO: Zuordnen von Umsätzen, die noch keiner Kategorie zugeordnet sind.
 		return Templates.buchungen(neueBuchung, buchungService.findeAlle());
 	}
 
