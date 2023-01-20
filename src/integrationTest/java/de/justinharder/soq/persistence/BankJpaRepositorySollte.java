@@ -7,9 +7,7 @@ import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -20,12 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BankJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BankJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	BankJpaRepository sut;
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -40,6 +40,7 @@ class BankJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
@@ -47,6 +48,7 @@ class BankJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -66,9 +68,9 @@ class BankJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
 	{
 		var bank = Bank.aus(Bezeichnung.aus("Volksbank Vechta").get(), BIC.aus("GENODEF1VEC").get()).get();
@@ -77,12 +79,12 @@ class BankJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
 	{
-		var bank = sut.finde(ID.aus("46c317ae-25dd-4805-98ca-273e45d32815", Schluessel.BANK).get()).get();
+		var bank = sut.finde(Bezeichnung.aus("Volksbank Vechta").get()).get();
 		sut.loesche(bank);
 		assertThat(sut.finde(bank.getId())).isEmpty();
 	}

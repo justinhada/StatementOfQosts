@@ -27,6 +27,7 @@ public class IntegrationTest
 	protected Kategorie kategorie2;
 	protected Umsatz umsatz1;
 	protected Umsatz umsatz2;
+	protected Umsatz umsatz3;
 	protected Buchung buchung1;
 	protected Buchung buchung2;
 
@@ -89,6 +90,7 @@ public class IntegrationTest
 		kategorie2 = getKategorie("8a977e9d-68e5-415e-948d-09b63b1e2907");
 		umsatz1 = getUmsatz("188fae37-0294-4db9-b7e6-7f40c7f390f1");
 		umsatz2 = getUmsatz("1da15420-5b77-4d06-9fad-e62c0b62bb6f");
+		umsatz3 = getUmsatz("7328350d-da3f-436f-bd2e-74c9c3259922");
 		buchung1 = getBuchung("bbc67b44-9f75-4a8c-9271-6533f3e062e3");
 		buchung2 = getBuchung("f1b01d7c-8fc2-4367-ae1e-d4042aa4bd9e");
 	}

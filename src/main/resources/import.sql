@@ -22,6 +22,8 @@ INSERT INTO Umsatz(ID, Datum, Betrag, Verwendungszweck, BankverbindungAuftraggeb
 VALUES ("188fae37-0294-4db9-b7e6-7f40c7f390f1", "2020-01-01", "1", "Wohnungsmiete",
         "37854473-fa07-4570-a094-3794cd555aa4", "87ada42c-a758-4595-a158-f69ba73fd77a"),
        ("1da15420-5b77-4d06-9fad-e62c0b62bb6f", "2021-01-01", "-1", "Lohn/Gehalt",
+        "87ada42c-a758-4595-a158-f69ba73fd77a", "37854473-fa07-4570-a094-3794cd555aa4"),
+       ("7328350d-da3f-436f-bd2e-74c9c3259922", "2021-01-01", "10", "Kindergeld",
         "87ada42c-a758-4595-a158-f69ba73fd77a", "37854473-fa07-4570-a094-3794cd555aa4");
 INSERT INTO Buchung(ID, UmsatzID, KategorieID)
 VALUES ("bbc67b44-9f75-4a8c-9271-6533f3e062e3", "188fae37-0294-4db9-b7e6-7f40c7f390f1",

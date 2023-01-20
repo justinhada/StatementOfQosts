@@ -2,16 +2,14 @@ package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.IntegrationTest;
 import de.justinharder.soq.domain.model.Bankverbindung;
+import de.justinharder.soq.domain.model.Umsatz;
 import de.justinharder.soq.domain.model.attribute.Betrag;
 import de.justinharder.soq.domain.model.attribute.Datum;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.attribute.Verwendungszweck;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -22,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("UmsatzJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UmsatzJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
@@ -34,7 +33,7 @@ class UmsatzJpaRepositorySollte extends IntegrationTest
 	private Bankverbindung zahlungsbeteiligter;
 
 	@BeforeEach
-	void setup()
+	public void setup()
 	{
 		super.setup();
 		datum = umsatz1.getDatum();
@@ -45,6 +44,7 @@ class UmsatzJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -75,13 +75,15 @@ class UmsatzJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
-		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(umsatz1, umsatz2);
+		assertThat(sut.findeAlle()).containsExactlyInAnyOrder(umsatz1, umsatz2, umsatz3);
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -99,16 +101,24 @@ class UmsatzJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
-	{}
+	{
+		var umsatz = Umsatz.aus(datum, betrag, verwendungszweck, bankverbindung2, bankverbindung1).get();
+		sut.speichere(umsatz);
+		assertThat(sut.finde(umsatz.getId())).contains(umsatz);
+	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
-	{}
+	{
+		var umsatz = sut.finde(datum, betrag, verwendungszweck, bankverbindung2, bankverbindung1).get();
+		sut.loesche(umsatz);
+		assertThat(sut.finde(umsatz.getId())).isEmpty();
+	}
 }

@@ -1,13 +1,12 @@
 package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.IntegrationTest;
+import de.justinharder.soq.domain.model.Kategorie;
 import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -18,12 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("KategorieJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class KategorieJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	KategorieJpaRepository sut;
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -36,6 +37,7 @@ public class KategorieJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
@@ -43,6 +45,7 @@ public class KategorieJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -58,16 +61,24 @@ public class KategorieJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
-	{}
+	{
+		var kategorie = Kategorie.aus(Bezeichnung.aus("Tanken").get()).get();
+		sut.speichere(kategorie);
+		assertThat(sut.finde(kategorie.getId())).contains(kategorie);
+	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
-	{}
+	{
+		var kategorie = sut.finde(Bezeichnung.aus("Tanken").get()).get();
+		sut.loesche(kategorie);
+		assertThat(sut.finde(kategorie.getId())).isEmpty();
+	}
 }

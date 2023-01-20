@@ -1,12 +1,11 @@
 package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.IntegrationTest;
+import de.justinharder.soq.domain.model.Kontoinhaber;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -17,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("KontoinhaberJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class KontoinhaberJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	KontoinhaberJpaRepository sut;
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -38,6 +39,7 @@ class KontoinhaberJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
@@ -48,6 +50,7 @@ class KontoinhaberJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -65,16 +68,24 @@ class KontoinhaberJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
-	{}
+	{
+		var kontoinhaber = Kontoinhaber.aus(benutzer1, bankverbindung2).get();
+		sut.speichere(kontoinhaber);
+		assertThat(sut.finde(kontoinhaber.getId())).contains(kontoinhaber);
+	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
-	{}
+	{
+		var kontoinhaber = sut.finde(benutzer1, bankverbindung2).get();
+		sut.loesche(kontoinhaber);
+		assertThat(sut.finde(kontoinhaber.getId())).isEmpty();
+	}
 }

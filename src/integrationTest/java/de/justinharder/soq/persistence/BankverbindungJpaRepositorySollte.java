@@ -1,13 +1,12 @@
 package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.IntegrationTest;
+import de.justinharder.soq.domain.model.Bankverbindung;
 import de.justinharder.soq.domain.model.attribute.IBAN;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -18,12 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BankverbindungJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BankverbindungJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	BankverbindungJpaRepository sut;
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -36,6 +37,7 @@ class BankverbindungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
@@ -43,6 +45,7 @@ class BankverbindungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -58,16 +61,24 @@ class BankverbindungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
-	{}
+	{
+		var bankverbindung = Bankverbindung.aus(IBAN.aus("DE68500105178152985159").get(), bank1).get();
+		sut.speichere(bankverbindung);
+		assertThat(sut.finde(bankverbindung.getId())).contains(bankverbindung);
+	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
-	{}
+	{
+		var bankverbindung = sut.finde(IBAN.aus("DE68500105178152985159").get()).get();
+		sut.loesche(bankverbindung);
+		assertThat(sut.finde(bankverbindung.getId())).isEmpty();
+	}
 }

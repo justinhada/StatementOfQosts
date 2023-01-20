@@ -1,12 +1,11 @@
 package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.IntegrationTest;
+import de.justinharder.soq.domain.model.Buchung;
 import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -17,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @DisplayName("BuchungJpaRepository sollte")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BuchungJpaRepositorySollte extends IntegrationTest
 {
 	@Inject
 	BuchungJpaRepository sut;
 
 	@Test
+	@Order(1)
 	@DisplayName("null validieren")
 	void test01()
 	{
@@ -37,6 +38,7 @@ class BuchungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(2)
 	@DisplayName("alle finden")
 	void test02()
 	{
@@ -44,6 +46,7 @@ class BuchungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(3)
 	@DisplayName("finden")
 	void test03()
 	{
@@ -61,16 +64,24 @@ class BuchungJpaRepositorySollte extends IntegrationTest
 	}
 
 	@Test
+	@Order(4)
 	@Transactional
 	@DisplayName("speichern")
-	@Disabled("Wenn gespeichert wird, funktioniert ein ViewTest nicht mehr")
 	void test04()
-	{}
+	{
+		var buchung = Buchung.aus(umsatz3, kategorie1).get();
+		sut.speichere(buchung);
+		assertThat(sut.finde(buchung.getId())).contains(buchung);
+	}
 
 	@Test
+	@Order(5)
 	@Transactional
 	@DisplayName("löschen")
-	@Disabled("Wenn gelöscht wird, funktioniert ein ViewTest nicht mehr")
 	void test05()
-	{}
+	{
+		var buchung = sut.finde(umsatz3, kategorie1).get();
+		sut.loesche(buchung);
+		assertThat(sut.finde(buchung.getId())).isEmpty();
+	}
 }
