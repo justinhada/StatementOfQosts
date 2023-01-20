@@ -31,6 +31,7 @@ public class Bankverbindung extends Entitaet
 
 	public static Validation<Meldungen, Bankverbindung> aus(IBAN iban, Bank bank)
 	{
+		// TODO: Prüfen, ob IBAN zur Bank bzw. BIC der Bank passt.
 		return Validation.combine(
 				validiere(iban, Meldung.IBAN_LEER),
 				validiere(bank, Meldung.BANK_LEER))
