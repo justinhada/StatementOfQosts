@@ -83,6 +83,16 @@ public class DTOTestdaten extends ImportTestdaten
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
 		KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
 			.getWert());
+	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_3 = new GespeicherterAuftraggeber(
+		BANKVERBINDUNG_3.getId().getWert().toString(),
+		BANKVERBINDUNG_3.getIban().getWert(),
+		BANKVERBINDUNG_3.getBank().getBezeichnung().getWert(),
+		KONTOINHABER_3.getBenutzer().getFirma().getWert());
+	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_4 = new GespeicherterAuftraggeber(
+		BANKVERBINDUNG_4.getId().getWert().toString(),
+		BANKVERBINDUNG_4.getIban().getWert(),
+		BANKVERBINDUNG_4.getBank().getBezeichnung().getWert(),
+		KONTOINHABER_4.getBenutzer().getFirma().getWert());
 	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_1 =
 		new GespeicherterZahlungsbeteiligter(
 			BANKVERBINDUNG_1.getId().getWert().toString(),
@@ -97,6 +107,18 @@ public class DTOTestdaten extends ImportTestdaten
 			BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
 				.getWert());
+	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_3 =
+		new GespeicherterZahlungsbeteiligter(
+			BANKVERBINDUNG_3.getId().getWert().toString(),
+			BANKVERBINDUNG_3.getIban().getWert(),
+			BANKVERBINDUNG_3.getBank().getBezeichnung().getWert(),
+			KONTOINHABER_3.getBenutzer().getFirma().getWert());
+	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_4 =
+		new GespeicherterZahlungsbeteiligter(
+			BANKVERBINDUNG_4.getId().getWert().toString(),
+			BANKVERBINDUNG_4.getIban().getWert(),
+			BANKVERBINDUNG_4.getBank().getBezeichnung().getWert(),
+			KONTOINHABER_4.getBenutzer().getFirma().getWert());
 	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_1 = new GespeicherteBuchung(
 		BUCHUNG_1.getId().getWert().toString(),
 		BUCHUNG_1.getUmsatz().getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),

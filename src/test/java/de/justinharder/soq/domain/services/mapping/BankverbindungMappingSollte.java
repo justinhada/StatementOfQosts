@@ -50,9 +50,17 @@ class BankverbindungMappingSollte extends DTOTestdaten
 				GESPEICHERTER_AUFTRAGGEBER_1),
 			() -> assertThat(sut.mappeZuAuftraggeber(BANKVERBINDUNG_2, List.of(KONTOINHABER_2))).isEqualTo(
 				GESPEICHERTER_AUFTRAGGEBER_2),
+			() -> assertThat(sut.mappeZuAuftraggeber(BANKVERBINDUNG_3, List.of(KONTOINHABER_3))).isEqualTo(
+				GESPEICHERTER_AUFTRAGGEBER_3),
+			() -> assertThat(sut.mappeZuAuftraggeber(BANKVERBINDUNG_4, List.of(KONTOINHABER_4))).isEqualTo(
+				GESPEICHERTER_AUFTRAGGEBER_4),
 			() -> assertThat(sut.mappeZuZahlungsbeteiligter(BANKVERBINDUNG_1, List.of(KONTOINHABER_1))).isEqualTo(
 				GESPEICHERTER_ZAHLUNGSBETEILIGTER_1),
 			() -> assertThat(sut.mappeZuZahlungsbeteiligter(BANKVERBINDUNG_2, List.of(KONTOINHABER_2))).isEqualTo(
-				GESPEICHERTER_ZAHLUNGSBETEILIGTER_2));
+				GESPEICHERTER_ZAHLUNGSBETEILIGTER_2),
+			() -> assertThat(sut.mappeZuZahlungsbeteiligter(BANKVERBINDUNG_3, List.of(KONTOINHABER_3))).isEqualTo(
+				GESPEICHERTER_ZAHLUNGSBETEILIGTER_3),
+			() -> assertThat(sut.mappeZuZahlungsbeteiligter(BANKVERBINDUNG_4, List.of(KONTOINHABER_4))).isEqualTo(
+				GESPEICHERTER_ZAHLUNGSBETEILIGTER_4));
 	}
 }

@@ -57,6 +57,10 @@ public class Testdaten
 	protected static final IBAN IBAN_1 = IBAN.aus(IBAN_1_WERT).get();
 	protected static final String IBAN_2_WERT = "DE28280651080012888000";
 	protected static final IBAN IBAN_2 = IBAN.aus(IBAN_2_WERT).get();
+	protected static final String IBAN_3_WERT = "DE54500105174969128221";
+	protected static final IBAN IBAN_3 = IBAN.aus(IBAN_3_WERT).get();
+	protected static final String IBAN_4_WERT = "DE40500105179746466452";
+	protected static final IBAN IBAN_4 = IBAN.aus(IBAN_4_WERT).get();
 	protected static final String ID_1_WERT = "46c317ae-25dd-4805-98ca-273e45d32815";
 	protected static final ID ID_1 = ID.aus(ID_1_WERT, Schluessel.BENUTZER).get();
 	protected static final String NACHNAME_1_WERT = "Harder";
@@ -80,10 +84,14 @@ public class Testdaten
 	protected static final Benutzer BENUTZER_4 = Benutzer.aus(FIRMA_2).get();
 	protected static final Bankverbindung BANKVERBINDUNG_1 = Bankverbindung.aus(IBAN_1, BANK_1).get();
 	protected static final Bankverbindung BANKVERBINDUNG_2 = Bankverbindung.aus(IBAN_2, BANK_2).get();
+	protected static final Bankverbindung BANKVERBINDUNG_3 = Bankverbindung.aus(IBAN_3, BANK_1).get();
+	protected static final Bankverbindung BANKVERBINDUNG_4 = Bankverbindung.aus(IBAN_4, BANK_2).get();
 	protected static final Kategorie KATEGORIE_1 = Kategorie.aus(BEZEICHNUNG_3).get();
 	protected static final Kategorie KATEGORIE_2 = Kategorie.aus(BEZEICHNUNG_4).get();
 	protected static final Kontoinhaber KONTOINHABER_1 = Kontoinhaber.aus(BENUTZER_1, BANKVERBINDUNG_1).get();
 	protected static final Kontoinhaber KONTOINHABER_2 = Kontoinhaber.aus(BENUTZER_2, BANKVERBINDUNG_2).get();
+	protected static final Kontoinhaber KONTOINHABER_3 = Kontoinhaber.aus(BENUTZER_3, BANKVERBINDUNG_3).get();
+	protected static final Kontoinhaber KONTOINHABER_4 = Kontoinhaber.aus(BENUTZER_4, BANKVERBINDUNG_4).get();
 	protected static final Umsatz UMSATZ_1 =
 		Umsatz.aus(DATUM_1, BETRAG_1, VERWENDUNGSZWECK_1, BANKVERBINDUNG_1, BANKVERBINDUNG_2).get();
 	protected static final Umsatz UMSATZ_2 =
