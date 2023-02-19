@@ -72,6 +72,6 @@ public class BankenRessource
 	public TemplateInstance aktualisiere(@PathParam("id") String id, @BeanParam GespeicherteBank gespeicherteBank)
 	{
 		this.gespeicherteBank = bankService.aktualisiere(gespeicherteBank);
-		return zeigeAktualisierungFormular(gespeicherteBank.getId());
+		return zeigeAktualisierungFormular(this.gespeicherteBank.getId());
 	}
 }
