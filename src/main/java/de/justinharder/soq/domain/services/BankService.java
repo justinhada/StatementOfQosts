@@ -8,6 +8,7 @@ import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
+import de.justinharder.soq.domain.services.dto.GeloeschteBank;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
 import de.justinharder.soq.domain.services.mapping.BankMapping;
@@ -82,5 +83,16 @@ public class BankService
 		 */
 
 		return null;
+	}
+
+	public GeloeschteBank loesche(String id)
+	{
+		return ID.aus(id, Schluessel.BANK)
+			.map(bankRepository::finde)
+			.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT)))
+			.fold(meldungen -> new GeloeschteBank().fuegeMeldungenHinzu(meldungen), bank -> {
+				bankRepository.loesche(bank);
+				return new GeloeschteBank().fuegeMeldungHinzu(Meldung.BANK_GELOESCHT);
+			});
 	}
 }

@@ -164,4 +164,27 @@ class BankServiceSollte extends DTOTestdaten
 		verify(bankRepository).istVorhanden(BIC_1);
 		verify(bankRepository).speichere(any(Bank.class));
 	}
+
+	@Test
+	@DisplayName("nicht löschen, wenn Bank nicht existiert")
+	void test10()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
+			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
+		verify(bankRepository).finde(BANK_1.getId());
+	}
+
+	@Test
+	@DisplayName("löschen")
+	void test11()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
+			.containsExactlyInAnyOrder(Meldung.BANK_GELOESCHT);
+		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankRepository).loesche(BANK_1);
+	}
 }

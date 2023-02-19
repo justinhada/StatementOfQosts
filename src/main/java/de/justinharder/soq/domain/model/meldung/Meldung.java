@@ -23,9 +23,14 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		"Die Bank wurde erfolgreich erstellt!");
 
 	public static final Meldung BANK_EXISTIERT_NICHT = new Meldung(
-		Schluessel.BANK,
+		Schluessel.ALLGEMEIN,
 		Ebene.FEHLER,
 		"Die Bank existiert nicht!");
+
+	public static final Meldung BANK_GELOESCHT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die Bank wurde erfolgreich gelöscht!");
 
 	public static final Meldung BANK_LEER = new Meldung(
 		Schluessel.BANK,
