@@ -20,6 +20,14 @@
                     </ul>
                 {/if}
 
+                {#if geloeschteBank.hatMeldungen(Schluessel:ALLGEMEIN)}
+                    <ul class="list-unstyled text-center fw-bold">
+                    {#for meldung in geloeschteBank.getMeldungen(Schluessel:ALLGEMEIN)}
+                        <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
+                    {/for}
+                    </ul>
+                {/if}
+
                 <div class="row">
                     <div class="col">
                         <label for="bezeichnung"
@@ -85,7 +93,7 @@
                 </thead>
                 <tbody>
                     {#for bank in banken}
-                        <tr>
+                    <tr>
                         <td>{bank.id}</td>
                         <td>{bank.bezeichnung}</td>
                         <td>{bank.bic}</td>
@@ -102,7 +110,7 @@
                                 </svg>
                             </a>
                         </td>
-                        </tr>
+                    </tr>
                     {/for}
                 </tbody>
             </table>

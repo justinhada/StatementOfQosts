@@ -17,6 +17,7 @@ public class Templates
 
 	public static native TemplateInstance banken(
 		NeueBank neueBank,
+		GeloeschteBank geloeschteBank,
 		List<GespeicherteBank> banken);
 
 	public static native TemplateInstance bankverbindungen(
