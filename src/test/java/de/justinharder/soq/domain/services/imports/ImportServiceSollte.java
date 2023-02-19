@@ -3,7 +3,6 @@ package de.justinharder.soq.domain.services.imports;
 import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
-import de.justinharder.soq.domain.repository.UmsatzRepository;
 import de.justinharder.soq.domain.services.dto.NeuerImport;
 import de.justinharder.soq.domain.services.imports.erzeugung.UmsatzErzeugung;
 import io.vavr.control.Validation;
@@ -23,16 +22,14 @@ class ImportServiceSollte extends DTOTestdaten
 {
 	private ImportService sut;
 
-	private UmsatzRepository umsatzRepository;
 	private UmsatzErzeugung umsatzErzeugung;
 
 	@BeforeEach
 	void setup()
 	{
-		umsatzRepository = mock(UmsatzRepository.class);
 		umsatzErzeugung = mock(UmsatzErzeugung.class);
 
-		sut = new ImportService(umsatzRepository, umsatzErzeugung);
+		sut = new ImportService(umsatzErzeugung);
 	}
 
 	@Test
@@ -40,8 +37,7 @@ class ImportServiceSollte extends DTOTestdaten
 	void test01()
 	{
 		assertAll(
-			() -> assertThrows(NullPointerException.class, () -> new ImportService(null, umsatzErzeugung)),
-			() -> assertThrows(NullPointerException.class, () -> new ImportService(umsatzRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> new ImportService(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.importiere(null)));
 	}
 

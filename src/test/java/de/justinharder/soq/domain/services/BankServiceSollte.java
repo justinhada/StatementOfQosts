@@ -171,7 +171,7 @@ class BankServiceSollte extends DTOTestdaten
 	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
 
-		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.BANK))
 			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
 		verify(bankRepository).finde(BANK_1.getId());
 	}

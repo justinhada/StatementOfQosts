@@ -115,6 +115,7 @@ class KontoinhaberServiceSollte extends DTOTestdaten
 	{
 		when(bankverbindungRepository.finde(BANKVERBINDUNG_1.getId())).thenReturn(Option.none());
 		when(benutzerRepository.finde(BENUTZER_1.getId())).thenReturn(Option.none());
+
 		var ergebnis = sut.erstelle(new NeuerKontoinhaber(
 			List.of(BENUTZER_1.getId().getWert().toString()),
 			BANKVERBINDUNG_1.getId().getWert().toString()));
