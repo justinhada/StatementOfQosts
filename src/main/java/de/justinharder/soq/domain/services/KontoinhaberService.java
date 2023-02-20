@@ -63,14 +63,12 @@ public class KontoinhaberService
 			.map(bankverbindungRepository::finde)
 			.flatMap(bv -> bv.toValidation(Meldungen.aus(Meldung.BANKVERBINDUNG_EXISTIERT_NICHT)));
 
-		if (bankverbindung.isInvalid())
-		{
-			neuerKontoinhaber.fuegeMeldungenHinzu(bankverbindung.getError());
-		}
-
+		// TODO: Warum schlägt der Test sonst fehl?
 		if (neuerKontoinhaber.getBenutzerIds().isEmpty())
 		{
-			return neuerKontoinhaber.fuegeMeldungHinzu(Meldung.BENUTZER_MINDESTAUSWAHL);
+			return neuerKontoinhaber
+				.fuegeMeldungHinzu(Meldung.BENUTZER_MINDESTAUSWAHL)
+				.fuegeMeldungenHinzu(bankverbindung.getError());
 		}
 
 		return neuerKontoinhaber.getBenutzerIds().stream()
