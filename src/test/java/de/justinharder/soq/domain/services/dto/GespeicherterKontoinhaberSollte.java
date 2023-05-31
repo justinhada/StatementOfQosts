@@ -13,7 +13,7 @@ class GespeicherterKontoinhaberSollte extends DTOTestdaten
 	private static final String ID = KONTOINHABER_1.getId().getWert().toString();
 	private static final String NACHNAME = KONTOINHABER_1.getBenutzer().getNachname().getWert();
 	private static final String VORNAME = KONTOINHABER_1.getBenutzer().getVorname().getWert();
-	private static final String IBAN = KONTOINHABER_1.getBankverbindung().getIban().getWert();
+	private static final String IBAN = KONTOINHABER_1.getBankverbindung().getIban().toString();
 	private static final String BANK = KONTOINHABER_1.getBankverbindung().getBank().getBezeichnung().getWert();
 
 	@Test

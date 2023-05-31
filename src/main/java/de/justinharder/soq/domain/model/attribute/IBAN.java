@@ -26,9 +26,22 @@ public class IBAN extends WertObjekt<String>
 	public static Validation<Meldungen, IBAN> aus(String wert)
 	{
 		return validiereString(wert, Meldung.IBAN_LEER)
-			.map(String::trim)
+			.map(s -> s.replace(" ", ""))
 			.filter(IBANValidator.DEFAULT_IBAN_VALIDATOR::isValid)
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.IBAN_UNGUELTIG)))
 			.map(IBAN::new);
+	}
+
+	@Override
+	public String toString()
+	{
+		var ibanBuffer = new StringBuilder(wert);
+		var length = ibanBuffer.length();
+
+		for (int i = 0; i < length / 4; i++) {
+			ibanBuffer.insert((i + 1) * 4 + i, " ");
+		}
+
+		return ibanBuffer.toString().trim();
 	}
 }

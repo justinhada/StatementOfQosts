@@ -29,12 +29,12 @@ class KontoinhaberViewSollte extends ViewSollte
 				containsString("bc01e451-051b-4bfa-979f-2acff87ba5a2"),
 				containsString("Harder"),
 				containsString("Justin"),
-				containsString("DE87280200504008357800"),
+				containsString("DE87 2802 0050 4008 3578 00"),
 				containsString("Oldenburgische Landesbank AG"),
 				containsString("7f94d5e5-3972-4f44-b81b-994a244ba3ad"),
 				containsString("Tiemerding"),
 				containsString("Laura"),
-				containsString("DE28280651080012888000"),
+				containsString("DE28 2806 5108 0012 8880 00"),
 				containsString("VR BANK Dinklage-Steinfeld eG"));
 	}
 }

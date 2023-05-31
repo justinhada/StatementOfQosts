@@ -16,7 +16,7 @@ public class KontoinhaberMapping implements Mapping<Kontoinhaber, GespeicherterK
 			kontoinhaber.getId().getWert().toString(),
 			kontoinhaber.getBenutzer().getNachname().getWert(),
 			kontoinhaber.getBenutzer().getVorname().getWert(),
-			kontoinhaber.getBankverbindung().getIban().getWert(),
+			kontoinhaber.getBankverbindung().getIban().toString(),
 			kontoinhaber.getBankverbindung().getBank().getBezeichnung().getWert());
 	}
 }

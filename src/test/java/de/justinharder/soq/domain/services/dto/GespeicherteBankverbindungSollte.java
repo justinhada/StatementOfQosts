@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class GespeicherteBankverbindungSollte extends DTOTestdaten
 {
 	private static final String ID = BANKVERBINDUNG_1.getId().getWert().toString();
-	private static final String IBAN = BANKVERBINDUNG_1.getIban().getWert();
+	private static final String IBAN = BANKVERBINDUNG_1.getIban().toString();
 	private static final String BANK = BANKVERBINDUNG_1.getBank().getBezeichnung().getWert();
 
 	@Test

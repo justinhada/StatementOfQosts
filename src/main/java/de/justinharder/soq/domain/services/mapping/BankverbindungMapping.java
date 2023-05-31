@@ -20,7 +20,7 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 	{
 		return new GespeicherteBankverbindung(
 			bankverbindung.getId().getWert().toString(),
-			bankverbindung.getIban().getWert(),
+			bankverbindung.getIban().toString(),
 			bankverbindung.getBank().getBezeichnung().getWert());
 	}
 
@@ -30,7 +30,7 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 	{
 		return new GespeicherterAuftraggeber(
 			bankverbindung.getId().getWert().toString(),
-			bankverbindung.getIban().getWert(),
+			bankverbindung.getIban().toString(),
 			bankverbindung.getBank().getBezeichnung().getWert(),
 			mappeAlleKontoinhaber(alleKontoinhaber));
 	}
@@ -41,7 +41,7 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 	{
 		return new GespeicherterZahlungsbeteiligter(
 			bankverbindung.getId().getWert().toString(),
-			bankverbindung.getIban().getWert(),
+			bankverbindung.getIban().toString(),
 			bankverbindung.getBank().getBezeichnung().getWert(),
 			mappeAlleKontoinhaber(alleKontoinhaber));
 	}

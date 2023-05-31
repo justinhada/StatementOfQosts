@@ -55,7 +55,7 @@ class BankverbindungenViewSollte extends ViewSollte
 	void test03()
 	{
 		given()
-			.formParam(IBAN, "DE87280200504008357800")
+			.formParam(IBAN, "DE87 2802 0050 4008 3578 00")
 			.formParam(BANK_ID, "e8b9020a-8c41-4d6c-9afb-f3dd70953d70")
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
@@ -72,7 +72,7 @@ class BankverbindungenViewSollte extends ViewSollte
 	@DisplayName("weiterleiten auf KontoinhaberView, wenn Bankverbindung erstellt wurde")
 	void test04()
 	{
-		var iban = "DE02120300000000202051";
+		var iban = "DE02 1203 0000 0000 2020 51";
 		var bankId = "46c317ae-25dd-4805-98ca-273e45d32815";
 
 		given()

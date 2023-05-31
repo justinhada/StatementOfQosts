@@ -17,7 +17,7 @@ public class UmsatzMapping implements Mapping<Umsatz, GespeicherterUmsatz>
 			umsatz.getDatum().toString(),
 			umsatz.getBetrag().toString(),
 			umsatz.getVerwendungszweck().getWert(),
-			umsatz.getBankverbindungAuftraggeber().getIban().getWert(),
-			umsatz.getBankverbindungZahlungsbeteiligter().getIban().getWert());
+			umsatz.getBankverbindungAuftraggeber().getIban().toString(),
+			umsatz.getBankverbindungZahlungsbeteiligter().getIban().toString());
 	}
 }

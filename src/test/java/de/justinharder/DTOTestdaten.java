@@ -31,11 +31,11 @@ public class DTOTestdaten extends ImportTestdaten
 		BENUTZER_4.getFirma().getWert());
 	protected static final GespeicherteBankverbindung GESPEICHERTE_BANKVERBINDUNG_1 = new GespeicherteBankverbindung(
 		BANKVERBINDUNG_1.getId().getWert().toString(),
-		BANKVERBINDUNG_1.getIban().getWert(),
+		BANKVERBINDUNG_1.getIban().toString(),
 		BANKVERBINDUNG_1.getBank().getBezeichnung().getWert());
 	protected static final GespeicherteBankverbindung GESPEICHERTE_BANKVERBINDUNG_2 = new GespeicherteBankverbindung(
 		BANKVERBINDUNG_2.getId().getWert().toString(),
-		BANKVERBINDUNG_2.getIban().getWert(),
+		BANKVERBINDUNG_2.getIban().toString(),
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert());
 	protected static final GespeicherteKategorie GESPEICHERTE_KATEGORIE_1 = new GespeicherteKategorie(
 		KATEGORIE_1.getId().getWert().toString(),
@@ -47,76 +47,76 @@ public class DTOTestdaten extends ImportTestdaten
 		KONTOINHABER_1.getId().getWert().toString(),
 		KONTOINHABER_1.getBenutzer().getNachname().getWert(),
 		KONTOINHABER_1.getBenutzer().getVorname().getWert(),
-		KONTOINHABER_1.getBankverbindung().getIban().getWert(),
+		KONTOINHABER_1.getBankverbindung().getIban().toString(),
 		KONTOINHABER_1.getBankverbindung().getBank().getBezeichnung().getWert());
 	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_2 = new GespeicherterKontoinhaber(
 		KONTOINHABER_2.getId().getWert().toString(),
 		KONTOINHABER_2.getBenutzer().getNachname().getWert(),
 		KONTOINHABER_2.getBenutzer().getVorname().getWert(),
-		KONTOINHABER_2.getBankverbindung().getIban().getWert(),
+		KONTOINHABER_2.getBankverbindung().getIban().toString(),
 		KONTOINHABER_2.getBankverbindung().getBank().getBezeichnung().getWert());
 	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_1 = new GespeicherterUmsatz(
 		UMSATZ_1.getId().getWert().toString(),
 		UMSATZ_1.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
 		"1,00",
 		UMSATZ_1.getVerwendungszweck().getWert(),
-		UMSATZ_1.getBankverbindungAuftraggeber().getIban().getWert(),
-		UMSATZ_1.getBankverbindungZahlungsbeteiligter().getIban().getWert());
+		UMSATZ_1.getBankverbindungAuftraggeber().getIban().toString(),
+		UMSATZ_1.getBankverbindungZahlungsbeteiligter().getIban().toString());
 	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_2 = new GespeicherterUmsatz(
 		UMSATZ_2.getId().getWert().toString(),
 		UMSATZ_2.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
 		"-1,00",
 		UMSATZ_2.getVerwendungszweck().getWert(),
-		UMSATZ_2.getBankverbindungAuftraggeber().getIban().getWert(),
-		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().getWert());
+		UMSATZ_2.getBankverbindungAuftraggeber().getIban().toString(),
+		UMSATZ_2.getBankverbindungZahlungsbeteiligter().getIban().toString());
 	protected static final NeuerImport NEUER_IMPORT =
 		new NeuerImport(String.valueOf(Herausgeber.OLB.getCode()), DATEI_1_WERT);
 	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_1 = new GespeicherterAuftraggeber(
 		BANKVERBINDUNG_1.getId().getWert().toString(),
-		BANKVERBINDUNG_1.getIban().getWert(),
+		BANKVERBINDUNG_1.getIban().toString(),
 		BANKVERBINDUNG_1.getBank().getBezeichnung().getWert(),
 		KONTOINHABER_1.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_1.getBenutzer().getNachname()
 			.getWert());
 	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_2 = new GespeicherterAuftraggeber(
 		BANKVERBINDUNG_2.getId().getWert().toString(),
-		BANKVERBINDUNG_2.getIban().getWert(),
+		BANKVERBINDUNG_2.getIban().toString(),
 		BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
 		KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
 			.getWert());
 	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_3 = new GespeicherterAuftraggeber(
 		BANKVERBINDUNG_3.getId().getWert().toString(),
-		BANKVERBINDUNG_3.getIban().getWert(),
+		BANKVERBINDUNG_3.getIban().toString(),
 		BANKVERBINDUNG_3.getBank().getBezeichnung().getWert(),
 		KONTOINHABER_3.getBenutzer().getFirma().getWert());
 	protected static final GespeicherterAuftraggeber GESPEICHERTER_AUFTRAGGEBER_4 = new GespeicherterAuftraggeber(
 		BANKVERBINDUNG_4.getId().getWert().toString(),
-		BANKVERBINDUNG_4.getIban().getWert(),
+		BANKVERBINDUNG_4.getIban().toString(),
 		BANKVERBINDUNG_4.getBank().getBezeichnung().getWert(),
 		KONTOINHABER_4.getBenutzer().getFirma().getWert());
 	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_1 =
 		new GespeicherterZahlungsbeteiligter(
 			BANKVERBINDUNG_1.getId().getWert().toString(),
-			BANKVERBINDUNG_1.getIban().getWert(),
+			BANKVERBINDUNG_1.getIban().toString(),
 			BANKVERBINDUNG_1.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_1.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_1.getBenutzer().getNachname()
 				.getWert());
 	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_2 =
 		new GespeicherterZahlungsbeteiligter(
 			BANKVERBINDUNG_2.getId().getWert().toString(),
-			BANKVERBINDUNG_2.getIban().getWert(),
+			BANKVERBINDUNG_2.getIban().toString(),
 			BANKVERBINDUNG_2.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_2.getBenutzer().getVorname().getWert() + " " + KONTOINHABER_2.getBenutzer().getNachname()
 				.getWert());
 	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_3 =
 		new GespeicherterZahlungsbeteiligter(
 			BANKVERBINDUNG_3.getId().getWert().toString(),
-			BANKVERBINDUNG_3.getIban().getWert(),
+			BANKVERBINDUNG_3.getIban().toString(),
 			BANKVERBINDUNG_3.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_3.getBenutzer().getFirma().getWert());
 	protected static final GespeicherterZahlungsbeteiligter GESPEICHERTER_ZAHLUNGSBETEILIGTER_4 =
 		new GespeicherterZahlungsbeteiligter(
 			BANKVERBINDUNG_4.getId().getWert().toString(),
-			BANKVERBINDUNG_4.getIban().getWert(),
+			BANKVERBINDUNG_4.getIban().toString(),
 			BANKVERBINDUNG_4.getBank().getBezeichnung().getWert(),
 			KONTOINHABER_4.getBenutzer().getFirma().getWert());
 	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_1 = new GespeicherteBuchung(

@@ -56,13 +56,13 @@ class IBANSollte extends Testdaten
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(IBAN_1_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(IBAN_1_WERT.replace(" ", "")));
 
 		validierung = IBAN.aus(IBAN_2_WERT);
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(IBAN_2_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(IBAN_2_WERT.replace(" ", "")));
 	}
 
 	@Test

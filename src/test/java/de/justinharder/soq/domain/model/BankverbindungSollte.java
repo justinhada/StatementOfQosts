@@ -52,6 +52,6 @@ class BankverbindungSollte extends Testdaten
 	void test03()
 	{
 		assertThat(BANKVERBINDUNG_1).hasToString(
-			"Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87280200504008357800, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}");
+			"Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87 2802 0050 4008 3578 00, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}");
 	}
 }

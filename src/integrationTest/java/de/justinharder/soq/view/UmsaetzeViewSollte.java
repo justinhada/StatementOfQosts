@@ -30,13 +30,13 @@ class UmsaetzeViewSollte extends ViewSollte
 				containsString("01.01.2020"),
 				containsString("1,00"),
 				containsString("Wohnungsmiete"),
-				containsString("DE87280200504008357800"),
-				containsString("DE28280651080012888000"),
+				containsString("DE87 2802 0050 4008 3578 00"),
+				containsString("DE28 2806 5108 0012 8880 00"),
 				containsString("1da15420-5b77-4d06-9fad-e62c0b62bb6f"),
 				containsString("01.01.2021"),
 				containsString("-1,00"),
 				containsString("Lohn/Gehalt"),
-				containsString("DE28280651080012888000"),
-				containsString("DE87280200504008357800"));
+				containsString("DE28 2806 5108 0012 8880 00"),
+				containsString("DE87 2802 0050 4008 3578 00"));
 	}
 }

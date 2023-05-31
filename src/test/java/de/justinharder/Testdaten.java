@@ -53,9 +53,9 @@ public class Testdaten
 	protected static final Firma FIRMA_1 = Firma.aus(FIRMA_1_WERT).get();
 	protected static final String FIRMA_2_WERT = "ALTE OLDENBURGER Krankenversicherung AG";
 	protected static final Firma FIRMA_2 = Firma.aus(FIRMA_2_WERT).get();
-	protected static final String IBAN_1_WERT = "DE87280200504008357800";
+	protected static final String IBAN_1_WERT = "DE87 2802 0050 4008 3578 00";
 	protected static final IBAN IBAN_1 = IBAN.aus(IBAN_1_WERT).get();
-	protected static final String IBAN_2_WERT = "DE28280651080012888000";
+	protected static final String IBAN_2_WERT = "DE28 2806 5108 0012 8880 00";
 	protected static final IBAN IBAN_2 = IBAN.aus(IBAN_2_WERT).get();
 	protected static final String IBAN_3_WERT = "DE54500105174969128221";
 	protected static final IBAN IBAN_3 = IBAN.aus(IBAN_3_WERT).get();
