@@ -11,3 +11,7 @@
   - gleicher Verwendungszweck,
   - gleicher Auftraggeber,
   - gleicher Zahlungsbeteiligter.
+
+## Bank aktualisieren
+
+- 
