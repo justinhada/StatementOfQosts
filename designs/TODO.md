@@ -14,4 +14,5 @@
 
 ## Bank aktualisieren
 
-- 
+- Bezeichnung ändern (nach Import haben Banken nur eine 4-stellige Bezeichnung abgeleitet vom BIC).
+- BIC sollte erstmal nicht geändert werden können.

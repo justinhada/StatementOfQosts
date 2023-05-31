@@ -81,6 +81,25 @@ public class BankService
 		       Wie sollen vergebene Bezeichnungen und BIC geprüft werden?
 		       Die gleiche Bezeichnung und BIC müssen möglich sein.
 		 */
+		ID.aus(gespeicherteBank.getId(), Schluessel.BANK)
+			.map(bankRepository::finde)
+			.flatMap(b -> b.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT)))
+			.fold(meldungen -> new GespeicherteBank().fuegeMeldungenHinzu(meldungen), bank -> {
+
+				var neueBezeichnung = Bezeichnung.aus(gespeicherteBank.getBezeichnung());
+				var neueBic = BIC.aus(gespeicherteBank.getBic());
+
+//				Validation.combine(neueBezeichnung, neueBic)
+//					.ap(Bank::aus)
+//					.
+//
+//				var alteBezeichnung = bank.getBezeichnung();
+//				var alteBic = bank.getBic();
+//
+//				if(alteBezeichnung.equals())
+
+				return new GespeicherteBank().fuegeMeldungHinzu(Meldung.BANK_AKTUALISIERT);
+			});
 
 		return null;
 	}

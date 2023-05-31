@@ -17,6 +17,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Auftraggeber darf nicht leer sein!");
 
+	public static final Meldung BANK_AKTUALISIERT = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.ERFOLG,
+		"Die wurde erfolgreich aktualisiert!");
+
 	public static final Meldung BANK_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
