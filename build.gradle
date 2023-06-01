@@ -23,6 +23,7 @@ dependencies {
     implementation "io.quarkus:quarkus-hibernate-orm",
             "io.quarkus:quarkus-qute",
             "io.quarkus:quarkus-jdbc-mariadb",
+            "io.quarkus:quarkus-jdbc-h2",
             "io.quarkus:quarkus-resteasy",
             "io.quarkus:quarkus-agroal",
             "io.quarkus:quarkus-resteasy-qute",
