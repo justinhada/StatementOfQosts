@@ -9,6 +9,7 @@ import io.vavr.control.Try;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
+import java.util.List;
 
 @Dependent
 public class BankJpaRepository extends JpaRepository<Bank> implements BankRepository
@@ -16,6 +17,15 @@ public class BankJpaRepository extends JpaRepository<Bank> implements BankReposi
 	public BankJpaRepository()
 	{
 		super(Bank.class);
+	}
+
+	@Override
+	public List<Bank> findeAlle()
+	{
+		return entityManager.createQuery(
+				"SELECT bank FROM Bank bank ORDER BY bank.bezeichnung",
+				Bank.class)
+			.getResultList();
 	}
 
 	@Override

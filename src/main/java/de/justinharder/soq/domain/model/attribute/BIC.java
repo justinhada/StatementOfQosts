@@ -28,6 +28,8 @@ public class BIC extends WertObjekt<String>
 			.map(String::strip)
 			.filter(BIC::pruefeLaenge)
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BIC_UNGUELTIG)))
+			.map(com.prowidesoftware.swift.model.BIC::new)
+			.map(com.prowidesoftware.swift.model.BIC::getBic11)
 			.map(BIC::new);
 	}
 

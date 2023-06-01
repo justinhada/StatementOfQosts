@@ -65,6 +65,6 @@ class ImportSollte extends ImportTestdaten
 	{
 		assertThat(IMPORT_1).hasToString(
 			"Import{Herausgeber=Herausgeber.OLB(code=1, wert=Oldenburgische Landesbank AG), Datei=Inhaberkonto;Buchungsdatum;Valuta;Empfaenger/Auftraggeber;IBAN;BIC;Verwendungszweck;Betrag;Waehrung;Kundenreferenz;Bankreferenz;Primatnota;Transaktions-Code;Transaktions-Text\n" +
-				"DE87 2802 0050 4008 3578 00;31.10.2022;31.10.2022;Laura Tiemerding;DE28 2806 5108 0012 8880 00;GENODEF1DIK;Wohnungsmiete;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR\n}");
+				"DE87280200504008357800;31.10.2022;31.10.2022;Laura Tiemerding;DE28280651080012888000;GENODEF1DIK;Wohnungsmiete;447,48;EUR;NONREF;;0004770;152;DA-GUTSCHR\n}");
 	}
 }

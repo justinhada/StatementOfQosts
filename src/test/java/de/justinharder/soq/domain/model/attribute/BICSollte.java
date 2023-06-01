@@ -73,7 +73,7 @@ class BICSollte extends Testdaten
 		sut = validierung.get();
 		assertAll(
 			() -> assertThrows(RuntimeException.class, validierung::getError),
-			() -> assertThat(sut.getWert()).isEqualTo(BIC_3_WERT));
+			() -> assertThat(sut.getWert()).isEqualTo(BIC_1_WERT));
 	}
 
 	@Test
