@@ -53,6 +53,6 @@ class BankSollte extends Testdaten
 	void test03()
 	{
 		assertThat(BANK_1).hasToString(
-			"Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}");
+			"Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBO DE H2 XXX}");
 	}
 }

@@ -10,11 +10,11 @@ public class DTOTestdaten extends ImportTestdaten
 	protected static final GespeicherteBank GESPEICHERTE_BANK_1 = new GespeicherteBank(
 		BANK_1.getId().getWert().toString(),
 		BANK_1.getBezeichnung().getWert(),
-		BANK_1.getBic().getWert());
+		BANK_1.getBic().toString());
 	protected static final GespeicherteBank GESPEICHERTE_BANK_2 = new GespeicherteBank(
 		BANK_2.getId().getWert().toString(),
 		BANK_2.getBezeichnung().getWert(),
-		BANK_2.getBic().getWert());
+		BANK_2.getBic().toString());
 	protected static final GespeichertePrivatperson GESPEICHERTE_PRIVATPERSON_1 = new GespeichertePrivatperson(
 		BENUTZER_1.getId().getWert().toString(),
 		BENUTZER_1.getNachname().getWert(),

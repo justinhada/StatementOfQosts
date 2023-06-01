@@ -53,6 +53,6 @@ class KontoinhaberSollte extends Testdaten
 	void test03()
 	{
 		assertThat(KONTOINHABER_1).hasToString(
-			"Kontoinhaber{ID=" + KONTOINHABER_1.getId() + ", Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}, Bankverbindung=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87 2802 0050 4008 3578 00, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBODEH2XXX}}}");
+			"Kontoinhaber{ID=" + KONTOINHABER_1.getId() + ", Benutzer=Benutzer{ID=" + BENUTZER_1.getId() + ", Nachname=Harder, Vorname=Justin, Art=Privatperson}, Bankverbindung=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87 2802 0050 4008 3578 00, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBO DE H2 XXX}}}");
 	}
 }

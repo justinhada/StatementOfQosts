@@ -15,6 +15,6 @@ public class BankMapping implements Mapping<Bank, GespeicherteBank>
 		return new GespeicherteBank(
 			bank.getId().getWert().toString(),
 			bank.getBezeichnung().getWert(),
-			bank.getBic().getWert());
+			bank.getBic().toString());
 	}
 }

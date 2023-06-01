@@ -29,10 +29,10 @@ class BankenViewSollte extends ViewSollte
 			.body(
 				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
 				containsString("Oldenburgische Landesbank AG"),
-				containsString("OLBODEH2XXX"),
+				containsString("OLBO DE H2 XXX"),
 				containsString("aaa8a25c-7589-4434-b668-4a78ab000628"),
 				containsString("VR BANK Dinklage-Steinfeld eG"),
-				containsString("GENODEF1DIK"));
+				containsString("GENO DE F1 DIK"));
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class BankenViewSollte extends ViewSollte
 	{
 		given()
 			.formParam(BEZEICHNUNG, "Oldenburgische Landesbank AG")
-			.formParam(BIC, "OLBODEH2XXX")
+			.formParam(BIC, "OLBO DE H2 XXX")
 			.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
 			.when()
 			.post(BANKEN)
@@ -74,7 +74,7 @@ class BankenViewSollte extends ViewSollte
 	void test04()
 	{
 		var bezeichnung = "Volksbank Vechta";
-		var bic = "GENODEF1VEC";
+		var bic = "GENO DE F1 VEC";
 
 		given()
 			.formParam(BEZEICHNUNG, bezeichnung)
@@ -104,6 +104,6 @@ class BankenViewSollte extends ViewSollte
 			.body(
 				containsString("46c317ae-25dd-4805-98ca-273e45d32815"),
 				containsString("Oldenburgische Landesbank AG"),
-				containsString("OLBODEH2XXX"));
+				containsString("OLBO DE H2 XXX"));
 	}
 }

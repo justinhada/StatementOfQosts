@@ -25,7 +25,7 @@ public class BIC extends WertObjekt<String>
 	public static Validation<Meldungen, BIC> aus(String wert)
 	{
 		return validiereString(wert, Meldung.BIC_LEER)
-			.map(String::strip)
+			.map(s -> s.replace(" ", ""))
 			.filter(BIC::pruefeLaenge)
 			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BIC_UNGUELTIG)))
 			.map(com.prowidesoftware.swift.model.BIC::new)
@@ -36,5 +36,15 @@ public class BIC extends WertObjekt<String>
 	private static boolean pruefeLaenge(String wert)
 	{
 		return wert.length() == 8 || wert.length() == 11;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s %s %s %s",
+			wert.substring(0, 4),
+			wert.substring(4, 6),
+			wert.substring(6, 8),
+			wert.substring(8));
 	}
 }
