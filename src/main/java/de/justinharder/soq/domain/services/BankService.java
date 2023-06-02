@@ -8,6 +8,7 @@ import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
+import de.justinharder.soq.domain.repository.BankverbindungRepository;
 import de.justinharder.soq.domain.services.dto.GeloeschteBank;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
@@ -20,6 +21,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
 
@@ -30,12 +32,19 @@ public class BankService
 	private final BankRepository bankRepository;
 
 	@NonNull
+	private final BankverbindungRepository bankverbindungRepository;
+
+	@NonNull
 	private final BankMapping bankMapping;
 
 	@Inject
-	public BankService(@NonNull BankRepository bankRepository, @NonNull BankMapping bankMapping)
+	public BankService(
+		@NonNull BankRepository bankRepository,
+		@NonNull BankverbindungRepository bankverbindungRepository,
+		@NonNull BankMapping bankMapping)
 	{
 		this.bankRepository = bankRepository;
+		this.bankverbindungRepository = bankverbindungRepository;
 		this.bankMapping = bankMapping;
 	}
 
@@ -101,8 +110,10 @@ public class BankService
 	{
 		return ID.aus(id, Schluessel.BANK)
 			.map(bankRepository::finde)
-			.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT)))
-			.fold(meldungen -> new GeloeschteBank().fuegeMeldungenHinzu(meldungen), bank -> {
+			.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT_ALLGEMEIN)))
+			.filter(not(bank -> bankverbindungRepository.istVorhanden(bank.getId())))
+			.getOrElse(Validation.invalid(Meldungen.aus(Meldung.BANK_NICHT_LOESCHBAR)))
+			.fold(new GeloeschteBank()::fuegeMeldungenHinzu, bank -> {
 				bankRepository.loesche(bank);
 				return new GeloeschteBank().fuegeMeldungHinzu(Meldung.BANK_GELOESCHT);
 			});

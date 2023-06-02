@@ -47,6 +47,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Bank darf nicht leer sein!");
 
+	public static final Meldung BANK_NICHT_LOESCHBAR = new Meldung(
+		Schluessel.ALLGEMEIN,
+		Ebene.FEHLER,
+		"Die Bank hat noch Bankverbindungen und kann deshalb nicht gelöscht werden!");
+
 	public static final Meldung BANKVERBINDUNG_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,

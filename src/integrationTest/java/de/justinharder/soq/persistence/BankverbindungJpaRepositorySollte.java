@@ -33,7 +33,8 @@ class BankverbindungJpaRepositorySollte extends IntegrationTest
 			() -> assertThrows(NullPointerException.class, () -> sut.speichere(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.finde((IBAN) null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden((ID) null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.istVorhanden((IBAN) null)));
 	}
 
 	@Test

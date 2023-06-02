@@ -6,8 +6,10 @@ import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import lombok.NonNull;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@XmlRootElement
 public abstract class DTO<T extends DTO<T>>
 {
 	protected final Meldungen meldungen = new Meldungen();
@@ -29,6 +31,11 @@ public abstract class DTO<T extends DTO<T>>
 	{
 		this.meldungen.addAll(meldungen);
 		return myself();
+	}
+
+	public List<Meldung> getMeldungen()
+	{
+		return meldungen;
 	}
 
 	public List<Meldung> getMeldungen(@NonNull Schluessel schluessel)

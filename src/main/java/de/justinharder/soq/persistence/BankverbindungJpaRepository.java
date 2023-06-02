@@ -2,12 +2,14 @@ package de.justinharder.soq.persistence;
 
 import de.justinharder.soq.domain.model.Bankverbindung;
 import de.justinharder.soq.domain.model.attribute.IBAN;
+import de.justinharder.soq.domain.model.attribute.ID;
 import de.justinharder.soq.domain.repository.BankverbindungRepository;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
+import java.util.List;
 
 @Dependent
 public class BankverbindungJpaRepository extends JpaRepository<Bankverbindung> implements BankverbindungRepository
@@ -15,6 +17,16 @@ public class BankverbindungJpaRepository extends JpaRepository<Bankverbindung> i
 	public BankverbindungJpaRepository()
 	{
 		super(Bankverbindung.class);
+	}
+
+	@Override
+	public List<Bankverbindung> findeAlle(@NonNull ID bankId)
+	{
+		return entityManager.createQuery(
+				"SELECT bankverbindung FROM Bankverbindung bankverbindung WHERE bankverbindung.bank.id = :bankId",
+				Bankverbindung.class)
+			.setParameter("bankId", bankId)
+			.getResultList();
 	}
 
 	@Override
@@ -26,6 +38,12 @@ public class BankverbindungJpaRepository extends JpaRepository<Bankverbindung> i
 				.setParameter("iban", iban)
 				.getSingleResult())
 			.toOption();
+	}
+
+	@Override
+	public boolean istVorhanden(@NonNull ID bankId)
+	{
+		return !findeAlle(bankId).isEmpty();
 	}
 
 	@Override

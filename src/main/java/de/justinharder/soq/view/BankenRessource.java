@@ -11,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @RequestScoped
 @Path("/banken")
@@ -77,5 +78,26 @@ public class BankenRessource
 			return zeigeErstellungFormular();
 		}
 		return Templates.bank(this.gespeicherteBank);
+	}
+
+	@DELETE
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response loesche(@PathParam("id") String id)
+	{
+		geloeschteBank = bankService.loesche(id);
+
+		if (!geloeschteBank.istErfolgreich())
+		{
+			return Response
+				.status(Response.Status.BAD_REQUEST)
+				.entity(geloeschteBank)
+				.type(MediaType.APPLICATION_JSON)
+				.build();
+		}
+
+		return Response
+			.ok(geloeschteBank, MediaType.APPLICATION_JSON)
+			.build();
 	}
 }

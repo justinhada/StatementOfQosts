@@ -6,6 +6,7 @@ import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
+import de.justinharder.soq.domain.repository.BankverbindungRepository;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
 import de.justinharder.soq.domain.services.mapping.BankMapping;
@@ -27,15 +28,17 @@ class BankServiceSollte extends DTOTestdaten
 	private BankService sut;
 
 	private BankRepository bankRepository;
+	private BankverbindungRepository bankverbindungRepository;
 	private BankMapping bankMapping;
 
 	@BeforeEach
 	void setup()
 	{
 		bankRepository = mock(BankRepository.class);
+		bankverbindungRepository = mock(BankverbindungRepository.class);
 		bankMapping = mock(BankMapping.class);
 
-		sut = new BankService(bankRepository, bankMapping);
+		sut = new BankService(bankRepository, bankverbindungRepository, bankMapping);
 	}
 
 	@Test
@@ -43,11 +46,15 @@ class BankServiceSollte extends DTOTestdaten
 	void test01()
 	{
 		assertAll(
-			() -> assertThrows(NullPointerException.class, () -> new BankService(bankRepository, null)),
-			() -> assertThrows(NullPointerException.class, () -> new BankService(null, bankMapping)),
+			() -> assertThrows(NullPointerException.class,
+				() -> new BankService(bankRepository, bankverbindungRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> new BankService(bankRepository, null, bankMapping)),
+			() -> assertThrows(NullPointerException.class,
+				() -> new BankService(null, bankverbindungRepository, bankMapping)),
 			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.aktualisiere(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.aktualisiere(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.loesche(null)));
 	}
 
 	@Test
@@ -292,25 +299,40 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("löschen")
+	@DisplayName("nicht löschen, wenn Bank nicht existiert")
 	void test16()
 	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
+			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT_ALLGEMEIN);
+		verify(bankRepository).finde(BANK_1.getId());
+	}
+
+	@Test
+	@DisplayName("nicht löschen, wenn Bank noch Bankverbindungen hat")
+	void test17()
+	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+		when(bankverbindungRepository.istVorhanden(BANK_1.getId())).thenReturn(true);
+
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
+			.containsExactlyInAnyOrder(Meldung.BANK_NICHT_LOESCHBAR);
+		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankverbindungRepository).istVorhanden(BANK_1.getId());
+	}
+
+	@Test
+	@DisplayName("löschen")
+	void test18()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+		when(bankverbindungRepository.istVorhanden(BANK_1.getId())).thenReturn(false);
 
 		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.ALLGEMEIN))
 			.containsExactlyInAnyOrder(Meldung.BANK_GELOESCHT);
 		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankverbindungRepository).istVorhanden(BANK_1.getId());
 		verify(bankRepository).loesche(BANK_1);
-	}
-
-	@Test
-	@DisplayName("nicht löschen, wenn Bank nicht existiert")
-	void test17()
-	{
-		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
-
-		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.BANK))
-			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
-		verify(bankRepository).finde(BANK_1.getId());
 	}
 }
