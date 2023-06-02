@@ -76,35 +76,28 @@ public class BankService
 	@Transactional
 	public GespeicherteBank aktualisiere(@NonNull GespeicherteBank gespeicherteBank)
 	{
-		/*
-		 TODO: Wie sollen Banken aktualisiert werden?
-		       Wie sollen vergebene Bezeichnungen und BIC geprüft werden?
-		       Die gleiche Bezeichnung und BIC müssen möglich sein.
-		 */
-		ID.aus(gespeicherteBank.getId(), Schluessel.BANK)
+		return ID.aus(gespeicherteBank.getId(), Schluessel.ALLGEMEIN)
 			.map(bankRepository::finde)
-			.flatMap(b -> b.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT)))
-			.fold(meldungen -> new GespeicherteBank().fuegeMeldungenHinzu(meldungen), bank -> {
-
-				var neueBezeichnung = Bezeichnung.aus(gespeicherteBank.getBezeichnung());
-				var neueBic = BIC.aus(gespeicherteBank.getBic());
-
-//				Validation.combine(neueBezeichnung, neueBic)
-//					.ap(Bank::aus)
-//					.
-//
-//				var alteBezeichnung = bank.getBezeichnung();
-//				var alteBic = bank.getBic();
-//
-//				if(alteBezeichnung.equals())
-
-				return new GespeicherteBank().fuegeMeldungHinzu(Meldung.BANK_AKTUALISIERT);
-			});
-
-		return null;
+			.flatMap(bank -> bank.toValidation(Meldungen.aus(Meldung.BANK_EXISTIERT_NICHT_ALLGEMEIN)))
+			.fold(gespeicherteBank::fuegeMeldungenHinzu, bank -> Validation.combine(
+					Bezeichnung.aus(gespeicherteBank.getBezeichnung()),
+					Validation.valid(bank.getBic()))
+				.ap(Bank::aus)
+				.mapError(Meldungen::aus)
+				.flatMap(Function.identity())
+				.fold(gespeicherteBank::fuegeMeldungenHinzu, neueBank -> {
+					var bezeichnung = neueBank.getBezeichnung();
+					if (!bank.getBezeichnung().equals(bezeichnung) && bankRepository.istVorhanden(bezeichnung))
+					{
+						return gespeicherteBank.fuegeMeldungHinzu(Meldung.BEZEICHNUNG_EXISTIERT_BEREITS);
+					}
+					bankRepository.speichere(bank.setBezeichnung(bezeichnung));
+					return bankMapping.mappe(bank).fuegeMeldungHinzu(Meldung.BANK_AKTUALISIERT);
+				}));
 	}
 
-	public GeloeschteBank loesche(String id)
+	@Transactional
+	public GeloeschteBank loesche(@NonNull String id)
 	{
 		return ID.aus(id, Schluessel.BANK)
 			.map(bankRepository::finde)

@@ -2,9 +2,11 @@ package de.justinharder.soq.domain.services;
 
 import de.justinharder.DTOTestdaten;
 import de.justinharder.soq.domain.model.Bank;
+import de.justinharder.soq.domain.model.attribute.Bezeichnung;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import de.justinharder.soq.domain.repository.BankRepository;
+import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
 import de.justinharder.soq.domain.services.mapping.BankMapping;
 import io.vavr.control.Option;
@@ -103,7 +105,7 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("leere Eingabedaten melden")
+	@DisplayName("leere Eingabedaten bei Erstellung melden")
 	void test06()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(LEER, LEER));
@@ -116,7 +118,7 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("ungültige BIC melden")
+	@DisplayName("ungültige BIC bei Erstellung melden")
 	void test07()
 	{
 		var ergebnis = sut.erstelle(new NeueBank(BEZEICHNUNG_1_WERT, "OLBODEH2XXXX"));
@@ -128,7 +130,7 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("bereits existierende Daten melden")
+	@DisplayName("bereits existierende Daten bei Erstellung melden")
 	void test08()
 	{
 		when(bankRepository.istVorhanden(BEZEICHNUNG_1)).thenReturn(true);
@@ -166,40 +168,132 @@ class BankServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("")
+	@DisplayName("nicht aktualisieren, wenn ID leer oder ungültig ist")
 	void test10()
 	{
-
+		assertAll(
+			() -> assertThat(sut.aktualisiere(new GespeicherteBank(
+					LEER,
+					GESPEICHERTE_BANK_1.getBezeichnung(),
+					GESPEICHERTE_BANK_1.getBic()))
+				.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(Meldung.idLeer(Schluessel.ALLGEMEIN)),
+			() -> assertThat(sut.aktualisiere(new GespeicherteBank(
+					"3ef97d60-4a4d-4ef0-b7a6-9c1c3c06a3f3-123",
+					GESPEICHERTE_BANK_1.getBezeichnung(),
+					GESPEICHERTE_BANK_1.getBic()))
+				.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
+				Meldung.idUngueltig(Schluessel.ALLGEMEIN)));
 	}
 
 	@Test
-	@DisplayName("")
+	@DisplayName("nicht aktualisieren, wenn Bank nicht existiert")
 	void test11()
-	{
-
-	}
-
-	@Test
-	@DisplayName("aktualisieren")
-	void test12()
-	{
-
-	}
-
-	@Test
-	@DisplayName("nicht löschen, wenn Bank nicht existiert")
-	void test13()
 	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
 
-		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.BANK))
-			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
+		var ergebnis = sut.aktualisiere(GESPEICHERTE_BANK_1);
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BEZEICHNUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BIC)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
+				Meldung.BANK_EXISTIERT_NICHT_ALLGEMEIN));
 		verify(bankRepository).finde(BANK_1.getId());
 	}
 
 	@Test
-	@DisplayName("löschen")
+	@DisplayName("leere Bezeichnung bei Aktualisierung melden")
+	void test12()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+
+		var ergebnis = sut.aktualisiere(new GespeicherteBank(
+			GESPEICHERTE_BANK_1.getId(),
+			LEER,
+			GESPEICHERTE_BANK_1.getBic()));
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BEZEICHNUNG)).containsExactlyInAnyOrder(
+				Meldung.BEZEICHNUNG_LEER),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BIC)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
+		verify(bankRepository).finde(BANK_1.getId());
+	}
+
+	@Test
+	@DisplayName("bereits existierende Bezeichnung bei Aktualisierung melden")
+	void test13()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+		when(bankRepository.istVorhanden(BANK_2.getBezeichnung())).thenReturn(true);
+
+		var ergebnis = sut.aktualisiere(new GespeicherteBank(
+			GESPEICHERTE_BANK_1.getId(),
+			GESPEICHERTE_BANK_2.getBezeichnung(),
+			GESPEICHERTE_BANK_1.getBic()));
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BEZEICHNUNG)).containsExactlyInAnyOrder(
+				Meldung.BEZEICHNUNG_EXISTIERT_BEREITS),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BIC)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).isEmpty());
+		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankRepository).istVorhanden(BANK_2.getBezeichnung());
+	}
+
+	@Test
+	@DisplayName("aktualisieren (Bezeichnung bleibt gleich)")
 	void test14()
+	{
+		var gespeicherteBank = new GespeicherteBank(
+			GESPEICHERTE_BANK_1.getId(),
+			GESPEICHERTE_BANK_1.getBezeichnung(),
+			GESPEICHERTE_BANK_1.getBic());
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
+		when(bankMapping.mappe(BANK_1)).thenReturn(gespeicherteBank);
+
+		var ergebnis = sut.aktualisiere(gespeicherteBank);
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BEZEICHNUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BIC)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
+				Meldung.BANK_AKTUALISIERT));
+		verify(bankRepository).finde(BANK_1.getId());
+		verify(bankRepository).speichere(BANK_1);
+		verify(bankMapping).mappe(BANK_1);
+	}
+
+	@Test
+	@DisplayName("aktualisieren (Bezeichnung ändert sich)")
+	void test15()
+	{
+		var bank = Bank.aus(BEZEICHNUNG_1, BIC_1).get();
+		var neueBezeichnung = "Neue Oldenburgische Landesbank AG";
+		var gespeicherteBank = new GespeicherteBank(
+			bank.getId().getWert().toString(),
+			neueBezeichnung,
+			bank.getBic().toString());
+		when(bankRepository.finde(bank.getId())).thenReturn(Option.of(bank));
+		when(bankRepository.istVorhanden(Bezeichnung.aus(neueBezeichnung).get())).thenReturn(false);
+		when(bankMapping.mappe(bank)).thenReturn(gespeicherteBank);
+
+		var ergebnis = sut.aktualisiere(gespeicherteBank);
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BEZEICHNUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BIC)).isEmpty(),
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.ALLGEMEIN)).containsExactlyInAnyOrder(
+				Meldung.BANK_AKTUALISIERT));
+		verify(bankRepository).finde(bank.getId());
+		verify(bankRepository).istVorhanden(Bezeichnung.aus(neueBezeichnung).get());
+		verify(bankRepository).speichere(any(Bank.class));
+		verify(bankMapping).mappe(bank);
+	}
+
+	@Test
+	@DisplayName("löschen")
+	void test16()
 	{
 		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.of(BANK_1));
 
@@ -207,5 +301,16 @@ class BankServiceSollte extends DTOTestdaten
 			.containsExactlyInAnyOrder(Meldung.BANK_GELOESCHT);
 		verify(bankRepository).finde(BANK_1.getId());
 		verify(bankRepository).loesche(BANK_1);
+	}
+
+	@Test
+	@DisplayName("nicht löschen, wenn Bank nicht existiert")
+	void test17()
+	{
+		when(bankRepository.finde(BANK_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.loesche(BANK_1.getId().getWert().toString()).getMeldungen(Schluessel.BANK))
+			.containsExactlyInAnyOrder(Meldung.BANK_EXISTIERT_NICHT);
+		verify(bankRepository).finde(BANK_1.getId());
 	}
 }

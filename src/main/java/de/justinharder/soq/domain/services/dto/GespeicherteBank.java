@@ -22,6 +22,11 @@ public class GespeicherteBank extends DTO<GespeicherteBank>
 	@FormParam("bic")
 	private String bic;
 
+	public GespeicherteBank(String id)
+	{
+		this.id = id;
+	}
+
 	@Override
 	protected GespeicherteBank myself()
 	{

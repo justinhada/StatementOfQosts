@@ -65,6 +65,6 @@ class UmsatzSollte extends Testdaten
 	void test03()
 	{
 		assertThat(UMSATZ_1).hasToString(
-			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1,00, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87 2802 0050 4008 3578 00, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBO DE H2 XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28 2806 5108 0012 8880 00, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBO DE H2 XXX}}}");
+			"Umsatz{ID=" + UMSATZ_1.getId() + ", Datum=01.01.2020, Betrag=1,00, Verwendungszweck=Wohnungsmiete, BankverbindungAuftraggeber=Bankverbindung{ID=" + BANKVERBINDUNG_1.getId() + ", IBAN=DE87 2802 0050 4008 3578 00, Bank=Bank{ID=" + BANK_1.getId() + ", Bezeichnung=Oldenburgische Landesbank AG, BIC=OLBO DE H2 XXX}}, BankverbindungZahlungsbeteiligter=Bankverbindung{ID=" + BANKVERBINDUNG_2.getId() + ", IBAN=DE28 2806 5108 0012 8880 00, Bank=Bank{ID=" + BANK_2.getId() + ", Bezeichnung=Volksbank Vechta eG, BIC=GENO DE F1 DIK}}}");
 	}
 }

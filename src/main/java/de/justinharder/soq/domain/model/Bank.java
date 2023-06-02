@@ -23,6 +23,7 @@ public class Bank extends Entitaet
 	@Serial
 	private static final long serialVersionUID = -7862317599521419955L;
 
+	@Setter
 	@NonNull
 	@Embedded
 	private Bezeichnung bezeichnung;

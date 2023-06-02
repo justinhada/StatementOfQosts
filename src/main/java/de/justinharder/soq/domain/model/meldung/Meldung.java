@@ -20,7 +20,7 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 	public static final Meldung BANK_AKTUALISIERT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
-		"Die wurde erfolgreich aktualisiert!");
+		"Die Bank wurde erfolgreich aktualisiert!");
 
 	public static final Meldung BANK_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
@@ -29,6 +29,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 
 	public static final Meldung BANK_EXISTIERT_NICHT = new Meldung(
 		Schluessel.BANK,
+		Ebene.FEHLER,
+		"Die Bank existiert nicht!");
+
+	public static final Meldung BANK_EXISTIERT_NICHT_ALLGEMEIN = new Meldung(
+		Schluessel.ALLGEMEIN,
 		Ebene.FEHLER,
 		"Die Bank existiert nicht!");
 
