@@ -10,3 +10,8 @@ body {
 .nav-link:hover {
     background-color: rgba(0, 0, 0, 0.45);
 }
+
+.table-soq {
+    background-color: #3a2080;
+    color: #ffffff;
+}
