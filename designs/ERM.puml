@@ -44,9 +44,16 @@ entity Buchung
     * **ID <<PK>>**
     * **UmsatzID <<FK>>**
     * **KategorieID <<FK>>**
+    * **VertragID [optional] <<FK>>**
 }
 
 entity Kategorie
+{
+    * **ID <<PK>>**
+    * Bezeichnung
+}
+
+entity Vertrag
 {
     * **ID <<PK>>**
     * Bezeichnung
@@ -58,4 +65,5 @@ Bank ||--o{ Bankverbindung
 Bankverbindung }o--o{ Umsatz
 Kategorie ||--o{ Buchung
 Umsatz ||--|| Buchung
+Vertrag ||--o{ Buchung
 @enduml
