@@ -10,6 +10,15 @@
         <main class="container">
             <h1 class="fw-bold">Bank: {gespeicherteBank.id}</h1>
 
+            <div class="row mt-3">
+                <div class="col">
+                    <a href="/banken"
+                       class="btn btn-secondary fw-bold">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+
             <form method="post"
                   action="/banken/{gespeicherteBank.id}">
                 {#if gespeicherteBank.hatMeldungen(Schluessel:ALLGEMEIN)}
