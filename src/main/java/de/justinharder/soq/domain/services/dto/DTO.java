@@ -50,7 +50,7 @@ public abstract class DTO<T extends DTO<T>>
 		return !getMeldungen(schluessel).isEmpty();
 	}
 
-	public T fasseZusammen(T t)
+	public T fasseZusammen(@NonNull T t)
 	{
 		return this.fuegeMeldungenHinzu(t.meldungen);
 	}
