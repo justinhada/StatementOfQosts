@@ -45,16 +45,26 @@ public class DTOTestdaten extends ImportTestdaten
 		KATEGORIE_2.getBezeichnung().getWert());
 	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_1 = new GespeicherterKontoinhaber(
 		KONTOINHABER_1.getId().getWert().toString(),
-		KONTOINHABER_1.getBenutzer().getNachname().getWert(),
-		KONTOINHABER_1.getBenutzer().getVorname().getWert(),
+		KONTOINHABER_1.getBenutzer().getNachname().getWert() + " "
+			+ KONTOINHABER_1.getBenutzer().getVorname().getWert(),
 		KONTOINHABER_1.getBankverbindung().getIban().toString(),
 		KONTOINHABER_1.getBankverbindung().getBank().getBezeichnung().getWert());
 	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_2 = new GespeicherterKontoinhaber(
 		KONTOINHABER_2.getId().getWert().toString(),
-		KONTOINHABER_2.getBenutzer().getNachname().getWert(),
-		KONTOINHABER_2.getBenutzer().getVorname().getWert(),
+		KONTOINHABER_2.getBenutzer().getNachname().getWert() + " "
+			+ KONTOINHABER_2.getBenutzer().getVorname().getWert(),
 		KONTOINHABER_2.getBankverbindung().getIban().toString(),
 		KONTOINHABER_2.getBankverbindung().getBank().getBezeichnung().getWert());
+	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_3 = new GespeicherterKontoinhaber(
+		KONTOINHABER_3.getId().getWert().toString(),
+		KONTOINHABER_3.getBenutzer().getFirma().getWert(),
+		KONTOINHABER_3.getBankverbindung().getIban().toString(),
+		KONTOINHABER_3.getBankverbindung().getBank().getBezeichnung().getWert());
+	protected static final GespeicherterKontoinhaber GESPEICHERTER_KONTOINHABER_4 = new GespeicherterKontoinhaber(
+		KONTOINHABER_4.getId().getWert().toString(),
+		KONTOINHABER_4.getBenutzer().getFirma().getWert(),
+		KONTOINHABER_4.getBankverbindung().getIban().toString(),
+		KONTOINHABER_4.getBankverbindung().getBank().getBezeichnung().getWert());
 	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_1 = new GespeicherterUmsatz(
 		UMSATZ_1.getId().getWert().toString(),
 		UMSATZ_1.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),

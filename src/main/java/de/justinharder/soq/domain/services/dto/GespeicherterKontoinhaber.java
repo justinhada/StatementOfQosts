@@ -12,10 +12,7 @@ public class GespeicherterKontoinhaber
 	private final String id;
 
 	@NonNull
-	private final String nachname;
-
-	@NonNull
-	private final String vorname;
+	private final String kontoinhaber;
 
 	@NonNull
 	private final String iban;

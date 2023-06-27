@@ -25,8 +25,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nachname</th>
-                        <th>Vorname</th>
+                        <th>Kontoinhaber</th>
                         <th>IBAN</th>
                         <th>Bank</th>
                     </tr>
@@ -35,8 +34,7 @@
                     {#for kontoinhaber in alleKontoinhaber}
                         <tr>
                         <td>{kontoinhaber.id}</td>
-                        <td>{kontoinhaber.nachname}</td>
-                        <td>{kontoinhaber.vorname}</td>
+                        <td>{kontoinhaber.kontoinhaber}</td>
                         <td>{kontoinhaber.iban}</td>
                         <td>{kontoinhaber.bank}</td>
                         </tr>

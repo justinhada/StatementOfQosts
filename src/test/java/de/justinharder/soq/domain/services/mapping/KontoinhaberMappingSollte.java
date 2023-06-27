@@ -33,6 +33,8 @@ class KontoinhaberMappingSollte extends DTOTestdaten
 	{
 		assertAll(
 			() -> assertThat(sut.mappe(KONTOINHABER_1)).isEqualTo(GESPEICHERTER_KONTOINHABER_1),
-			() -> assertThat(sut.mappe(KONTOINHABER_2)).isEqualTo(GESPEICHERTER_KONTOINHABER_2));
+			() -> assertThat(sut.mappe(KONTOINHABER_2)).isEqualTo(GESPEICHERTER_KONTOINHABER_2),
+			() -> assertThat(sut.mappe(KONTOINHABER_3)).isEqualTo(GESPEICHERTER_KONTOINHABER_3),
+			() -> assertThat(sut.mappe(KONTOINHABER_4)).isEqualTo(GESPEICHERTER_KONTOINHABER_4));
 	}
 }
