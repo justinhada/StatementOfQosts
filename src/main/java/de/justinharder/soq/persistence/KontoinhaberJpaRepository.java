@@ -20,6 +20,15 @@ public class KontoinhaberJpaRepository extends JpaRepository<Kontoinhaber> imple
 	}
 
 	@Override
+	public List<Kontoinhaber> findeAlle()
+	{
+		return entityManager.createQuery(
+				"SELECT kontoinhaber FROM Kontoinhaber kontoinhaber ORDER BY kontoinhaber.benutzer.vorname, kontoinhaber.bankverbindung.iban",
+				Kontoinhaber.class)
+			.getResultList();
+	}
+
+	@Override
 	public List<Kontoinhaber> findeAlle(@NonNull Bankverbindung bankverbindung)
 	{
 		return entityManager.createQuery("""
