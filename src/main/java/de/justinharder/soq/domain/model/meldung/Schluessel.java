@@ -6,7 +6,6 @@ import io.quarkus.qute.TemplateEnum;
 public enum Schluessel
 {
 	ALLGEMEIN,
-	ART,
 	AUFTRAGGEBER,
 	BANK,
 	BANKVERBINDUNG,
@@ -24,6 +23,7 @@ public enum Schluessel
 	KATEGORIE,
 	KONTOINHABER,
 	NACHNAME,
+	TURNUS,
 	UMSATZ,
 	VERWENDUNGSZWECK,
 	VORNAME,

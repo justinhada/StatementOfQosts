@@ -29,6 +29,10 @@ public class Testdaten
 	protected static final Bezeichnung BEZEICHNUNG_3 = Bezeichnung.aus(BEZEICHNUNG_3_WERT).get();
 	protected static final String BEZEICHNUNG_4_WERT = "Supplements";
 	protected static final Bezeichnung BEZEICHNUNG_4 = Bezeichnung.aus(BEZEICHNUNG_4_WERT).get();
+	protected static final String BEZEICHNUNG_5_WERT = "Wohnungsmiete";
+	protected static final Bezeichnung BEZEICHNUNG_5 = Bezeichnung.aus(BEZEICHNUNG_5_WERT).get();
+	protected static final String BEZEICHNUNG_6_WERT = "Hausratversicherung";
+	protected static final Bezeichnung BEZEICHNUNG_6 = Bezeichnung.aus(BEZEICHNUNG_6_WERT).get();
 	protected static final String BIC_1_WERT = "OLBO DE H2 XXX";
 	protected static final BIC BIC_1 = BIC.aus(BIC_1_WERT).get();
 	protected static final String BIC_2_WERT = "GENO DE F1 DIK";
@@ -97,5 +101,7 @@ public class Testdaten
 		Umsatz.aus(DATUM_2, BETRAG_2, VERWENDUNGSZWECK_2, BANKVERBINDUNG_2, BANKVERBINDUNG_1).get();
 	protected static final Buchung BUCHUNG_1 = Buchung.aus(UMSATZ_1, KATEGORIE_1).get();
 	protected static final Buchung BUCHUNG_2 = Buchung.aus(UMSATZ_2, KATEGORIE_2).get();
+	protected static final Vertrag VERTRAG_1 = Vertrag.aus(BEZEICHNUNG_5, Turnus.MONATLICH).get();
+	protected static final Vertrag VERTRAG_2 = Vertrag.aus(BEZEICHNUNG_6, Turnus.JAEHRLICH).get();
 	// -----------------------------------------------------------------------------------------------------------------
 }

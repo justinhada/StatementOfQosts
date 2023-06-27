@@ -237,6 +237,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.ERFOLG,
 		"Die Privatperson wurde erfolgreich erstellt!");
 
+	public static final Meldung TURNUS = new Meldung(
+		Schluessel.TURNUS,
+		Ebene.FEHLER,
+		"Der Turnus darf nicht leer sein!");
+
 	public static final Meldung UMSATZ_ERSTELLT = new Meldung(
 		Schluessel.ALLGEMEIN,
 		Ebene.ERFOLG,
