@@ -20,6 +20,15 @@ public class BankverbindungJpaRepository extends JpaRepository<Bankverbindung> i
 	}
 
 	@Override
+	public List<Bankverbindung> findeAlle()
+	{
+		return entityManager.createQuery(
+				"SELECT bankverbindung FROM Bankverbindung bankverbindung ORDER BY bankverbindung.bank.bezeichnung",
+				Bankverbindung.class)
+			.getResultList();
+	}
+
+	@Override
 	public List<Bankverbindung> findeAlle(@NonNull ID bankId)
 	{
 		return entityManager.createQuery(
