@@ -1,24 +1,64 @@
 <!DOCTYPE html>
 <html lang="de">
     {#include head}
-        {#title}Umsätze - Statement of Qosts{/title}
+        {#title}Buchungen - Statement of Qosts{/title}
     {/include}
 
     <body>
         {#include header /}
 
         <main class="container">
-            <h1 class="fw-bold">Umsatz erstellen</h1>
+            <h1 class="fw-bold">Buchung: {gespeicherteBuchung.id}</h1>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <a href="/buchungen"
+                       class="btn btn-secondary fw-bold">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
 
             <form method="post"
-                  action="/umsaetze">
-                {#if neuerUmsatz.hatMeldungen(Schluessel:ALLGEMEIN)}
+                  action="/buchungen/{gespeicherteBuchung.id}">
+                {#if gespeicherteBuchung.hatMeldungen(Schluessel:ALLGEMEIN)}
                     <ul class="list-unstyled text-center fw-bold">
-                    {#for meldung in neuerUmsatz.getMeldungen(Schluessel:ALLGEMEIN)}
+                    {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:ALLGEMEIN)}
                         <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
                     {/for}
                     </ul>
                 {/if}
+
+                <input id="id"
+                       name="id"
+                       type="hidden"
+                       value="{gespeicherteBuchung.id}" />
+
+                <div class="row">
+                    <div class="col">
+                        <label for="kategorieId"
+                               class="form-label mt-2 fw-bold">
+                            Kategorie
+                        </label>
+
+                        <select id="kategorieId"
+                                name="kategorieId"
+                                class="form-select {#if gespeicherteBuchung.hatMeldungen(Schluessel:KATEGORIE)}is-invalid{/if}">
+                            {#for kategorie in kategorien}
+                                <option value="{kategorie.id}"
+                                        {#if gespeicherteBuchung.kategorie.equals(kategorie.bezeichnung)}selected="selected"{/if}>
+                                    {kategorie.bezeichnung}
+                                </option>
+                            {/for}
+                        </select>
+
+                        <ul class="list-unstyled invalid-feedback">
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:KATEGORIE)}
+                                <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col">
@@ -30,13 +70,13 @@
                         <input id="datum"
                                name="datum"
                                type="date"
-                               class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:DATUM)}is-invalid{/if}"
+                               class="form-control {#if gespeicherteBuchung.hatMeldungen(Schluessel:DATUM)}is-invalid{/if}"
                                placeholder="dd.MM.yyyy"
                                aria-label="datum"
-                               value="{neuerUmsatz.datum}" />
+                               value="{gespeicherteBuchung.datum}" />
 
                         <ul class="list-unstyled invalid-feedback">
-                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:DATUM)}
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:DATUM)}
                                 <li>{meldung.text}</li>
                             {/for}
                         </ul>
@@ -51,14 +91,14 @@
                         <input id="betrag"
                                name="betrag"
                                type="number"
-                               class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:BETRAG)}is-invalid{/if}"
+                               class="form-control {#if gespeicherteBuchung.hatMeldungen(Schluessel:BETRAG)}is-invalid{/if}"
                                placeholder="1234,56"
                                step=".01"
                                aria-label="betrag"
-                               value="{neuerUmsatz.betrag}" />
+                               value="{gespeicherteBuchung.betrag}" />
 
                         <ul class="list-unstyled invalid-feedback">
-                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:BETRAG)}
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:BETRAG)}
                                 <li>{meldung.text}</li>
                             {/for}
                         </ul>
@@ -74,12 +114,12 @@
 
                         <textarea id="verwendungszweck"
                                   name="verwendungszweck"
-                                  class="form-control {#if neuerUmsatz.hatMeldungen(Schluessel:VERWENDUNGSZWECK)}is-invalid{/if}"
+                                  class="form-control {#if gespeicherteBuchung.hatMeldungen(Schluessel:VERWENDUNGSZWECK)}is-invalid{/if}"
                                   aria-label="verwendungszweck"
-                                  rows="3">{neuerUmsatz.verwendungszweck}</textarea>
+                                  rows="3">{gespeicherteBuchung.verwendungszweck}</textarea>
 
                         <ul class="list-unstyled invalid-feedback">
-                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:VERWENDUNGSZWECK)}
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:VERWENDUNGSZWECK)}
                                 <li>{meldung.text}</li>
                             {/for}
                         </ul>
@@ -95,7 +135,7 @@
 
                         <select id="auftraggeberId"
                                 name="auftraggeberId"
-                                class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:AUFTRAGGEBER)}is-invalid{/if}">
+                                class="form-select {#if gespeicherteBuchung.hatMeldungen(Schluessel:AUFTRAGGEBER)}is-invalid{/if}">
                             {#for auftraggeber in alleAuftraggeber}
                                 <option value="{auftraggeber.id}">
                                     {auftraggeber.iban} {#if auftraggeber.hatKontoinhaber()}({auftraggeber.alleKontoinhaber}){/if}
@@ -104,7 +144,7 @@
                         </select>
 
                         <ul class="list-unstyled invalid-feedback">
-                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:AUFTRAGGEBER)}
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:AUFTRAGGEBER)}
                                 <li>{meldung.text}</li>
                             {/for}
                         </ul>
@@ -118,7 +158,7 @@
 
                         <select id="zahlungsbeteiligterId"
                                 name="zahlungsbeteiligterId"
-                                class="form-select {#if neuerUmsatz.hatMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}is-invalid{/if}">
+                                class="form-select {#if gespeicherteBuchung.hatMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}is-invalid{/if}">
                             {#for zahlungsbeteiligter in zahlungsbeteiligte}
                                 <option value="{zahlungsbeteiligter.id}">
                                     {zahlungsbeteiligter.iban} {#if zahlungsbeteiligter.hatKontoinhaber()}({zahlungsbeteiligter.alleKontoinhaber}){/if}
@@ -127,7 +167,7 @@
                         </select>
 
                         <ul class="list-unstyled invalid-feedback">
-                            {#for meldung in neuerUmsatz.getMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}
+                            {#for meldung in gespeicherteBuchung.getMeldungen(Schluessel:ZAHLUNGSBETEILIGTER)}
                                 <li>{meldung.text}</li>
                             {/for}
                         </ul>
@@ -138,36 +178,11 @@
                     <div class="col d-grid gap-2">
                         <button type="submit"
                                 class="btn btn-success mt-3 fw-bold">
-                            Umsatz erstellen
+                            Buchung aktualisieren
                         </button>
                     </div>
                 </div>
             </form>
-
-            <table class="table table-striped table-hover mt-5">
-                <thead class="table-soq">
-                    <tr>
-                        <th>ID</th>
-                        <th>Datum</th>
-                        <th>Betrag</th>
-                        <th>Verwendungszweck</th>
-                        <th>Auftraggeber</th>
-                        <th>Zahlungsbeteiligter</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#for umsatz in umsaetze}
-                        <tr>
-                        <td>{umsatz.id}</td>
-                        <td>{umsatz.datum}</td>
-                        <td>{umsatz.betrag}</td>
-                        <td>{umsatz.verwendungszweck}</td>
-                        <td>{umsatz.auftraggeber}</td>
-                        <td>{umsatz.zahlungsbeteiligter}</td>
-                        </tr>
-                    {/for}
-                </tbody>
-            </table>
         </main>
 
         {#include footer /}

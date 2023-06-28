@@ -27,14 +27,15 @@ public class Templates
 		List<GespeichertePrivatperson> alleBenutzer,
 		List<GespeicherteBank> banken);
 
+	public static native TemplateInstance buchung(
+		GespeicherteBuchung gespeicherteBuchung,
+		List<GespeicherteKategorie> kategorien,
+		List<GespeicherterAuftraggeber> alleAuftraggeber,
+		List<GespeicherterZahlungsbeteiligter> zahlungsbeteiligte);
+
 	public static native TemplateInstance buchungen(
 		NeueBuchung neueBuchung,
 		List<GespeicherteBuchung> buchungen);
-
-	public static native TemplateInstance buchungenWeiterleitung(
-		NeueBuchung neueBuchung,
-		List<GespeicherteKategorie> kategorien,
-		GespeicherterUmsatz umsatz);
 
 	public static native TemplateInstance imports(
 		NeuerImport neuerImport);
@@ -63,6 +64,11 @@ public class Templates
 		List<GespeicherterAuftraggeber> alleAuftraggeber,
 		List<GespeicherterZahlungsbeteiligter> zahlungsbeteiligte,
 		List<GespeicherterUmsatz> umsaetze);
+
+	public static native TemplateInstance umsaetzeWeiterleitung(
+		NeueBuchung neueBuchung,
+		List<GespeicherteKategorie> kategorien,
+		GespeicherterUmsatz umsatz);
 
 	public static native TemplateInstance unternehmen(
 		NeuesUnternehmen neuesUnternehmen,

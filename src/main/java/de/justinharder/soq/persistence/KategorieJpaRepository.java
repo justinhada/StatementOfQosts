@@ -8,6 +8,7 @@ import io.vavr.control.Try;
 import lombok.NonNull;
 
 import javax.enterprise.context.Dependent;
+import java.util.List;
 
 @Dependent
 public class KategorieJpaRepository extends JpaRepository<Kategorie> implements KategorieRepository
@@ -15,6 +16,15 @@ public class KategorieJpaRepository extends JpaRepository<Kategorie> implements 
 	public KategorieJpaRepository()
 	{
 		super(Kategorie.class);
+	}
+
+	@Override
+	public List<Kategorie> findeAlle()
+	{
+		return entityManager.createQuery(
+				"SELECT kategorie FROM Kategorie kategorie ORDER BY kategorie.bezeichnung",
+				Kategorie.class)
+			.getResultList();
 	}
 
 	@Override

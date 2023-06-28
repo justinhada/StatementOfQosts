@@ -24,6 +24,7 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 			bankverbindung.getBank().getBezeichnung().getWert());
 	}
 
+	// TODO: Eigene Klasse AuftraggeberMapping
 	public GespeicherterAuftraggeber mappeZuAuftraggeber(
 		@NonNull Bankverbindung bankverbindung,
 		@NonNull List<Kontoinhaber> alleKontoinhaber)
@@ -35,6 +36,7 @@ public class BankverbindungMapping implements Mapping<Bankverbindung, Gespeicher
 			mappeAlleKontoinhaber(alleKontoinhaber));
 	}
 
+	// TODO: Eigene Klasse ZahlungsbeteiligterMapping
 	public GespeicherterZahlungsbeteiligter mappeZuZahlungsbeteiligter(
 		@NonNull Bankverbindung bankverbindung,
 		@NonNull List<Kontoinhaber> alleKontoinhaber)

@@ -55,6 +55,7 @@ class BuchungServiceSollte extends DTOTestdaten
 				() -> new BuchungService(buchungRepository, umsatzRepository, null, buchungMapping)),
 			() -> assertThrows(NullPointerException.class,
 				() -> new BuchungService(buchungRepository, umsatzRepository, kategorieRepository, null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.finde(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.erstelle(null)));
 	}
 
@@ -73,8 +74,53 @@ class BuchungServiceSollte extends DTOTestdaten
 	}
 
 	@Test
-	@DisplayName("nicht existierende IDs melden")
+	@DisplayName("nicht finden, wenn ID leer oder ungültig ist")
 	void test03()
+	{
+		assertAll(
+			() -> assertThat(sut.finde(LEER).getMeldungen(Schluessel.BUCHUNG))
+				.containsExactlyInAnyOrder(Meldung.idLeer(Schluessel.BUCHUNG)),
+			() -> assertThat(sut.finde("3ef97d60-4a4d-4ef0-b7a6-9c1c3c06a3f3-123").getMeldungen(Schluessel.BUCHUNG))
+				.containsExactlyInAnyOrder(Meldung.idUngueltig(Schluessel.BUCHUNG)));
+	}
+
+	@Test
+	@DisplayName("nicht finden, wenn ID nicht existiert")
+	void test04()
+	{
+		when(buchungRepository.finde(BUCHUNG_1.getId())).thenReturn(Option.none());
+
+		assertThat(sut.finde(BUCHUNG_1.getId().getWert().toString()).getMeldungen(Schluessel.BUCHUNG))
+			.containsExactlyInAnyOrder(Meldung.BUCHUNG_EXISTIERT_NICHT);
+		verify(buchungRepository).finde(BUCHUNG_1.getId());
+	}
+
+	@Test
+	@DisplayName("finden, wenn ID existiert")
+	void test05()
+	{
+		when(buchungRepository.finde(BUCHUNG_1.getId())).thenReturn(Option.of(BUCHUNG_1));
+		when(buchungMapping.mappe(BUCHUNG_1)).thenReturn(GESPEICHERTE_BUCHUNG_1);
+
+		var ergebnis = sut.finde(BUCHUNG_1.getId().getWert().toString());
+
+		assertAll(
+			() -> assertThat(ergebnis.getMeldungen(Schluessel.BUCHUNG)).isEmpty(),
+			() -> assertThat(ergebnis.getId()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getId()),
+			() -> assertThat(ergebnis.getKategorie()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getKategorie()),
+			() -> assertThat(ergebnis.getDatum()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getDatum()),
+			() -> assertThat(ergebnis.getBetrag()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getBetrag()),
+			() -> assertThat(ergebnis.getVerwendungszweck()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getVerwendungszweck()),
+			() -> assertThat(ergebnis.getAuftraggeber()).isEqualTo(GESPEICHERTE_BUCHUNG_1.getAuftraggeber()),
+			() -> assertThat(ergebnis.getZahlungsbeteiligter()).isEqualTo(
+				GESPEICHERTE_BUCHUNG_1.getZahlungsbeteiligter()));
+		verify(buchungRepository).finde(BUCHUNG_1.getId());
+		verify(buchungMapping).mappe(BUCHUNG_1);
+	}
+
+	@Test
+	@DisplayName("nicht existierende IDs melden")
+	void test06()
 	{
 		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.none());
 		when(kategorieRepository.finde(KATEGORIE_1.getId())).thenReturn(Option.none());
@@ -95,7 +141,7 @@ class BuchungServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("bereits existierende Buchung nicht erstellen")
-	void test04()
+	void test07()
 	{
 		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.of(UMSATZ_1));
 		when(kategorieRepository.finde(KATEGORIE_1.getId())).thenReturn(Option.of(KATEGORIE_1));
@@ -117,7 +163,7 @@ class BuchungServiceSollte extends DTOTestdaten
 
 	@Test
 	@DisplayName("Buchung erstellen")
-	void test05()
+	void test08()
 	{
 		when(umsatzRepository.finde(UMSATZ_1.getId())).thenReturn(Option.of(UMSATZ_1));
 		when(kategorieRepository.finde(KATEGORIE_1.getId())).thenReturn(Option.of(KATEGORIE_1));

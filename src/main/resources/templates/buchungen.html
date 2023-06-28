@@ -21,12 +21,18 @@
                 </thead>
                 <tbody>
                     {#for buchung in buchungen}
-                        <tr>
-                        <td>{buchung.id}</td>
+                    <tr>
+                        <td>
+                            <a class=""
+                               title="Zur Buchung {buchung.id}"
+                               href="/buchungen/{buchung.id}">
+                                {buchung.id}
+                            </a>
+                        </td>
                         <td>{buchung.datum}</td>
                         <td>{buchung.betrag}</td>
                         <td>{buchung.kategorie}</td>
-                        </tr>
+                    </tr>
                     {/for}
                 </tbody>
             </table>

@@ -1,8 +1,10 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.BuchungService;
 import de.justinharder.soq.domain.services.KategorieService;
 import de.justinharder.soq.domain.services.UmsatzService;
+import de.justinharder.soq.domain.services.dto.GespeicherteBuchung;
 import de.justinharder.soq.domain.services.dto.NeueBuchung;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
@@ -26,6 +28,9 @@ public class BuchungenRessource
 	private final UmsatzService umsatzService;
 
 	@NonNull
+	private final BankverbindungService bankverbindungService;
+
+	@NonNull
 	private NeueBuchung neueBuchung;
 
 	@Inject
@@ -33,11 +38,13 @@ public class BuchungenRessource
 		@NonNull BuchungService buchungService,
 		@NonNull KategorieService kategorieService,
 		@NonNull UmsatzService umsatzService,
+		@NonNull BankverbindungService bankverbindungService,
 		@NonNull NeueBuchung neueBuchung)
 	{
 		this.buchungService = buchungService;
 		this.kategorieService = kategorieService;
 		this.umsatzService = umsatzService;
+		this.bankverbindungService = bankverbindungService;
 		this.neueBuchung = neueBuchung;
 	}
 
@@ -47,17 +54,6 @@ public class BuchungenRessource
 	{
 		// TODO: Zuordnen von Umsätzen, die noch keiner Kategorie zugeordnet sind.
 		return Templates.buchungen(neueBuchung, buchungService.findeAlle());
-	}
-
-	@GET
-	@Path("/{umsatzId}")
-	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance zeigeErstellungFormular(@PathParam("umsatzId") String umsatzId)
-	{
-		return Templates.buchungenWeiterleitung(
-			neueBuchung,
-			kategorieService.findeAlle(),
-			umsatzService.finde(umsatzId));
 	}
 
 	@POST
@@ -70,9 +66,32 @@ public class BuchungenRessource
 		{
 			return zeigeListe();
 		}
-		return Templates.buchungenWeiterleitung(
+		return Templates.umsaetzeWeiterleitung(
 			neueBuchung,
 			kategorieService.findeAlle(),
 			umsatzService.finde(neueBuchung.getUmsatzId()));
+	}
+
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public TemplateInstance zeigeInformationen(@PathParam("id") String id)
+	{
+		return Templates.buchung(
+			buchungService.finde(id),
+			kategorieService.findeAlle(),
+			bankverbindungService.findeAlleAuftraggeber(),
+			bankverbindungService.findeAlleZahlungsbeteiligten());
+	}
+
+	@POST
+	@Path("/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public TemplateInstance aktualisiere(
+		@PathParam("id") String id,
+		@BeanParam GespeicherteBuchung gespeicherteBuchung)
+	{
+		return null;
 	}
 }

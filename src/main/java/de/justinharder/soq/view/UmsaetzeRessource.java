@@ -62,7 +62,7 @@ public class UmsaetzeRessource
 		this.neuerUmsatz = umsatzService.erstelle(neuerUmsatz);
 		if (this.neuerUmsatz.istErfolgreich())
 		{
-			return Templates.buchungenWeiterleitung(
+			return Templates.umsaetzeWeiterleitung(
 				new NeueBuchung(),
 				kategorieService.findeAlle(),
 				umsatzService.finde(this.neuerUmsatz.getId()));

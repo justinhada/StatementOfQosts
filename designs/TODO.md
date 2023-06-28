@@ -30,3 +30,9 @@
 
 - Wie ein DELETE aufrufen? Über jQuery?
 
+## Buchungen
+
+### /buchungen/{id}
+
+- Übersicht einer Buchung darstellen.
+- Bankverbindungen darstellen, welcher Betrag dabei von wo nach wo gegangen ist (also der Umsatz).

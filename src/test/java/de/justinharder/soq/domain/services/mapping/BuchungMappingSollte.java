@@ -33,6 +33,8 @@ class BuchungMappingSollte extends DTOTestdaten
 	{
 		assertAll(
 			() -> assertThat(sut.mappe(BUCHUNG_1)).isEqualTo(GESPEICHERTE_BUCHUNG_1),
+			() -> assertThat(sut.mappe(BUCHUNG_2)).isEqualTo(GESPEICHERTE_BUCHUNG_2),
+			() -> assertThat(sut.mappe(BUCHUNG_1)).isEqualTo(GESPEICHERTE_BUCHUNG_1),
 			() -> assertThat(sut.mappe(BUCHUNG_2)).isEqualTo(GESPEICHERTE_BUCHUNG_2));
 	}
 }

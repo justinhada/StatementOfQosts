@@ -57,6 +57,14 @@ public class BuchungService
 			.toList();
 	}
 
+	public GespeicherteBuchung finde(@NonNull String id)
+	{
+		return ID.aus(id, Schluessel.BUCHUNG)
+			.map(buchungRepository::finde)
+			.flatMap(buchung -> buchung.toValidation(Meldungen.aus(Meldung.BUCHUNG_EXISTIERT_NICHT)))
+			.fold(meldungen -> new GespeicherteBuchung().fuegeMeldungenHinzu(meldungen), buchungMapping::mappe);
+	}
+
 	@Transactional
 	public NeueBuchung erstelle(@NonNull NeueBuchung neueBuchung)
 	{

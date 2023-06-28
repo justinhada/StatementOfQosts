@@ -4,19 +4,35 @@ import lombok.*;
 
 @Getter
 @ToString
+@NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class GespeicherteBuchung
+public class GespeicherteBuchung extends DTO<GespeicherteBuchung>
 {
 	@NonNull
-	private final String id;
+	private String id;
 
 	@NonNull
-	private final String datum;
+	private String kategorie;
 
 	@NonNull
-	private final String betrag;
+	private String datum;
 
 	@NonNull
-	private final String kategorie;
+	private String betrag;
+
+	@NonNull
+	private String verwendungszweck;
+
+	@NonNull
+	private String auftraggeber;
+
+	@NonNull
+	private String zahlungsbeteiligter;
+
+	@Override
+	protected GespeicherteBuchung myself()
+	{
+		return this;
+	}
 }

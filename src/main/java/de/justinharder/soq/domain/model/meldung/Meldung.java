@@ -127,6 +127,11 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Die Buchung existiert bereits!");
 
+	public static final Meldung BUCHUNG_EXISTIERT_NICHT = new Meldung(
+		Schluessel.BUCHUNG,
+		Ebene.FEHLER,
+		"Die Buchung existiert nicht!");
+
 	public static final Meldung DATEI = new Meldung(
 		Schluessel.DATEI,
 		Ebene.FEHLER,

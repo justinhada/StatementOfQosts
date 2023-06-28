@@ -33,7 +33,8 @@ abstract class DTOSollte<T extends DTO<T>> extends DTOTestdaten
 			() -> assertThrows(NullPointerException.class, () -> sut.fuegeMeldungHinzu(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.fuegeMeldungenHinzu(null)),
 			() -> assertThrows(NullPointerException.class, () -> sut.getMeldungen(null)),
-			() -> assertThrows(NullPointerException.class, () -> sut.hatMeldungen(null)));
+			() -> assertThrows(NullPointerException.class, () -> sut.hatMeldungen(null)),
+			() -> assertThrows(NullPointerException.class, () -> sut.fasseZusammen(null)));
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.BuchungService;
 import de.justinharder.soq.domain.services.KategorieService;
 import de.justinharder.soq.domain.services.UmsatzService;
@@ -18,6 +19,7 @@ class BuchungenRessourceSollte
 	private BuchungService buchungService;
 	private KategorieService kategorieService;
 	private UmsatzService umsatzService;
+	private BankverbindungService bankverbindungService;
 	private NeueBuchung neueBuchung;
 
 	@BeforeEach
@@ -26,6 +28,7 @@ class BuchungenRessourceSollte
 		buchungService = mock(BuchungService.class);
 		kategorieService = mock(KategorieService.class);
 		umsatzService = mock(UmsatzService.class);
+		bankverbindungService = mock(BankverbindungService.class);
 		neueBuchung = mock(NeueBuchung.class);
 	}
 
@@ -35,12 +38,15 @@ class BuchungenRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new BuchungenRessource(null, kategorieService, umsatzService, neueBuchung)),
+				() -> new BuchungenRessource(null, kategorieService, umsatzService, bankverbindungService,
+					neueBuchung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BuchungenRessource(buchungService, null, umsatzService, neueBuchung)),
+				() -> new BuchungenRessource(buchungService, null, umsatzService, bankverbindungService, neueBuchung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BuchungenRessource(buchungService, kategorieService, null, neueBuchung)),
+				() -> new BuchungenRessource(buchungService, kategorieService, null, bankverbindungService,
+					neueBuchung)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BuchungenRessource(buchungService, kategorieService, umsatzService, null)));
+				() -> new BuchungenRessource(buchungService, kategorieService, umsatzService, bankverbindungService,
+					null)));
 	}
 }

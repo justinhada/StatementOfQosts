@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 public class DTOTestdaten extends ImportTestdaten
 {
+	private static final DateTimeFormatter DATUMFORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
 	protected static final GespeicherteBank GESPEICHERTE_BANK_1 = new GespeicherteBank(
 		BANK_1.getId().getWert().toString(),
 		BANK_1.getBezeichnung().getWert(),
@@ -67,14 +69,14 @@ public class DTOTestdaten extends ImportTestdaten
 		KONTOINHABER_4.getBankverbindung().getBank().getBezeichnung().getWert());
 	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_1 = new GespeicherterUmsatz(
 		UMSATZ_1.getId().getWert().toString(),
-		UMSATZ_1.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		UMSATZ_1.getDatum().toString(),
 		"1,00",
 		UMSATZ_1.getVerwendungszweck().getWert(),
 		UMSATZ_1.getBankverbindungAuftraggeber().getIban().toString(),
 		UMSATZ_1.getBankverbindungZahlungsbeteiligter().getIban().toString());
 	protected static final GespeicherterUmsatz GESPEICHERTER_UMSATZ_2 = new GespeicherterUmsatz(
 		UMSATZ_2.getId().getWert().toString(),
-		UMSATZ_2.getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+		UMSATZ_2.getDatum().toString(),
 		"-1,00",
 		UMSATZ_2.getVerwendungszweck().getWert(),
 		UMSATZ_2.getBankverbindungAuftraggeber().getIban().toString(),
@@ -131,12 +133,18 @@ public class DTOTestdaten extends ImportTestdaten
 			KONTOINHABER_4.getBenutzer().getFirma().getWert());
 	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_1 = new GespeicherteBuchung(
 		BUCHUNG_1.getId().getWert().toString(),
-		BUCHUNG_1.getUmsatz().getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-		"1,00",
-		BUCHUNG_1.getKategorie().getBezeichnung().getWert());
+		BUCHUNG_1.getKategorie().getBezeichnung().getWert(),
+		BUCHUNG_1.getUmsatz().getDatum().toString(),
+		BUCHUNG_1.getUmsatz().getBetrag().toString(),
+		BUCHUNG_1.getUmsatz().getVerwendungszweck().getWert(),
+		BUCHUNG_1.getUmsatz().getBankverbindungAuftraggeber().getIban().getWert(),
+		BUCHUNG_1.getUmsatz().getBankverbindungZahlungsbeteiligter().getIban().getWert());
 	protected static final GespeicherteBuchung GESPEICHERTE_BUCHUNG_2 = new GespeicherteBuchung(
 		BUCHUNG_2.getId().getWert().toString(),
-		BUCHUNG_2.getUmsatz().getDatum().getWert().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-		"-1,00",
-		BUCHUNG_2.getKategorie().getBezeichnung().getWert());
+		BUCHUNG_2.getKategorie().getBezeichnung().getWert(),
+		BUCHUNG_2.getUmsatz().getDatum().toString(),
+		BUCHUNG_2.getUmsatz().getBetrag().toString(),
+		BUCHUNG_2.getUmsatz().getVerwendungszweck().getWert(),
+		BUCHUNG_2.getUmsatz().getBankverbindungAuftraggeber().getIban().getWert(),
+		BUCHUNG_2.getUmsatz().getBankverbindungZahlungsbeteiligter().getIban().getWert());
 }
