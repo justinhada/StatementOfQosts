@@ -36,3 +36,7 @@
 
 - Übersicht einer Buchung darstellen.
 - Bankverbindungen darstellen, welcher Betrag dabei von wo nach wo gegangen ist (also der Umsatz).
+
+## Darkmode
+
+- SessionScoped
