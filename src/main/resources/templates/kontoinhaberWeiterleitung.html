@@ -13,23 +13,23 @@
             <form method="post"
                   action="/kontoinhaber">
                 {#if neuerKontoinhaber.hatMeldungen(Schluessel:ALLGEMEIN)}
-                    <ul class="list-unstyled text-center fw-bold">
+                <ul class="list-unstyled text-center fw-bold">
                     {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:ALLGEMEIN)}
-                        <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
+                    <li class="alert {#if meldung.istErfolg()}alert-success{/if}{#if meldung.istWarnung()}alert-warning{/if}{#if meldung.istFehler()}alert-danger{/if}">{meldung.text}</li>
                     {/for}
-                    </ul>
+                </ul>
                 {/if}
 
                 {#if neuerKontoinhaber.hatMeldungen(Schluessel:BANKVERBINDUNG)}
-                    <div class="row">
+                <div class="row">
                     <div class="col">
-                    <ul class="list-unstyled alert alert-danger">
-                    {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BANKVERBINDUNG)}
-                        <li>{meldung.text}</li>
-                    {/for}
-                    </ul>
+                        <ul class="list-unstyled alert alert-danger">
+                            {#for meldung in neuerKontoinhaber.getMeldungen(Schluessel:BANKVERBINDUNG)}
+                            <li>{meldung.text}</li>
+                            {/for}
+                        </ul>
                     </div>
-                    </div>
+                </div>
                 {/if}
 
                 <div class="row">
@@ -85,9 +85,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col d-grid gap-2">
                         <button type="submit"
-                                class="btn btn-primary mt-3 fw-bold">
+                                class="btn btn-success mt-3 fw-bold">
                             Kontoinhaber erstellen
                         </button>
                     </div>
