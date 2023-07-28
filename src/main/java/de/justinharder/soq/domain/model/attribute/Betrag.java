@@ -53,10 +53,10 @@ public class Betrag extends WertObjekt<BigDecimal>
 	@Override
 	public String toString()
 	{
-		var symbols = new DecimalFormatSymbols(Locale.GERMAN);
-		symbols.setDecimalSeparator(',');
-		symbols.setGroupingSeparator('.');
-		var format = new DecimalFormat("###,###.00", symbols);
-		return format.format(getWert().setScale(2, RoundingMode.HALF_UP));
+		var decimalFormatSymbols = new DecimalFormatSymbols(Locale.GERMAN);
+		decimalFormatSymbols.setDecimalSeparator(',');
+		decimalFormatSymbols.setGroupingSeparator('.');
+		var decimalFormat = new DecimalFormat("###,##0.00", decimalFormatSymbols);
+		return decimalFormat.format(getWert().setScale(2, RoundingMode.HALF_UP));
 	}
 }
