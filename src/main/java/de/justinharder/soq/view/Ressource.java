@@ -1,6 +1,16 @@
 package de.justinharder.soq.view;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Ressource
 {
-	// TODO: Abstrakte Basisklasse für Ressourcen erstellen.
+	protected ThemeRessource themeRessource;
+
+	protected Ressource(@NonNull ThemeRessource themeRessource)
+	{
+		this.themeRessource = themeRessource;
+	}
 }
