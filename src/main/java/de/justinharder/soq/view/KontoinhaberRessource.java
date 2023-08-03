@@ -48,6 +48,7 @@ public class KontoinhaberRessource extends Ressource
 	public TemplateInstance zeigeListe()
 	{
 		return Templates.kontoinhaber(
+			themeRessource.getTheme(),
 			neuerKontoinhaber,
 			kontoinhaberService.findeAlle());
 	}
@@ -58,6 +59,7 @@ public class KontoinhaberRessource extends Ressource
 	public TemplateInstance zeigeErstellungFormular(@PathParam("bankverbindungId") String bankverbindungId)
 	{
 		return Templates.kontoinhaberWeiterleitung(
+			themeRessource.getTheme(),
 			neuerKontoinhaber,
 			privatpersonService.findeAlle(),
 			bankverbindungService.finde(bankverbindungId));
@@ -74,6 +76,7 @@ public class KontoinhaberRessource extends Ressource
 			return zeigeListe();
 		}
 		return Templates.kontoinhaberWeiterleitung(
+			themeRessource.getTheme(),
 			neuerKontoinhaber,
 			privatpersonService.findeAlle(),
 			bankverbindungService.finde(neuerKontoinhaber.getBankverbindungId()));

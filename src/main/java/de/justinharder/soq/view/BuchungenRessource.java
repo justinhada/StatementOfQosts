@@ -55,7 +55,10 @@ public class BuchungenRessource extends Ressource
 	public TemplateInstance zeigeListe()
 	{
 		// TODO: Zuordnen von Umsätzen, die noch keiner Kategorie zugeordnet sind.
-		return Templates.buchungen(neueBuchung, buchungService.findeAlle());
+		return Templates.buchungen(
+			themeRessource.getTheme(),
+			neueBuchung,
+			buchungService.findeAlle());
 	}
 
 	@POST
@@ -69,6 +72,7 @@ public class BuchungenRessource extends Ressource
 			return zeigeListe();
 		}
 		return Templates.umsaetzeWeiterleitung(
+			themeRessource.getTheme(),
 			neueBuchung,
 			kategorieService.findeAlle(),
 			umsatzService.finde(neueBuchung.getUmsatzId()));
@@ -80,6 +84,7 @@ public class BuchungenRessource extends Ressource
 	public TemplateInstance zeigeInformationen(@PathParam("id") String id)
 	{
 		return Templates.buchung(
+			themeRessource.getTheme(),
 			buchungService.finde(id),
 			kategorieService.findeAlle(),
 			bankverbindungService.findeAlleAuftraggeber(),

@@ -36,7 +36,9 @@ public class ImportRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeImportFormular()
 	{
-		return Templates.imports(neuerImport);
+		return Templates.imports(
+			themeRessource.getTheme(),
+			neuerImport);
 	}
 
 	@POST

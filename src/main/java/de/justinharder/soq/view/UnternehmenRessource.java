@@ -33,7 +33,10 @@ public class UnternehmenRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeErstellungFormular()
 	{
-		return Templates.unternehmen(neuesUnternehmen, unternehmenService.findeAlle());
+		return Templates.unternehmen(
+			themeRessource.getTheme(),
+			neuesUnternehmen,
+			unternehmenService.findeAlle());
 	}
 
 	@POST

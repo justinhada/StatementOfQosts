@@ -50,6 +50,7 @@ public class UmsaetzeRessource extends Ressource
 	{
 		// TODO: Möglichkeit finden, hinter den Bankverbindungen auch die Kontoinhaber anzuzeigen.
 		return Templates.umsaetze(
+			themeRessource.getTheme(),
 			neuerUmsatz,
 			bankverbindungService.findeAlleAuftraggeber(),
 			bankverbindungService.findeAlleZahlungsbeteiligten(),
@@ -65,6 +66,7 @@ public class UmsaetzeRessource extends Ressource
 		if (this.neuerUmsatz.istErfolgreich())
 		{
 			return Templates.umsaetzeWeiterleitung(
+				themeRessource.getTheme(),
 				new NeueBuchung(),
 				kategorieService.findeAlle(),
 				umsatzService.finde(this.neuerUmsatz.getId()));

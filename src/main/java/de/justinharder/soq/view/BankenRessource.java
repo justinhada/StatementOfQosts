@@ -48,7 +48,12 @@ public class BankenRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeErstellungFormular()
 	{
-		return Templates.banken(neueBank, gespeicherteBank, geloeschteBank, bankService.findeAlle());
+		return Templates.banken(
+			themeRessource.getTheme(),
+			neueBank,
+			gespeicherteBank,
+			geloeschteBank,
+			bankService.findeAlle());
 	}
 
 	@POST
@@ -65,7 +70,9 @@ public class BankenRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeAktualisierungFormular(@PathParam("id") String id)
 	{
-		return Templates.bank(bankService.finde(id));
+		return Templates.bank(
+			themeRessource.getTheme(),
+			bankService.finde(id));
 	}
 
 	@POST
@@ -79,7 +86,9 @@ public class BankenRessource extends Ressource
 		{
 			return zeigeErstellungFormular();
 		}
-		return Templates.bank(this.gespeicherteBank);
+		return Templates.bank(
+			themeRessource.getTheme(),
+			this.gespeicherteBank);
 	}
 
 	@DELETE

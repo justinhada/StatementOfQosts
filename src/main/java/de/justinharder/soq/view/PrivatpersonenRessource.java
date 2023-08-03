@@ -35,7 +35,10 @@ public class PrivatpersonenRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeErstellungFormular()
 	{
-		return Templates.privatpersonen(neuePrivatperson, privatpersonService.findeAlle());
+		return Templates.privatpersonen(
+			themeRessource.getTheme(),
+			neuePrivatperson,
+			privatpersonService.findeAlle());
 	}
 
 	@POST

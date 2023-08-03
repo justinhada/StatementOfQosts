@@ -23,6 +23,6 @@ public class StartRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeStartseite()
 	{
-		return Templates.start();
+		return Templates.start(themeRessource.getTheme());
 	}
 }

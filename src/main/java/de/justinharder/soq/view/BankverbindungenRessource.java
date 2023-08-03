@@ -49,6 +49,7 @@ public class BankverbindungenRessource extends Ressource
 	public TemplateInstance zeigeErstellungFormular()
 	{
 		return Templates.bankverbindungen(
+			themeRessource.getTheme(),
 			neueBankverbindung,
 			bankverbindungService.findeAlle(),
 			privatpersonService.findeAlle(),
@@ -64,6 +65,7 @@ public class BankverbindungenRessource extends Ressource
 		if (this.neueBankverbindung.istErfolgreich())
 		{
 			return Templates.kontoinhaberWeiterleitung(
+				themeRessource.getTheme(),
 				new NeuerKontoinhaber(),
 				privatpersonService.findeAlle(),
 				bankverbindungService.finde(this.neueBankverbindung.getId()));

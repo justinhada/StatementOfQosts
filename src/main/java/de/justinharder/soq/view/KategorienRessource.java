@@ -35,7 +35,10 @@ public class KategorienRessource extends Ressource
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance zeigeErstellungFormular()
 	{
-		return Templates.kategorien(neueKategorie, kategorieService.findeAlle());
+		return Templates.kategorien(
+			themeRessource.getTheme(),
+			neueKategorie,
+			kategorieService.findeAlle());
 	}
 
 	@POST
