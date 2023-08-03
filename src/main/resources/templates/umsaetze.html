@@ -158,14 +158,14 @@
                 </thead>
                 <tbody>
                     {#for umsatz in umsaetze}
-                        <tr>
+                    <tr>
                         <td>{umsatz.id}</td>
                         <td>{umsatz.datum}</td>
-                        <td>{umsatz.betrag}</td>
+                        <td class="font-monospace text-end">{umsatz.betrag} EUR</td>
                         <td>{umsatz.verwendungszweck}</td>
                         <td>{umsatz.auftraggeber}</td>
                         <td>{umsatz.zahlungsbeteiligter}</td>
-                        </tr>
+                    </tr>
                     {/for}
                 </tbody>
             </table>
