@@ -35,12 +35,12 @@ class BankenRessourceSollte
 	{
 		assertAll(
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankenRessource(null, neueBank, gespeicherteBank, geloeschteBank)),
+				() -> new BankenRessource(themeRessource, null, neueBank, gespeicherteBank, geloeschteBank)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankenRessource(bankService, null, gespeicherteBank, geloeschteBank)),
+				() -> new BankenRessource(themeRessource, bankService, null, gespeicherteBank, geloeschteBank)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankenRessource(bankService, neueBank, null, geloeschteBank)),
+				() -> new BankenRessource(themeRessource, bankService, neueBank, null, geloeschteBank)),
 			() -> assertThrows(NullPointerException.class,
-				() -> new BankenRessource(bankService, neueBank, gespeicherteBank, null)));
+				() -> new BankenRessource(themeRessource, bankService, neueBank, gespeicherteBank, null)));
 	}
 }

@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 @RequestScoped
 @Path("/banken")
-public class BankenRessource
+public class BankenRessource extends Ressource
 {
 	@NonNull
 	private final BankService bankService;
@@ -31,11 +31,13 @@ public class BankenRessource
 
 	@Inject
 	public BankenRessource(
+		ThemeRessource themeRessource,
 		@NonNull BankService bankService,
 		@NonNull NeueBank neueBank,
 		@NonNull GespeicherteBank gespeicherteBank,
 		@NonNull GeloeschteBank geloeschteBank)
 	{
+		super(themeRessource);
 		this.bankService = bankService;
 		this.neueBank = neueBank;
 		this.gespeicherteBank = gespeicherteBank;

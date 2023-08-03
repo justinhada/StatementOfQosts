@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/privatpersonen")
-public class PrivatpersonenRessource
+public class PrivatpersonenRessource extends Ressource
 {
 	@NonNull
 	private final PrivatpersonService privatpersonService;
@@ -21,8 +21,12 @@ public class PrivatpersonenRessource
 	private NeuePrivatperson neuePrivatperson;
 
 	@Inject
-	public PrivatpersonenRessource(@NonNull PrivatpersonService privatpersonService, @NonNull NeuePrivatperson neuePrivatperson)
+	public PrivatpersonenRessource(
+		ThemeRessource themeRessource,
+		@NonNull PrivatpersonService privatpersonService,
+		@NonNull NeuePrivatperson neuePrivatperson)
 	{
+		super(themeRessource);
 		this.privatpersonService = privatpersonService;
 		this.neuePrivatperson = neuePrivatperson;
 	}

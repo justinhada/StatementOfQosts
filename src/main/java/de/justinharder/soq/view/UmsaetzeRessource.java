@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/umsaetze")
-public class UmsaetzeRessource
+public class UmsaetzeRessource extends Ressource
 {
 	@NonNull
 	private final UmsatzService umsatzService;
@@ -31,11 +31,13 @@ public class UmsaetzeRessource
 
 	@Inject
 	public UmsaetzeRessource(
+		ThemeRessource themeRessource,
 		@NonNull UmsatzService umsatzService,
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull KategorieService kategorieService,
 		@NonNull NeuerUmsatz neuerUmsatz)
 	{
+		super(themeRessource);
 		this.umsatzService = umsatzService;
 		this.bankverbindungService = bankverbindungService;
 		this.kategorieService = kategorieService;

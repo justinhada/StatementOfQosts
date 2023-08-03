@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/kontoinhaber")
-public class KontoinhaberRessource
+public class KontoinhaberRessource extends Ressource
 {
 	@NonNull
 	private final KontoinhaberService kontoinhaberService;
@@ -30,11 +30,13 @@ public class KontoinhaberRessource
 
 	@Inject
 	public KontoinhaberRessource(
+		ThemeRessource themeRessource,
 		@NonNull KontoinhaberService kontoinhaberService,
 		@NonNull PrivatpersonService privatpersonService,
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull NeuerKontoinhaber neuerKontoinhaber)
 	{
+		super(themeRessource);
 		this.kontoinhaberService = kontoinhaberService;
 		this.privatpersonService = privatpersonService;
 		this.bankverbindungService = bankverbindungService;

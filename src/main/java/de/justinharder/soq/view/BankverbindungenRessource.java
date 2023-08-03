@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/bankverbindungen")
-public class BankverbindungenRessource
+public class BankverbindungenRessource extends Ressource
 {
 	@NonNull
 	private final BankverbindungService bankverbindungService;
@@ -31,11 +31,13 @@ public class BankverbindungenRessource
 
 	@Inject
 	public BankverbindungenRessource(
+		ThemeRessource themeRessource,
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull PrivatpersonService privatpersonService,
 		@NonNull BankService bankService,
 		@NonNull NeueBankverbindung neueBankverbindung)
 	{
+		super(themeRessource);
 		this.bankverbindungService = bankverbindungService;
 		this.privatpersonService = privatpersonService;
 		this.bankService = bankService;

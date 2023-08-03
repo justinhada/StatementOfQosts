@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/buchungen")
-public class BuchungenRessource
+public class BuchungenRessource extends Ressource
 {
 	@NonNull
 	private final BuchungService buchungService;
@@ -35,12 +35,14 @@ public class BuchungenRessource
 
 	@Inject
 	public BuchungenRessource(
+		ThemeRessource themeRessource,
 		@NonNull BuchungService buchungService,
 		@NonNull KategorieService kategorieService,
 		@NonNull UmsatzService umsatzService,
 		@NonNull BankverbindungService bankverbindungService,
 		@NonNull NeueBuchung neueBuchung)
 	{
+		super(themeRessource);
 		this.buchungService = buchungService;
 		this.kategorieService = kategorieService;
 		this.umsatzService = umsatzService;

@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/unternehmen")
-public class UnternehmenRessource
+public class UnternehmenRessource extends Ressource
 {
 	@NonNull
 	private final UnternehmenService unternehmenService;
@@ -20,9 +20,11 @@ public class UnternehmenRessource
 	private NeuesUnternehmen neuesUnternehmen;
 
 	public UnternehmenRessource(
+		ThemeRessource themeRessource,
 		@NonNull UnternehmenService unternehmenService,
 		@NonNull NeuesUnternehmen neuesUnternehmen)
 	{
+		super(themeRessource);
 		this.unternehmenService = unternehmenService;
 		this.neuesUnternehmen = neuesUnternehmen;
 	}

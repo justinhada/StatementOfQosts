@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 @RequestScoped
 @Path("/import")
-public class ImportRessource
+public class ImportRessource extends Ressource
 {
 	@NonNull
 	private final ImportService importService;
@@ -22,8 +22,12 @@ public class ImportRessource
 	private NeuerImport neuerImport;
 
 	@Inject
-	public ImportRessource(@NonNull ImportService importService, @NonNull NeuerImport neuerImport)
+	public ImportRessource(
+		ThemeRessource themeRessource,
+		@NonNull ImportService importService,
+		@NonNull NeuerImport neuerImport)
 	{
+		super(themeRessource);
 		this.importService = importService;
 		this.neuerImport = neuerImport;
 	}
