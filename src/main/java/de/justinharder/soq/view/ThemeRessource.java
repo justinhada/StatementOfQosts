@@ -21,7 +21,7 @@ public class ThemeRessource implements Serializable
 	@POST
 	@Consumes
 	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance wechsleTheme()
+	public TemplateInstance aendere()
 	{
 		theme = theme.equals("dark") ? "light" : "dark";
 		return Templates.start(theme);
