@@ -102,6 +102,19 @@
                             Unternehmen
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <form class="container-fluid justify-content-center"
+                              method="POST"
+                              action="/theme">
+                            <button class="btn nav-link text-white py-2 px-0 px-lg-2 d-flex align-items-center"
+                                    type="submit">
+                                <i class="bi {theme.equals('dark') ? 'bi-sun' : 'bi-moon'}"></i>
+
+                                <span class="fw-bold px-1">{theme.equals('dark') ? 'Lightmode' : 'Darkmode'}</span>
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import io.quarkus.qute.TemplateInstance;
 import lombok.Getter;
 
 import javax.enterprise.context.SessionScoped;
@@ -19,9 +20,10 @@ public class ThemeRessource implements Serializable
 
 	@POST
 	@Consumes
-	@Produces(MediaType.TEXT_PLAIN)
-	public void wechsleTheme()
+	@Produces(MediaType.TEXT_HTML)
+	public TemplateInstance wechsleTheme()
 	{
 		theme = theme.equals("dark") ? "light" : "dark";
+		return Templates.start(theme);
 	}
 }
