@@ -1,7 +1,7 @@
-package de.justinharder.soq.view;
+package de.justinharder.soq.view.theme;
 
+import de.justinharder.soq.view.Templates;
 import io.quarkus.qute.TemplateInstance;
-import lombok.Getter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.ws.rs.Consumes;
@@ -11,19 +11,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
-@Getter
 @SessionScoped
 @Path("/theme")
 public class ThemeRessource implements Serializable
 {
-	private String theme = "dark";
+	private Theme theme = Theme.DARK;
+
+	public String getTheme()
+	{
+		return theme.getBezeichnung();
+	}
 
 	@POST
 	@Consumes
 	@Produces(MediaType.TEXT_HTML)
 	public TemplateInstance aendere()
 	{
-		theme = theme.equals("dark") ? "light" : "dark";
-		return Templates.start(theme);
+		theme = theme.isDark() ? Theme.LIGHT : Theme.DARK;
+		return Templates.start(theme.getBezeichnung());
 	}
 }

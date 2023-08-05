@@ -2,6 +2,7 @@ package de.justinharder.soq.view;
 
 import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeuePrivatperson;
+import de.justinharder.soq.view.theme.ThemeRessource;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 

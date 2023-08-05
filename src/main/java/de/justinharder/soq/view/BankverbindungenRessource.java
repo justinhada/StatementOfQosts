@@ -5,6 +5,7 @@ import de.justinharder.soq.domain.services.BankverbindungService;
 import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeueBankverbindung;
 import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
+import de.justinharder.soq.view.theme.ThemeRessource;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 

@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.view.theme.ThemeRessource;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

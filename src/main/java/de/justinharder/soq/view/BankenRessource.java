@@ -4,6 +4,7 @@ import de.justinharder.soq.domain.services.BankService;
 import de.justinharder.soq.domain.services.dto.GeloeschteBank;
 import de.justinharder.soq.domain.services.dto.GespeicherteBank;
 import de.justinharder.soq.domain.services.dto.NeueBank;
+import de.justinharder.soq.view.theme.ThemeRessource;
 import io.quarkus.qute.TemplateInstance;
 import lombok.NonNull;
 

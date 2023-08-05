@@ -1,5 +1,6 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.view.theme.ThemeRessource;
 import io.quarkus.qute.TemplateInstance;
 
 import javax.enterprise.context.RequestScoped;
