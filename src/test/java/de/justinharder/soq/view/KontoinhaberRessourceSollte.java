@@ -1,20 +1,21 @@
 package de.justinharder.soq.view;
 
+import de.justinharder.soq.TestSollte;
 import de.justinharder.soq.domain.services.BankverbindungService;
-import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.KontoinhaberService;
+import de.justinharder.soq.domain.services.PrivatpersonService;
 import de.justinharder.soq.domain.services.dto.NeuerKontoinhaber;
+import de.justinharder.soq.view.theme.ThemeRessource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 @DisplayName("KontoinhaberRessource sollte")
-class KontoinhaberRessourceSollte
+class KontoinhaberRessourceSollte extends TestSollte
 {
+	private ThemeRessource themeRessource;
 	private KontoinhaberService kontoinhaberService;
 	private PrivatpersonService privatpersonService;
 	private BankverbindungService bankverbindungService;
@@ -23,6 +24,7 @@ class KontoinhaberRessourceSollte
 	@BeforeEach
 	void setup()
 	{
+		themeRessource = mock(ThemeRessource.class);
 		kontoinhaberService = mock(KontoinhaberService.class);
 		privatpersonService = mock(PrivatpersonService.class);
 		bankverbindungService = mock(BankverbindungService.class);
@@ -33,14 +35,16 @@ class KontoinhaberRessourceSollte
 	@DisplayName("null validieren")
 	void test01()
 	{
-		assertAll(
-			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(null, privatpersonService, bankverbindungService, neuerKontoinhaber)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(kontoinhaberService, null, bankverbindungService, neuerKontoinhaber)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(kontoinhaberService, privatpersonService, null, neuerKontoinhaber)),
-			() -> assertThrows(NullPointerException.class,
-				() -> new KontoinhaberRessource(kontoinhaberService, privatpersonService, bankverbindungService, null)));
+		validiereNull(
+			() -> new KontoinhaberRessource(null, kontoinhaberService, privatpersonService, bankverbindungService,
+				neuerKontoinhaber),
+			() -> new KontoinhaberRessource(themeRessource, null, privatpersonService, bankverbindungService,
+				neuerKontoinhaber),
+			() -> new KontoinhaberRessource(themeRessource, kontoinhaberService, null, bankverbindungService,
+				neuerKontoinhaber),
+			() -> new KontoinhaberRessource(themeRessource, kontoinhaberService, privatpersonService, null,
+				neuerKontoinhaber),
+			() -> new KontoinhaberRessource(themeRessource, kontoinhaberService, privatpersonService,
+				bankverbindungService, null));
 	}
 }
