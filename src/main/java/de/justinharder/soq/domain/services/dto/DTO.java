@@ -1,21 +1,27 @@
 package de.justinharder.soq.domain.services.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.justinharder.soq.domain.model.meldung.Ebene;
 import de.justinharder.soq.domain.model.meldung.Meldung;
 import de.justinharder.soq.domain.model.meldung.Meldungen;
 import de.justinharder.soq.domain.model.meldung.Schluessel;
 import lombok.NonNull;
+import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class DTO<T extends DTO<T>>
 {
+	@JsonProperty(value = "Meldungen", required = true)
 	protected final Meldungen meldungen = new Meldungen();
 
 	protected abstract T myself();
 
+	@JsonIgnore
 	public boolean istErfolgreich()
 	{
 		return meldungen.stream().allMatch(meldung -> meldung.ebene().equals(Ebene.ERFOLG));

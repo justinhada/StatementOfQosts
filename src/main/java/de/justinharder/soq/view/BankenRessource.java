@@ -102,7 +102,7 @@ public class BankenRessource extends Ressource
 		if (!geloeschteBank.istErfolgreich())
 		{
 			return Response
-				.status(Response.Status.BAD_REQUEST)
+				.status(Response.Status.OK)
 				.entity(geloeschteBank)
 				.type(MediaType.APPLICATION_JSON)
 				.build();

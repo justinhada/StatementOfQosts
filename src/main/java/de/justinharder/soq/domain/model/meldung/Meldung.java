@@ -1,6 +1,11 @@
 package de.justinharder.soq.domain.model.meldung;
 
-public record Meldung(Schluessel schluessel, Ebene ebene, String text)
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record Meldung(@JsonProperty(value = "Schluessel", required = true) Schluessel schluessel,
+					  @JsonProperty(value = "Ebene", required = true) Ebene ebene,
+					  @JsonProperty(value = "Text", required = true) String text)
 {
 	public static final Meldung AUFTRAGGEBER_EXISTIERT_NICHT = new Meldung(
 		Schluessel.AUFTRAGGEBER,
@@ -302,16 +307,19 @@ public record Meldung(Schluessel schluessel, Ebene ebene, String text)
 		Ebene.FEHLER,
 		"Der Zahlungsbeteiligte darf nicht leer sein!");
 
+	@JsonIgnore
 	public boolean istErfolg()
 	{
 		return ebene.equals(Ebene.ERFOLG);
 	}
 
+	@JsonIgnore
 	public boolean istWarnung()
 	{
 		return ebene.equals(Ebene.WARNUNG);
 	}
 
+	@JsonIgnore
 	public boolean istFehler()
 	{
 		return ebene.equals(Ebene.FEHLER);

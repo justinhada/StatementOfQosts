@@ -117,6 +117,7 @@
                             <form method="GET"
                                   action="/banken">
                                 <button class="btn btn-link text-danger"
+                                        type="button"
                                         onclick="loesche('{bank.id}')">
                                     <i class="bi bi-trash"></i>
                                 </button>
@@ -131,15 +132,5 @@
         {#include footer /}
     </body>
 
-    <script type="application/javascript">
-        function loesche(id) {
-            fetch('/banken/' + id, {
-                method: 'DELETE'
-            });
-
-            fetch('/banken', {
-                method: 'GET'
-            });
-        }
-    </script>
+    <script type="application/javascript" src="/js/bank.js"></script>
 </html>
