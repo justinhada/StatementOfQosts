@@ -23,11 +23,8 @@ public class ThemeRessource implements Serializable
 	}
 
 	@POST
-	@Consumes
-	@Produces(MediaType.TEXT_HTML)
-	public TemplateInstance aendere()
+	public void aendere()
 	{
 		theme = theme.isDark() ? Theme.LIGHT : Theme.DARK;
-		return Templates.start(theme.getBezeichnung());
 	}
 }
