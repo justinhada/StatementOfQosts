@@ -57,6 +57,15 @@ public class BankenRessource extends Ressource
 			bankService.findeAlle());
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findeAlle()
+	{
+		return Response
+			.ok(bankService.findeAlle())
+			.build();
+	}
+
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

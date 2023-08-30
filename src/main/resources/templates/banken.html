@@ -8,11 +8,14 @@
     <body>
         {#include header /}
 
-        <main class="container">
-            <h1 class="fw-bold">Bank erstellen</h1>
+        <main>
+            <div class="container">
+                <h1 class="fw-bold">Bank erstellen</h1>
+            </div>
 
             <form method="post"
-                  action="/banken">
+                  action="/banken"
+                  class="container">
                 {#if neueBank.hatMeldungen(Schluessel:ALLGEMEIN)}
                     <ul class="list-unstyled text-center fw-bold">
                     {#for meldung in neueBank.getMeldungen(Schluessel:ALLGEMEIN)}
@@ -90,6 +93,28 @@
                     </div>
                 </div>
             </form>
+
+            <div class="container mt-5">
+                <div class="row rounded shadow fw-bold py-2 mt-5">
+                    <div class="col">
+                        <div class="row soq">
+                            <div class="col">ID</div>
+
+                            <div class="col">Bezeichnung</div>
+
+                            <div class="col">BIC</div>
+                        </div>
+                    </div>
+
+                    <div class="col ms-1">
+                        <div class="row soq">
+                            <div class="col">
+                                Aktion
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <table class="table table-striped table-hover mt-5">
                 <thead class="table-soq">

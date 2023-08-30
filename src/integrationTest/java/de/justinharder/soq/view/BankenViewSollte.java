@@ -21,6 +21,7 @@ class BankenViewSollte extends ViewSollte
 	void test01()
 	{
 		given()
+			.header(HttpHeaders.ACCEPT, MediaType.TEXT_HTML)
 			.when()
 			.get(BANKEN)
 			.then()
